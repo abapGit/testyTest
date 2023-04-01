@@ -1,0 +1,1 @@
+TYPES trwbo_request_headers TYPE c LENGTH 1.

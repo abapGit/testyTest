@@ -1,0 +1,30 @@
+{
+  "name": "abapgit2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "notes",
+  "scripts": {
+    "build": "rm -rf output && abap_transpile abap_transpile.json && echo RUNNING && cp -f abapGit/src/ui/zabapgit_icon_font.w3mi.data.woff output/ && node output/index.mjs",
+    "express": "node express.mjs",
+    "electron": "electron ./electron/index.js",
+    "test": "sh run.sh && npx abaplint ./abaplint-cloud.jsonc && npx abaplint ./abaplint-open.jsonc && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larshp/abapGit2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larshp/abapGit2/issues"
+  },
+  "homepage": "https://github.com/larshp/abapGit2#readme",
+  "dependencies": {
+    "@abaplint/cli": "^2.95.51",
+    "@abaplint/database-sqlite": "^2.5.39",
+    "@abaplint/runtime": "^2.5.71",
+    "@abaplint/transpiler-cli": "^2.5.71",
+    "electron": "^23.2.1",
+    "express": "^4.18.2"
+  }
+}
