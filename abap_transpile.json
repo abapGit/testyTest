@@ -24,12 +24,13 @@
       {"object": "ZCL_ABAPGIT_PERSISTENCE_USER",  "class": "ltcl_user",              "method": "set_get_repo_show",  "note": "skip, this changes database"},
       {"object": "ZCL_ABAPGIT_PERSISTENCE_USER",  "class": "ltcl_user",              "method": "set_get_settings",   "note": "skip, this changes database"},
       {"object": "ZCL_ABAPGIT_PERSISTENCE_USER",  "class": "ltcl_user",              "method": "set_get_repo_login", "note": "skip, this changes database"},
-      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_get_t100_longtext", "method": "test01",         "note": "DOCU_GET, open-abap"},
-      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_split_text",        "method": "test_set_msg_z", "note": "some bug in fm TEXT_SPLIT, open-abap"},
-      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_t100",              "method": "text6",          "note": "uses MSAG from database"},
-      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_t100",              "method": "text7",          "note": "uses MSAG from database"},
-      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_t100",              "method": "text8",          "note": "uses MSAG from database"},
-      {"object": "ZCL_ABAPGIT_DOT_ABAPGIT",       "class": "ltcl_dot_abapgit",       "method": "identity",       "note": " https://github.com/open-abap/open-abap/issues/471 "}
+      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_get_t100_longtext", "method": "test01",           "note": "DOCU_GET, open-abap"},
+      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_split_text",        "method": "test_set_msg_z",   "note": "some bug in fm TEXT_SPLIT, open-abap"},
+      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_t100",              "method": "text6",            "note": "uses MSAG from database"},
+      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_t100",              "method": "text7",            "note": "uses MSAG from database"},
+      {"object": "ZCX_ABAPGIT_EXCEPTION",         "class": "ltcl_t100",              "method": "text8",            "note": "uses MSAG from database"},
+      {"object": "ZCL_ABAPGIT_DATA_SUPPORTER",    "class": "ltcl_supporter",         "method": "is_not_supported", "note": "blah"},
+      {"object": "ZCL_ABAPGIT_DOT_ABAPGIT",       "class": "ltcl_dot_abapgit",       "method": "identity",         "note": " https://github.com/open-abap/open-abap/issues/471 "}
     ]
   }
 }

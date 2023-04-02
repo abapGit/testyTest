@@ -2,7 +2,7 @@
 set -e # exit on error
 
 rm -rf abapGit
-git clone https://github.com/abapGit/abapGit --depth 1
+git clone --branch hvam/trans0204 https://github.com/abapGit/abapGit --depth 1
 rm -f open/*
 rm -f cloud/*
 
@@ -228,6 +228,7 @@ sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_package.prog.abap' ./open/zif_abapg
 ###########################################################################
 
 cp replace/zcl_abapgit_apack* open
+cp replace/zcl_abapgit_data_supporter* open
 cp replace/zcl_abapgit_background* open
 cp replace/zcl_abapgit_diff* open
 cp replace/zcl_abapgit_exception_viewer* open
