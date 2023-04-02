@@ -19,7 +19,6 @@
     "keywords": ["return", "in", "class"],
     "extraSetup": "../setup.mjs",
     "skip": [
-      {"object": "ZCL_ABAPGIT_AJSON",             "class": "ltcl_json_to_abap",      "method": "to_abap_array_of_arrays", "note": "Expected table to contain 2 rows, got 4"},
       {"object": "ZCL_ABAPGIT_PERSISTENCE_USER",  "class": "ltcl_user",              "method": "set_get_git_user",   "note": "skip, this changes database"},
       {"object": "ZCL_ABAPGIT_PERSISTENCE_USER",  "class": "ltcl_user",              "method": "set_get_repo_show",  "note": "skip, this changes database"},
       {"object": "ZCL_ABAPGIT_PERSISTENCE_USER",  "class": "ltcl_user",              "method": "set_get_settings",   "note": "skip, this changes database"},
