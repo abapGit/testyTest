@@ -21,6 +21,7 @@
     "check_syntax": true,
     "global_class": true,
     "implement_methods": true,
+    "sql_escape_host_variables": true,
     "method_implemented_twice": true,
     "parser_error": true,
     "superclass_final": true,
