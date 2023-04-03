@@ -7,7 +7,7 @@ INTERFACE zif_abapgit_code_inspector
       !iv_variant    TYPE char20
       !iv_save       TYPE abap_bool DEFAULT abap_false
     RETURNING
-      VALUE(rt_list) TYPE any
+      VALUE(rt_list) TYPE string_table
     RAISING
       zcx_abapgit_exception .
 

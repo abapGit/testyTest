@@ -32,7 +32,7 @@ CLASS zcl_abapgit_transport DEFINITION
       IMPORTING
         !is_trkorr        TYPE any OPTIONAL
       RETURNING
-        VALUE(rs_request) TYPE any
+        VALUE(rs_request) TYPE string
       RAISING
         zcx_abapgit_exception .
 
