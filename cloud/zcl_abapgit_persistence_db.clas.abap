@@ -109,7 +109,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
     ls_table-value = iv_value.
     ls_table-data_str = iv_data.
 
-    INSERT (c_tabname) FROM ls_table.                     "#EC CI_SUBRC
+    INSERT (c_tabname) FROM @ls_table.                     "#EC CI_SUBRC
     ASSERT sy-subrc = 0.
 
   ENDMETHOD.
@@ -122,8 +122,8 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
 
     " Ignore errors since record might not exist
     DELETE FROM (c_tabname)
-      WHERE type = iv_type
-      AND value = iv_value.
+      WHERE type = @iv_type
+      AND value = @iv_value.
 
   ENDMETHOD.
 
@@ -158,7 +158,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
 
   METHOD list.
     SELECT * FROM (c_tabname)
-      INTO TABLE rt_content.                              "#EC CI_SUBRC
+      INTO TABLE @rt_content.                              "#EC CI_SUBRC
   ENDMETHOD.
 
 
@@ -166,17 +166,17 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
     FIELD-SYMBOLS: <ls_key> LIKE LINE OF it_keys.
     LOOP AT it_keys ASSIGNING <ls_key>.
       SELECT * FROM (c_tabname)
-      APPENDING TABLE rt_contents
-      WHERE value = <ls_key> AND
-            type  = iv_type.
+      APPENDING TABLE @rt_contents
+      WHERE value = @<ls_key> AND
+            type  = @iv_type.
     ENDLOOP.
   ENDMETHOD.
 
 
   METHOD list_by_type.
     SELECT * FROM (c_tabname)
-      INTO TABLE rt_content
-      WHERE type = iv_type
+      INTO TABLE @rt_content
+      WHERE type = @iv_type
       ORDER BY PRIMARY KEY.                               "#EC CI_SUBRC
   ENDMETHOD.
 
@@ -217,7 +217,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
     ls_content-value = iv_value.
     ls_content-data_str = iv_data.
 
-    MODIFY (c_tabname) FROM ls_content.
+    MODIFY (c_tabname) FROM @ls_content.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise( 'DB modify failed' ).
     ENDIF.
@@ -227,9 +227,9 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
 
   METHOD read.
 
-    SELECT SINGLE data_str FROM (c_tabname) INTO rv_data
-      WHERE type = iv_type
-      AND value = iv_value.
+    SELECT SINGLE data_str FROM (c_tabname) INTO @rv_data
+      WHERE type = @iv_type
+      AND value = @iv_value.
     IF sy-subrc <> 0.
       RAISE EXCEPTION TYPE zcx_abapgit_not_found.
     ENDIF.
@@ -250,9 +250,9 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
     lock( iv_type  = iv_type
           iv_value = iv_value ).
 
-    UPDATE (c_tabname) SET data_str = lv_data
-      WHERE type  = iv_type
-      AND value = iv_value.
+    UPDATE (c_tabname) SET data_str = @lv_data
+      WHERE type  = @iv_type
+      AND value = @iv_value.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise( 'DB update failed' ).
     ENDIF.

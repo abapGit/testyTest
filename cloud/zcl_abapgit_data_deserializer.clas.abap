@@ -100,7 +100,7 @@ CLASS zcl_abapgit_data_deserializer IMPLEMENTATION.
         ASSIGN lo_delivery_class->('VALUE') TO <ls_any>.
         lv_contflag = <ls_any>.
       CATCH cx_sy_dyn_call_illegal_class.
-        SELECT SINGLE contflag FROM ('DD02L') INTO lv_contflag WHERE tabname = iv_name.
+        SELECT SINGLE contflag FROM ('DD02L') INTO @lv_contflag WHERE tabname = @iv_name.
     ENDTRY.
 
     IF lv_contflag = 'C'.
@@ -174,10 +174,10 @@ CLASS zcl_abapgit_data_deserializer IMPLEMENTATION.
     ASSIGN rr_data->* TO <lg_tab>.
 
     LOOP AT it_where INTO lv_where.
-      SELECT * FROM (iv_name) APPENDING TABLE <lg_tab> WHERE (lv_where).
+      SELECT * FROM (iv_name) APPENDING TABLE @<lg_tab> WHERE (lv_where).
     ENDLOOP.
     IF lines( it_where ) = 0.
-      SELECT * FROM (iv_name) INTO TABLE <lg_tab>.
+      SELECT * FROM (iv_name) INTO TABLE @<lg_tab>.
     ENDIF.
 
   ENDMETHOD.
@@ -203,7 +203,7 @@ CLASS zcl_abapgit_data_deserializer IMPLEMENTATION.
     ENDIF.
 
     IF lines( <lg_ins> ) > 0.
-      INSERT (iv_name) FROM TABLE <lg_ins>.
+      INSERT (iv_name) FROM TABLE @<lg_ins>.
       IF sy-subrc <> 0.
         zcx_abapgit_exception=>raise( |Error inserting { lines( <lg_ins> ) } records into table { iv_name }| ).
       ENDIF.
