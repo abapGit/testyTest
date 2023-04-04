@@ -1,5 +1,5 @@
 {
-  "name": "abapgit2",
+  "name": "testyTest",
   "version": "1.0.0",
   "private": true,
   "description": "notes",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/larshp/abapGit2.git"
+    "url": "git+https://github.com/larshp/testyTest.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/larshp/abapGit2/issues"
+    "url": "https://github.com/larshp/testyTest/issues"
   },
-  "homepage": "https://github.com/larshp/abapGit2#readme",
+  "homepage": "https://github.com/larshp/testyTest#readme",
   "dependencies": {
     "@abaplint/cli": "^2.97.2",
     "@abaplint/database-sqlite": "^2.5.39",
