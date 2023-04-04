@@ -196,7 +196,7 @@ CLASS zcl_abapgit_data_deserializer IMPLEMENTATION.
     ASSIGN ir_ins->* TO <lg_ins>.
 
     IF lines( <lg_del> ) > 0.
-      DELETE (iv_name) FROM TABLE <lg_del>.
+      DELETE (iv_name) FROM TABLE @<lg_del>.
       IF sy-subrc <> 0.
         zcx_abapgit_exception=>raise( |Error deleting { lines( <lg_del> ) } records from table { iv_name }| ).
       ENDIF.
