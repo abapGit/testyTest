@@ -1,0 +1,10 @@
+{
+  "configurations": {
+    "open": {
+      "filename": "./abaplint-open.jsonc"
+    },
+    "cloud": {
+      "filename": "./abaplint-cloud.jsonc"
+    }
+  }
+}

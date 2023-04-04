@@ -1,0 +1,30 @@
+{
+  "name": "testy-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "notes",
+  "scripts": {
+    "build": "rm -rf output && abap_transpile abap_transpile.json && echo RUNNING && cp -f abapGit/src/ui/zabapgit_icon_font.w3mi.data.woff output/ && node output/index.mjs",
+    "express": "node express.mjs",
+    "electron": "electron ./electron/index.js",
+    "test": "sh run.sh && npx abaplint --fix ./abaplint-cloud.jsonc && npx abaplint ./abaplint-open.jsonc && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larshp/testyTest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larshp/testyTest/issues"
+  },
+  "homepage": "https://github.com/larshp/testyTest#readme",
+  "dependencies": {
+    "@abaplint/cli": "^2.97.2",
+    "@abaplint/database-sqlite": "^2.5.39",
+    "@abaplint/runtime": "^2.5.74",
+    "@abaplint/transpiler-cli": "^2.5.74",
+    "electron": "^24.0.0",
+    "express": "^4.18.2"
+  }
+}

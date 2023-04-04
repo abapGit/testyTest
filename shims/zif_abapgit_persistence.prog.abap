@@ -1,0 +1,1 @@
+TYPES sci_chkv TYPE c LENGTH 1.
