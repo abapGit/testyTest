@@ -82,7 +82,7 @@ CLASS zcl_abapgit_data_serializer IMPLEMENTATION.
 
     TRY.
         LOOP AT it_where INTO lv_where.
-          SELECT * FROM (iv_name) APPENDING TABLE @<lg_tab> WHERE (lv_where).
+          SELECT * FROM (iv_name)  WHERE (lv_where) APPENDING TABLE @<lg_tab>.
         ENDLOOP.
         IF lines( it_where ) = 0.
           SELECT * FROM (iv_name) INTO TABLE @<lg_tab>.

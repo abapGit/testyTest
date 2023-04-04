@@ -100,7 +100,7 @@ CLASS zcl_abapgit_data_deserializer IMPLEMENTATION.
         ASSIGN lo_delivery_class->('VALUE') TO <ls_any>.
         lv_contflag = <ls_any>.
       CATCH cx_sy_dyn_call_illegal_class.
-        SELECT SINGLE contflag FROM ('DD02L') INTO @lv_contflag WHERE tabname = @iv_name.
+        SELECT SINGLE contflag FROM ('DD02L')  WHERE tabname = @iv_name INTO @lv_contflag.
     ENDTRY.
 
     IF lv_contflag = 'C'.
@@ -174,7 +174,7 @@ CLASS zcl_abapgit_data_deserializer IMPLEMENTATION.
     ASSIGN rr_data->* TO <lg_tab>.
 
     LOOP AT it_where INTO lv_where.
-      SELECT * FROM (iv_name) APPENDING TABLE @<lg_tab> WHERE (lv_where).
+      SELECT * FROM (iv_name)  WHERE (lv_where) APPENDING TABLE @<lg_tab>.
     ENDLOOP.
     IF lines( it_where ) = 0.
       SELECT * FROM (iv_name) INTO TABLE @<lg_tab>.

@@ -14,7 +14,7 @@
     "errorNamespace": "."
   },
   "rules": {
-    "strict_sql": false, // todo, add quickfix to this rule
+    "strict_sql": true,
     "begin_end_names": true,
     "cds_parser_error": true,
     "check_ddic": true,

@@ -166,17 +166,17 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
     FIELD-SYMBOLS: <ls_key> LIKE LINE OF it_keys.
     LOOP AT it_keys ASSIGNING <ls_key>.
       SELECT * FROM (c_tabname)
-      APPENDING TABLE @rt_contents
+      
       WHERE value = @<ls_key> AND
-            type  = @iv_type.
+            type  = @iv_type APPENDING TABLE @rt_contents.
     ENDLOOP.
   ENDMETHOD.
 
 
   METHOD list_by_type.
     SELECT * FROM (c_tabname)
-      INTO TABLE @rt_content
-      WHERE type = @iv_type
+      
+      WHERE type = @iv_type INTO TABLE @rt_content
       ORDER BY PRIMARY KEY.                               "#EC CI_SUBRC
   ENDMETHOD.
 
@@ -227,9 +227,9 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
 
   METHOD read.
 
-    SELECT SINGLE data_str FROM (c_tabname) INTO @rv_data
+    SELECT SINGLE data_str FROM (c_tabname) 
       WHERE type = @iv_type
-      AND value = @iv_value.
+      AND value = @iv_value INTO @rv_data.
     IF sy-subrc <> 0.
       RAISE EXCEPTION TYPE zcx_abapgit_not_found.
     ENDIF.
