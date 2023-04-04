@@ -2,7 +2,7 @@
 set -e # exit on error
 
 rm -rf abapGit
-git clone --branch hvam/trans0204 https://github.com/abapGit/abapGit --depth 1
+git clone https://github.com/abapGit/abapGit --depth 1
 rm -f open/*
 rm -f cloud/*
 
