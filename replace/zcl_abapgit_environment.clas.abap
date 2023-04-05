@@ -28,15 +28,8 @@ CLASS zcl_abapgit_environment IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_abapgit_environment~is_sap_cloud_platform.
-    TRY.
-        CALL METHOD ('CL_COS_UTILITIES')=>('IS_SAP_CLOUD_PLATFORM')
-          RECEIVING
-            rv_is_sap_cloud_platform = rv_result.
-      CATCH cx_sy_dyn_call_error.
-        rv_result = abap_false.
-    ENDTRY.
+    rv_result = abap_false.
   ENDMETHOD.
-
 
   METHOD zif_abapgit_environment~is_sap_object_allowed.
     rv_allowed = abap_false.
