@@ -201,7 +201,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
 
 * trigger dummy update task to automatically release locks at commit
     CALL FUNCTION lv_dummy_update_function
-      IN UPDATE TASK.
+      .
 
   ENDMETHOD.
 

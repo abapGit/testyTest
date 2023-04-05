@@ -310,7 +310,8 @@ sed -i "s/ TYPE REF TO if_ixml_renderer/ TYPE REF TO if_ixml_renderer_core/ig" .
 sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/*xml*.abap
 sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )./ig" ./cloud/*xml*.abap
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/*xml*.abap
-sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/*.abap
+sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_repo.clas.abap
+sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
 
 sed -i 's/DESCRIBE FIELD ig_chunk TYPE lv_type/lv_type = cl_abap_typedescr=>describe_by_data( ig_chunk )->type_kind/ig' ./cloud/zcl_abapgit_html.clas.abap
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
