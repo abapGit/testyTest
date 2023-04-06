@@ -29,6 +29,7 @@ TYPES sci_chkv TYPE c LENGTH 1.
       main_language_only           TYPE abap_bool,
       labels                       TYPE string,
       transport_request            TYPE SXCO_TRANSPORT,
+      customizing_request          TYPE SXCO_TRANSPORT,
     END OF ty_local_settings.
 
   TYPES: ty_local_checksum_tt TYPE STANDARD TABLE OF ty_local_checksum WITH DEFAULT KEY.
