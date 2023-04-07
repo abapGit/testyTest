@@ -187,17 +187,7 @@ CLASS zcl_abapgit_data_utils IMPLEMENTATION.
   METHOD jump.
 
     " Run SE16 with authorization check
-    CALL FUNCTION 'RS_TABLE_LIST_CREATE'
-      EXPORTING
-        table_name         = is_item-obj_name
-      EXCEPTIONS
-        table_is_structure = 1
-        table_not_exists   = 2
-        db_not_exists      = 3
-        no_permission      = 4
-        no_change_allowed  = 5
-        table_is_gtt       = 6
-        OTHERS             = 7.
+    ASSERT 1 = 'replacedByAutomation'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise( |Table { is_item-obj_name } cannot be displayed| ).
     ENDIF.

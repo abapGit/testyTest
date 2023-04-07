@@ -160,7 +160,7 @@ TYPES: BEGIN OF addr3_val,
         zcx_abapgit_exception .
     CLASS-METHODS render_transport
       IMPORTING
-        !iv_transport   TYPE SXCO_TRANSPORT
+        !iv_transport   TYPE sxco_transport
         !iv_interactive TYPE abap_bool DEFAULT abap_true
         !iv_icon_only   TYPE abap_bool DEFAULT abap_false
       RETURNING

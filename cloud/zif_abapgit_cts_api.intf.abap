@@ -19,7 +19,7 @@ INTERFACE zif_abapgit_cts_api
   TYPES: BEGIN OF ty_transport,
            obj_type TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType,
            obj_name TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
-           trkorr   TYPE SXCO_TRANSPORT,
+           trkorr   TYPE sxco_transport,
          END OF ty_transport.
 
   TYPES ty_transport_list TYPE SORTED TABLE OF ty_transport WITH NON-UNIQUE KEY obj_type obj_name.
@@ -32,7 +32,7 @@ INTERFACE zif_abapgit_cts_api
     IMPORTING
       !is_item            TYPE zif_abapgit_definitions=>ty_item
     RETURNING
-      VALUE(rv_transport) TYPE SXCO_TRANSPORT
+      VALUE(rv_transport) TYPE sxco_transport
     RAISING
       zcx_abapgit_exception .
   "! Check if change recording is possible for the given package
@@ -65,19 +65,19 @@ INTERFACE zif_abapgit_cts_api
 
   METHODS read_description
     IMPORTING
-      iv_trkorr             TYPE SXCO_TRANSPORT
+      iv_trkorr             TYPE sxco_transport
     RETURNING
       VALUE(rv_description) TYPE string.
 
   METHODS read_user
     IMPORTING
-      iv_trkorr       TYPE SXCO_TRANSPORT
+      iv_trkorr       TYPE sxco_transport
     RETURNING
       VALUE(rv_uname) TYPE uname.
 
   METHODS create_transport_entries
     IMPORTING
-      iv_transport TYPE SXCO_TRANSPORT
+      iv_transport TYPE sxco_transport
       it_table_ins TYPE ANY TABLE
       it_table_upd TYPE ANY TABLE
       it_table_del TYPE ANY TABLE

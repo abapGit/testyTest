@@ -72,15 +72,7 @@ CLASS zcl_abapgit_gui_asset_manager IMPLEMENTATION.
     ls_key-objid = iv_mime_name.
 
     " Get exact file size
-    CALL FUNCTION 'WWWPARAMS_READ'
-      EXPORTING
-        relid            = ls_key-relid
-        objid            = ls_key-objid
-        name             = 'filesize'
-      IMPORTING
-        value            = lv_size_c
-      EXCEPTIONS
-        entry_not_exists = 1.
+    ASSERT 1 = 'replacedByAutomation'.
 
     IF sy-subrc IS NOT INITIAL.
       RETURN.
@@ -89,14 +81,7 @@ CLASS zcl_abapgit_gui_asset_manager IMPLEMENTATION.
     lv_size = lv_size_c.
 
     " Get binary data
-    CALL FUNCTION 'WWWDATA_IMPORT'
-      EXPORTING
-        key               = ls_key
-      TABLES
-        mime              = lt_w3mime
-      EXCEPTIONS
-        wrong_object_type = 1
-        import_error      = 2.
+    ASSERT 1 = 'replacedByAutomation'.
 
     IF sy-subrc IS NOT INITIAL.
       RETURN.

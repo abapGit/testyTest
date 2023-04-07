@@ -158,7 +158,7 @@ TYPES sci_chkv TYPE c LENGTH 1.
       !iv_use_default_transport TYPE abap_bool DEFAULT abap_false
       PREFERRED PARAMETER is_transport_type
     RETURNING
-      VALUE(rv_transport)       TYPE SXCO_TRANSPORT
+      VALUE(rv_transport)       TYPE sxco_transport
     RAISING
       zcx_abapgit_exception .
   METHODS choose_pr_popup

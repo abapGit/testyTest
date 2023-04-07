@@ -89,7 +89,7 @@ CLASS zcl_abapgit_gui_router DEFINITION
         zcx_abapgit_exception .
     CLASS-METHODS jump_display_transport
       IMPORTING
-        !iv_transport TYPE SXCO_TRANSPORT
+        !iv_transport TYPE sxco_transport
       RAISING
         zcx_abapgit_exception .
     CLASS-METHODS jump_display_user
@@ -476,14 +476,10 @@ CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
           zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
 
         CATCH cx_root.
-          CALL FUNCTION 'TR_DISPLAY_REQUEST'
-            EXPORTING
-              i_trkorr = iv_transport.
+          ASSERT 1 = 'replacedByAutomation'.
       ENDTRY.
     ELSE.
-      CALL FUNCTION 'TR_DISPLAY_REQUEST'
-        EXPORTING
-          i_trkorr = iv_transport.
+      ASSERT 1 = 'replacedByAutomation'.
     ENDIF.
 
   ENDMETHOD.
@@ -493,9 +489,7 @@ CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
 
     " todo, user display in ADT
 
-    CALL FUNCTION 'BAPI_USER_DISPLAY'
-      EXPORTING
-        username = iv_username.
+    ASSERT 1 = 'replacedByAutomation'.
 
   ENDMETHOD.
 

@@ -46,7 +46,7 @@ CLASS zcl_abapgit_data_deserializer DEFINITION
         io_repo                     TYPE REF TO zcl_abapgit_repo
         iv_transport_type           TYPE zif_abapgit_definitions=>ty_transport_type
       RETURNING
-        VALUE(rv_transport_request) TYPE SXCO_TRANSPORT.
+        VALUE(rv_transport_request) TYPE sxco_transport.
     METHODS is_table_allowed_to_edit
       IMPORTING
         !is_result                TYPE zif_abapgit_data_deserializer=>ty_result

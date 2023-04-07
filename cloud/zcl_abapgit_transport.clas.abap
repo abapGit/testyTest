@@ -38,7 +38,7 @@ CLASS zcl_abapgit_transport DEFINITION
 
     CLASS-METHODS validate_transport_request
       IMPORTING
-        iv_transport_request TYPE SXCO_TRANSPORT
+        iv_transport_request TYPE sxco_transport
       RAISING
         zcx_abapgit_exception.
 

@@ -119,7 +119,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
 
     DATA:
       ls_transport_type      TYPE zif_abapgit_definitions=>ty_transport_type,
-      lv_customizing_request TYPE SXCO_TRANSPORT.
+      lv_customizing_request TYPE sxco_transport.
 
     ls_transport_type-request = zif_abapgit_cts_api=>c_transport_type-cust_request.
     ls_transport_type-task    = zif_abapgit_cts_api=>c_transport_type-cust_task.
@@ -154,7 +154,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
 
   METHOD choose_transport_request.
 
-    DATA: lv_transport_request TYPE SXCO_TRANSPORT.
+    DATA: lv_transport_request TYPE sxco_transport.
 
     lv_transport_request = zcl_abapgit_ui_factory=>get_popups( )->popup_transport_request( ).
 
@@ -376,8 +376,8 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
 
     DATA:
       lx_error               TYPE REF TO zcx_abapgit_exception,
-      lv_transport_request   TYPE SXCO_TRANSPORT,
-      lv_customizing_request TYPE SXCO_TRANSPORT,
+      lv_transport_request   TYPE sxco_transport,
+      lv_customizing_request TYPE sxco_transport,
       lv_check_variant       TYPE char20.
 
     ro_validation_log = mo_form_util->validate( io_form_data ).

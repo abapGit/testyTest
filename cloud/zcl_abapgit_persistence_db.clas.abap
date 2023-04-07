@@ -141,11 +141,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
   METHOD get_update_function.
     IF mv_update_function IS INITIAL.
       mv_update_function = 'CALL_V1_PING'.
-      CALL FUNCTION 'FUNCTION_EXISTS'
-        EXPORTING
-          funcname = mv_update_function
-        EXCEPTIONS
-          OTHERS   = 2.
+      ASSERT 1 = 'replacedByAutomation'.
 
       IF sy-subrc <> 0.
         mv_update_function = 'BANK_OBJ_WORKL_RELEASE_LOCKS'.
@@ -184,15 +180,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
   METHOD lock.
     DATA: lv_dummy_update_function TYPE sxco_fm_name.
 
-    CALL FUNCTION 'ENQUEUE_EZABAPGIT'
-      EXPORTING
-        mode_zabapgit  = iv_mode
-        type           = iv_type
-        value          = iv_value
-      EXCEPTIONS
-        foreign_lock   = 1
-        system_failure = 2
-        OTHERS         = 3.
+    ASSERT 1 = 'replacedByAutomation'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
