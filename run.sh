@@ -277,8 +277,6 @@ sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.in
 sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
 sed -i 's/ cl_http_utility=>fields_to_string/ zcl_abapgit_http_utility=>fields_to_string/ig' ./cloud/*.abap
 sed -i "s/GET PARAMETER ID 'DBT' FIELD lv_mode.//ig" ./cloud/*.abap
-sed -i "s/GET RUN TIME FIELD lv_start.//ig" ./cloud/*.abap
-sed -i "s/GET RUN TIME FIELD lv_end.//ig" ./cloud/*.abap
 sed -i "s/ TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0/ TYPE REF TO object OPTIONAL/ig" ./cloud/*.abap
 sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/*xml*.abap
 sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )./ig" ./cloud/*xml*.abap
