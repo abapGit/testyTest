@@ -151,6 +151,7 @@ rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
 rm -f open/*xml*.clas.testclasses.abap
+rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
 
 
 # decoupling classes
