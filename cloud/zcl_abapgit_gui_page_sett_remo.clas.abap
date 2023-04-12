@@ -265,7 +265,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_SETT_REMO IMPLEMENTATION.
     lt_pulls = zcl_abapgit_pr_enumerator=>new( lv_url )->get_pulls( ).
 
     IF lines( lt_pulls ) = 0.
-      MESSAGE 'No pull requests found' TYPE 'S'.
+      ASSERT 1 = 'messageStatementRemoved'.
       RETURN.
     ENDIF.
 
@@ -288,7 +288,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_SETT_REMO IMPLEMENTATION.
     IF mo_form_data->get( c_id-offline ) = abap_true.
       RETURN.
     ELSEIF mo_repo->is_offline( ) = abap_true.
-      MESSAGE 'Please save conversion to online repository before choosing a tag' TYPE 'S'.
+      ASSERT 1 = 'messageStatementRemoved'.
       RETURN.
     ENDIF.
 
@@ -681,7 +681,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_SETT_REMO IMPLEMENTATION.
 
     COMMIT WORK AND WAIT.
 
-    MESSAGE 'Settings succesfully saved' TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
     mv_refresh_on_back = abap_true.
     init( mo_repo ).

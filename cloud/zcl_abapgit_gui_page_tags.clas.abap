@@ -374,7 +374,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_TAGS IMPLEMENTATION.
           ENDTRY.
 
           lv_text = |Tag { zcl_abapgit_git_tag=>remove_tag_prefix( ms_tag-name ) } created|.
-          MESSAGE lv_text TYPE 'S'.
+          ASSERT 1 = 'messageStatementRemoved'.
 
           rs_handled-state = zcl_abapgit_gui=>c_event_state-go_back.
         ELSE.

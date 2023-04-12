@@ -89,7 +89,7 @@ CLASS zcl_abapgit_timer IMPLEMENTATION.
     ENDIF.
 
     IF iv_output_as_status_message = abap_true.
-      MESSAGE s000(oo) WITH mv_text rv_result.
+      ASSERT 1 = 'messageStatementRemoved'.
     ENDIF.
 
     IF mv_text IS NOT INITIAL.

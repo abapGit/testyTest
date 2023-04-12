@@ -145,7 +145,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_EX_OBJECT IMPLEMENTATION.
       WHEN c_event-export.
 
         export_object( ).
-        MESSAGE 'Object successfully exported' TYPE 'S'.
+        ASSERT 1 = 'messageStatementRemoved'.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-go_back.
 
       WHEN c_event-choose_object_type.

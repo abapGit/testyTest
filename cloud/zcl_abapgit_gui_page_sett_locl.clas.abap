@@ -365,7 +365,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
 
     COMMIT WORK AND WAIT.
 
-    MESSAGE 'Settings succesfully saved' TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
     read_settings( ).
 

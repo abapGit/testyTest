@@ -1070,7 +1070,7 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
           " In case of missing or wrong credentials, show message in status bar
           lv_hint = lx_error->get_text( ).
           IF lv_hint CS 'credentials'.
-            MESSAGE lv_hint TYPE 'S' DISPLAY LIKE 'E'.
+            ASSERT 1 = 'messageStatementRemoved'.
           ENDIF.
       ENDTRY.
     ENDIF.

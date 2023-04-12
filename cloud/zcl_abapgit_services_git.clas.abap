@@ -126,7 +126,7 @@ CLASS zcl_abapgit_services_git IMPLEMENTATION.
 
     lv_msg = |Branch switched from { zcl_abapgit_git_branch_list=>get_display_name( lv_source_branch_name )
       } to new branch { zcl_abapgit_git_branch_list=>get_display_name( lv_name ) }|.
-    MESSAGE lv_msg TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 
@@ -154,7 +154,7 @@ CLASS zcl_abapgit_services_git IMPLEMENTATION.
       is_branch = ls_branch ).
 
     lv_msg = |Branch { ls_branch-display_name } deleted|.
-    MESSAGE lv_msg TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 
@@ -178,7 +178,7 @@ CLASS zcl_abapgit_services_git IMPLEMENTATION.
 
     lv_text = |Tag { ls_tag-display_name } deleted|.
 
-    MESSAGE lv_text TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 
@@ -246,7 +246,7 @@ CLASS zcl_abapgit_services_git IMPLEMENTATION.
 
     lv_text = |Tag switched to { ls_tag-display_name } |.
 
-    MESSAGE lv_text TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 ENDCLASS.

@@ -202,7 +202,7 @@ CLASS zcl_abapgit_repo_online IMPLEMENTATION.
           ENDIF.
           lv_msg = |{ lv_msg } { lo_branch_list->get_display_name( lv_branch ) } does not exist.|
                 && | Switched to { lo_branch_list->get_display_name( lv_head ) }|.
-          MESSAGE lv_msg TYPE 'S'.
+          ASSERT 1 = 'messageStatementRemoved'.
           select_branch( lv_head ).
       ENDTRY.
     ENDIF.
