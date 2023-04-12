@@ -178,7 +178,7 @@ sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/*.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
 sed -i 's/ TYPE tdevc-as4user/ TYPE usnam/ig' ./open/*.abap
-sed -i 's/ TYPE sci_chkv/ TYPE char20/ig' ./open/*.abap   # if_satc_api_factory=>ty_check_variant_name
+sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/*.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/*.abap
 sed -i 's/ OF namespace/ OF char10/ig' ./open/*.abap
 sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/*.abap

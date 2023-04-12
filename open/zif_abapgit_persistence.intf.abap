@@ -24,7 +24,7 @@ TYPES sci_chkv TYPE c LENGTH 1.
       ignore_subpackages           TYPE abap_bool,
       write_protected              TYPE abap_bool,
       only_local_objects           TYPE abap_bool,
-      code_inspector_check_variant TYPE char20,
+      code_inspector_check_variant TYPE char30,
       block_commit                 TYPE abap_bool,
       main_language_only           TYPE abap_bool,
       labels                       TYPE string,
