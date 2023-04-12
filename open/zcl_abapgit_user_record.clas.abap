@@ -22,6 +22,11 @@ CLASS zcl_abapgit_user_record DEFINITION
     METHODS get_email
       RETURNING
         VALUE(rv_email) TYPE zif_abapgit_git_definitions=>ty_git_user-email.
+    CLASS-METHODS get_title
+      IMPORTING
+        iv_username     TYPE sy-uname
+      RETURNING
+        VALUE(rv_title) TYPE string.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -30,6 +35,10 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_user_record IMPLEMENTATION.
+
+  METHOD get_title.
+    rv_title = 'title'.
+  ENDMETHOD.
 
   METHOD constructor.
 

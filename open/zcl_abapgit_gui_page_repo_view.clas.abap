@@ -1125,7 +1125,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
 
       WHEN c_actions-go_unit.
-        rs_handled-page  = zcl_abapgit_gui_page_runit=>create( mo_repo ).
+         ASSERT 1 = 'decoupled'.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
 
       WHEN c_actions-toggle_hide_files. " Toggle file diplay

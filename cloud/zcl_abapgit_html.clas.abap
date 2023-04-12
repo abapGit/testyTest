@@ -354,7 +354,7 @@ CLASS zcl_abapgit_html IMPLEMENTATION.
 
     FIELD-SYMBOLS: <lt_tab> TYPE string_table.
 
-    lv_type = cl_abap_typedescr=>describe_by_data( ig_chunk )->type_kind. " Describe is faster than RTTI classes
+    lv_type = cl_abap_typedescr=>describe_by_data( ig_chunk )->type_kind.
 
     CASE lv_type.
       WHEN 'C' OR 'g'.  " Char or string

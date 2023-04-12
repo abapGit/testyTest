@@ -95,7 +95,6 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_patch* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_over* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_view* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_run_bckg* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_runit* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_bckg* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_glob* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_info* open
@@ -194,6 +193,8 @@ sed -i "s/ ELSEIF ls_trnspace-editflag <> 'X'./ ELSEIF ls_trnspace <> 'X'./ig" .
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_debuginfo=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_sett_repo=>create( lo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ zcl_abapgit_transport_mass=>run( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
+sed -i "s/rs_handled-page  = zcl_abapgit_gui_page_runit=>create( mo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
+sed -i "s/lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 
 # CLAS shims,
 sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx_abapgit_exception.clas.abap

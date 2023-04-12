@@ -1,5 +1,7 @@
 import fs from "node:fs";
 
+// NOTE: this file only runs for cloud code
+
 const dir = "./cloud/";
 
 const replace = [
@@ -25,6 +27,7 @@ const replace = [
 ]
 
 const removeFunctionModuleCalls = [
+  "ABAP4_CALL_TRANSACTION",
   "BAPI_USER_DISPLAY",
   "CONVERT_ITF_TO_STREAM_TEXT",
   "DOCU_GET",
@@ -55,6 +58,7 @@ for (const filename of fs.readdirSync(dir)) {
       changed = true;
     }
   }
+
   for (const fm of removeFunctionModuleCalls) {
     const regex = new RegExp(`CALL FUNCTION '${fm}'[\\s\\S]+?\\.`, "ig");
     if (abap.match(regex)) {

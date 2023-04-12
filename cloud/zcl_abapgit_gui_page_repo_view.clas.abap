@@ -741,19 +741,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
     ls_spagpa-parval = mo_repo->get_key( ).
     INSERT ls_spagpa INTO TABLE lt_spagpa.
 
-    CALL FUNCTION 'ABAP4_CALL_TRANSACTION'
-      DESTINATION 'NONE'
-      STARTING NEW TASK 'ABAPGIT'
-      EXPORTING
-        tcode                   = lv_tcode
-      TABLES
-        spagpa_tab              = lt_spagpa
-      EXCEPTIONS
-        call_transaction_denied = 1
-        tcode_invalid           = 2
-        communication_failure   = 3
-        system_failure          = 4
-        OTHERS                  = 5.
+    ASSERT 1 = 'replacedByAutomation'.
 
     lv_subrc = sy-subrc.
 
@@ -1125,7 +1113,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
 
       WHEN c_actions-go_unit.
-        rs_handled-page  = zcl_abapgit_gui_page_runit=>create( mo_repo ).
+         ASSERT 1 = 'decoupled'.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
 
       WHEN c_actions-toggle_hide_files. " Toggle file diplay
