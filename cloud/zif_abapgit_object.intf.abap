@@ -22,13 +22,13 @@ INTERFACE zif_abapgit_object
       !io_xml       TYPE REF TO zif_abapgit_xml_input
       !iv_step      TYPE zif_abapgit_definitions=>ty_deserialization_step
       !ii_log       TYPE REF TO zif_abapgit_log
-      !iv_transport TYPE SXCO_TRANSPORT
+      !iv_transport TYPE sxco_transport
     RAISING
       zcx_abapgit_exception .
   METHODS delete
     IMPORTING
       !iv_package   TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
-      !iv_transport TYPE SXCO_TRANSPORT
+      !iv_transport TYPE sxco_transport
     RAISING
       zcx_abapgit_exception .
   METHODS exists

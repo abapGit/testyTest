@@ -141,11 +141,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
   METHOD get_update_function.
     IF mv_update_function IS INITIAL.
       mv_update_function = 'CALL_V1_PING'.
-      CALL FUNCTION 'FUNCTION_EXISTS'
-        EXPORTING
-          funcname = mv_update_function
-        EXCEPTIONS
-          OTHERS   = 2.
+      ASSERT 1 = 'replacedByAutomation'.
 
       IF sy-subrc <> 0.
         mv_update_function = 'BANK_OBJ_WORKL_RELEASE_LOCKS'.
@@ -166,33 +162,25 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
     FIELD-SYMBOLS: <ls_key> LIKE LINE OF it_keys.
     LOOP AT it_keys ASSIGNING <ls_key>.
       SELECT * FROM (c_tabname)
-      APPENDING TABLE @rt_contents
+      
       WHERE value = @<ls_key> AND
-            type  = @iv_type.
+            type  = @iv_type APPENDING TABLE @rt_contents.
     ENDLOOP.
   ENDMETHOD.
 
 
   METHOD list_by_type.
     SELECT * FROM (c_tabname)
-      INTO TABLE @rt_content
+      
       WHERE type = @iv_type
-      ORDER BY PRIMARY KEY.                               "#EC CI_SUBRC
+      ORDER BY PRIMARY KEY INTO TABLE @rt_content.                               "#EC CI_SUBRC
   ENDMETHOD.
 
 
   METHOD lock.
     DATA: lv_dummy_update_function TYPE sxco_fm_name.
 
-    CALL FUNCTION 'ENQUEUE_EZABAPGIT'
-      EXPORTING
-        mode_zabapgit  = iv_mode
-        type           = iv_type
-        value          = iv_value
-      EXCEPTIONS
-        foreign_lock   = 1
-        system_failure = 2
-        OTHERS         = 3.
+    ASSERT 1 = 'replacedByAutomation'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
@@ -201,7 +189,7 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
 
 * trigger dummy update task to automatically release locks at commit
     CALL FUNCTION lv_dummy_update_function
-      IN UPDATE TASK.
+      .
 
   ENDMETHOD.
 
@@ -227,9 +215,9 @@ CLASS ZCL_ABAPGIT_PERSISTENCE_DB IMPLEMENTATION.
 
   METHOD read.
 
-    SELECT SINGLE data_str FROM (c_tabname) INTO @rv_data
+    SELECT SINGLE data_str FROM (c_tabname) 
       WHERE type = @iv_type
-      AND value = @iv_value.
+      AND value = @iv_value INTO @rv_data.
     IF sy-subrc <> 0.
       RAISE EXCEPTION TYPE zcx_abapgit_not_found.
     ENDIF.

@@ -46,7 +46,7 @@ CLASS zcl_abapgit_objects_super DEFINITION
         !iv_package TYPE I_CustABAPObjDirectoryEntry-ABAPPackage .
     METHODS set_default_transport
       IMPORTING
-        !iv_transport TYPE SXCO_TRANSPORT.
+        !iv_transport TYPE sxco_transport.
     METHODS serialize_longtexts
       IMPORTING
         !ii_xml           TYPE REF TO zif_abapgit_xml_output

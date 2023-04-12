@@ -160,7 +160,7 @@ TYPES: BEGIN OF addr3_val,
         zcx_abapgit_exception .
     CLASS-METHODS render_transport
       IMPORTING
-        !iv_transport   TYPE SXCO_TRANSPORT
+        !iv_transport   TYPE sxco_transport
         !iv_interactive TYPE abap_bool DEFAULT abap_true
         !iv_icon_only   TYPE abap_bool DEFAULT abap_false
       RETURNING
@@ -295,13 +295,21 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
 
   METHOD class_constructor.
 
-    CALL FUNCTION 'GET_SYSTEM_TIMEZONE'
-      IMPORTING
-        timezone            = gv_time_zone
-      EXCEPTIONS
-        customizing_missing = 1
-        OTHERS              = 2.
-    ASSERT sy-subrc = 0.
+    DATA lv_fm TYPE string.
+    lv_fm = 'GET_SYSTEM_TIMEZONE'.
+
+    TRY.
+        CALL METHOD ('CL_ABAP_TSTMP')=>get_system_timezone
+          RECEIVING
+            system_timezone = gv_time_zone.
+      CATCH cx_sy_dyn_call_illegal_method.
+        CALL FUNCTION lv_fm
+          IMPORTING
+            timezone            = gv_time_zone
+          EXCEPTIONS
+            customizing_missing = 1
+            OTHERS              = 2.
+    ENDTRY.
 
   ENDMETHOD.
 
@@ -1281,7 +1289,6 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
   METHOD render_user_name.
 
     DATA:
-      ls_user_address TYPE addr3_val,
       lv_title        TYPE string,
       lv_jump         TYPE string.
 
@@ -1292,17 +1299,7 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
     ENDIF.
 
     IF iv_username <> 'UNKNOWN' AND iv_suppress_title = abap_false.
-      CALL FUNCTION 'SUSR_USER_ADDRESS_READ'
-        EXPORTING
-          user_name              = iv_username
-        IMPORTING
-          user_address           = ls_user_address
-        EXCEPTIONS
-          user_address_not_found = 1
-          OTHERS                 = 2.
-      IF sy-subrc = 0.
-        lv_title = ls_user_address-name_text.
-      ENDIF.
+      lv_title = zcl_abapgit_user_record=>get_title( iv_username ).
     ENDIF.
 
     lv_jump = |{ zif_abapgit_definitions=>c_action-jump_user }?user={ iv_username }|.

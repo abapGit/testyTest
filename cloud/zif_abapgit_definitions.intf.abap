@@ -74,7 +74,7 @@ types dokil type c length 1.
   TYPES:
     BEGIN OF ty_transport,
       required  TYPE abap_bool,
-      transport TYPE SXCO_TRANSPORT,
+      transport TYPE sxco_transport,
       type      TYPE ty_transport_type,
     END OF ty_transport .
   TYPES:
@@ -84,6 +84,7 @@ types dokil type c length 1.
       requirements    TYPE ty_requirements,
       dependencies    TYPE ty_dependencies,
       transport       TYPE ty_transport,
+      customizing     TYPE ty_transport,
     END OF ty_deserialize_checks .
   TYPES:
     BEGIN OF ty_delete_checks,
@@ -124,7 +125,7 @@ types dokil type c length 1.
       object    TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType,
       obj_name  TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
       devclass  TYPE I_CustABAPObjDirectoryEntry-ABAPPackage,
-      korrnum   TYPE SXCO_TRANSPORT, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
+      korrnum   TYPE sxco_transport, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
       delflag   TYPE abap_bool,
       genflag   TYPE abap_bool,
       path      TYPE string,
@@ -252,7 +253,7 @@ types dokil type c length 1.
       rstate     TYPE zif_abapgit_git_definitions=>ty_item_state,
       files      TYPE ty_repo_file_tt,
       changed_by TYPE syuname,
-      transport  TYPE SXCO_TRANSPORT,
+      transport  TYPE sxco_transport,
       packmove   TYPE abap_bool,
       srcsystem  TYPE c LENGTH 10,
     END OF ty_repo_item .
@@ -476,5 +477,5 @@ types dokil type c length 1.
       translation_languages TYPE ty_languages,
       use_lxe               TYPE abap_bool,
     END OF ty_i18n_params .
-  TYPES ty_trrngtrkor_tt TYPE RANGE OF SXCO_TRANSPORT.
+  TYPES ty_trrngtrkor_tt TYPE RANGE OF sxco_transport.
 ENDINTERFACE.

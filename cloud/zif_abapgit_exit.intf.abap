@@ -84,7 +84,7 @@ INTERFACE zif_abapgit_exit
       !io_repo              TYPE REF TO zcl_abapgit_repo
       !iv_transport_type    TYPE zif_abapgit_definitions=>ty_transport_type
     CHANGING
-      !cv_transport_request TYPE SXCO_TRANSPORT .
+      !cv_transport_request TYPE sxco_transport .
   METHODS get_ci_tests
     IMPORTING
       !iv_object   TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType

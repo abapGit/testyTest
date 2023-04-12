@@ -28,7 +28,8 @@ TYPES sci_chkv TYPE c LENGTH 1.
       block_commit                 TYPE abap_bool,
       main_language_only           TYPE abap_bool,
       labels                       TYPE string,
-      transport_request            TYPE SXCO_TRANSPORT,
+      transport_request            TYPE sxco_transport,
+      customizing_request          TYPE sxco_transport,
     END OF ty_local_settings.
 
   TYPES: ty_local_checksum_tt TYPE STANDARD TABLE OF ty_local_checksum WITH DEFAULT KEY.

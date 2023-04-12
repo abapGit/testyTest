@@ -26,7 +26,7 @@ TYPES: BEGIN OF e070use,
 
       set
         IMPORTING
-          iv_transport TYPE SXCO_TRANSPORT
+          iv_transport TYPE sxco_transport
         RAISING
           zcx_abapgit_exception,
 
@@ -55,7 +55,7 @@ TYPES: BEGIN OF e070use,
         zcx_abapgit_exception .
     METHODS set_internal
       IMPORTING
-        !iv_transport TYPE SXCO_TRANSPORT
+        !iv_transport TYPE sxco_transport
       RAISING
         zcx_abapgit_exception .
     METHODS clear
@@ -72,17 +72,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
 
   METHOD clear.
 
-    CALL FUNCTION 'TR_TASK_RESET'
-      EXPORTING
-        iv_username      = is_default_task-username
-        iv_order         = is_default_task-ordernum
-        iv_task          = is_default_task-tasknum
-        iv_dialog        = abap_false
-      EXCEPTIONS
-        invalid_username = 1
-        invalid_order    = 2
-        invalid_task     = 3
-        OTHERS           = 4.
+    ASSERT 1 = 'replacedByAutomation'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
@@ -101,14 +91,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
 
     DATA: lt_e070use TYPE STANDARD TABLE OF e070use.
 
-    CALL FUNCTION 'TR_TASK_GET'
-      TABLES
-        tt_e070use       = lt_e070use
-      EXCEPTIONS
-        invalid_username = 1
-        invalid_category = 2
-        invalid_client   = 3
-        OTHERS           = 4.
+    ASSERT 1 = 'replacedByAutomation'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
@@ -163,18 +146,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    CALL FUNCTION 'TR_TASK_SET'
-      EXPORTING
-        iv_order          = ms_save-ordernum
-        iv_task           = ms_save-tasknum
-      EXCEPTIONS
-        invalid_username  = 1
-        invalid_category  = 2
-        invalid_client    = 3
-        invalid_validdays = 4
-        invalid_order     = 5
-        invalid_task      = 6
-        OTHERS            = 7.
+    ASSERT 1 = 'replacedByAutomation'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
@@ -207,18 +179,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
 
   METHOD set_internal.
 
-    CALL FUNCTION 'TR_TASK_SET'
-      EXPORTING
-        iv_order          = iv_transport
-        iv_validdays      = 1
-      EXCEPTIONS
-        invalid_username  = 1
-        invalid_category  = 2
-        invalid_client    = 3
-        invalid_validdays = 4
-        invalid_order     = 5
-        invalid_task      = 6
-        OTHERS            = 7.
+    ASSERT 1 = 'replacedByAutomation'.
 
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).

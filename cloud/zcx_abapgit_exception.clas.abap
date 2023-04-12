@@ -211,16 +211,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
 
     lv_docu_key = if_t100_message~t100key-msgid && if_t100_message~t100key-msgno.
 
-    CALL FUNCTION 'DOCU_GET'
-      EXPORTING
-        id     = 'NA'
-        langu  = sy-langu
-        object = lv_docu_key
-        typ    = 'E'
-      TABLES
-        line   = rt_itf
-      EXCEPTIONS
-        OTHERS = 1.
+    ASSERT 1 = 'replacedByAutomation'.
 
     IF sy-subrc = 0.
       ASSIGN me->(if_t100_message~t100key-attr1) TO <lv_msgv>.
@@ -317,14 +308,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
 
     ENDLOOP.
 
-    CALL FUNCTION 'CONVERT_ITF_TO_STREAM_TEXT'
-      EXPORTING
-        lf           = 'X'
-      IMPORTING
-        stream_lines = lt_string
-      TABLES
-        itf_text     = lt_itf
-        text_stream  = lt_stream.
+    ASSERT 1 = 'replacedByAutomation'.
 
     LOOP AT lt_string INTO lv_string.
       IF sy-tabix = 1.
@@ -434,9 +418,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
 
     FIELD-SYMBOLS: <ls_callstack> LIKE LINE OF mt_callstack.
 
-    CALL FUNCTION 'SYSTEM_CALLSTACK'
-      IMPORTING
-        callstack = mt_callstack.
+    ASSERT 1 = 'replacedByAutomation'.
 
     " You should remember that the first lines are from zcx_abapgit_exception
     " and are removed so that highest level in the callstack is the position where
@@ -479,13 +461,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
 
       lv_index = sy-index.
 
-      CALL FUNCTION 'TEXT_SPLIT'
-        EXPORTING
-          length = lc_length_of_msgv
-          text   = lv_text
-        IMPORTING
-          line   = lv_msg_var
-          rest   = lv_rest.
+      ASSERT 1 = 'replacedByAutomation'.
 
       IF lv_msg_var+lc_offset_of_last_character(1) = space OR
          lv_text+lc_length_of_msgv(1) = space.

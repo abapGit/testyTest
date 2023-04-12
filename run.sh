@@ -6,15 +6,6 @@ git clone https://github.com/abapGit/abapGit --depth 1
 rm -f open/*
 rm -f cloud/*
 
-# TODO: decouple git from stage which uses repo
-# TODO: zcl_abapgit_repo_filter, method filter_generated_tadir is strange
-# TODO: replace use of ABAPTXT255_TAB
-# TODO: add interface for zcl_abapgit_objects_activation
-
-# cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_repo* open          t002t
-# cp abapGit/src/objects/texts/zcl_abapgit_lxe_texts* open
-
-
 cp abapGit/src/ui/core/zcl_abapgit_gui_hotkey_ctl* open
 cp abapGit/src/apack/zif_abapgit_apack_definitions* open
 cp abapGit/src/background/zif_abapgit_background* open
@@ -104,7 +95,6 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_patch* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_over* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_view* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_run_bckg* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_runit* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_bckg* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_glob* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_info* open
@@ -151,6 +141,7 @@ rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
 rm -f open/*xml*.clas.testclasses.abap
+rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
 
 
 # decoupling classes
@@ -202,6 +193,8 @@ sed -i "s/ ELSEIF ls_trnspace-editflag <> 'X'./ ELSEIF ls_trnspace <> 'X'./ig" .
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_debuginfo=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_sett_repo=>create( lo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ zcl_abapgit_transport_mass=>run( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
+sed -i "s/rs_handled-page  = zcl_abapgit_gui_page_runit=>create( mo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
+sed -i "s/lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 
 # CLAS shims,
 sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx_abapgit_exception.clas.abap
@@ -275,43 +268,27 @@ sed -i "s/ TYPE REF TO if_http_client/ TYPE REF TO object/ig" ./cloud/*.abap
 sed -i 's/tadir-pgmid/I_CustABAPObjDirectoryEntry-ABAPObjectCategory/ig' ./cloud/*.intf.abap
 sed -i 's/ tadir-object/ I_CustABAPObjDirectoryEntry-ABAPObjectType/ig' ./cloud/*.abap
 sed -i 's/ tadir-obj_name/ I_CustABAPObjDirectoryEntry-ABAPObject/ig' ./cloud/*.abap
-sed -i 's/ TYPE devclass/ TYPE I_CustABAPObjDirectoryEntry-ABAPPackage/ig' ./cloud/*.abap
-sed -i 's/ TYPE RANGE OF devclass/ TYPE RANGE OF I_CustABAPObjDirectoryEntry-ABAPPackage/ig' ./cloud/*.abap
-sed -i 's/ TYPE tdevc-parentcl/ TYPE I_CustABAPObjDirectoryEntry-ABAPPackage/ig' ./cloud/*.abap
-sed -i 's/ TABLE OF devclass/ TABLE OF I_CustABAPObjDirectoryEntry-ABAPPackage/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-srcsystem/ TYPE c LENGTH 10/ig' ./cloud/*.intf.abap
-sed -i 's/ TYPE tadir-devclass/ TYPE I_CustABAPObjDirectoryEntry-ABAPPackage/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE seoclsname/ TYPE char30/ig' ./cloud/*.abap
 sed -i 's/ TYPE filetable/ TYPE string/ig' ./cloud/*.abap
-sed -i 's/ TYPE funcname/ TYPE sxco_fm_name/ig' ./cloud/*.abap
 sed -i 's/ TYPE wwwdatatab-objid/ TYPE string/ig' ./cloud/*.abap
-sed -i 's/ TYPE tadir-korrnum/ TYPE SXCO_TRANSPORT/ig' ./cloud/*.intf.abap
-sed -i 's/ TYPE trkorr/ TYPE SXCO_TRANSPORT/ig' ./cloud/*.abap
-sed -i 's/ RANGE OF trkorr/ RANGE OF SXCO_TRANSPORT/ig' ./cloud/*.intf.abap
 sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.intf.abap
 sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
-sed -i 's/ cl_http_utility=>unescape_url/ cl_web_http_utility=>unescape_url/ig' ./cloud/*.abap
-sed -i 's/ cl_http_utility=>encode_base64/ cl_web_http_utility=>encode_base64/ig' ./cloud/*.abap
 sed -i 's/ cl_http_utility=>fields_to_string/ zcl_abapgit_http_utility=>fields_to_string/ig' ./cloud/*.abap
 sed -i "s/GET PARAMETER ID 'DBT' FIELD lv_mode.//ig" ./cloud/*.abap
-sed -i "s/GET RUN TIME FIELD lv_start.//ig" ./cloud/*.abap
-sed -i "s/GET RUN TIME FIELD lv_end.//ig" ./cloud/*.abap
 sed -i "s/ TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0/ TYPE REF TO object OPTIONAL/ig" ./cloud/*.abap
-sed -i "s/ TYPE REF TO if_ixml,/ TYPE REF TO if_ixml_core,/ig" ./cloud/*.abap
-sed -i "s/ cl_ixml=>/ cl_ixml_core=>/ig" ./cloud/*.abap
-sed -i "s/ TYPE REF TO if_ixml_parser/ TYPE REF TO if_ixml_parser_core/ig" ./cloud/*xml*.abap
-sed -i "s/ TYPE REF TO if_ixml_parse_error/ TYPE REF TO if_ixml_parse_error_core/ig" ./cloud/*xml*.abap
-sed -i "s/ TYPE REF TO if_ixml_stream_factory/ TYPE REF TO if_ixml_stream_factory_core/ig" ./cloud/*xml*.abap
-sed -i "s/ TYPE REF TO if_ixml_istream/ TYPE REF TO if_ixml_istream_core/ig" ./cloud/*xml*.abap
-sed -i "s/ TYPE REF TO if_ixml_ostream/ TYPE REF TO if_ixml_ostream_core/ig" ./cloud/*xml*.abap
-sed -i "s/ TYPE REF TO if_ixml_renderer/ TYPE REF TO if_ixml_renderer_core/ig" ./cloud/*xml*.abap
 sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/*xml*.abap
 sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )./ig" ./cloud/*xml*.abap
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/*xml*.abap
-sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/*.abap
+sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_repo.clas.abap
+sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
 
+# https://github.com/abapGit/abapGit/pull/6205
 sed -i 's/DESCRIBE FIELD ig_chunk TYPE lv_type/lv_type = cl_abap_typedescr=>describe_by_data( ig_chunk )->type_kind/ig' ./cloud/zcl_abapgit_html.clas.abap
+
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap
+
+node refactor.mjs

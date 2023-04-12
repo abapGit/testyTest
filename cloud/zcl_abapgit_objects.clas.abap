@@ -125,7 +125,7 @@ CLASS zcl_abapgit_objects DEFINITION
       IMPORTING
         !iv_package   TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
         !is_item      TYPE zif_abapgit_definitions=>ty_item
-        !iv_transport TYPE SXCO_TRANSPORT
+        !iv_transport TYPE sxco_transport
       RAISING
         zcx_abapgit_exception .
     CLASS-METHODS compare_remote_to_local
@@ -140,7 +140,7 @@ CLASS zcl_abapgit_objects DEFINITION
       IMPORTING
         !is_step      TYPE zif_abapgit_objects=>ty_step_data
         !ii_log       TYPE REF TO zif_abapgit_log
-        !iv_transport TYPE SXCO_TRANSPORT
+        !iv_transport TYPE sxco_transport
       CHANGING
         !ct_files     TYPE zif_abapgit_git_definitions=>ty_file_signatures_tt
       RAISING

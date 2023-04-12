@@ -82,7 +82,7 @@ CLASS zcl_abapgit_data_serializer IMPLEMENTATION.
 
     TRY.
         LOOP AT it_where INTO lv_where.
-          SELECT * FROM (iv_name) APPENDING TABLE @<lg_tab> WHERE (lv_where).
+          SELECT * FROM (iv_name)  WHERE (lv_where) APPENDING TABLE @<lg_tab>.
         ENDLOOP.
         IF lines( it_where ) = 0.
           SELECT * FROM (iv_name) INTO TABLE @<lg_tab>.
@@ -128,7 +128,7 @@ CLASS zcl_abapgit_data_serializer IMPLEMENTATION.
         ls_file-data = zcl_abapgit_convert=>string_to_xstring_utf8( '[]' ).
       ENDIF.
 
-      ls_file-filename = zcl_abapgit_data_utils=>build_filename( ls_config ).
+      ls_file-filename = zcl_abapgit_data_utils=>build_data_filename( ls_config ).
       ls_file-sha1 = zcl_abapgit_hash=>sha1_blob( ls_file-data ).
       APPEND ls_file TO rt_files.
     ENDLOOP.

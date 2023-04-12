@@ -73,7 +73,7 @@ CLASS zcl_abapgit_gui_page_stage DEFINITION
         !is_item       TYPE zif_abapgit_definitions=>ty_item OPTIONAL
         !is_status     TYPE zif_abapgit_definitions=>ty_result
         !iv_changed_by TYPE syuname OPTIONAL
-        !iv_transport  TYPE SXCO_TRANSPORT OPTIONAL
+        !iv_transport  TYPE sxco_transport OPTIONAL
       RETURNING
         VALUE(ri_html) TYPE REF TO zif_abapgit_html
       RAISING
