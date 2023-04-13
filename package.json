@@ -22,9 +22,9 @@
   "dependencies": {
     "@abaplint/cli": "^2.97.10",
     "@abaplint/database-sqlite": "^2.6.0",
-    "@abaplint/runtime": "^2.6.15",
-    "@abaplint/transpiler-cli": "^2.6.15",
-    "electron": "^24.1.0",
+    "@abaplint/runtime": "^2.6.16",
+    "@abaplint/transpiler-cli": "^2.6.16",
+    "electron": "^24.1.1",
     "express": "^4.18.2"
   }
 }

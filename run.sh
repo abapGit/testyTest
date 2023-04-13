@@ -154,7 +154,7 @@ sed -i "s/ CREATE OBJECT gi_longtext TYPE zcl_abapgit_longtexts./ ASSERT 1 = 'de
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT rs_handled-page TYPE zcl_abapgit_gui_page_stage/ CREATE OBJECT rs_handled-page TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_gui_page_code_insp.clas.abap
 sed -i "s/ TYPE zcl_abapgit_stage_logic./ TYPE ('DECOUPLED')./ig" ./open/*.abap
-sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer/ig" ./open/*.abap
+sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ TYPE REF TO zcl_abapgit_repo_online/ TYPE REF TO object/ig" ./open/zif_abapgit_background.intf.abap
 sed -i "s/ TYPE seoclskey/ TYPE char30/ig" ./open/zif_abapgit_exit.intf.abap
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
