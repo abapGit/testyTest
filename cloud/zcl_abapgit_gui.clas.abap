@@ -318,12 +318,12 @@ CLASS ZCL_ABAPGIT_GUI IMPLEMENTATION.
             zcl_abapgit_log_viewer=>show_log( mi_common_log ).
           ENDIF.
         ELSE.
-          MESSAGE ix_exception TYPE 'S' DISPLAY LIKE 'E'.
+          ASSERT 1 = 'messageStatementRemoved'.
         ENDIF.
 
       CATCH zcx_abapgit_exception cx_sy_move_cast_error INTO lx_exception.
         " In case of fire we just fallback to plain old message
-        MESSAGE lx_exception TYPE 'S' DISPLAY LIKE 'E'.
+        ASSERT 1 = 'messageStatementRemoved'.
     ENDTRY.
 
   ENDMETHOD.

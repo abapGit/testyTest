@@ -102,7 +102,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
 
   METHOD choose_check_variant.
 
-    DATA: lv_check_variant TYPE char20.
+    DATA: lv_check_variant TYPE char30.
 
     lv_check_variant = zcl_abapgit_ui_factory=>get_popups( )->choose_code_insp_check_variant( ).
 
@@ -378,7 +378,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
       lx_error               TYPE REF TO zcx_abapgit_exception,
       lv_transport_request   TYPE trkorr,
       lv_customizing_request TYPE trkorr,
-      lv_check_variant       TYPE char20.
+      lv_check_variant       TYPE char30.
 
     ro_validation_log = mo_form_util->validate( io_form_data ).
 

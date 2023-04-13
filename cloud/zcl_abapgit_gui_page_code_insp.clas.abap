@@ -30,7 +30,7 @@ CLASS zcl_abapgit_gui_page_code_insp DEFINITION PUBLIC FINAL CREATE PUBLIC
   PRIVATE SECTION.
     DATA:
       mo_stage         TYPE REF TO zcl_abapgit_stage,
-      mv_check_variant TYPE char20.
+      mv_check_variant TYPE char30.
 
     METHODS:
       build_menu
@@ -53,7 +53,7 @@ CLASS zcl_abapgit_gui_page_code_insp DEFINITION PUBLIC FINAL CREATE PUBLIC
 
       ask_user_for_check_variant
         RETURNING
-          VALUE(rv_check_variant) TYPE char20
+          VALUE(rv_check_variant) TYPE char30
         RAISING
           zcx_abapgit_exception,
 

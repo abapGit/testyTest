@@ -160,7 +160,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_DB IMPLEMENTATION.
       iv_path = lv_path
       iv_xstr = lv_zip ).
 
-    MESSAGE 'abapGit Backup successfully saved' TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 
@@ -308,7 +308,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_DB IMPLEMENTATION.
 
     COMMIT WORK AND WAIT.
 
-    MESSAGE 'abapGit Backup successfully restored' TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 

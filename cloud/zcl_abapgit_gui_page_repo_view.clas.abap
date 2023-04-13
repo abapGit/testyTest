@@ -751,7 +751,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
       zcx_abapgit_exception=>raise( |Error from ABAP4_CALL_TRANSACTION. Subrc = { lv_subrc }| ).
     ENDIF.
 
-    MESSAGE 'Repository opened in a new window' TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 

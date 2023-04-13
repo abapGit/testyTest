@@ -135,7 +135,7 @@ CLASS ZCL_ABAPGIT_SERVICES_REPO IMPLEMENTATION.
     ENDLOOP.
 
     IF lv_count = 0.
-      MESSAGE 'No inactive objects found' TYPE 'S'.
+      ASSERT 1 = 'messageStatementRemoved'.
       RETURN.
     ENDIF.
 
@@ -150,7 +150,7 @@ CLASS ZCL_ABAPGIT_SERVICES_REPO IMPLEMENTATION.
 
     IF ri_log->get_status( ) <> zif_abapgit_log=>c_status-error.
       lv_message = |Successfully activated { lv_count } objects|.
-      MESSAGE lv_message TYPE 'S'.
+      ASSERT 1 = 'messageStatementRemoved'.
     ENDIF.
 
     lo_repo->refresh( iv_drop_log = abap_false ).
@@ -264,7 +264,7 @@ CLASS ZCL_ABAPGIT_SERVICES_REPO IMPLEMENTATION.
 
     IF li_log->get_status( ) = zif_abapgit_log=>c_status-ok.
       lv_msg = |Repository { io_repo->get_name( ) } successfully pulled for package { io_repo->get_package( ) }|.
-      MESSAGE lv_msg TYPE 'S'.
+      ASSERT 1 = 'messageStatementRemoved'.
     ENDIF.
 
   ENDMETHOD.
@@ -558,7 +558,7 @@ CLASS ZCL_ABAPGIT_SERVICES_REPO IMPLEMENTATION.
     ENDIF.
 
     lv_message = |Repository { lv_repo_name } successfully uninstalled from Package { lv_package }. |.
-    MESSAGE lv_message TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 
@@ -651,7 +651,7 @@ CLASS ZCL_ABAPGIT_SERVICES_REPO IMPLEMENTATION.
     COMMIT WORK.
 
     lv_message = |Reference to repository { lv_repo_name } successfully removed from Package { lv_package }. |.
-    MESSAGE lv_message TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
   ENDMETHOD.
 

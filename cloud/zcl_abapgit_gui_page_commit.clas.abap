@@ -501,7 +501,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_COMMIT IMPLEMENTATION.
             io_stage  = mo_stage ).
 
 
-          MESSAGE 'Commit was successful' TYPE 'S'.
+          ASSERT 1 = 'messageStatementRemoved'.
 
           rs_handled-state = zcl_abapgit_gui=>c_event_state-go_back_to_bookmark.
         ELSE.

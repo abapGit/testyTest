@@ -140,7 +140,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_EX_PCKAGE IMPLEMENTATION.
           rs_handled-state = zcl_abapgit_gui=>c_event_state-re_render.
         ELSE.
           export_package( ).
-          MESSAGE 'Package successfully exported' TYPE 'S'.
+          ASSERT 1 = 'messageStatementRemoved'.
           rs_handled-state = zcl_abapgit_gui=>c_event_state-go_back.
         ENDIF.
 

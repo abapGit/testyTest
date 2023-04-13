@@ -519,13 +519,13 @@ CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
         lv_clip_content = ii_event->query( )->get( 'CLIPBOARD' ).
         APPEND lv_clip_content TO lt_clipboard.
         zcl_abapgit_ui_factory=>get_frontend_services( )->clipboard_export( lt_clipboard ).
-        MESSAGE 'Successfully exported URL to Clipboard.' TYPE 'S'.
+        ASSERT 1 = 'messageStatementRemoved'.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
       WHEN zif_abapgit_definitions=>c_action-yank_to_clipboard.
         lv_clip_content = ii_event->form_data( )->get( 'CLIPBOARD' ).
         APPEND lv_clip_content TO lt_clipboard.
         zcl_abapgit_ui_factory=>get_frontend_services( )->clipboard_export( lt_clipboard ).
-        MESSAGE 'Successfully exported to Clipboard.' TYPE 'S'.
+        ASSERT 1 = 'messageStatementRemoved'.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
     ENDCASE.
 

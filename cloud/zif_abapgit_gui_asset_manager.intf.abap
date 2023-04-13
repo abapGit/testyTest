@@ -40,7 +40,7 @@ INTERFACE zif_abapgit_gui_asset_manager
       !iv_url       TYPE string
       !iv_type      TYPE string
       !iv_cachable  TYPE abap_bool DEFAULT abap_true
-      !iv_mime_name TYPE string OPTIONAL
+      !iv_mime_name TYPE char40 OPTIONAL
       !iv_base64    TYPE string OPTIONAL
       !iv_inline    TYPE string OPTIONAL
     RAISING

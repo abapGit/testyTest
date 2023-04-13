@@ -348,7 +348,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_SETT_PERS IMPLEMENTATION.
 
     COMMIT WORK AND WAIT.
 
-    MESSAGE 'Settings succesfully saved' TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
     read_settings( ).
 

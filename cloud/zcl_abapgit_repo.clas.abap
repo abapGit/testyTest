@@ -234,7 +234,7 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
        sy-cprog = lc_abapgit_prog.
 
       IF zcl_abapgit_persist_factory=>get_settings( )->read( )->get_show_default_repo( ) = abap_false.
-        MESSAGE 'abapGit was updated and will restart itself' TYPE 'I'.
+        ASSERT 1 = 'messageStatementRemoved'.
       ENDIF.
 
       ASSERT 1 = 'non_cloud'.

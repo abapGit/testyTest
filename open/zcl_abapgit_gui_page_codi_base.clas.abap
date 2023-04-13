@@ -16,10 +16,7 @@ CLASS zcl_abapgit_gui_page_codi_base DEFINITION PUBLIC ABSTRACT INHERITING FROM 
         commit TYPE string VALUE 'commit' ##NO_TEXT,
       END OF c_actions .
     DATA mo_repo TYPE REF TO zcl_abapgit_repo .
-    TYPES: BEGIN OF ty,
-             kind TYPE string,
-           END OF ty.
-    DATA mt_result TYPE STANDARD TABLE OF ty WITH DEFAULT KEY.
+    DATA mt_result TYPE zif_abapgit_code_inspector=>ty_results .
 
     METHODS render_variant
       IMPORTING
