@@ -5,7 +5,9 @@ CLASS zcl_abapgit_services_basis DEFINITION
 
   PUBLIC SECTION.
 TYPES: BEGIN OF scompkdtln,
-         devclass TYPE I_CustABAPObjDirectoryEntry-ABAPPackage,
+         devclass TYPE c LENGTH 30,
+         ctext    TYPE c LENGTH 60,
+         as4user  TYPE c LENGTH 8,
        END OF scompkdtln.
     CLASS-METHODS create_package
       IMPORTING
