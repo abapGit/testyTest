@@ -256,6 +256,7 @@ cp abapGit/src/http/zcl_abapgit_proxy_config* open
 cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
 cp additional/* open
+cp additional/zabapgit.msag.xml cloud
 
 # replace or rewrite most of the code,
 cp replace/zcl_abapgit_convert* cloud

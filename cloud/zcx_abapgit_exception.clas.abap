@@ -486,7 +486,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
     ENDDO.
 
     " Set syst using generic error message
-    MESSAGE e001(00) WITH ls_msg-msgv1 ls_msg-msgv2 ls_msg-msgv3 ls_msg-msgv4 INTO null.
+    MESSAGE e001(zabapgit) WITH ls_msg-msgv1 ls_msg-msgv2 ls_msg-msgv3 ls_msg-msgv4 INTO null.
 
     rs_msg = ls_msg.
 

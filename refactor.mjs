@@ -24,6 +24,7 @@ const replace = [
   {search: " TYPE tadir-korrnum",                 replace: " TYPE sxco_transport"},
   {search: " TYPE tdevc-parentcl",                replace: " TYPE I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE trkorr",                        replace: " TYPE sxco_transport"},
+  {search: " msgid type symsgid value '00',",                                 replace: " msgid type symsgid value 'ZABAPGIT',"},
   {search: "MESSAGE 'abapGit Backup successfully restored' TYPE 'S'.",        replace: "ASSERT 1 = 'messageStatementRemoved'."},
   {search: "MESSAGE 'abapGit Backup successfully saved' TYPE 'S'.",           replace: "ASSERT 1 = 'messageStatementRemoved'."},
   {search: "MESSAGE 'abapGit was updated and will restart itself' TYPE 'I'.", replace: "ASSERT 1 = 'messageStatementRemoved'."},
@@ -43,8 +44,11 @@ const replace = [
   {search: "MESSAGE lv_text TYPE 'S'.",                                       replace: "ASSERT 1 = 'messageStatementRemoved'."},
   {search: "MESSAGE lx_exception TYPE 'S' DISPLAY LIKE 'E'.",                 replace: "ASSERT 1 = 'messageStatementRemoved'."},
   {search: "MESSAGE s000\\(oo\\) WITH mv_text rv_result.",                    replace: "ASSERT 1 = 'messageStatementRemoved'."},
-  {search: "MESSAGE e058\\(00\\) WITH 'Value_1' 'Value_2' 'Value_3' 'Value_4' INTO zcx_abapgit_exception=>null.", replace: "ASSERT 1 = 'messageStatementRemoved'."},
   {search: "MESSAGE 'Please save conversion to online repository before choosing a tag' TYPE 'S'.",               replace: "ASSERT 1 = 'messageStatementRemoved'."},
+  {search: "MESSAGE e058\\(00\\) WITH 'Value_1' 'Value_2' 'Value_3' 'Value_4' INTO zcx_abapgit_exception=>null.",
+   replace: "MESSAGE e001(zabapgit) WITH 'Value_1' 'Value_2' 'Value_3' 'Value_4' INTO zcx_abapgit_exception=>null."},
+  {search: "MESSAGE e001\\(00\\) WITH ls_msg-msgv1 ls_msg-msgv2 ls_msg-msgv3 ls_msg-msgv4 INTO null.",
+   replace: "MESSAGE e001(zabapgit) WITH ls_msg-msgv1 ls_msg-msgv2 ls_msg-msgv3 ls_msg-msgv4 INTO null."},
 ]
 
 const removeFunctionModuleCalls = [
