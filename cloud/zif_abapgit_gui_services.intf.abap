@@ -17,7 +17,7 @@ INTERFACE zif_abapgit_gui_services
     IMPORTING
       !iv_url       TYPE string
       !iv_type      TYPE string
-      !iv_mime_name TYPE string OPTIONAL
+      !iv_mime_name TYPE char40 OPTIONAL
       !iv_inline    TYPE string OPTIONAL
       " Notes:
       " - page_asset is supposed to be not cachable

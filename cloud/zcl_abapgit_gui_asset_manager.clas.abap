@@ -25,7 +25,7 @@ TYPES: BEGIN OF w3mime,
     TYPES:
       BEGIN OF ty_asset_entry.
         INCLUDE TYPE zif_abapgit_gui_asset_manager~ty_web_asset.
-    TYPES: mime_name TYPE string,
+    TYPES: mime_name TYPE char40,
       END OF ty_asset_entry.
     TYPES:
       ty_asset_register TYPE STANDARD TABLE OF ty_asset_entry WITH KEY url.

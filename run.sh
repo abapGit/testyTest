@@ -274,7 +274,7 @@ sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE seoclsname/ TYPE char30/ig' ./cloud/*.abap
 sed -i 's/ TYPE filetable/ TYPE string/ig' ./cloud/*.abap
-sed -i 's/ TYPE wwwdatatab-objid/ TYPE string/ig' ./cloud/*.abap
+sed -i 's/ TYPE wwwdatatab-objid/ TYPE char40/ig' ./cloud/*.abap
 sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.intf.abap
 sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
 sed -i 's/ cl_http_utility=>fields_to_string/ zcl_abapgit_http_utility=>fields_to_string/ig' ./cloud/*.abap
