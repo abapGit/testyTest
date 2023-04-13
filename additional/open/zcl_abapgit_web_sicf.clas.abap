@@ -5,7 +5,9 @@ CLASS zcl_abapgit_web_sicf DEFINITION
 
   PUBLIC SECTION.
 
-    INTERFACES if_http_extension .
+    INTERFACES if_http_extension.
+    INTERFACES zif_abapgit_web_request.
+    INTERFACES zif_abapgit_web_response.
 
   PROTECTED SECTION.
 
@@ -34,6 +36,25 @@ ENDCLASS.
 
 CLASS zcl_abapgit_web_sicf IMPLEMENTATION.
 
+  METHOD zif_abapgit_web_request~get_header_field.
+* todo
+  ENDMETHOD.
+
+  METHOD zif_abapgit_web_request~get_method.
+* todo
+  ENDMETHOD.
+
+  METHOD zif_abapgit_web_request~get_cdata.
+* todo
+  ENDMETHOD.
+
+  METHOD zif_abapgit_web_response~set_content_type.
+* todo
+  ENDMETHOD.
+
+  METHOD zif_abapgit_web_response~set_cdata.
+* todo
+  ENDMETHOD.
 
   METHOD if_http_extension~handle_request.
 
