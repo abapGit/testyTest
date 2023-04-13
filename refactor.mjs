@@ -42,8 +42,9 @@ const replace = [
   {search: "MESSAGE lv_msg TYPE 'S'.",                                        replace: "ASSERT 1 = 'messageStatementRemoved'."},
   {search: "MESSAGE lv_text TYPE 'S'.",                                       replace: "ASSERT 1 = 'messageStatementRemoved'."},
   {search: "MESSAGE lx_exception TYPE 'S' DISPLAY LIKE 'E'.",                 replace: "ASSERT 1 = 'messageStatementRemoved'."},
-  {search: "MESSAGE s000\\(oo\\) WITH mv_text rv_result.",                        replace: "ASSERT 1 = 'messageStatementRemoved'."},
-  {search: "MESSAGE 'Please save conversion to online repository before choosing a tag' TYPE 'S'.", replace: "ASSERT 1 = 'messageStatementRemoved'."},
+  {search: "MESSAGE s000\\(oo\\) WITH mv_text rv_result.",                    replace: "ASSERT 1 = 'messageStatementRemoved'."},
+  {search: "MESSAGE e058\\(00\\) WITH 'Value_1' 'Value_2' 'Value_3' 'Value_4' INTO zcx_abapgit_exception=>null.", replace: "ASSERT 1 = 'messageStatementRemoved'."},
+  {search: "MESSAGE 'Please save conversion to online repository before choosing a tag' TYPE 'S'.",               replace: "ASSERT 1 = 'messageStatementRemoved'."},
 ]
 
 const removeFunctionModuleCalls = [
