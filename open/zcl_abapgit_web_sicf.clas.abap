@@ -108,22 +108,20 @@ CLASS zcl_abapgit_web_sicf IMPLEMENTATION.
 * todo, parse and pass data
 * todo, respect GET and POST
 
-    DATA: lt_fields   TYPE tihttpnvp,
-          lv_action   TYPE c LENGTH 100,
+    DATA: lv_action   TYPE c LENGTH 100,
           lv_getdata  TYPE c LENGTH 100,
           lv_method   TYPE string,
           lv_body     TYPE string,
-          lt_postdata TYPE zif_abapgit_html_viewer=>ty_post_data,
-          ls_field    LIKE LINE OF lt_fields.
+          lv_value    TYPE string,
+          lt_postdata TYPE zif_abapgit_html_viewer=>ty_post_data.
 
-    ii_server->request->get_header_fields( CHANGING fields = lt_fields ).
+    lv_value = ii_server->request->get_header_field( '~request_uri' ).
 
-    READ TABLE lt_fields WITH KEY name = '~request_uri' INTO ls_field.
-    REPLACE FIRST OCCURRENCE OF gc_base IN ls_field-value WITH ''.
+    REPLACE FIRST OCCURRENCE OF gc_base IN lv_value WITH ''.
 
-    FIND REGEX '^sapevent:([\w-]+)' IN ls_field-value SUBMATCHES lv_action.
+    FIND REGEX '^sapevent:([\w-]+)' IN lv_value SUBMATCHES lv_action.
 
-    FIND REGEX '\?([\w=&]+)' IN ls_field-value SUBMATCHES lv_getdata.
+    FIND REGEX '\?([\w=&]+)' IN lv_value SUBMATCHES lv_getdata.
 
     lv_method = ii_server->request->get_method( ).
     IF lv_method = 'POST'.
