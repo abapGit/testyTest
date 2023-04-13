@@ -18,6 +18,8 @@ CLASS zcl_abapgit_web_punk IMPLEMENTATION.
 
   METHOD if_http_service_extension~handle_request.
 
+* https://developers.sap.com/tutorials/abap-environment-create-http-service.html
+
 * todo
 
   ENDMETHOD.
