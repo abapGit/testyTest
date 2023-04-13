@@ -13,8 +13,8 @@ CLASS zcl_abapgit_html_viewer_web DEFINITION
 
   PROTECTED SECTION.
   PRIVATE SECTION.
-    DATA mv_html TYPE string.
-    DATA mv_css TYPE string.
+    DATA mv_html   TYPE string.
+    DATA mv_css    TYPE string.
     DATA mi_server TYPE REF TO if_http_server .
 ENDCLASS.
 

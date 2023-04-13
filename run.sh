@@ -248,15 +248,17 @@ cp replace/zcl_abapgit_user_record* open
 cp replace/zcl_abapgit_sap_package* open
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
 
+cp additional/*.* open
 cp open/* cloud
+cp additional/open/*.* open
+cp additional/cloud/*.* cloud
+
 cp abapGit/src/utils/zcl_abapgit_convert* open
 cp abapGit/src/http/zcl_abapgit_http.clas* open
 cp abapGit/src/http/zcl_abapgit_http_client.clas* open
 cp abapGit/src/http/zcl_abapgit_proxy_config* open
 cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
-cp additional/* open
-cp additional/zabapgit.msag.xml cloud
 
 # replace or rewrite most of the code,
 cp replace/zcl_abapgit_convert* cloud
