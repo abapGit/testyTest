@@ -11,6 +11,9 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_web_punk IMPLEMENTATION.
+  METHOD zif_abapgit_web_response~set_xdata.
+    RETURN. " todo, implement method
+  ENDMETHOD.
 
   METHOD zif_abapgit_web_request~get_header_field.
 * todo
