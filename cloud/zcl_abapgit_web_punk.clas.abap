@@ -36,6 +36,11 @@ CLASS zcl_abapgit_web_punk IMPLEMENTATION.
 
 * https://developers.sap.com/tutorials/abap-environment-create-http-service.html
 
+" todo, cl_web_http_server_utility=>set_session_stateful(
+"   stateful = cl_web_http_server_utility=>co_enabled
+"   path     = '/sap/bc/http/sap/zhttp_state'
+"   request  = request ).
+
 * todo
 
   ENDMETHOD.
