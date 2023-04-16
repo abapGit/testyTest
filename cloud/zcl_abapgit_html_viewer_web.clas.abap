@@ -1,11 +1,7 @@
-CLASS zcl_abapgit_html_viewer_web DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+CLASS zcl_abapgit_html_viewer_web DEFINITION PUBLIC FINAL CREATE PUBLIC.
 
   PUBLIC SECTION.
-
-    INTERFACES zif_abapgit_html_viewer .
+    INTERFACES zif_abapgit_html_viewer.
 
     METHODS constructor
       IMPORTING
@@ -69,9 +65,9 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
   METHOD zif_abapgit_html_viewer~show_url.
 
     DATA lv_path TYPE string.
-    DATA lv_js TYPE string.
+    DATA lv_js   TYPE string.
 
-    lv_path = cl_http_utility=>if_http_utility~unescape_url( mi_request->get_header_field( '~path' ) ).
+    lv_path = cl_web_http_utility=>unescape_url( mi_request->get_header_field( '~path' ) ).
 
     lv_js = |<script>                                     \n| &&
       |function registerLinks() \{                        \n| &&
