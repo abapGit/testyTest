@@ -48,7 +48,7 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    lv_path = cl_http_utility=>if_http_utility~unescape_url( ii_request->get_header_field( '~path' ) ).
+    lv_path = cl_web_http_utility=>unescape_url( ii_request->get_header_field( '~path' ) ).
     IF lv_path = '/sap/zabapgit'.
       redirect( ).
     ELSEIF lv_path = gc_base.
@@ -152,7 +152,7 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
     DATA li_assets TYPE REF TO zif_abapgit_gui_asset_manager.
 
 
-    lv_path = cl_http_utility=>if_http_utility~unescape_url( mi_request->get_header_field( '~path' ) ).
+    lv_path = cl_web_http_utility=>unescape_url( mi_request->get_header_field( '~path' ) ).
 
     li_assets = zcl_abapgit_ui_factory=>get_asset_manager( ).
 
