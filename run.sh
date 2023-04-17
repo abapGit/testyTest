@@ -203,7 +203,6 @@ sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_event.prog.abap' ./open/zcl
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui.prog.abap' ./open/zcl_abapgit_gui.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_default_transport.prog.abap' ./open/zcl_abapgit_default_transport.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_folder_logic.prog.abap' ./open/zcl_abapgit_folder_logic.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_chunk_lib.prog.abap' ./open/zcl_abapgit_gui_chunk_lib.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_basis.prog.abap' ./open/zcl_abapgit_services_basis.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_repo.prog.abap' ./open/zcl_abapgit_services_repo.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_page_repo_view.prog.abap' ./open/zcl_abapgit_gui_page_repo_view.clas.abap

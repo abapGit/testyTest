@@ -4,9 +4,7 @@ CLASS zcl_abapgit_gui_chunk_lib DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-TYPES: BEGIN OF addr3_val,
-         name_text TYPE string,
-       END OF addr3_val.
+
     TYPES:
       BEGIN OF ty_event_signature,
         method TYPE string,
