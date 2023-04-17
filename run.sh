@@ -198,7 +198,6 @@ sed -i "s/lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport )./ A
 
 # CLAS shims,
 sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx_abapgit_exception.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_asset_manager.prog.abap' ./open/zcl_abapgit_gui_asset_manager.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_html_action_utils.prog.abap' ./open/zcl_abapgit_html_action_utils.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_event.prog.abap' ./open/zcl_abapgit_gui_event.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui.prog.abap' ./open/zcl_abapgit_gui.clas.abap

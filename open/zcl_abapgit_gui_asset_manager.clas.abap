@@ -1,18 +1,7 @@
 CLASS zcl_abapgit_gui_asset_manager DEFINITION PUBLIC FINAL CREATE PUBLIC .
 
   PUBLIC SECTION.
-TYPES: BEGIN OF wwwdatatab,
-         relid TYPE c LENGTH 2,
-         objid TYPE c LENGTH 40,
-       END OF wwwdatatab.
 
-TYPES: BEGIN OF wwwparams,
-         value TYPE c LENGTH 250,
-       END OF wwwparams.
-
-TYPES: BEGIN OF w3mime,
-         line TYPE x LENGTH 255,
-       END OF w3mime.
     INTERFACES zif_abapgit_gui_asset_manager.
 
     CLASS-METHODS create
