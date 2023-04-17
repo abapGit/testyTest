@@ -212,7 +212,6 @@ sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_page_repo_view.prog.abap' .
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_definitions.prog.abap' ./open/zif_abapgit_definitions.intf.abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_html_viewer.prog.abap' ./open/zif_abapgit_html_viewer.intf.abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_popups.prog.abap' ./open/zif_abapgit_popups.intf.abap
-sed -i -e '/PUBLIC/r ./shims/zif_abapgit_persistence.prog.abap' ./open/zif_abapgit_persistence.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_longtexts.prog.abap' ./open/zif_abapgit_longtexts.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_package.prog.abap' ./open/zif_abapgit_sap_package.intf.abap
 

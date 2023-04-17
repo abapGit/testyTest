@@ -1,5 +1,5 @@
 INTERFACE zif_abapgit_persistence PUBLIC.
-TYPES sci_chkv TYPE c LENGTH 1.
+
   TYPES:
     ty_type  TYPE c LENGTH 12 .
   TYPES:
