@@ -205,8 +205,6 @@ sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_default_transport.prog.abap' ./
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_folder_logic.prog.abap' ./open/zcl_abapgit_folder_logic.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_basis.prog.abap' ./open/zcl_abapgit_services_basis.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_repo.prog.abap' ./open/zcl_abapgit_services_repo.clas.abap
-# https://github.com/abapGit/abapGit/pull/6227
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_page_repo_view.prog.abap' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 
 # INTF shims,
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_definitions.prog.abap' ./open/zif_abapgit_definitions.intf.abap

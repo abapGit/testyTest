@@ -5,10 +5,7 @@ CLASS zcl_abapgit_gui_page_repo_view DEFINITION
   CREATE PRIVATE.
 
   PUBLIC SECTION.
-TYPES: BEGIN OF rfc_spagpa,
-parid TYPE string,
-parval TYPE string,
-END OF rfc_spagpa.
+
     INTERFACES:
       zif_abapgit_gui_event_handler,
       zif_abapgit_gui_hotkeys,
@@ -656,14 +653,8 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
 
     DATA:
       lv_main_language TYPE spras,
-      lt_spagpa        TYPE STANDARD TABLE OF rfc_spagpa,
-      ls_spagpa        LIKE LINE OF lt_spagpa,
       ls_item          TYPE zif_abapgit_definitions=>ty_item,
-      lv_subrc         TYPE syst-subrc,
-      lv_save_sy_langu TYPE sy-langu,
       lv_tcode         TYPE string.
-
-    " https://blogs.sap.com/2017/01/13/logon-language-sy-langu-and-rfc/
 
     lv_main_language = mo_repo->get_dot_abapgit( )->get_main_language( ).
     lv_tcode = zcl_abapgit_services_abapgit=>get_abapgit_tcode( ).
@@ -680,24 +671,9 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
       zcx_abapgit_exception=>raise( |Please install the abapGit repository| ).
     ENDIF.
 
-    lv_save_sy_langu = sy-langu.
-    ASSERT 1 = 'decoupled'.
-
-    ls_spagpa-parid  = zif_abapgit_definitions=>c_spagpa_param_repo_key.
-    ls_spagpa-parval = mo_repo->get_key( ).
-    INSERT ls_spagpa INTO TABLE lt_spagpa.
-
-    ASSERT 1 = 'replacedByAutomation'.
-
-    lv_subrc = sy-subrc.
-
-    ASSERT 1 = 'decoupled'.
-
-    IF lv_subrc <> 0.
-      zcx_abapgit_exception=>raise( |Error from ABAP4_CALL_TRANSACTION. Subrc = { lv_subrc }| ).
-    ENDIF.
-
-    ASSERT 1 = 'messageStatementRemoved'.
+    zcl_abapgit_ui_factory=>get_gui_jumper( )->jump_abapgit(
+      iv_language = lv_main_language
+      iv_key      = mo_repo->get_key( ) ).
 
   ENDMETHOD.
 
