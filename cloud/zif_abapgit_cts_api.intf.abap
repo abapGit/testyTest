@@ -16,6 +16,12 @@ INTERFACE zif_abapgit_cts_api
       customizing TYPE c LENGTH 4 VALUE 'CUST',
     END OF c_transport_category.
 
+  CONSTANTS:
+    BEGIN OF c_transport_mode,
+      insert TYPE c LENGTH 1 VALUE 'I',
+      delete TYPE c LENGTH 1 VALUE 'D',
+    END OF c_transport_mode.
+
   TYPES: BEGIN OF ty_transport,
            obj_type TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType,
            obj_name TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
@@ -82,6 +88,20 @@ INTERFACE zif_abapgit_cts_api
       it_table_upd TYPE ANY TABLE
       it_table_del TYPE ANY TABLE
       iv_tabname   TYPE tabname
+    RAISING
+      zcx_abapgit_exception.
+
+  METHODS insert_transport_object
+    IMPORTING
+      iv_pgmid    TYPE I_CustABAPObjDirectoryEntry-ABAPObjectCategory DEFAULT 'R3TR'
+      iv_object   TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType
+      iv_obj_name TYPE csequence
+      iv_package  TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
+      iv_language TYPE sy-langu DEFAULT sy-langu
+      iv_mode     TYPE c DEFAULT 'I'
+    EXPORTING
+      ev_object   TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType
+      ev_obj_name TYPE char120
     RAISING
       zcx_abapgit_exception.
 
