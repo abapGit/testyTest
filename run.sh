@@ -259,6 +259,7 @@ cp abapGit/src/ui/zcl_abapgit_password_dialog* open
 cp replace/zcl_abapgit_convert* cloud
 cp replace/zcl_abapgit_http_utility* cloud
 cp replace/zcl_abapgit_xml_pretty* cloud
+rm cloud/*.w3mi.*
 
 ###########################################################################
 
