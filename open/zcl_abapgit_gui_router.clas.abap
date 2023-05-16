@@ -87,6 +87,13 @@ CLASS zcl_abapgit_gui_router DEFINITION
         VALUE(ri_page) TYPE REF TO zif_abapgit_gui_renderable
       RAISING
         zcx_abapgit_exception .
+    CLASS-METHODS jump_object
+      IMPORTING
+        !iv_obj_type TYPE string
+        !iv_obj_name TYPE string
+        !iv_filename TYPE string
+      RAISING
+        zcx_abapgit_exception .
     CLASS-METHODS jump_display_transport
       IMPORTING
         !iv_transport TYPE trkorr
@@ -119,7 +126,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
+CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
 
   METHOD abapgit_services_actions.
@@ -464,8 +471,15 @@ CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
 
     lv_adt_jump_enabled = zcl_abapgit_persist_factory=>get_settings( )->read( )->get_adt_jump_enabled( ).
     IF lv_adt_jump_enabled = abap_true.
-       ASSERT 1 = 'decoupled'.
-      zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
+      TRY.
+           ASSERT 1 = 'decoupled'.
+          zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
+        CATCH zcx_abapgit_exception.
+          " Fallback if ADT link execution failed or was cancelled
+          CALL FUNCTION 'TR_DISPLAY_REQUEST'
+            EXPORTING
+              i_trkorr = iv_transport.
+      ENDTRY.
     ELSE.
       CALL FUNCTION 'TR_DISPLAY_REQUEST'
         EXPORTING
@@ -482,6 +496,40 @@ CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
     CALL FUNCTION 'BAPI_USER_DISPLAY'
       EXPORTING
         username = iv_username.
+
+  ENDMETHOD.
+
+
+  METHOD jump_object.
+
+    DATA:
+      ls_item        TYPE zif_abapgit_definitions=>ty_item,
+      lv_extra       TYPE string,
+      lx_error       TYPE REF TO zcx_abapgit_exception,
+      li_html_viewer TYPE REF TO zif_abapgit_html_viewer.
+
+    ls_item-obj_type = cl_http_utility=>unescape_url( |{ iv_obj_type }| ).
+    ls_item-obj_name = cl_http_utility=>unescape_url( |{ iv_obj_name }| ).
+
+    TRY.
+        li_html_viewer = zcl_abapgit_ui_factory=>get_html_viewer( ).
+
+        " Hide HTML Viewer in dummy screen0 for direct CALL SCREEN to work
+        li_html_viewer->set_visiblity( abap_false ).
+
+        IF ls_item-obj_type = zif_abapgit_data_config=>c_data_type-tabu.
+          zcl_abapgit_data_utils=>jump( ls_item ).
+        ELSE.
+          zcl_abapgit_objects=>jump(
+            is_item     = ls_item
+            iv_filename = iv_filename ).
+        ENDIF.
+
+        li_html_viewer->set_visiblity( abap_true ).
+      CATCH zcx_abapgit_exception INTO lx_error.
+        li_html_viewer->set_visiblity( abap_true ).
+        RAISE EXCEPTION lx_error.
+    ENDTRY.
 
   ENDMETHOD.
 
@@ -617,31 +665,12 @@ CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
 
   METHOD sap_gui_actions.
 
-    DATA: ls_item        TYPE zif_abapgit_definitions=>ty_item,
-          lx_ex          TYPE REF TO zcx_abapgit_exception,
-          li_html_viewer TYPE REF TO zif_abapgit_html_viewer.
-
     CASE ii_event->mv_action.
       WHEN zif_abapgit_definitions=>c_action-jump.                          " Open object editor
-        ls_item-obj_type = ii_event->query( )->get( 'TYPE' ).
-        ls_item-obj_name = ii_event->query( )->get( 'NAME' ).
-        ls_item-obj_name = cl_http_utility=>unescape_url( |{ ls_item-obj_name }| ).
-
-        li_html_viewer = zcl_abapgit_ui_factory=>get_html_viewer( ).
-
-        TRY.
-            " Hide HTML Viewer in dummy screen0 for direct CALL SCREEN to work
-            li_html_viewer->set_visiblity( abap_false ).
-            IF ls_item-obj_type = zif_abapgit_data_config=>c_data_type-tabu.
-              zcl_abapgit_data_utils=>jump( ls_item ).
-            ELSE.
-              zcl_abapgit_objects=>jump( ls_item ).
-            ENDIF.
-            li_html_viewer->set_visiblity( abap_true ).
-          CATCH zcx_abapgit_exception INTO lx_ex.
-            li_html_viewer->set_visiblity( abap_true ).
-            RAISE EXCEPTION lx_ex.
-        ENDTRY.
+        jump_object(
+          iv_obj_type = ii_event->query( )->get( 'TYPE' )
+          iv_obj_name = ii_event->query( )->get( 'NAME' )
+          iv_filename = ii_event->query( )->get( 'FILE' ) ).
 
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
 

@@ -251,9 +251,8 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
       lv_error_message  TYPE string,
       lv_error_longtext TYPE string.
 
-    " assumes find_remote_dot_abapgit has been called before
+    " for deserialize, assumes find_remote_dot_abapgit has been called before (or language won't be defined)
     lv_main_language = get_dot_abapgit( )->get_main_language( ).
-
 
     IF lv_main_language <> sy-langu.
 
@@ -311,8 +310,6 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
   METHOD delete_checks.
 
     DATA: li_package TYPE REF TO zif_abapgit_sap_package.
-
-    find_remote_dot_abapgit( ).
 
     check_write_protect( ).
     check_language( ).
@@ -761,9 +758,9 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
       CHANGING
         ct_files  = lt_updated_files ).
 
-    zif_abapgit_repo~checksums( )->update( lt_updated_files ).
+    CLEAR mt_local. " Should be before CS update which uses NEW local
 
-    CLEAR: mt_local.
+    zif_abapgit_repo~checksums( )->update( lt_updated_files ).
 
     update_last_deserialize( ).
     reset_status( ).

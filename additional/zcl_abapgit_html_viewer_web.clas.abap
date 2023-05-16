@@ -1,28 +1,27 @@
-CLASS zcl_abapgit_html_viewer_web DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+CLASS zcl_abapgit_html_viewer_web DEFINITION PUBLIC FINAL CREATE PUBLIC.
 
   PUBLIC SECTION.
-
-    INTERFACES zif_abapgit_html_viewer .
+    INTERFACES zif_abapgit_html_viewer.
 
     METHODS constructor
       IMPORTING
-        ii_server TYPE REF TO if_http_server.
+        ii_request  TYPE REF TO zif_abapgit_web_request
+        ii_response TYPE REF TO zif_abapgit_web_response.
 
   PROTECTED SECTION.
   PRIVATE SECTION.
-    DATA mv_html TYPE string.
-    DATA mv_css TYPE string.
-    DATA mi_server TYPE REF TO if_http_server .
+    DATA mv_html   TYPE string.
+    DATA mv_css    TYPE string.
+    DATA mi_request  TYPE REF TO zif_abapgit_web_request.
+    DATA mi_response TYPE REF TO zif_abapgit_web_response.
 ENDCLASS.
 
 
 CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
 
   METHOD constructor.
-    mi_server = ii_server.
+    mi_request = ii_request.
+    mi_response = ii_response.
   ENDMETHOD.
 
   METHOD zif_abapgit_html_viewer~back.
@@ -66,9 +65,9 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
   METHOD zif_abapgit_html_viewer~show_url.
 
     DATA lv_path TYPE string.
-    DATA lv_js TYPE string.
+    DATA lv_js   TYPE string.
 
-    lv_path = cl_http_utility=>if_http_utility~unescape_url( mi_server->request->get_header_field( '~path' ) ).
+    lv_path = cl_http_utility=>unescape_url( mi_request->get_header_field( '~path' ) ).
 
     lv_js = |<script>                                     \n| &&
       |function registerLinks() \{                        \n| &&
@@ -98,15 +97,15 @@ CLASS zcl_abapgit_html_viewer_web IMPLEMENTATION.
       |</script></body>\n|.
 
     IF lv_path = '/sap/zabapgit/css/bundle.css'.
-      mi_server->response->set_content_type( 'text/css' ).
-      mi_server->response->set_cdata( mv_css ).
+      mi_response->set_content_type( 'text/css' ).
+      mi_response->set_cdata( mv_css ).
     ELSEIF lv_path = '/sap/zabapgit/' OR lv_path CP |/sap/zabapgit/sapevent:+*|.
       REPLACE FIRST OCCURRENCE OF |</body>| IN mv_html WITH lv_js.
-      mi_server->response->set_content_type( 'text/html' ).
-      mi_server->response->set_cdata( mv_html ).
+      mi_response->set_content_type( 'text/html' ).
+      mi_response->set_cdata( mv_html ).
     ELSE.
-      mi_server->response->set_content_type( 'text/html' ).
-      mi_server->response->set_cdata( |show_url, unknown path { lv_path }| ).
+      mi_response->set_content_type( 'text/html' ).
+      mi_response->set_cdata( |show_url, unknown path { lv_path }| ).
     ENDIF.
 
   ENDMETHOD.

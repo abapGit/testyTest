@@ -22,9 +22,18 @@ CLASS zcl_abapgit_exit IMPLEMENTATION.
 
   METHOD get_instance.
 
+    DATA lv_class_name TYPE string.
+
+    lv_class_name = 'ZCL_ABAPGIT_USER_EXIT'.
+
+    IF zcl_abapgit_factory=>get_environment( )->is_merged( ) = abap_true.
+      " Prevent accidental usage of exit handlers in the developer version
+      lv_class_name = |\\PROGRAM={ sy-repid }\\CLASS={ lv_class_name }|.
+    ENDIF.
+
     IF gi_exit IS INITIAL.
       TRY.
-          CREATE OBJECT gi_exit TYPE ('ZCL_ABAPGIT_USER_EXIT').
+          CREATE OBJECT gi_exit TYPE (lv_class_name).
         CATCH cx_sy_create_object_error ##NO_HANDLER.
       ENDTRY.
     ENDIF.
@@ -378,5 +387,16 @@ CLASS zcl_abapgit_exit IMPLEMENTATION.
       ENDTRY.
     ENDIF.
 
+  ENDMETHOD.
+  METHOD zif_abapgit_exit~enhance_repo_toolbar.
+    IF gi_exit IS NOT INITIAL.
+      TRY.
+          gi_exit->enhance_repo_toolbar(
+            io_menu = io_menu
+            iv_key  = iv_key
+            iv_act  = iv_act ).
+        CATCH cx_sy_ref_is_initial cx_sy_dyn_call_illegal_method ##NO_HANDLER.
+      ENDTRY.
+    ENDIF.
   ENDMETHOD.
 ENDCLASS.

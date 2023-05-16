@@ -5,9 +5,7 @@ CLASS zcl_abapgit_gui_page_sett_info DEFINITION
   CREATE PRIVATE .
 
   PUBLIC SECTION.
-TYPES: BEGIN OF addr3_val,
-name_text TYPE string,
-END OF addr3_val.
+
     INTERFACES zif_abapgit_gui_event_handler .
     INTERFACES zif_abapgit_gui_renderable .
 

@@ -112,7 +112,7 @@ cp abapGit/src/ui/zcl_abapgit_ui_factory* open
 cp abapGit/src/ui/zcl_abapgit_ui_injector* open
 cp abapGit/src/ui/zif_abapgit_frontend_services* open
 cp abapGit/src/ui/zif_abapgit_popups* open
-cp abapGit/src/zif_abapgit_sap_namespace* open
+cp abapGit/src/objects/sap/zif_abapgit_* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
 cp abapGit/src/utils/zcl_abapgit_path* open
@@ -121,18 +121,17 @@ cp abapGit/src/utils/zcl_abapgit_string_map* open
 cp abapGit/src/utils/zcl_abapgit_utils* open
 cp abapGit/src/utils/zcl_abapgit_version* open
 cp abapGit/src/utils/zif_abapgit_log* open
+cp abapGit/src/utils/zcl_abapgit_environment.clas.abap open
+cp abapGit/src/utils/zcl_abapgit_zip* open
 cp abapGit/src/xml/*clas* open
 cp abapGit/src/xml/*intf* open
-cp abapGit/src/zcl_abapgit_auth* open
+cp abapGit/src/exits/z* open
 cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
 cp abapGit/src/zcl_abapgit_settings.clas* open
-cp abapGit/src/zcl_abapgit_zip* open
 cp abapGit/src/zcx* open
-cp abapGit/src/zif_abapgit_auth* open
-cp abapGit/src/zif_abapgit_definitions* open
 cp abapGit/src/zif_abapgit_environment* open
-cp abapGit/src/zif_abapgit_sap_package* open
+cp abapGit/src/zif_abapgit_definitions* open
 cp abapGit/src/zif_abapgit_version* open
 
 rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
@@ -198,23 +197,18 @@ sed -i "s/lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport )./ A
 
 # CLAS shims,
 sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx_abapgit_exception.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_asset_manager.prog.abap' ./open/zcl_abapgit_gui_asset_manager.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_html_action_utils.prog.abap' ./open/zcl_abapgit_html_action_utils.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_event.prog.abap' ./open/zcl_abapgit_gui_event.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui.prog.abap' ./open/zcl_abapgit_gui.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_default_transport.prog.abap' ./open/zcl_abapgit_default_transport.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_folder_logic.prog.abap' ./open/zcl_abapgit_folder_logic.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_chunk_lib.prog.abap' ./open/zcl_abapgit_gui_chunk_lib.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_basis.prog.abap' ./open/zcl_abapgit_services_basis.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_repo.prog.abap' ./open/zcl_abapgit_services_repo.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_page_repo_view.prog.abap' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_page_sett_info.prog.abap' ./open/zcl_abapgit_gui_page_sett_info.clas.abap
 
 # INTF shims,
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_definitions.prog.abap' ./open/zif_abapgit_definitions.intf.abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_html_viewer.prog.abap' ./open/zif_abapgit_html_viewer.intf.abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_popups.prog.abap' ./open/zif_abapgit_popups.intf.abap
-sed -i -e '/PUBLIC/r ./shims/zif_abapgit_persistence.prog.abap' ./open/zif_abapgit_persistence.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_longtexts.prog.abap' ./open/zif_abapgit_longtexts.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_package.prog.abap' ./open/zif_abapgit_sap_package.intf.abap
 
@@ -248,20 +242,23 @@ cp replace/zcl_abapgit_user_record* open
 cp replace/zcl_abapgit_sap_package* open
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
 
+cp additional/*.* open
 cp open/* cloud
+cp additional/open/*.* open
+cp additional/cloud/*.* cloud
+
 cp abapGit/src/utils/zcl_abapgit_convert* open
 cp abapGit/src/http/zcl_abapgit_http.clas* open
 cp abapGit/src/http/zcl_abapgit_http_client.clas* open
 cp abapGit/src/http/zcl_abapgit_proxy_config* open
 cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
-cp additional/* open
-cp additional/zabapgit.msag.xml cloud
 
 # replace or rewrite most of the code,
 cp replace/zcl_abapgit_convert* cloud
 cp replace/zcl_abapgit_http_utility* cloud
 cp replace/zcl_abapgit_xml_pretty* cloud
+rm cloud/*.w3mi.*
 
 ###########################################################################
 
@@ -285,8 +282,6 @@ sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DAT
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/*xml*.abap
 sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_repo.clas.abap
 sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
-# https://github.com/sbcgua/ajson/pull/160
-sed -i "s/<MSG_ID>SY<\\/MSG_ID>//ig" ./cloud/zcx_abapgit_ajson_error.clas.xml
 
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap

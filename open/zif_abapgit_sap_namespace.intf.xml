@@ -5,7 +5,7 @@
    <VSEOINTERF>
     <CLSNAME>ZIF_ABAPGIT_SAP_NAMESPACE</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>abapGit namespace abstraction</DESCRIPT>
+    <DESCRIPT>abapGit - SAP Namespace</DESCRIPT>
     <EXPOSURE>2</EXPOSURE>
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>
