@@ -471,8 +471,13 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
     lv_adt_jump_enabled = zcl_abapgit_persist_factory=>get_settings( )->read( )->get_adt_jump_enabled( ).
     IF lv_adt_jump_enabled = abap_true.
-       ASSERT 1 = 'decoupled'.
-      zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
+      TRY.
+           ASSERT 1 = 'decoupled'.
+          zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
+        CATCH zcx_abapgit_exception.
+          " Fallback if ADT link execution failed or was cancelled
+          ASSERT 1 = 'replacedByAutomation'.
+      ENDTRY.
     ELSE.
       ASSERT 1 = 'replacedByAutomation'.
     ENDIF.
@@ -500,11 +505,6 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
     ls_item-obj_type = cl_web_http_utility=>unescape_url( |{ iv_obj_type }| ).
     ls_item-obj_name = cl_web_http_utility=>unescape_url( |{ iv_obj_name }| ).
 
-    IF iv_filename IS NOT INITIAL.
-      FIND REGEX '\..*\.([\-a-z0-9_%]*)\.' IN iv_filename SUBMATCHES lv_extra.
-      lv_extra = cl_web_http_utility=>unescape_url( lv_extra ).
-    ENDIF.
-
     TRY.
         li_html_viewer = zcl_abapgit_ui_factory=>get_html_viewer( ).
 
@@ -515,8 +515,8 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
           zcl_abapgit_data_utils=>jump( ls_item ).
         ELSE.
           zcl_abapgit_objects=>jump(
-            is_item  = ls_item
-            iv_extra = lv_extra ).
+            is_item     = ls_item
+            iv_filename = iv_filename ).
         ENDIF.
 
         li_html_viewer->set_visiblity( abap_true ).

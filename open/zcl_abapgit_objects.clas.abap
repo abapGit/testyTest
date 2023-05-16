@@ -49,13 +49,15 @@ CLASS zcl_abapgit_objects DEFINITION
       IMPORTING
         !is_item        TYPE zif_abapgit_definitions=>ty_item
         !is_sub_item    TYPE zif_abapgit_definitions=>ty_item OPTIONAL
-        !iv_extra       TYPE string OPTIONAL
+        !iv_filename    TYPE string OPTIONAL
         !iv_line_number TYPE i OPTIONAL
       RAISING
         zcx_abapgit_exception .
     CLASS-METHODS changed_by
       IMPORTING
         !is_item       TYPE zif_abapgit_definitions=>ty_item
+        !is_sub_item   TYPE zif_abapgit_definitions=>ty_item OPTIONAL
+        !iv_filename   TYPE string OPTIONAL
       RETURNING
         VALUE(rv_user) TYPE syuname .
     CLASS-METHODS is_supported

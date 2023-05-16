@@ -112,7 +112,7 @@ cp abapGit/src/ui/zcl_abapgit_ui_factory* open
 cp abapGit/src/ui/zcl_abapgit_ui_injector* open
 cp abapGit/src/ui/zif_abapgit_frontend_services* open
 cp abapGit/src/ui/zif_abapgit_popups* open
-cp abapGit/src/zif_abapgit_sap_namespace* open
+cp abapGit/src/objects/sap/zif_abapgit_* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
 cp abapGit/src/utils/zcl_abapgit_path* open
@@ -121,18 +121,17 @@ cp abapGit/src/utils/zcl_abapgit_string_map* open
 cp abapGit/src/utils/zcl_abapgit_utils* open
 cp abapGit/src/utils/zcl_abapgit_version* open
 cp abapGit/src/utils/zif_abapgit_log* open
+cp abapGit/src/utils/zcl_abapgit_environment.clas.abap open
+cp abapGit/src/utils/zcl_abapgit_zip* open
 cp abapGit/src/xml/*clas* open
 cp abapGit/src/xml/*intf* open
-cp abapGit/src/zcl_abapgit_auth* open
+cp abapGit/src/exits/z* open
 cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
 cp abapGit/src/zcl_abapgit_settings.clas* open
-cp abapGit/src/zcl_abapgit_zip* open
 cp abapGit/src/zcx* open
-cp abapGit/src/zif_abapgit_auth* open
-cp abapGit/src/zif_abapgit_definitions* open
 cp abapGit/src/zif_abapgit_environment* open
-cp abapGit/src/zif_abapgit_sap_package* open
+cp abapGit/src/zif_abapgit_definitions* open
 cp abapGit/src/zif_abapgit_version* open
 
 rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
