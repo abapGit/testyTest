@@ -89,7 +89,7 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_db* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_diff* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_object* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_pckage* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_hoc* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_page_hoc* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_merge* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_patch* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_over* open
@@ -105,7 +105,9 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_stage* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_syntax* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tags* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tutorial* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page.clas* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_page.clas* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_picklist* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_in_page_modal* open
 cp abapGit/src/ui/routing/zcl* open
 cp abapGit/src/ui/routing/zif* open
 cp abapGit/src/ui/zcl_abapgit_ui_factory* open

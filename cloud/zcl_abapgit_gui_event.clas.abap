@@ -14,6 +14,14 @@ TYPES: BEGIN OF ty,
 TYPES tihttpnvp TYPE STANDARD TABLE OF ty WITH DEFAULT KEY.
     INTERFACES zif_abapgit_gui_event .
 
+    CLASS-METHODS new
+      IMPORTING
+        !ii_gui_services   TYPE REF TO zif_abapgit_gui_services OPTIONAL
+        !iv_action         TYPE clike
+        !iv_getdata        TYPE clike OPTIONAL
+        !it_postdata       TYPE zif_abapgit_html_viewer=>ty_post_data OPTIONAL
+      RETURNING
+        VALUE(ro_instance) TYPE REF TO zcl_abapgit_gui_event.
     METHODS constructor
       IMPORTING
         !ii_gui_services TYPE REF TO zif_abapgit_gui_services OPTIONAL
@@ -63,6 +71,16 @@ CLASS zcl_abapgit_gui_event IMPLEMENTATION.
         iv_key = <ls_field>-name
         iv_val = <ls_field>-value ).
     ENDLOOP.
+  ENDMETHOD.
+
+
+  METHOD new.
+    CREATE OBJECT ro_instance
+      EXPORTING
+        ii_gui_services = ii_gui_services
+        iv_action       = iv_action
+        iv_getdata      = iv_getdata
+        it_postdata     = it_postdata.
   ENDMETHOD.
 
 
