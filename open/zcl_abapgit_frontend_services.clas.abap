@@ -59,7 +59,7 @@ CLASS zcl_abapgit_frontend_services IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_abapgit_frontend_services~is_sapgui_for_java.
-    ASSERT 1 = 'decoupled'.
+    rv_result = abap_false.
   ENDMETHOD.
 
   METHOD zif_abapgit_frontend_services~is_sapgui_for_windows.
@@ -67,7 +67,7 @@ CLASS zcl_abapgit_frontend_services IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_abapgit_frontend_services~is_webgui.
-    ASSERT 1 = 'decoupled'.
+    rv_is_webgui = abap_false.
   ENDMETHOD.
 
   METHOD zif_abapgit_frontend_services~show_file_open_dialog.
