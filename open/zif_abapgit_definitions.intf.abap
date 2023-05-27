@@ -25,6 +25,7 @@ types dokil type c length 1.
       INCLUDE TYPE ty_item_signature.
   TYPES:
       srcsystem TYPE tadir-srcsystem,
+      origlang  TYPE tadir-masterlang,
       inactive  TYPE abap_bool,
     END OF ty_item .
   TYPES:
@@ -121,15 +122,16 @@ types dokil type c length 1.
       WITH NON-UNIQUE SORTED KEY type COMPONENTS type sha1 .
   TYPES:
     BEGIN OF ty_tadir,
-      pgmid     TYPE tadir-pgmid,
-      object    TYPE tadir-object,
-      obj_name  TYPE tadir-obj_name,
-      devclass  TYPE tadir-devclass,
-      korrnum   TYPE tadir-korrnum, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
-      delflag   TYPE tadir-delflag,
-      genflag   TYPE tadir-genflag,
-      path      TYPE string,
-      srcsystem TYPE tadir-srcsystem,
+      pgmid      TYPE tadir-pgmid,
+      object     TYPE tadir-object,
+      obj_name   TYPE tadir-obj_name,
+      devclass   TYPE tadir-devclass,
+      korrnum    TYPE tadir-korrnum, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
+      delflag    TYPE tadir-delflag,
+      genflag    TYPE tadir-genflag,
+      path       TYPE string,
+      srcsystem  TYPE tadir-srcsystem,
+      masterlang TYPE tadir-masterlang,
     END OF ty_tadir .
   TYPES:
     ty_tadir_tt TYPE STANDARD TABLE OF ty_tadir WITH DEFAULT KEY .
@@ -146,6 +148,7 @@ types dokil type c length 1.
       rstate    TYPE zif_abapgit_git_definitions=>ty_item_state,
       packmove  TYPE abap_bool,
       srcsystem TYPE tadir-srcsystem,
+      origlang  TYPE tadir-masterlang,
     END OF ty_result .
   TYPES:
     ty_results_tt TYPE STANDARD TABLE OF ty_result WITH DEFAULT KEY .
@@ -256,6 +259,7 @@ types dokil type c length 1.
       transport  TYPE trkorr,
       packmove   TYPE abap_bool,
       srcsystem  TYPE tadir-srcsystem,
+      origlang   TYPE tadir-masterlang,
     END OF ty_repo_item .
   TYPES:
     ty_repo_item_tt TYPE STANDARD TABLE OF ty_repo_item WITH DEFAULT KEY .

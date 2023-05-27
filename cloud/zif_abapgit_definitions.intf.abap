@@ -25,6 +25,7 @@ types dokil type c length 1.
       INCLUDE TYPE ty_item_signature.
   TYPES:
       srcsystem TYPE c LENGTH 10,
+      origlang  TYPE spras,
       inactive  TYPE abap_bool,
     END OF ty_item .
   TYPES:
@@ -121,15 +122,16 @@ types dokil type c length 1.
       WITH NON-UNIQUE SORTED KEY type COMPONENTS type sha1 .
   TYPES:
     BEGIN OF ty_tadir,
-      pgmid     TYPE I_CustABAPObjDirectoryEntry-ABAPObjectCategory,
-      object    TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType,
-      obj_name  TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
-      devclass  TYPE I_CustABAPObjDirectoryEntry-ABAPPackage,
-      korrnum   TYPE sxco_transport, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
-      delflag   TYPE abap_bool,
-      genflag   TYPE abap_bool,
-      path      TYPE string,
-      srcsystem TYPE c LENGTH 10,
+      pgmid      TYPE I_CustABAPObjDirectoryEntry-ABAPObjectCategory,
+      object     TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType,
+      obj_name   TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
+      devclass   TYPE I_CustABAPObjDirectoryEntry-ABAPPackage,
+      korrnum    TYPE sxco_transport, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
+      delflag    TYPE abap_bool,
+      genflag    TYPE abap_bool,
+      path       TYPE string,
+      srcsystem  TYPE c LENGTH 10,
+      masterlang TYPE spras,
     END OF ty_tadir .
   TYPES:
     ty_tadir_tt TYPE STANDARD TABLE OF ty_tadir WITH DEFAULT KEY .
@@ -146,6 +148,7 @@ types dokil type c length 1.
       rstate    TYPE zif_abapgit_git_definitions=>ty_item_state,
       packmove  TYPE abap_bool,
       srcsystem TYPE c LENGTH 10,
+      origlang  TYPE spras,
     END OF ty_result .
   TYPES:
     ty_results_tt TYPE STANDARD TABLE OF ty_result WITH DEFAULT KEY .
@@ -256,6 +259,7 @@ types dokil type c length 1.
       transport  TYPE sxco_transport,
       packmove   TYPE abap_bool,
       srcsystem  TYPE c LENGTH 10,
+      origlang   TYPE spras,
     END OF ty_repo_item .
   TYPES:
     ty_repo_item_tt TYPE STANDARD TABLE OF ty_repo_item WITH DEFAULT KEY .

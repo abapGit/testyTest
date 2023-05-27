@@ -268,6 +268,7 @@ sed -i "s/ TYPE REF TO if_http_client/ TYPE REF TO object/ig" ./cloud/*.abap
 sed -i 's/tadir-pgmid/I_CustABAPObjDirectoryEntry-ABAPObjectCategory/ig' ./cloud/*.intf.abap
 sed -i 's/ tadir-object/ I_CustABAPObjDirectoryEntry-ABAPObjectType/ig' ./cloud/*.abap
 sed -i 's/ tadir-obj_name/ I_CustABAPObjDirectoryEntry-ABAPObject/ig' ./cloud/*.abap
+sed -i 's/ tadir-masterlang/ spras/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-srcsystem/ TYPE c LENGTH 10/ig' ./cloud/*.intf.abap
 sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap
