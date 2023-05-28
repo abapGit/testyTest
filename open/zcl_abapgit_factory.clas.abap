@@ -191,7 +191,7 @@ CLASS ZCL_ABAPGIT_FACTORY IMPLEMENTATION.
 
     IF gi_stage_logic IS INITIAL.
       CREATE OBJECT gi_stage_logic
-        TYPE ('DECOUPLED').
+        TYPE zcl_abapgit_stage_logic.
     ENDIF.
 
     ri_logic = gi_stage_logic.
