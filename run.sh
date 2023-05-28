@@ -153,7 +153,6 @@ sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decou
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_longtext TYPE zcl_abapgit_longtexts./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
-sed -i "s/ CREATE OBJECT rs_handled-page TYPE zcl_abapgit_gui_page_stage/ CREATE OBJECT rs_handled-page TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_gui_page_code_insp.clas.abap
 sed -i "s/ TYPE zcl_abapgit_stage_logic./ TYPE ('DECOUPLED')./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ TYPE REF TO zcl_abapgit_repo_online/ TYPE REF TO object/ig" ./open/zif_abapgit_background.intf.abap
