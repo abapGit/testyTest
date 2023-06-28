@@ -151,6 +151,7 @@ sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 
 sed -i "s/ CREATE OBJECT gi_cts_api TYPE zcl_abapgit_cts_api./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
+sed -i "s/ CREATE OBJECT gi_sap_report TYPE zcl_abapgit_sap_report./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_longtext TYPE zcl_abapgit_longtexts./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
@@ -166,6 +167,7 @@ sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/*.intf.abap
 sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
+sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/*.abap
 sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/*.abap
 sed -i 's/ OF bdcdata/ OF string/ig' ./open/*.abap
