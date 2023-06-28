@@ -89,7 +89,7 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_db* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_diff* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_object* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_pckage* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_hoc* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_page_hoc* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_merge* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_patch* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_over* open
@@ -105,7 +105,9 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_stage* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_syntax* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tags* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tutorial* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page.clas* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_page.clas* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_picklist* open
+cp abapGit/src/ui/lib/zcl_abapgit_gui_in_page_modal* open
 cp abapGit/src/ui/routing/zcl* open
 cp abapGit/src/ui/routing/zif* open
 cp abapGit/src/ui/zcl_abapgit_ui_factory* open
@@ -149,13 +151,11 @@ sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 
 sed -i "s/ CREATE OBJECT gi_cts_api TYPE zcl_abapgit_cts_api./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
+sed -i "s/ CREATE OBJECT gi_sap_report TYPE zcl_abapgit_sap_report./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_longtext TYPE zcl_abapgit_longtexts./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
-sed -i "s/ CREATE OBJECT rs_handled-page TYPE zcl_abapgit_gui_page_stage/ CREATE OBJECT rs_handled-page TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_gui_page_code_insp.clas.abap
-sed -i "s/ TYPE zcl_abapgit_stage_logic./ TYPE ('DECOUPLED')./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
-sed -i "s/ TYPE REF TO zcl_abapgit_repo_online/ TYPE REF TO object/ig" ./open/zif_abapgit_background.intf.abap
-sed -i "s/ TYPE seoclskey/ TYPE char30/ig" ./open/zif_abapgit_exit.intf.abap
+sed -i "s/ TYPE seoclskey/ TYPE char30/ig" ./open/zif_abapgit_exit.intf.abap # https://github.com/abapGit/abapGit/pull/6305
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ cl_gui_cfw=>flush( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_services_basis.clas.abap
@@ -167,6 +167,7 @@ sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/*.intf.abap
 sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
+sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/*.abap
 sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/*.abap
 sed -i 's/ OF bdcdata/ OF string/ig' ./open/*.abap
@@ -266,6 +267,7 @@ sed -i "s/ TYPE REF TO if_http_client/ TYPE REF TO object/ig" ./cloud/*.abap
 sed -i 's/tadir-pgmid/I_CustABAPObjDirectoryEntry-ABAPObjectCategory/ig' ./cloud/*.intf.abap
 sed -i 's/ tadir-object/ I_CustABAPObjDirectoryEntry-ABAPObjectType/ig' ./cloud/*.abap
 sed -i 's/ tadir-obj_name/ I_CustABAPObjDirectoryEntry-ABAPObject/ig' ./cloud/*.abap
+sed -i 's/ tadir-masterlang/ spras/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-srcsystem/ TYPE c LENGTH 10/ig' ./cloud/*.intf.abap
 sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap

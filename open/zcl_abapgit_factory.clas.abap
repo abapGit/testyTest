@@ -41,6 +41,9 @@ CLASS zcl_abapgit_factory DEFINITION
     CLASS-METHODS get_sap_namespace
       RETURNING
         VALUE(ri_namespace) TYPE REF TO zif_abapgit_sap_namespace .
+    CLASS-METHODS get_sap_report
+      RETURNING
+        VALUE(ri_report) TYPE REF TO zif_abapgit_sap_report.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -71,11 +74,12 @@ CLASS zcl_abapgit_factory DEFINITION
     CLASS-DATA gi_http_agent TYPE REF TO zif_abapgit_http_agent .
     CLASS-DATA gi_lxe_texts TYPE REF TO zif_abapgit_lxe_texts .
     CLASS-DATA gi_sap_namespace TYPE REF TO zif_abapgit_sap_namespace .
+    CLASS-DATA gi_sap_report TYPE REF TO zif_abapgit_sap_report.
 ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_FACTORY IMPLEMENTATION.
+CLASS zcl_abapgit_factory IMPLEMENTATION.
 
 
   METHOD get_code_inspector.
@@ -187,11 +191,22 @@ CLASS ZCL_ABAPGIT_FACTORY IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD get_sap_report.
+
+    IF gi_sap_report IS NOT BOUND.
+      ASSERT 1 = 'decoupled'.
+    ENDIF.
+
+    ri_report = gi_sap_report.
+
+  ENDMETHOD.
+
+
   METHOD get_stage_logic.
 
     IF gi_stage_logic IS INITIAL.
       CREATE OBJECT gi_stage_logic
-        TYPE ('DECOUPLED').
+        TYPE zcl_abapgit_stage_logic.
     ENDIF.
 
     ri_logic = gi_stage_logic.

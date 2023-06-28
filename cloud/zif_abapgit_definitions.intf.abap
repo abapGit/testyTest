@@ -25,6 +25,7 @@ types dokil type c length 1.
       INCLUDE TYPE ty_item_signature.
   TYPES:
       srcsystem TYPE c LENGTH 10,
+      origlang  TYPE spras,
       inactive  TYPE abap_bool,
     END OF ty_item .
   TYPES:
@@ -121,15 +122,16 @@ types dokil type c length 1.
       WITH NON-UNIQUE SORTED KEY type COMPONENTS type sha1 .
   TYPES:
     BEGIN OF ty_tadir,
-      pgmid     TYPE I_CustABAPObjDirectoryEntry-ABAPObjectCategory,
-      object    TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType,
-      obj_name  TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
-      devclass  TYPE I_CustABAPObjDirectoryEntry-ABAPPackage,
-      korrnum   TYPE sxco_transport, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
-      delflag   TYPE abap_bool,
-      genflag   TYPE abap_bool,
-      path      TYPE string,
-      srcsystem TYPE c LENGTH 10,
+      pgmid      TYPE I_CustABAPObjDirectoryEntry-ABAPObjectCategory,
+      object     TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType,
+      obj_name   TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
+      devclass   TYPE I_CustABAPObjDirectoryEntry-ABAPPackage,
+      korrnum    TYPE sxco_transport, " used by ZCL_ABAPGIT_DEPENDENCIES->RESOLVE
+      delflag    TYPE abap_bool,
+      genflag    TYPE abap_bool,
+      path       TYPE string,
+      srcsystem  TYPE c LENGTH 10,
+      masterlang TYPE spras,
     END OF ty_tadir .
   TYPES:
     ty_tadir_tt TYPE STANDARD TABLE OF ty_tadir WITH DEFAULT KEY .
@@ -146,9 +148,12 @@ types dokil type c length 1.
       rstate    TYPE zif_abapgit_git_definitions=>ty_item_state,
       packmove  TYPE abap_bool,
       srcsystem TYPE c LENGTH 10,
+      origlang  TYPE spras,
     END OF ty_result .
   TYPES:
-    ty_results_tt TYPE STANDARD TABLE OF ty_result WITH DEFAULT KEY .
+    ty_results_tt TYPE STANDARD TABLE OF ty_result WITH DEFAULT KEY
+                       WITH NON-UNIQUE SORTED KEY sec_key
+                       COMPONENTS obj_type obj_name.
   TYPES:
     ty_results_ts_path TYPE HASHED TABLE OF ty_result WITH UNIQUE KEY path filename .
   TYPES:
@@ -256,6 +261,7 @@ types dokil type c length 1.
       transport  TYPE sxco_transport,
       packmove   TYPE abap_bool,
       srcsystem  TYPE c LENGTH 10,
+      origlang   TYPE spras,
     END OF ty_repo_item .
   TYPES:
     ty_repo_item_tt TYPE STANDARD TABLE OF ty_repo_item WITH DEFAULT KEY .
@@ -273,6 +279,14 @@ types dokil type c length 1.
       activate_wo_popup      TYPE abap_bool,
       label_colors           TYPE string,
     END OF ty_s_user_settings .
+  TYPES:
+    BEGIN OF ty_list_settings,
+      filter           TYPE string,
+      only_favorites   TYPE abap_bool,
+      show_details     TYPE abap_bool,
+      order_by         TYPE string,
+      order_descending TYPE abap_bool,
+    END OF ty_list_settings.
   TYPES:
     ty_dokil_tt TYPE STANDARD TABLE OF dokil
                          WITH NON-UNIQUE DEFAULT KEY .
@@ -406,6 +420,7 @@ types dokil type c length 1.
       db_display                    TYPE string VALUE 'db_display',
       db_edit                       TYPE string VALUE 'db_edit',
       bg_update                     TYPE string VALUE 'bg_update',
+      go_home                       TYPE string VALUE 'go_home',
       go_back                       TYPE string VALUE 'go_back',
       go_explore                    TYPE string VALUE 'go_explore',
       go_repo                       TYPE string VALUE 'go_repo',
