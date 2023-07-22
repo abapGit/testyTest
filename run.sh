@@ -212,6 +212,7 @@ sed -i -e '/PUBLIC /r ./shims/zif_abapgit_html_viewer.prog.abap' ./open/zif_abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_popups.prog.abap' ./open/zif_abapgit_popups.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_longtexts.prog.abap' ./open/zif_abapgit_longtexts.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_package.prog.abap' ./open/zif_abapgit_sap_package.intf.abap
+sed -i -e '/PUBLIC/r ./shims/zif_abapgit_lxe_texts.prog.abap' ./open/zif_abapgit_lxe_texts.intf.abap
 
 ###########################################################################
 
