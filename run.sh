@@ -35,6 +35,7 @@ cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
 cp abapGit/src/objects/texts/zif_abapgit_lxe_texts* open
+cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/zif_abapgit_comparator* open
 cp abapGit/src/objects/zif_abapgit_object* open
 cp abapGit/src/objects/zif_abapgit_objects* open

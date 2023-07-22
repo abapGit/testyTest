@@ -15,9 +15,7 @@ CLASS zcl_abapgit_objects DEFINITION
     CLASS-METHODS serialize
       IMPORTING
         !is_item                 TYPE zif_abapgit_definitions=>ty_item
-        !iv_language             TYPE spras
-        !iv_main_language_only   TYPE abap_bool DEFAULT abap_false
-        !it_translation_langs    TYPE zif_abapgit_definitions=>ty_languages OPTIONAL
+        !io_i18n_params          TYPE REF TO zcl_abapgit_i18n_params
       RETURNING
         VALUE(rs_files_and_item) TYPE ty_serialization
       RAISING
@@ -51,6 +49,7 @@ CLASS zcl_abapgit_objects DEFINITION
         !is_sub_item    TYPE zif_abapgit_definitions=>ty_item OPTIONAL
         !iv_filename    TYPE string OPTIONAL
         !iv_line_number TYPE i OPTIONAL
+        !iv_new_window  TYPE abap_bool DEFAULT abap_true
       RAISING
         zcx_abapgit_exception .
     CLASS-METHODS changed_by

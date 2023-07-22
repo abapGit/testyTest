@@ -161,13 +161,6 @@ TYPES sci_chkv TYPE c LENGTH 1.
       VALUE(rv_transport)       TYPE trkorr
     RAISING
       zcx_abapgit_exception .
-  METHODS choose_pr_popup
-    IMPORTING
-      !it_pulls      TYPE zif_abapgit_pr_enum_provider=>ty_pull_requests
-    RETURNING
-      VALUE(rs_pull) TYPE zif_abapgit_pr_enum_provider=>ty_pull_request
-    RAISING
-      zcx_abapgit_exception .
   METHODS popup_select_tr_requests
     IMPORTING is_selection        TYPE trwbo_selection
               iv_title            TYPE trwbo_title
