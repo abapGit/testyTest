@@ -52,7 +52,7 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
     IF lv_path = '/sap/zabapgit'.
       redirect( ).
     ELSEIF lv_path = gc_base.
-      mo_gui->go_home( ).
+      mo_gui->go_home( zif_abapgit_definitions=>c_action-go_home ).
     ELSEIF lv_path = |{ gc_base }css/bundle.css|.
       mo_viewer->zif_abapgit_html_viewer~show_url( |css/bundle.css| ).
     ELSEIF lv_path CP |{ gc_base }sapevent:+*|.
