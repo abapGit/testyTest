@@ -27,10 +27,12 @@ cp abapGit/src/inspect/zif_abapgit_code_inspector* open
 cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif_abapgit_aff_registry* open
+cp abapGit/src/objects/aff_types/zif_abapgit_aff_types_v1.* open
 cp abapGit/src/repo/zcl_abapgit_file_status* open
 cp abapGit/src/objects/core/zcl_abapgit_filename_logic* open
 cp abapGit/src/objects/core/zcl_abapgit_folder_logic* open
 cp abapGit/src/utils/zcl_abapgit_item_state* open
+cp abapGit/src/utils/zcl_abapgit_abap_language_vers.* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
