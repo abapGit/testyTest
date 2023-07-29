@@ -23,24 +23,6 @@ TYPES tihttpnvp TYPE STANDARD TABLE OF ty WITH DEFAULT KEY.
         !iv_upper_cased  TYPE abap_bool DEFAULT abap_false
       RETURNING
         VALUE(rt_fields) TYPE tihttpnvp .
-    CLASS-METHODS parse_fields_upper_case_name
-      IMPORTING
-        !iv_string       TYPE clike
-      RETURNING
-        VALUE(rt_fields) TYPE tihttpnvp .
-    CLASS-METHODS translate_postdata
-      IMPORTING
-        !it_postdata     TYPE zif_abapgit_html_viewer=>ty_post_data
-      RETURNING
-        VALUE(rv_string) TYPE string .
-
-    CLASS-METHODS get_field
-      IMPORTING
-        !iv_name   TYPE string
-        !it_field  TYPE tihttpnvp
-        !iv_decode TYPE abap_bool DEFAULT abap_false
-      CHANGING
-        !cg_field  TYPE any .
     CLASS-METHODS jump_encode
       IMPORTING
         !iv_obj_type     TYPE I_CustABAPObjDirectoryEntry-ABAPObjectType
@@ -53,7 +35,6 @@ TYPES tihttpnvp TYPE STANDARD TABLE OF ty WITH DEFAULT KEY.
         !iv_path         TYPE string
       RETURNING
         VALUE(rv_string) TYPE string .
-
     CLASS-METHODS file_encode
       IMPORTING
         !iv_key          TYPE zif_abapgit_persistence=>ty_repo-key
@@ -66,18 +47,27 @@ TYPES tihttpnvp TYPE STANDARD TABLE OF ty WITH DEFAULT KEY.
         !ig_object       TYPE any
       RETURNING
         VALUE(rv_string) TYPE string .
-
-    CLASS-METHODS class_constructor.
+    CLASS-METHODS class_constructor .
     CLASS-METHODS dbkey_encode
       IMPORTING
         !is_key          TYPE zif_abapgit_persistence=>ty_content
       RETURNING
         VALUE(rv_string) TYPE string .
-
   PROTECTED SECTION.
   PRIVATE SECTION.
-    CLASS-DATA gv_non_breaking_space TYPE string.
 
+    CLASS-DATA gv_non_breaking_space TYPE string .
+
+    CLASS-METHODS parse_fields_upper_case_name
+      IMPORTING
+        !iv_string       TYPE clike
+      RETURNING
+        VALUE(rt_fields) TYPE tihttpnvp .
+    CLASS-METHODS translate_postdata
+      IMPORTING
+        !it_postdata     TYPE zif_abapgit_html_viewer=>ty_post_data
+      RETURNING
+        VALUE(rv_string) TYPE string .
     CLASS-METHODS field_keys_to_upper
       CHANGING
         !ct_fields TYPE tihttpnvp .
@@ -96,7 +86,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_abapgit_html_action_utils IMPLEMENTATION.
+CLASS ZCL_ABAPGIT_HTML_ACTION_UTILS IMPLEMENTATION.
 
 
   METHOD add_field.
@@ -184,39 +174,6 @@ CLASS zcl_abapgit_html_action_utils IMPLEMENTATION.
                          ig_field = ig_file CHANGING ct_field = lt_fields ).
 
     rv_string = zcl_abapgit_http_utility=>fields_to_string( lt_fields ).
-
-  ENDMETHOD.
-
-
-  METHOD get_field.
-
-    DATA: lv_value TYPE string.
-
-    FIELD-SYMBOLS: <ls_field> LIKE LINE OF it_field,
-                   <lg_dest>  TYPE any.
-
-
-    READ TABLE it_field ASSIGNING <ls_field> WITH KEY name = iv_name.
-    IF sy-subrc IS NOT INITIAL.
-      RETURN.
-    ENDIF.
-
-    lv_value = <ls_field>-value.
-
-    IF iv_decode = abap_true.
-      lv_value = cl_web_http_utility=>unescape_url( escaped = lv_value ).
-    ENDIF.
-
-    CASE cl_abap_typedescr=>describe_by_data( cg_field )->kind.
-      WHEN cl_abap_typedescr=>kind_elem.
-        cg_field = lv_value.
-      WHEN cl_abap_typedescr=>kind_struct.
-        ASSIGN COMPONENT iv_name OF STRUCTURE cg_field TO <lg_dest>.
-        ASSERT <lg_dest> IS ASSIGNED.
-        <lg_dest> = lv_value.
-      WHEN OTHERS.
-        ASSERT 0 = 1.
-    ENDCASE.
 
   ENDMETHOD.
 

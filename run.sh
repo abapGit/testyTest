@@ -77,6 +77,7 @@ cp abapGit/src/ui/core/zcl_abapgit_gui.clas* open
 cp abapGit/src/ui/core/zcl_abapgit_html_parts* open
 cp abapGit/src/ui/core/zcl_abapgit_html.clas* open
 cp abapGit/src/ui/core/zcx* open
+cp abapGit/src/ui/popups/zcl* open
 cp abapGit/src/ui/core/zif* open
 cp abapGit/src/ui/lib/zcl_abapgit_gui_buttons* open
 cp abapGit/src/ui/lib/zcl_abapgit_gui_chunk_lib* open
@@ -118,6 +119,7 @@ cp abapGit/src/ui/zcl_abapgit_ui_injector* open
 cp abapGit/src/ui/zif_abapgit_frontend_services* open
 cp abapGit/src/ui/zif_abapgit_popups* open
 cp abapGit/src/objects/sap/zif_abapgit_* open
+cp abapGit/src/objects/zcl_abapgit_objects_factory* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
 cp abapGit/src/utils/zcl_abapgit_path* open
@@ -150,7 +152,7 @@ rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
 
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
-sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
+sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_objects_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_cts_api TYPE zcl_abapgit_cts_api./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
