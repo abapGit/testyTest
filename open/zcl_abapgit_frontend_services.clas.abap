@@ -77,4 +77,8 @@ CLASS zcl_abapgit_frontend_services IMPLEMENTATION.
   METHOD zif_abapgit_frontend_services~show_file_save_dialog.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.
+
+  METHOD zif_abapgit_frontend_services~open_ie_devtools.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
 ENDCLASS.

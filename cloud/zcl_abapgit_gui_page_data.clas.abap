@@ -94,9 +94,6 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_gui_page_data IMPLEMENTATION.
-  METHOD create.
-    RETURN. " todo, implement method
-  ENDMETHOD.
 
 
   METHOD add_via_transport.
@@ -132,16 +129,15 @@ CLASS zcl_abapgit_gui_page_data IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD concatenated_key_to_where.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
 
+  METHOD create.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
 
   METHOD constructor.
-
     super->constructor( ).
 
     ms_control-page_title = 'Data'.
