@@ -90,7 +90,7 @@ CLASS zcl_abapgit_gui_page_tags DEFINITION
 
     METHODS choose_commit
       RETURNING
-        VALUE(rv_commit) TYPE zif_abapgit_definitions=>ty_commit-sha1
+        VALUE(rv_commit) TYPE zif_abapgit_git_definitions=>ty_commit-sha1
       RAISING
         zcx_abapgit_exception.
 
@@ -98,7 +98,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_GUI_PAGE_TAGS IMPLEMENTATION.
+CLASS zcl_abapgit_gui_page_tags IMPLEMENTATION.
 
 
   METHOD choose_commit.
@@ -169,10 +169,10 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_TAGS IMPLEMENTATION.
       iv_action = c_event-change_type
     )->option(
       iv_label = 'Lightweight'
-      iv_value = zif_abapgit_definitions=>c_git_branch_type-lightweight_tag
+      iv_value = zif_abapgit_git_definitions=>c_git_branch_type-lightweight_tag
     )->option(
       iv_label = 'Annotated'
-      iv_value = zif_abapgit_definitions=>c_git_branch_type-annotated_tag
+      iv_value = zif_abapgit_git_definitions=>c_git_branch_type-annotated_tag
     )->text(
       iv_name        = c_id-name
       iv_label       = 'Tag Name'
@@ -186,7 +186,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_TAGS IMPLEMENTATION.
       iv_required    = abap_true
       iv_side_action = c_event-choose_commit ).
 
-    IF ms_tag-type = zif_abapgit_definitions=>c_git_branch_type-annotated_tag.
+    IF ms_tag-type = zif_abapgit_git_definitions=>c_git_branch_type-annotated_tag.
       ro_form->start_group(
         iv_name        = c_id-anno_group
         iv_label       = 'Annotation'
@@ -263,7 +263,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_TAGS IMPLEMENTATION.
 
   METHOD initialize_form_data.
 
-    ms_tag-type = zif_abapgit_definitions=>c_git_branch_type-lightweight_tag.
+    ms_tag-type = zif_abapgit_git_definitions=>c_git_branch_type-lightweight_tag.
 
     mo_form_data->set(
       iv_key = c_id-tag_type
@@ -358,7 +358,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_TAGS IMPLEMENTATION.
             WITH cl_abap_char_utilities=>newline.
 
           ms_tag-name = zcl_abapgit_git_tag=>add_tag_prefix( ms_tag-name ).
-          ASSERT ms_tag-name CP zif_abapgit_definitions=>c_git_branch-tags.
+          ASSERT ms_tag-name CP zif_abapgit_git_definitions=>c_git_branch-tags.
 
           TRY.
               zcl_abapgit_git_porcelain=>create_tag(

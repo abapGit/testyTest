@@ -89,9 +89,13 @@ CLASS zcl_abapgit_gui_router DEFINITION
         zcx_abapgit_exception .
     CLASS-METHODS jump_object
       IMPORTING
-        !iv_obj_type TYPE string
-        !iv_obj_name TYPE string
-        !iv_filename TYPE string
+        !iv_obj_type   TYPE string
+        !iv_obj_name   TYPE string
+        !iv_filename   TYPE string
+        !iv_sub_type   TYPE string OPTIONAL
+        !iv_sub_name   TYPE string OPTIONAL
+        !iv_line       TYPE string OPTIONAL
+        !iv_new_window TYPE string DEFAULT 'X'
       RAISING
         zcx_abapgit_exception .
     CLASS-METHODS jump_display_transport
@@ -304,60 +308,44 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
   METHOD get_page_stage.
 
-    DATA: lo_repo                     TYPE REF TO zcl_abapgit_repo_online,
-          lv_key                      TYPE zif_abapgit_persistence=>ty_repo-key,
-          lv_seed                     TYPE string,
-          lo_stage_page               TYPE REF TO zcl_abapgit_gui_page_stage,
-          lo_code_inspector_page      TYPE REF TO zcl_abapgit_gui_page_code_insp,
-          lv_answer                   TYPE c LENGTH 1,
-          lv_question_text            TYPE string,
-          lv_question_title           TYPE string,
-          lv_show_create_branch_popup TYPE c LENGTH 1,
-          lx_error                    TYPE REF TO cx_sy_move_cast_error.
+    DATA: lo_repo                TYPE REF TO zcl_abapgit_repo_online,
+          lv_key                 TYPE zif_abapgit_persistence=>ty_repo-key,
+          lv_seed                TYPE string,
+          lo_stage_page          TYPE REF TO zcl_abapgit_gui_page_stage,
+          lo_code_inspector_page TYPE REF TO zcl_abapgit_gui_page_code_insp,
+          lv_sci_result          TYPE zif_abapgit_definitions=>ty_sci_result,
+          lx_error               TYPE REF TO cx_sy_move_cast_error.
 
     lv_key   = ii_event->query( )->get( 'KEY' ).
     lv_seed  = ii_event->query( )->get( 'SEED' ).
+
+    lv_sci_result = zif_abapgit_definitions=>c_sci_result-no_run.
+
     TRY.
         lo_repo ?= zcl_abapgit_repo_srv=>get_instance( )->get( lv_key ).
       CATCH cx_sy_move_cast_error INTO lx_error.
         zcx_abapgit_exception=>raise( `Staging is only possible for online repositories.` ).
     ENDTRY.
 
-    IF lo_repo->get_local_settings( )-code_inspector_check_variant IS NOT INITIAL.
+    IF lo_repo->get_selected_branch( ) CP zif_abapgit_git_definitions=>c_git_branch-tags.
+      zcx_abapgit_exception=>raise( |You are working on a tag, must be on branch| ).
+    ELSEIF lo_repo->get_selected_commit( ) IS NOT INITIAL.
+      zcx_abapgit_exception=>raise( |You are working on a commit, must be on branch| ).
+    ENDIF.
 
+    IF lo_repo->get_local_settings( )-code_inspector_check_variant IS NOT INITIAL.
       CREATE OBJECT lo_code_inspector_page
         EXPORTING
           io_repo = lo_repo.
 
       IF lo_code_inspector_page->is_nothing_to_display( ) = abap_true.
-        " force refresh on stage, to make sure the latest local and remote files are used
-        lo_repo->refresh( ).
-        CREATE OBJECT lo_stage_page
-          EXPORTING
-            io_repo       = lo_repo
-            iv_seed       = lv_seed
-            iv_sci_result = zif_abapgit_definitions=>c_sci_result-passed
-            ii_obj_filter = ii_obj_filter.
-
-        ri_page = lo_stage_page.
+        lv_sci_result = zif_abapgit_definitions=>c_sci_result-passed.
       ELSE.
         ri_page = lo_code_inspector_page.
       ENDIF.
+    ENDIF.
 
-    ELSEIF lo_repo->get_selected_branch( ) CP zif_abapgit_definitions=>c_git_branch-tags.
-      lv_show_create_branch_popup = abap_true.
-      lv_question_title = 'Staging on a tag'.
-      lv_question_text = 'You are currently working on a tag.'.
-      lv_question_text = |{ lv_question_text } You must be on a branch to stage.|.
-      lv_question_text = |{ lv_question_text } Create new branch?|.
-    ELSEIF lo_repo->get_selected_commit( ) IS NOT INITIAL.
-      lv_show_create_branch_popup = abap_true.
-      lv_question_title = 'Staging on a checked out commit'.
-      lv_question_text = 'You are currently checked out in a commit.'.
-      lv_question_text = |{ lv_question_text } You must be on a branch to stage.|.
-      lv_question_text = |{ lv_question_text } Create new branch?|.
-    ELSE.
-
+    IF ri_page IS INITIAL.
       " force refresh on stage, to make sure the latest local and remote files are used
       lo_repo->refresh( ).
 
@@ -365,33 +353,10 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
         EXPORTING
           io_repo       = lo_repo
           iv_seed       = lv_seed
+          iv_sci_result = lv_sci_result
           ii_obj_filter = ii_obj_filter.
 
       ri_page = lo_stage_page.
-
-    ENDIF.
-
-    IF lv_show_create_branch_popup = abap_true.
-
-      lv_answer = zcl_abapgit_ui_factory=>get_popups( )->popup_to_confirm(
-        iv_titlebar              = lv_question_title
-        iv_text_question         = lv_question_text
-        iv_text_button_1         = 'New branch' "Ideally the button name would be Create branch, but it did not fit
-        iv_icon_button_1         = 'ICON_OKAY'
-        iv_text_button_2         = 'Cancel'
-        iv_icon_button_2         = 'ICON_CANCEL'
-        iv_default_button        = '2'
-        iv_display_cancel_button = abap_false ).
-      IF lv_answer = '1'.
-        TRY.
-            zcl_abapgit_services_git=>create_branch( iv_key = lo_repo->get_key( ) ).
-          CATCH zcx_abapgit_cancel.
-            "Continue processing so we can return to the correct page
-        ENDTRY.
-      ENDIF.
-
-      ri_page = zcl_abapgit_gui_page_repo_view=>create( lo_repo->get_key( ) ).
-
     ENDIF.
 
   ENDMETHOD.
@@ -504,12 +469,21 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
     DATA:
       ls_item        TYPE zif_abapgit_definitions=>ty_item,
-      lv_extra       TYPE string,
+      ls_sub_item    TYPE zif_abapgit_definitions=>ty_item,
       lx_error       TYPE REF TO zcx_abapgit_exception,
+      lv_line_number TYPE i,
+      lv_new_window  TYPE abap_bool,
       li_html_viewer TYPE REF TO zif_abapgit_html_viewer.
 
     ls_item-obj_type = cl_http_utility=>unescape_url( |{ iv_obj_type }| ).
     ls_item-obj_name = cl_http_utility=>unescape_url( |{ iv_obj_name }| ).
+    ls_sub_item-obj_type = cl_http_utility=>unescape_url( |{ iv_sub_type }| ).
+    ls_sub_item-obj_name = cl_http_utility=>unescape_url( |{ iv_sub_name }| ).
+
+    IF iv_line CO '0123456789'.
+      lv_line_number = iv_line.
+    ENDIF.
+    lv_new_window = boolc( iv_new_window IS NOT INITIAL ).
 
     TRY.
         li_html_viewer = zcl_abapgit_ui_factory=>get_html_viewer( ).
@@ -519,10 +493,18 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
         IF ls_item-obj_type = zif_abapgit_data_config=>c_data_type-tabu.
           zcl_abapgit_data_utils=>jump( ls_item ).
+        ELSEIF lv_line_number IS INITIAL OR ls_sub_item IS INITIAL.
+          zcl_abapgit_objects=>jump(
+            is_item       = ls_item
+            iv_filename   = iv_filename
+            iv_new_window = lv_new_window ).
         ELSE.
           zcl_abapgit_objects=>jump(
-            is_item     = ls_item
-            iv_filename = iv_filename ).
+            is_item        = ls_item
+            is_sub_item    = ls_sub_item
+            iv_filename    = iv_filename
+            iv_line_number = lv_line_number
+            iv_new_window  = lv_new_window ).
         ENDIF.
 
         li_html_viewer->set_visiblity( abap_true ).
@@ -557,7 +539,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
     CASE ii_event->mv_action.
       WHEN zif_abapgit_definitions=>c_action-ie_devtools.
-        zcl_abapgit_services_basis=>open_ie_devtools( ).
+        zcl_abapgit_ui_factory=>get_frontend_services( )->open_ie_devtools( ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
       WHEN zif_abapgit_definitions=>c_action-clipboard.
         lv_clip_content = ii_event->query( )->get( 'CLIPBOARD' ).
@@ -660,9 +642,13 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
     CASE ii_event->mv_action.
       WHEN zif_abapgit_definitions=>c_action-jump.                          " Open object editor
         jump_object(
-          iv_obj_type = ii_event->query( )->get( 'TYPE' )
-          iv_obj_name = ii_event->query( )->get( 'NAME' )
-          iv_filename = ii_event->query( )->get( 'FILE' ) ).
+          iv_obj_type   = ii_event->query( )->get( 'TYPE' )
+          iv_obj_name   = ii_event->query( )->get( 'NAME' )
+          iv_filename   = ii_event->query( )->get( 'FILE' )
+          iv_sub_type   = ii_event->query( )->get( 'SUBTYPE' )
+          iv_sub_name   = ii_event->query( )->get( 'SUBNAME' )
+          iv_line       = ii_event->query( )->get( 'LINE' )
+          iv_new_window = ii_event->query( )->get( 'NEW_WINDOW' ) ).
 
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
 

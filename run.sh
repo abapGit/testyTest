@@ -27,14 +27,17 @@ cp abapGit/src/inspect/zif_abapgit_code_inspector* open
 cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif_abapgit_aff_registry* open
+cp abapGit/src/objects/aff_types/zif_abapgit_aff_types_v1.* open
 cp abapGit/src/repo/zcl_abapgit_file_status* open
 cp abapGit/src/objects/core/zcl_abapgit_filename_logic* open
 cp abapGit/src/objects/core/zcl_abapgit_folder_logic* open
 cp abapGit/src/utils/zcl_abapgit_item_state* open
+cp abapGit/src/utils/zcl_abapgit_abap_language_vers.* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
 cp abapGit/src/objects/texts/zif_abapgit_lxe_texts* open
+cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/zif_abapgit_comparator* open
 cp abapGit/src/objects/zif_abapgit_object* open
 cp abapGit/src/objects/zif_abapgit_objects* open
@@ -74,6 +77,7 @@ cp abapGit/src/ui/core/zcl_abapgit_gui.clas* open
 cp abapGit/src/ui/core/zcl_abapgit_html_parts* open
 cp abapGit/src/ui/core/zcl_abapgit_html.clas* open
 cp abapGit/src/ui/core/zcx* open
+cp abapGit/src/ui/popups/zcl* open
 cp abapGit/src/ui/core/zif* open
 cp abapGit/src/ui/lib/zcl_abapgit_gui_buttons* open
 cp abapGit/src/ui/lib/zcl_abapgit_gui_chunk_lib* open
@@ -115,6 +119,7 @@ cp abapGit/src/ui/zcl_abapgit_ui_injector* open
 cp abapGit/src/ui/zif_abapgit_frontend_services* open
 cp abapGit/src/ui/zif_abapgit_popups* open
 cp abapGit/src/objects/sap/zif_abapgit_* open
+cp abapGit/src/objects/zcl_abapgit_objects_factory* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
 cp abapGit/src/utils/zcl_abapgit_path* open
@@ -147,7 +152,7 @@ rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
 
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
-sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
+sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_objects_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_cts_api TYPE zcl_abapgit_cts_api./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
@@ -211,6 +216,7 @@ sed -i -e '/PUBLIC /r ./shims/zif_abapgit_html_viewer.prog.abap' ./open/zif_abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_popups.prog.abap' ./open/zif_abapgit_popups.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_longtexts.prog.abap' ./open/zif_abapgit_longtexts.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_package.prog.abap' ./open/zif_abapgit_sap_package.intf.abap
+sed -i -e '/PUBLIC/r ./shims/zif_abapgit_lxe_texts.prog.abap' ./open/zif_abapgit_lxe_texts.intf.abap
 
 ###########################################################################
 
@@ -248,6 +254,7 @@ cp additional/open/*.* open
 cp additional/cloud/*.* cloud
 
 cp abapGit/src/utils/zcl_abapgit_convert* open
+cp abapGit/src/utils/zcl_abapgit_convert* cloud
 cp abapGit/src/http/zcl_abapgit_http.clas* open
 cp abapGit/src/http/zcl_abapgit_http_client.clas* open
 cp abapGit/src/http/zcl_abapgit_proxy_config* open
@@ -255,10 +262,12 @@ cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
 
 # replace or rewrite most of the code,
-cp replace/zcl_abapgit_convert* cloud
+# cp replace/zcl_abapgit_convert* cloud
 cp replace/zcl_abapgit_http_utility* cloud
 cp replace/zcl_abapgit_xml_pretty* cloud
 rm cloud/*.w3mi.*
+rm cloud/zcl_abapgit_data_deserializer.clas.testclasses.abap  # uses T100 db table
+rm cloud/zcl_abapgit_data_utils.clas.testclasses.abap  # uses T100 db table
 
 ###########################################################################
 
@@ -283,6 +292,7 @@ sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DAT
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/*xml*.abap
 sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_repo.clas.abap
 sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
+sed -i "s/cl_http_utility=>/cl_web_http_utility=>/ig" ./cloud/zcl_abapgit_convert.clas.abap
 
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap

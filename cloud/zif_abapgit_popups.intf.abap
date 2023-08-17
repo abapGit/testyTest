@@ -98,7 +98,7 @@ TYPES sci_chkv TYPE c LENGTH 1.
       !iv_repo_url     TYPE string
       !iv_branch_name  TYPE string OPTIONAL
     RETURNING
-      VALUE(rs_commit) TYPE zif_abapgit_definitions=>ty_commit
+      VALUE(rs_commit) TYPE zif_abapgit_git_definitions=>ty_commit
     RAISING
       zcx_abapgit_exception .
   TYPES ty_char1 TYPE c LENGTH 1.
@@ -159,13 +159,6 @@ TYPES sci_chkv TYPE c LENGTH 1.
       PREFERRED PARAMETER is_transport_type
     RETURNING
       VALUE(rv_transport)       TYPE sxco_transport
-    RAISING
-      zcx_abapgit_exception .
-  METHODS choose_pr_popup
-    IMPORTING
-      !it_pulls      TYPE zif_abapgit_pr_enum_provider=>ty_pull_requests
-    RETURNING
-      VALUE(rs_pull) TYPE zif_abapgit_pr_enum_provider=>ty_pull_request
     RAISING
       zcx_abapgit_exception .
   METHODS popup_select_tr_requests
