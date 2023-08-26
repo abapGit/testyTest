@@ -5,6 +5,12 @@ CLASS zcl_abapgit_services_repo DEFINITION
 
   PUBLIC SECTION.
 TYPES trwbo_request_headers TYPE c LENGTH 1.
+
+TYPES: BEGIN OF scompkdtln,
+         devclass TYPE c LENGTH 30,
+         ctext    TYPE c LENGTH 60,
+         as4user  TYPE c LENGTH 8,
+       END OF scompkdtln.
     CLASS-METHODS new_online
       IMPORTING
         !is_repo_params TYPE zif_abapgit_services_repo=>ty_repo_params
@@ -111,7 +117,7 @@ TYPES trwbo_request_headers TYPE c LENGTH 1.
         zcx_abapgit_exception .
     CLASS-METHODS raise_error_if_package_exists
       IMPORTING
-        iv_devclass TYPE scompkdtln-devclass
+        iv_devclass TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
       RAISING
         zcx_abapgit_exception.
 ENDCLASS.

@@ -269,6 +269,8 @@ rm cloud/*.w3mi.*
 rm cloud/zcl_abapgit_data_deserializer.clas.testclasses.abap  # uses T100 db table
 rm cloud/zcl_abapgit_data_utils.clas.testclasses.abap  # uses T100 db table
 rm cloud/zcl_abapgit_gui_event.clas.testclasses.abap
+rm cloud/zcl_abapgit_repo_status.clas.testclasses.abap
+rm open/zcl_abapgit_repo_status.clas.testclasses.abap
 
 ###########################################################################
 
@@ -280,6 +282,7 @@ sed -i 's/ tadir-masterlang/ spras/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-srcsystem/ TYPE c LENGTH 10/ig' ./cloud/*.intf.abap
 sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap
+sed -i 's/ TYPE scompkdtln-devclass/ TYPE devclass/ig' ./cloud/zcl_abapgit_services_repo.clas.abap
 sed -i 's/ TYPE seoclsname/ TYPE char30/ig' ./cloud/*.abap
 sed -i 's/ TYPE filetable/ TYPE string/ig' ./cloud/*.abap
 sed -i 's/ TYPE wwwdatatab-objid/ TYPE char40/ig' ./cloud/*.abap
