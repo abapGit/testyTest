@@ -5,6 +5,12 @@ CLASS zcl_abapgit_services_repo DEFINITION
 
   PUBLIC SECTION.
 TYPES trwbo_request_headers TYPE c LENGTH 1.
+
+TYPES: BEGIN OF scompkdtln,
+         devclass TYPE c LENGTH 30,
+         ctext    TYPE c LENGTH 60,
+         as4user  TYPE c LENGTH 8,
+       END OF scompkdtln.
     CLASS-METHODS new_online
       IMPORTING
         !is_repo_params TYPE zif_abapgit_services_repo=>ty_repo_params
@@ -62,7 +68,20 @@ TYPES trwbo_request_headers TYPE c LENGTH 1.
       RETURNING
         VALUE(ri_log) TYPE REF TO zif_abapgit_log
       RAISING
-        zcx_abapgit_exception .
+        zcx_abapgit_exception.
+    CLASS-METHODS create_package
+      IMPORTING
+        !iv_prefill_package TYPE I_CustABAPObjDirectoryEntry-ABAPPackage OPTIONAL
+      RETURNING
+        VALUE(rv_package)   TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
+      RAISING
+        zcx_abapgit_exception.
+    CLASS-METHODS check_and_create_package
+      IMPORTING
+        !iv_package TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
+        !it_remote  TYPE zif_abapgit_git_definitions=>ty_files_tt
+      RAISING
+        zcx_abapgit_exception.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -96,6 +115,11 @@ TYPES trwbo_request_headers TYPE c LENGTH 1.
         !is_repo_params TYPE zif_abapgit_services_repo=>ty_repo_params
       RAISING
         zcx_abapgit_exception .
+    CLASS-METHODS raise_error_if_package_exists
+      IMPORTING
+        iv_devclass TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
+      RAISING
+        zcx_abapgit_exception.
 ENDCLASS.
 
 
@@ -158,6 +182,22 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD check_and_create_package.
+
+    IF zcl_abapgit_factory=>get_sap_package( iv_package )->exists( ) = abap_false.
+      " Check if any package is included in remote
+      READ TABLE it_remote TRANSPORTING NO FIELDS
+        WITH KEY file
+        COMPONENTS filename = zcl_abapgit_filename_logic=>c_package_file.
+      IF sy-subrc <> 0.
+        " If not, prompt to create it
+        create_package( iv_package ).
+      ENDIF.
+    ENDIF.
+
+  ENDMETHOD.
+
+
   METHOD check_package.
 
     DATA:
@@ -178,6 +218,32 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
     IF li_repo IS BOUND.
       zcx_abapgit_exception=>raise( lv_reason ).
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD create_package.
+
+    DATA ls_package_data TYPE scompkdtln.
+    DATA lv_create       TYPE abap_bool.
+    DATA li_popup        TYPE REF TO zif_abapgit_popups.
+
+    ls_package_data-devclass = condense( to_upper( iv_prefill_package ) ).
+
+    raise_error_if_package_exists( ls_package_data-devclass ).
+
+    li_popup = zcl_abapgit_ui_factory=>get_popups( ).
+
+    li_popup->popup_to_create_package(
+      IMPORTING
+        es_package_data = ls_package_data
+        ev_create       = lv_create ).
+
+    IF lv_create = abap_true.
+      zcl_abapgit_factory=>get_sap_package( ls_package_data-devclass )->create( ls_package_data ).
+      rv_package = ls_package_data-devclass.
+      COMMIT WORK AND WAIT.
     ENDIF.
 
   ENDMETHOD.
@@ -282,6 +348,10 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       iv_labels         = is_repo_params-labels
       iv_main_lang_only = is_repo_params-main_lang_only ).
 
+    check_and_create_package(
+      iv_package = is_repo_params-package
+      it_remote  = ro_repo->get_files_remote( ) ).
+
     " Make sure there're no leftovers from previous repos
     ro_repo->zif_abapgit_repo~checksums( )->rebuild( ).
     ro_repo->reset_status( ). " TODO refactor later
@@ -310,6 +380,10 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       iv_labels         = is_repo_params-labels
       iv_ign_subpkg     = is_repo_params-ignore_subpackages
       iv_main_lang_only = is_repo_params-main_lang_only ).
+
+    check_and_create_package(
+      iv_package = is_repo_params-package
+      it_remote  = ro_repo->get_files_remote( ) ).
 
     " Make sure there're no leftovers from previous repos
     ro_repo->zif_abapgit_repo~checksums( )->rebuild( ).
@@ -565,6 +639,19 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
     lv_message = |Repository { lv_repo_name } successfully uninstalled from Package { lv_package }. |.
     ASSERT 1 = 'messageStatementRemoved'.
+
+  ENDMETHOD.
+
+
+  METHOD raise_error_if_package_exists.
+
+    IF iv_devclass IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    IF zcl_abapgit_factory=>get_sap_package( iv_devclass )->exists( ) = abap_true.
+      zcx_abapgit_exception=>raise( |Package { iv_devclass } already exists| ).
+    ENDIF.
 
   ENDMETHOD.
 
