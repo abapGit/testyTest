@@ -28,7 +28,7 @@ cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif_abapgit_aff_registry* open
 cp abapGit/src/objects/aff_types/zif_abapgit_aff_types_v1.* open
-cp abapGit/src/repo/zcl_abapgit_file_status* open
+cp abapGit/src/repo/zcl_abapgit_repo_status* open
 cp abapGit/src/objects/core/zcl_abapgit_filename_logic* open
 cp abapGit/src/objects/core/zcl_abapgit_folder_logic* open
 cp abapGit/src/utils/zcl_abapgit_item_state* open
@@ -162,7 +162,7 @@ sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspec
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
-sed -i "s/ cl_gui_cfw=>flush( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_services_basis.clas.abap
+# sed -i "s/ cl_gui_cfw=>flush( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_services_basis.clas.abap
 
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/*.abap
 sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/*.abap
@@ -192,8 +192,8 @@ sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /i
 sed -i "s/ SET LOCALE LANGUAGE lv_main_language./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_save_sy_langu./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ READ LINE lv_line LINE VALUE INTO lv_text./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_run_bckg.clas.abap
-sed -i "s/ SELECT SINGLE editflag FROM trnspace INTO ls_trnspace-editflag WHERE namespace = lv_namespace./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_file_status.clas.abap
-sed -i "s/ ELSEIF ls_trnspace-editflag <> 'X'./ ELSEIF ls_trnspace <> 'X'./ig" ./open/zcl_abapgit_file_status.clas.abap
+#sed -i "s/ SELECT SINGLE editflag FROM trnspace INTO ls_trnspace-editflag WHERE namespace = lv_namespace./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_file_status.clas.abap
+#sed -i "s/ ELSEIF ls_trnspace-editflag <> 'X'./ ELSEIF ls_trnspace <> 'X'./ig" ./open/zcl_abapgit_file_status.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_debuginfo=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_sett_repo=>create( lo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ zcl_abapgit_transport_mass=>run( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
@@ -207,7 +207,7 @@ sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_event.prog.abap' ./open/zcl
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui.prog.abap' ./open/zcl_abapgit_gui.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_default_transport.prog.abap' ./open/zcl_abapgit_default_transport.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_folder_logic.prog.abap' ./open/zcl_abapgit_folder_logic.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_basis.prog.abap' ./open/zcl_abapgit_services_basis.clas.abap
+# sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_basis.prog.abap' ./open/zcl_abapgit_services_basis.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_repo.prog.abap' ./open/zcl_abapgit_services_repo.clas.abap
 
 # INTF shims,
@@ -268,6 +268,7 @@ cp replace/zcl_abapgit_xml_pretty* cloud
 rm cloud/*.w3mi.*
 rm cloud/zcl_abapgit_data_deserializer.clas.testclasses.abap  # uses T100 db table
 rm cloud/zcl_abapgit_data_utils.clas.testclasses.abap  # uses T100 db table
+rm cloud/zcl_abapgit_gui_event.clas.testclasses.abap
 
 ###########################################################################
 
