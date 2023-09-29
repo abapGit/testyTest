@@ -1,22 +1,26 @@
 CLASS zcl_abapgit_abap_language_vers DEFINITION
   PUBLIC
   FINAL
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
+
+    CONSTANTS c_feature_flag TYPE string VALUE 'ALAV'.
 
     METHODS get_abap_language_vers_by_objt
       IMPORTING
         !iv_object_type                      TYPE tadir-object
         !iv_package                          TYPE devclass
       RETURNING
-        VALUE(rv_allowed_abap_langu_version) TYPE zif_abapgit_aff_types_v1=>ty_abap_language_version .
+        VALUE(rv_allowed_abap_langu_version) TYPE zif_abapgit_aff_types_v1=>ty_abap_language_version.
+
     METHODS is_import_allowed
       IMPORTING
         !io_repo          TYPE REF TO zif_abapgit_repo
         !iv_package       TYPE devclass
       RETURNING
-        VALUE(rv_allowed) TYPE abap_bool .
+        VALUE(rv_allowed) TYPE abap_bool.
+
   PROTECTED SECTION.
   PRIVATE SECTION.
 
@@ -24,12 +28,14 @@ CLASS zcl_abapgit_abap_language_vers DEFINITION
       IMPORTING
         !iv_package                     TYPE devclass
       RETURNING
-        VALUE(rv_abap_language_version) TYPE string .
+        VALUE(rv_abap_language_version) TYPE string.
+
     METHODS get_abap_language_vers_by_repo
       IMPORTING
         !io_repo                        TYPE REF TO zif_abapgit_repo
       RETURNING
-        VALUE(rv_abap_language_version) TYPE string .
+        VALUE(rv_abap_language_version) TYPE string.
+
 ENDCLASS.
 
 
@@ -46,7 +52,6 @@ CLASS zcl_abapgit_abap_language_vers IMPLEMENTATION.
     lv_class = 'CL_ABAP_LANGUAGE_VERSION_CFG'.
 
     TRY.
-        CREATE OBJECT lo_abap_language_version_cfg TYPE ('IF_ABAP_LANGUAGE_VERSION_CFG').
 
         CALL METHOD (lv_class)=>('GET_INSTANCE')
           RECEIVING
@@ -71,6 +76,7 @@ CLASS zcl_abapgit_abap_language_vers IMPLEMENTATION.
       CATCH cx_root.
         rv_abap_language_version = zif_abapgit_dot_abapgit=>c_abap_language_version-undefined.
     ENDTRY.
+
   ENDMETHOD.
 
 
@@ -79,20 +85,18 @@ CLASS zcl_abapgit_abap_language_vers IMPLEMENTATION.
     DATA lv_class TYPE string.
     DATA lo_abap_language_version TYPE REF TO object.
 
-    lv_class = 'CL_ABAP_LANGUAGE_VERSION_CFG'.
+    lv_class = 'CL_ABAP_LANGUAGE_VERSION'.
 
     TRY.
 
-        CREATE OBJECT lo_abap_language_version TYPE ('IF_ABAP_LANGUAGE_VERSION').
-
         CALL METHOD (lv_class)=>('GET_INSTANCE')
           RECEIVING
-            ro_instance = lo_abap_language_version.
+            ro_version_handler = lo_abap_language_version.
 
         CALL METHOD lo_abap_language_version->('IF_ABAP_LANGUAGE_VERSION~GET_DEFAULT_VERSION')
           EXPORTING
             iv_object_type     = iv_object_type
-            iv_package_name    = iv_package
+            iv_package         = iv_package
           RECEIVING
             rv_default_version = rv_allowed_abap_langu_version.
 

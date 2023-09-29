@@ -238,7 +238,8 @@ CLASS zcl_abapgit_git_pack IMPLEMENTATION.
             gzip_out       = lv_compressed
             gzip_out_len   = lv_compressed_len ).
 
-        IF lv_compressed(lv_compressed_len) <> lv_data(lv_compressed_len).
+        IF xstrlen( lv_data ) <= lv_compressed_len OR
+          lv_compressed(lv_compressed_len) <> lv_data(lv_compressed_len).
           "Lets try with zlib before error in out for good
           "This fixes issues with TFS 2017 and visualstudio.com Git repos
           zlib_decompress( CHANGING cv_data = lv_data
@@ -645,11 +646,9 @@ CLASS zcl_abapgit_git_pack IMPLEMENTATION.
     li_progress = zcl_abapgit_progress=>get_instance( lv_objects_total ).
 
     LOOP AT it_objects ASSIGNING <ls_object>.
-      IF sy-tabix MOD 200 = 0.
-        li_progress->show(
-          iv_current = sy-tabix
-          iv_text    = |Encoding objects ( { sy-tabix } of { lv_objects_total } )| ).
-      ENDIF.
+      li_progress->show(
+        iv_current = sy-tabix
+        iv_text    = |Encoding objects ( { sy-tabix } of { lv_objects_total } )| ).
 
       lv_xstring = type_and_length(
         iv_type   = <ls_object>-type

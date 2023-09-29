@@ -31,6 +31,7 @@ TYPES: BEGIN OF scompkdtln,
     CLASS-METHODS purge
       IMPORTING
         !iv_key       TYPE zif_abapgit_persistence=>ty_repo-key
+        !iv_keep_repo TYPE abap_bool DEFAULT abap_false
       RETURNING
         VALUE(ri_log) TYPE REF TO zif_abapgit_log
       RAISING
@@ -120,6 +121,9 @@ TYPES: BEGIN OF scompkdtln,
         iv_devclass TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
       RAISING
         zcx_abapgit_exception.
+    CLASS-METHODS check_for_restart
+      IMPORTING
+        !io_repo TYPE REF TO zif_abapgit_repo.
 ENDCLASS.
 
 
@@ -193,6 +197,37 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
         " If not, prompt to create it
         create_package( iv_package ).
       ENDIF.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD check_for_restart.
+
+    CONSTANTS:
+      lc_abapgit_prog TYPE char30 VALUE `ZABAPGIT`.
+
+    DATA lo_repo_online TYPE REF TO zcl_abapgit_repo_online.
+
+    IF io_repo->is_offline( ) = abap_true.
+      RETURN.
+    ENDIF.
+
+    lo_repo_online ?= io_repo.
+
+    " If abapGit was used to update itself, then restart to avoid LOAD_PROGRAM_&_MISMATCH dumps
+    " because abapGit code was changed at runtime
+    IF zcl_abapgit_ui_factory=>get_frontend_services( )->gui_is_available( ) = abap_true AND
+       zcl_abapgit_url=>is_abapgit_repo( lo_repo_online->get_url( ) ) = abap_true AND
+       sy-batch = abap_false AND
+       sy-cprog = lc_abapgit_prog.
+
+      IF zcl_abapgit_persist_factory=>get_settings( )->read( )->get_show_default_repo( ) = abap_false.
+        ASSERT 1 = 'messageStatementRemoved'.
+      ENDIF.
+
+      ASSERT 1 = 'non_cloud'.
+
     ENDIF.
 
   ENDMETHOD.
@@ -333,6 +368,8 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       ASSERT 1 = 'messageStatementRemoved'.
     ENDIF.
 
+    check_for_restart( io_repo ).
+
   ENDMETHOD.
 
 
@@ -354,7 +391,6 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
     " Make sure there're no leftovers from previous repos
     ro_repo->zif_abapgit_repo~checksums( )->rebuild( ).
-    ro_repo->reset_status( ). " TODO refactor later
 
     toggle_favorite( ro_repo->get_key( ) ).
 
@@ -387,7 +423,6 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
     " Make sure there're no leftovers from previous repos
     ro_repo->zif_abapgit_repo~checksums( )->rebuild( ).
-    ro_repo->reset_status( ). " TODO refactor later
 
     toggle_favorite( ro_repo->get_key( ) ).
 
@@ -587,7 +622,8 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
           lv_answer    TYPE c LENGTH 1,
           lo_repo      TYPE REF TO zcl_abapgit_repo,
           lv_package   TYPE I_CustABAPObjDirectoryEntry-ABAPPackage,
-          lv_question  TYPE c LENGTH 100,
+          lv_title     TYPE c LENGTH 20,
+          lv_question  TYPE c LENGTH 150,
           ls_checks    TYPE zif_abapgit_definitions=>ty_delete_checks,
           lv_repo_name TYPE string,
           lv_message   TYPE string.
@@ -604,14 +640,23 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       lv_question = |This will DELETE all objects in package { lv_package
         } including subpackages ({ lines( lt_tadir ) } objects) from the system|.
 
+      IF iv_keep_repo = abap_true.
+        lv_title = 'Remove Objects'.
+        lv_question = lv_question && ', but keep the reference to the repository'.
+      ELSE.
+        lv_title = 'Uninstall'.
+        lv_question = lv_question && ' and remove the reference to the repository'.
+      ENDIF.
+
       lv_answer = zcl_abapgit_ui_factory=>get_popups( )->popup_to_confirm(
-        iv_titlebar              = 'Uninstall'
+        iv_titlebar              = lv_title
         iv_text_question         = lv_question
         iv_text_button_1         = 'Delete'
         iv_icon_button_1         = 'ICON_DELETE'
         iv_text_button_2         = 'Cancel'
         iv_icon_button_2         = 'ICON_CANCEL'
         iv_default_button        = '2'
+        iv_popup_type            = 'ICON_MESSAGE_WARNING'
         iv_display_cancel_button = abap_false ).
 
       IF lv_answer = '2'.
@@ -627,8 +672,9 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
     ENDIF.
 
     ri_log = zcl_abapgit_repo_srv=>get_instance( )->purge(
-      ii_repo   = lo_repo
-      is_checks = ls_checks ).
+      ii_repo      = lo_repo
+      is_checks    = ls_checks
+      iv_keep_repo = iv_keep_repo ).
 
     COMMIT WORK.
 
@@ -702,7 +748,6 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
     ENDIF.
 
     lo_repo->zif_abapgit_repo~checksums( )->rebuild( ).
-    lo_repo->reset_status( ). " TODO refactor later
 
     COMMIT WORK AND WAIT.
 
@@ -726,7 +771,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       }. All objects will safely remain in the system.|.
 
     lv_answer = zcl_abapgit_ui_factory=>get_popups( )->popup_to_confirm(
-      iv_titlebar              = 'Remove'
+      iv_titlebar              = 'Remove Repository'
       iv_text_question         = lv_question
       iv_text_button_1         = 'Remove'
       iv_icon_button_1         = 'ICON_WF_UNLINK'

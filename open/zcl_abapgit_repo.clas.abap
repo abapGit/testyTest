@@ -89,20 +89,12 @@ CLASS zcl_abapgit_repo DEFINITION
         !ct_files TYPE zif_abapgit_git_definitions=>ty_files_tt
       RAISING
         zcx_abapgit_exception .
-    METHODS reset_status .
     METHODS set_files_remote
       IMPORTING
         !it_files TYPE zif_abapgit_git_definitions=>ty_files_tt .
     METHODS set_local_settings
       IMPORTING
         !is_settings TYPE zif_abapgit_persistence=>ty_repo-local_settings
-      RAISING
-        zcx_abapgit_exception .
-    METHODS status
-      IMPORTING
-        !ii_log           TYPE REF TO zif_abapgit_log OPTIONAL
-      RETURNING
-        VALUE(rt_results) TYPE zif_abapgit_definitions=>ty_results_tt
       RAISING
         zcx_abapgit_exception .
     METHODS switch_repo_type
@@ -116,7 +108,6 @@ CLASS zcl_abapgit_repo DEFINITION
     DATA mt_remote TYPE zif_abapgit_git_definitions=>ty_files_tt .
     DATA mv_request_local_refresh TYPE abap_bool .
     DATA mv_request_remote_refresh TYPE abap_bool .
-    DATA mt_status TYPE zif_abapgit_definitions=>ty_results_tt .
     DATA mi_log TYPE REF TO zif_abapgit_log .
     DATA mi_listener TYPE REF TO zif_abapgit_repo_listener .
     DATA mo_apack_reader TYPE REF TO zcl_abapgit_apack_reader .
@@ -149,7 +140,6 @@ CLASS zcl_abapgit_repo DEFINITION
         zcx_abapgit_exception .
   PRIVATE SECTION.
 
-    METHODS check_for_restart .
     METHODS check_language
       RAISING
         zcx_abapgit_exception .
@@ -214,29 +204,6 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
                 |ABAP Language Version of linked package is not compatible with repository settings.|.
       zcx_abapgit_exception=>raise( iv_text = lv_text ).
     ENDIF.
-  ENDMETHOD.
-
-
-  METHOD check_for_restart.
-
-    CONSTANTS:
-      lc_abapgit_prog TYPE char30 VALUE `ZABAPGIT`.
-
-    " If abapGit was used to update itself, then restart to avoid LOAD_PROGRAM_&_MISMATCH dumps
-    " because abapGit code was changed at runtime
-    IF zcl_abapgit_ui_factory=>get_frontend_services( )->gui_is_available( ) = abap_true AND
-       zcl_abapgit_url=>is_abapgit_repo( ms_data-url ) = abap_true AND
-       sy-batch = abap_false AND
-       sy-cprog = lc_abapgit_prog.
-
-      IF zcl_abapgit_persist_factory=>get_settings( )->read( )->get_show_default_repo( ) = abap_false.
-        MESSAGE 'abapGit was updated and will restart itself' TYPE 'I'.
-      ENDIF.
-
-      SUBMIT (sy-cprog).
-
-    ENDIF.
-
   ENDMETHOD.
 
 
@@ -560,12 +527,6 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
   METHOD reset_remote.
     CLEAR mt_remote.
     mv_request_remote_refresh = abap_true.
-    reset_status( ).
-  ENDMETHOD.
-
-
-  METHOD reset_status.
-    CLEAR mt_status.
   ENDMETHOD.
 
 
@@ -662,18 +623,6 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD status.
-
-    IF lines( mt_status ) = 0.
-      mt_status = zcl_abapgit_repo_status=>calculate( io_repo = me
-                                                      ii_log  = ii_log ).
-    ENDIF.
-
-    rt_results = mt_status.
-
-  ENDMETHOD.
-
-
   METHOD switch_repo_type.
 
     IF iv_offline = ms_data-offline.
@@ -758,11 +707,8 @@ CLASS zcl_abapgit_repo IMPLEMENTATION.
     zif_abapgit_repo~checksums( )->update( lt_updated_files ).
 
     update_last_deserialize( ).
-    reset_status( ).
 
     COMMIT WORK AND WAIT.
-
-    check_for_restart( ).
 
   ENDMETHOD.
 

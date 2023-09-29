@@ -21,6 +21,11 @@ types dokil type c length 1.
       devclass TYPE devclass,
     END OF ty_item_signature .
   TYPES:
+    BEGIN OF ty_obj_namespace,
+      namespace TYPE char10,
+      obj_without_namespace  TYPE tadir-obj_name,
+    END OF ty_obj_namespace.
+  TYPES:
     BEGIN OF ty_item.
       INCLUDE TYPE ty_item_signature.
   TYPES:
@@ -322,7 +327,8 @@ types dokil type c length 1.
       repo_background               TYPE string VALUE 'repo_background',
       repo_infos                    TYPE string VALUE 'repo_infos',
       repo_purge                    TYPE string VALUE 'repo_purge',
-      repo_activate_objects         TYPE string VALUE 'activate_objects',
+      repo_delete_objects           TYPE string VALUE 'repo_delete_objects',
+      repo_activate_objects         TYPE string VALUE 'repo_activate_objects',
       repo_newonline                TYPE string VALUE 'repo_newonline',
       repo_newoffline               TYPE string VALUE 'repo_newoffline',
       repo_add_all_obj_to_trans_req TYPE string VALUE 'repo_add_all_obj_to_trans_req',
@@ -415,13 +421,6 @@ types dokil type c length 1.
       ignore TYPE ty_method VALUE 'I',
       skip   TYPE ty_method VALUE '?',
     END OF c_method .
-
-  CONSTANTS:
-    BEGIN OF c_abap_language_version,
-      standard         TYPE c VALUE '',
-      keyuser          TYPE c VALUE '2',
-      clouddevelopment TYPE c VALUE '5',
-    END OF c_abap_language_version.
 
   TYPES:
     ty_sap_langu_tab TYPE STANDARD TABLE OF langu WITH DEFAULT KEY.

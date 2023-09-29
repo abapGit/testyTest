@@ -12,6 +12,9 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_sap_namespace IMPLEMENTATION.
+  METHOD zif_abapgit_sap_namespace~split_by_name.
+    RETURN. " todo, implement method
+  ENDMETHOD.
 
 
   METHOD zif_abapgit_sap_namespace~exists.
