@@ -272,6 +272,7 @@ rm cloud/zcl_abapgit_data_utils.clas.testclasses.abap  # uses T100 db table
 rm cloud/zcl_abapgit_gui_event.clas.testclasses.abap
 rm cloud/zcl_abapgit_repo_status.clas.testclasses.abap
 rm open/zcl_abapgit_repo_status.clas.testclasses.abap
+rm open/zcl_abapgit_abap_language_vers.clas.testclasses.abap
 
 ###########################################################################
 
