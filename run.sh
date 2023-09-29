@@ -172,7 +172,7 @@ sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/*.abap
-sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap
+sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap         ## if_abap_lock_object=>tv_mode ??
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/*.abap
 sed -i 's/ OF bdcdata/ OF string/ig' ./open/*.abap
 sed -i "s/zcl_abapgit_objects_super=>c_user_unknown/'UNKNOWN'/ig" ./open/*.abap
@@ -181,7 +181,7 @@ sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/*.abap
 sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/*.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
-sed -i 's/ TYPE tdevc-as4user/ TYPE usnam/ig' ./open/*.abap
+sed -i 's/ TYPE tdevc-as4user/ TYPE usnam/ig' ./open/*.abap     # https://github.com/abapGit/abapGit/pull/6514
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/*.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/*.abap
 sed -i 's/ OF namespace/ OF char10/ig' ./open/*.abap
@@ -230,7 +230,7 @@ cp replace/zcl_abapgit_http* open
 cp replace/zcl_abapgit_tadir.clas* open
 cp replace/zcl_abapgit_transport* open
 cp replace/zcl_abapgit_progress* open
-cp replace/zcl_abapgit_sap_namespace* open
+cp replace/zcl_abapgit_sap_namespace* open      #### https://github.com/abapGit/abapGit/pull/6513
 cp replace/zcl_abapgit_log_viewer* open
 cp replace/zcl_abapgit_environment* open
 cp replace/zcl_abapgit_objects_activation* open
