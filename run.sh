@@ -68,6 +68,7 @@ cp abapGit/src/repo/zif* open
 cp abapGit/src/stage/z* open
 cp abapGit/src/syntax/z* open
 cp abapGit/src/ui/*w3mi* open
+cp abapGit/src/ui/pages/*w3mi* open
 cp abapGit/src/ui/core/zcl_abapgit_gui_asset_manager* open
 cp abapGit/src/ui/core/zcl_abapgit_gui_css_processor* open
 cp abapGit/src/ui/core/zcl_abapgit_gui_event* open
@@ -86,6 +87,7 @@ cp abapGit/src/ui/lib/zcl_abapgit_html* open
 cp abapGit/src/ui/lib/zif* open
 cp abapGit/src/utils/zcl_abapgit_string_buffer* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addofflin* open
+# cp abapGit/src/ui/pages/zcl_abapgit_gui_page_debuginfo* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addonline* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_commit* open
