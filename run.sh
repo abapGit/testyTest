@@ -119,6 +119,7 @@ cp abapGit/src/ui/zcl_abapgit_ui_injector* open
 cp abapGit/src/ui/zif_abapgit_frontend_services* open
 cp abapGit/src/ui/zif_abapgit_popups* open
 cp abapGit/src/objects/sap/zif_abapgit_* open
+cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
@@ -162,7 +163,6 @@ sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspec
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
-# sed -i "s/ cl_gui_cfw=>flush( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_services_basis.clas.abap
 
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/*.abap
 sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/*.abap
@@ -181,19 +181,17 @@ sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/*.abap
 sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/*.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
-sed -i 's/ TYPE tdevc-as4user/ TYPE usnam/ig' ./open/*.abap     # https://github.com/abapGit/abapGit/pull/6514
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/*.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/*.abap
 sed -i 's/ OF namespace/ OF char10/ig' ./open/*.abap
 sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/*.abap
+sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/*.abap
 sed -i 's/ TYPE trnspace/ TYPE char10/ig' ./open/*.abap
 sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/*.abap
 sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /ig" ./open/zcl_abapgit_gui_chunk_lib.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_main_language./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_save_sy_langu./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ READ LINE lv_line LINE VALUE INTO lv_text./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_run_bckg.clas.abap
-#sed -i "s/ SELECT SINGLE editflag FROM trnspace INTO ls_trnspace-editflag WHERE namespace = lv_namespace./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_file_status.clas.abap
-#sed -i "s/ ELSEIF ls_trnspace-editflag <> 'X'./ ELSEIF ls_trnspace <> 'X'./ig" ./open/zcl_abapgit_file_status.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_debuginfo=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_sett_repo=>create( lo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ zcl_abapgit_transport_mass=>run( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
@@ -230,7 +228,6 @@ cp replace/zcl_abapgit_http* open
 cp replace/zcl_abapgit_tadir.clas* open
 cp replace/zcl_abapgit_transport* open
 cp replace/zcl_abapgit_progress* open
-cp replace/zcl_abapgit_sap_namespace* open      #### https://github.com/abapGit/abapGit/pull/6513
 cp replace/zcl_abapgit_log_viewer* open
 cp replace/zcl_abapgit_environment* open
 cp replace/zcl_abapgit_objects_activation* open
@@ -263,8 +260,6 @@ cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
 
 # replace or rewrite most of the code,
-# cp replace/zcl_abapgit_convert* cloud
-cp replace/zcl_abapgit_http_utility* cloud
 cp replace/zcl_abapgit_xml_pretty* cloud
 rm cloud/*.w3mi.*
 rm cloud/zcl_abapgit_data_deserializer.clas.testclasses.abap  # uses T100 db table
@@ -286,11 +281,9 @@ sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap
 sed -i 's/ TYPE scompkdtln-devclass/ TYPE devclass/ig' ./cloud/zcl_abapgit_services_repo.clas.abap
 sed -i 's/ TYPE seoclsname/ TYPE char30/ig' ./cloud/*.abap
-sed -i 's/ TYPE filetable/ TYPE string/ig' ./cloud/*.abap
 sed -i 's/ TYPE wwwdatatab-objid/ TYPE char40/ig' ./cloud/*.abap
 sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.intf.abap
 sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
-sed -i 's/ cl_http_utility=>fields_to_string/ zcl_abapgit_http_utility=>fields_to_string/ig' ./cloud/*.abap
 sed -i "s/GET PARAMETER ID 'DBT' FIELD lv_mode.//ig" ./cloud/*.abap
 sed -i "s/ TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0/ TYPE REF TO object OPTIONAL/ig" ./cloud/*.abap
 sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/*xml*.abap
@@ -298,6 +291,7 @@ sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DAT
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/*xml*.abap
 sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_services_repo.clas.abap
 sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
+sed -i "s/cl_http_utility=>/cl_web_http_utility=>/ig" ./cloud/zcl_abapgit_html_action_utils.clas.abap
 sed -i "s/cl_http_utility=>/cl_web_http_utility=>/ig" ./cloud/zcl_abapgit_convert.clas.abap
 
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap

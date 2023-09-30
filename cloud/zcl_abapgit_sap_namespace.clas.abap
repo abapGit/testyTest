@@ -13,16 +13,59 @@ ENDCLASS.
 
 CLASS zcl_abapgit_sap_namespace IMPLEMENTATION.
 
+
   METHOD zif_abapgit_sap_namespace~exists.
-    rv_yes = abap_true.
+    DATA lv_editflag TYPE abap_bool.
+    DATA lo_obj TYPE REF TO object.
+    DATA lo_nsp TYPE REF TO object.
+    FIELD-SYMBOLS <lg_obj> TYPE any.
+    TRY.
+        SELECT SINGLE editflag FROM ('TRNSPACE')  WHERE namespace = @iv_namespace INTO @lv_editflag.
+        rv_yes = boolc( sy-subrc = 0 ).
+      CATCH cx_sy_dynamic_osql_error.
+        ASSIGN ('XCO_CP_SYSTEM=>NAMESPACE') TO <lg_obj>.
+        lo_obj = <lg_obj>.
+        CALL METHOD lo_obj->('IF_XCO_CP_NAMESPACE_FACTORY~FOR')
+          EXPORTING
+            iv_value     = iv_namespace
+          RECEIVING
+            ro_namespace = lo_nsp.
+        CALL METHOD lo_nsp->('IF_XCO_CP_NAMESPACE~EXISTS')
+          RECEIVING
+            rv_exists = rv_yes.
+    ENDTRY.
   ENDMETHOD.
+
+
+  METHOD zif_abapgit_sap_namespace~is_editable.
+    DATA lv_editflag TYPE abap_bool.
+    DATA lo_obj TYPE REF TO object.
+    DATA lo_nsp TYPE REF TO object.
+    FIELD-SYMBOLS <lg_obj> TYPE any.
+    TRY.
+        SELECT SINGLE editflag FROM ('TRNSPACE')  WHERE namespace = @iv_namespace INTO @lv_editflag.
+        rv_yes = boolc( sy-subrc = 0 AND lv_editflag = 'X' ).
+      CATCH cx_sy_dynamic_osql_error.
+        ASSIGN ('XCO_CP_SYSTEM=>NAMESPACE') TO <lg_obj>.
+        lo_obj = <lg_obj>.
+        CALL METHOD lo_obj->('IF_XCO_CP_NAMESPACE_FACTORY~FOR')
+          EXPORTING
+            iv_value     = iv_namespace
+          RECEIVING
+            ro_namespace = lo_nsp.
+        CALL METHOD lo_nsp->('IF_XCO_CP_NAMESPACE~IS_CHANGEABLE')
+          RECEIVING
+            rv_exists = rv_yes.
+    ENDTRY.
+  ENDMETHOD.
+
 
   METHOD zif_abapgit_sap_namespace~split_by_name.
 * use this method instead of function module RS_NAME_SPLIT_NAMESPACE
-    DATA lv_regex TYPE string.
+    DATA lv_regex  TYPE string.
     DATA lv_object TYPE string.
     DATA lv_length TYPE i.
-    DATA lr_ex TYPE REF TO cx_root.
+    DATA lr_ex     TYPE REF TO cx_root.
 
     lv_regex = '^\/[^\/]{1,8}\/'.
 
@@ -43,12 +86,9 @@ CLASS zcl_abapgit_sap_namespace IMPLEMENTATION.
     ENDIF.
 
     IF iv_allow_slash_in_name = abap_false AND rs_obj_namespace-obj_without_namespace CA '/'.
-      zcx_abapgit_exception=>raise( |Object without namespace { rs_obj_namespace-obj_without_namespace } contains a '/'| ).
+      zcx_abapgit_exception=>raise(
+       |Object without namespace { rs_obj_namespace-obj_without_namespace } contains a '/'| ).
     ENDIF.
-  ENDMETHOD.
-
-  METHOD zif_abapgit_sap_namespace~is_editable.
-    rv_yes = abap_true.
   ENDMETHOD.
 
 ENDCLASS.
