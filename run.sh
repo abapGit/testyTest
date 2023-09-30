@@ -163,7 +163,6 @@ sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspec
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
-# sed -i "s/ cl_gui_cfw=>flush( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_services_basis.clas.abap
 
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/*.abap
 sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/*.abap
@@ -182,7 +181,6 @@ sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/*.abap
 sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/*.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
-sed -i 's/ TYPE tdevc-as4user/ TYPE usnam/ig' ./open/*.abap     # https://github.com/abapGit/abapGit/pull/6514
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/*.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/*.abap
 sed -i 's/ OF namespace/ OF char10/ig' ./open/*.abap
