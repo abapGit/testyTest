@@ -192,8 +192,6 @@ sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /i
 sed -i "s/ SET LOCALE LANGUAGE lv_main_language./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_save_sy_langu./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ READ LINE lv_line LINE VALUE INTO lv_text./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_run_bckg.clas.abap
-#sed -i "s/ SELECT SINGLE editflag FROM trnspace INTO ls_trnspace-editflag WHERE namespace = lv_namespace./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_file_status.clas.abap
-#sed -i "s/ ELSEIF ls_trnspace-editflag <> 'X'./ ELSEIF ls_trnspace <> 'X'./ig" ./open/zcl_abapgit_file_status.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_debuginfo=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_sett_repo=>create( lo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/ zcl_abapgit_transport_mass=>run( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
