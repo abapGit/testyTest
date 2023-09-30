@@ -235,7 +235,6 @@ cp replace/zcl_abapgit_environment* open
 cp replace/zcl_abapgit_objects_activation* open
 cp replace/zcl_abapgit_object_filter_tran* open
 cp replace/zcl_abapgit_objects* open
-# cp replace/zcl_abapgit_repo* open
 cp replace/zcl_abapgit_repo_filter* open
 cp replace/zcl_abapgit_frontend_services* open
 cp replace/zcl_abapgit_objects_super* open
