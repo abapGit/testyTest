@@ -187,7 +187,7 @@ CLASS zcl_abapgit_data_utils IMPLEMENTATION.
   METHOD jump.
 
     " Run SE16 with authorization check
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise( |Table { is_item-obj_name } cannot be displayed| ).
     ENDIF.

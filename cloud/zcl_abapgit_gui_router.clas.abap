@@ -441,10 +441,10 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
           zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
         CATCH zcx_abapgit_exception.
           " Fallback if ADT link execution failed or was cancelled
-          ASSERT 1 = 'replacedByAutomation'.
+          ASSERT 1 = 'replacedByRefactorMJS'.
       ENDTRY.
     ELSE.
-      ASSERT 1 = 'replacedByAutomation'.
+      ASSERT 1 = 'replacedByRefactorMJS'.
     ENDIF.
 
   ENDMETHOD.
@@ -454,7 +454,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
     " todo, user display in ADT
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
 
   ENDMETHOD.
 

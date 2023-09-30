@@ -72,7 +72,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
 
   METHOD clear.
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
@@ -91,7 +91,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
 
     DATA: lt_e070use TYPE STANDARD TABLE OF e070use.
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
@@ -146,7 +146,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).
     ENDIF.
@@ -179,7 +179,7 @@ CLASS zcl_abapgit_default_transport IMPLEMENTATION.
 
   METHOD set_internal.
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
 
     IF sy-subrc <> 0.
       zcx_abapgit_exception=>raise_t100( ).

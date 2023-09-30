@@ -87,7 +87,7 @@ for (const filename of fs.readdirSync(dir)) {
   for (const fm of removeFunctionModuleCalls) {
     const regex = new RegExp(`CALL FUNCTION '${fm}'[\\s\\S]+?\\.`, "ig");
     if (abap.match(regex)) {
-      abap = abap.replace(regex, "ASSERT 1 = 'replacedByAutomation'.");
+      abap = abap.replace(regex, "ASSERT 1 = 'replacedByRefactorMJS'.");
       changed = true;
     }
   }

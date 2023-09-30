@@ -261,7 +261,7 @@ cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
 
 # replace or rewrite most of the code,
-cp replace/zcl_abapgit_xml_pretty* cloud
+cp replace/zcl_abapgit_xml_pretty* cloud # https://github.com/abapGit/abapGit/pull/6522
 rm cloud/*.w3mi.*
 rm cloud/zcl_abapgit_data_deserializer.clas.testclasses.abap  # uses T100 db table
 rm cloud/zcl_abapgit_data_utils.clas.testclasses.abap  # uses T100 db table
@@ -287,8 +287,8 @@ sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.in
 sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
 sed -i "s/GET PARAMETER ID 'DBT' FIELD lv_mode.//ig" ./cloud/*.abap
 sed -i "s/ TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0/ TYPE REF TO object OPTIONAL/ig" ./cloud/*.abap
-sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/*xml*.abap
-sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )./ig" ./cloud/*xml*.abap
+sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/*xml*.abap # https://github.com/abapGit/abapGit/pull/6522
+sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )./ig" ./cloud/*xml*.abap # https://github.com/abapGit/abapGit/pull/6522
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/*xml*.abap
 sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_services_repo.clas.abap
 sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
