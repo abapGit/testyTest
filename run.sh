@@ -264,8 +264,6 @@ cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
 
 # replace or rewrite most of the code,
-# cp replace/zcl_abapgit_convert* cloud
-cp replace/zcl_abapgit_http_utility* cloud
 cp replace/zcl_abapgit_xml_pretty* cloud
 rm cloud/*.w3mi.*
 rm cloud/zcl_abapgit_data_deserializer.clas.testclasses.abap  # uses T100 db table
@@ -291,7 +289,6 @@ sed -i 's/ TYPE filetable/ TYPE string/ig' ./cloud/*.abap
 sed -i 's/ TYPE wwwdatatab-objid/ TYPE char40/ig' ./cloud/*.abap
 sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.intf.abap
 sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
-sed -i 's/ cl_http_utility=>fields_to_string/ zcl_abapgit_http_utility=>fields_to_string/ig' ./cloud/*.abap
 sed -i "s/GET PARAMETER ID 'DBT' FIELD lv_mode.//ig" ./cloud/*.abap
 sed -i "s/ TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0/ TYPE REF TO object OPTIONAL/ig" ./cloud/*.abap
 sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/*xml*.abap
@@ -299,6 +296,7 @@ sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DAT
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/*xml*.abap
 sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_services_repo.clas.abap
 sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
+sed -i "s/cl_http_utility=>/cl_web_http_utility=>/ig" ./cloud/zcl_abapgit_html_action_utils.clas.abap
 sed -i "s/cl_http_utility=>/cl_web_http_utility=>/ig" ./cloud/zcl_abapgit_convert.clas.abap
 
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
