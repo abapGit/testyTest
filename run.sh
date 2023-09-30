@@ -119,6 +119,7 @@ cp abapGit/src/ui/zcl_abapgit_ui_injector* open
 cp abapGit/src/ui/zif_abapgit_frontend_services* open
 cp abapGit/src/ui/zif_abapgit_popups* open
 cp abapGit/src/objects/sap/zif_abapgit_* open
+cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
@@ -186,6 +187,7 @@ sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/*.abap   # if_satc_api_factory=
 sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/*.abap
 sed -i 's/ OF namespace/ OF char10/ig' ./open/*.abap
 sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/*.abap
+sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/*.abap
 sed -i 's/ TYPE trnspace/ TYPE char10/ig' ./open/*.abap
 sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/*.abap
 sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /ig" ./open/zcl_abapgit_gui_chunk_lib.clas.abap
@@ -230,7 +232,6 @@ cp replace/zcl_abapgit_http* open
 cp replace/zcl_abapgit_tadir.clas* open
 cp replace/zcl_abapgit_transport* open
 cp replace/zcl_abapgit_progress* open
-cp replace/zcl_abapgit_sap_namespace* open      #### https://github.com/abapGit/abapGit/pull/6513
 cp replace/zcl_abapgit_log_viewer* open
 cp replace/zcl_abapgit_environment* open
 cp replace/zcl_abapgit_objects_activation* open
