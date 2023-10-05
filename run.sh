@@ -293,8 +293,6 @@ sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DAT
 sed -i "s/ li_istream->close( )./ /ig" ./cloud/zcl_abapgit_xml.clas.abap
 sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_services_repo.clas.abap
 sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
-sed -i "s/cl_http_utility=>/cl_web_http_utility=>/ig" ./cloud/zcl_abapgit_html_action_utils.clas.abap
-sed -i "s/cl_http_utility=>/cl_web_http_utility=>/ig" ./cloud/zcl_abapgit_convert.clas.abap
 
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap

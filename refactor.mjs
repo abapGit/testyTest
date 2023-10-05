@@ -5,8 +5,7 @@ import fs from "node:fs";
 const dir = "./cloud/";
 
 const replace = [
-  {search: " cl_http_utility=>encode_base64",     replace: " cl_web_http_utility=>encode_base64"},
-  {search: " cl_http_utility=>unescape_url",      replace: " cl_web_http_utility=>unescape_url"},
+  {search: " cl_http_utility=>",                  replace: " cl_web_http_utility=>"},
   {search: " cl_ixml=>",                          replace: " cl_ixml_core=>"},
   {search: " RANGE OF trkorr",                    replace: " RANGE OF sxco_transport"},
   {search: " TABLE OF devclass",                  replace: " TABLE OF I_CustABAPObjDirectoryEntry-ABAPPackage"},
