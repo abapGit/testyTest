@@ -19,7 +19,7 @@ TYPES cntl_simple_events TYPE TABLE OF cntl_simple_event.
   TYPES:
     ty_query_table TYPE STANDARD TABLE OF ty_name_value WITH DEFAULT KEY .
 
-  CONSTANTS m_id_sapevent TYPE i VALUE 1 ##NO_TEXT.
+  CONSTANTS c_id_sapevent TYPE i VALUE 1 ##NO_TEXT.
 
   EVENTS sapevent
     EXPORTING
