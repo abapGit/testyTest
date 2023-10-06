@@ -118,12 +118,11 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
 
     FIND REGEX '^sapevent:([\w-]+)' IN lv_value SUBMATCHES lv_action.
 
-    FIND REGEX '\?([\w=&]+)' IN lv_value SUBMATCHES lv_getdata.
+    FIND REGEX '\?([\w=&%.]+)' IN lv_value SUBMATCHES lv_getdata.
 
     lv_method = mi_request->get_method( ).
     IF lv_method = 'POST'.
       lv_body = mi_request->get_cdata( ).
-* sdf      WRITE '@KERNEL console.dir(lv_body);'.
 
       zcl_abapgit_convert=>string_to_tab(
         EXPORTING
@@ -134,7 +133,7 @@ CLASS zcl_abapgit_web IMPLEMENTATION.
 
     mo_gui->on_event(
       action   = lv_action
-      getdata  = ''
+      getdata  = lv_getdata
       postdata = lt_postdata ).
 
 * sdf     getdata     = iv_getdata
