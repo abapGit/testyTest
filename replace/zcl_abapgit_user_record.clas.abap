@@ -5,8 +5,6 @@ CLASS zcl_abapgit_user_record DEFINITION
 
   PUBLIC SECTION.
 
-    CONSTANTS c_cc_category TYPE string VALUE 'C'.
-
     CLASS-METHODS reset.
     CLASS-METHODS get_instance
       IMPORTING
@@ -41,32 +39,20 @@ CLASS zcl_abapgit_user_record IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD constructor.
-
-    ASSERT 1 = 'decoupled'.
-
+    RETURN.
   ENDMETHOD.
-
 
   METHOD get_email.
-
-    ASSERT 1 = 'decoupled'.
-
+    rv_email = 'foo@bar.com'.
   ENDMETHOD.
-
 
   METHOD get_instance.
-
-    ASSERT 1 = 'decoupled'.
-
+    CREATE OBJECT ro_user EXPORTING iv_user = iv_user.
   ENDMETHOD.
-
 
   METHOD get_name.
-
-    ASSERT 1 = 'decoupled'.
-
+    rv_name = 'John'.
   ENDMETHOD.
-
 
   METHOD reset.
     ASSERT 1 = 'decoupled'.

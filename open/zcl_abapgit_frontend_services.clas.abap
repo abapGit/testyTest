@@ -47,7 +47,7 @@ CLASS zcl_abapgit_frontend_services IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD zif_abapgit_frontend_services~get_gui_version.
-    ASSERT 1 = 'decoupled'.
+    ev_gui_version_string = '123'.
   ENDMETHOD.
 
   METHOD zif_abapgit_frontend_services~get_system_directory.

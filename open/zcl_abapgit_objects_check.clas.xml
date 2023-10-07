@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZCL_ABAPGIT_XML_PRETTY</CLSNAME>
+    <CLSNAME>ZCL_ABAPGIT_OBJECTS_CHECK</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>abapGit - XML Pretty Printer</DESCRIPT>
+    <DESCRIPT>abapGit - Objects Check</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

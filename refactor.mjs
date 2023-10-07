@@ -5,13 +5,20 @@ import fs from "node:fs";
 const dir = "./cloud/";
 
 const replace = [
-  {search: " cl_http_utility=>encode_base64",     replace: " cl_web_http_utility=>encode_base64"},
-  {search: " cl_http_utility=>unescape_url",      replace: " cl_web_http_utility=>unescape_url"},
+  {search: "li_istream->close\\( \\)\\.",              replace: ""},  // https://github.com/abapGit/abapGit/pull/6532
+  {search: " icon_package_standard",              replace: "'@11@'"},
+  {search: " icon_no_status",                     replace: "'@11@'"},
+  {search: " icon_change",                        replace: "'@11@'"},
+  {search: " icon_create",                        replace: "'@11@'"},
+  {search: " icon_delete",                        replace: "'@11@'"},
+  {search: " icon_adopt",                         replace: "'@11@'"},
+  {search: " cl_http_utility=>",                  replace: " cl_web_http_utility=>"},
   {search: " cl_ixml=>",                          replace: " cl_ixml_core=>"},
   {search: " RANGE OF trkorr",                    replace: " RANGE OF sxco_transport"},
   {search: " TABLE OF devclass",                  replace: " TABLE OF I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE devclass",                      replace: " TYPE I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE funcname",                      replace: " TYPE sxco_fm_name"},
+  {search: " TYPE dirtree-tname",                 replace: " TYPE c LENGTH 45"},
   {search: " TYPE RANGE OF devclass",             replace: " TYPE RANGE OF I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE REF TO if_ixml_istream",        replace: " TYPE REF TO if_ixml_istream_core"},
   {search: " TYPE REF TO if_ixml_ostream",        replace: " TYPE REF TO if_ixml_ostream_core"},
@@ -58,10 +65,13 @@ const removeFunctionModuleCalls = [
   "DOCU_GET",
   "ENQUEUE_EZABAPGIT",
   "FUNCTION_EXISTS",
+  "TR_TADIR_INTERFACE",
+  "WB_TREE_ACTUALIZE",
   "RS_TABLE_LIST_CREATE",
   "SYSTEM_CALLSTACK",
   "TEXT_SPLIT",
   "TR_DISPLAY_REQUEST",
+  "CDNAMES_GET",
   "TR_TASK_GET",
   "TR_TASK_RESET",
   "TR_TASK_SET",
@@ -87,7 +97,7 @@ for (const filename of fs.readdirSync(dir)) {
   for (const fm of removeFunctionModuleCalls) {
     const regex = new RegExp(`CALL FUNCTION '${fm}'[\\s\\S]+?\\.`, "ig");
     if (abap.match(regex)) {
-      abap = abap.replace(regex, "ASSERT 1 = 'replacedByAutomation'.");
+      abap = abap.replace(regex, "ASSERT 1 = 'replacedByRefactorMJS'.");
       changed = true;
     }
   }

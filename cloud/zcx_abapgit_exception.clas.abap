@@ -211,7 +211,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
 
     lv_docu_key = if_t100_message~t100key-msgid && if_t100_message~t100key-msgno.
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
 
     IF sy-subrc = 0.
       ASSIGN me->(if_t100_message~t100key-attr1) TO <lv_msgv>.
@@ -308,7 +308,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
 
     ENDLOOP.
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
 
     LOOP AT lt_string INTO lv_string.
       IF sy-tabix = 1.
@@ -418,7 +418,7 @@ CLASS zcx_abapgit_exception IMPLEMENTATION.
 
     FIELD-SYMBOLS: <ls_callstack> LIKE LINE OF mt_callstack.
 
-    ASSERT 1 = 'replacedByAutomation'.
+    ASSERT 1 = 'replacedByRefactorMJS'.
 
     " You should remember that the first lines are from zcx_abapgit_exception
     " and are removed so that highest level in the callstack is the position where

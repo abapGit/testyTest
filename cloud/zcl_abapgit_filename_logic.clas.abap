@@ -233,7 +233,7 @@ CLASS zcl_abapgit_filename_logic IMPLEMENTATION.
   METHOD name_escape.
     " Some characters in object names cause problems when identifying the object later
     " -> we escape these characters here
-    " cl_http_utility=>escape_url doesn't do dots but escapes slash which we use for namespaces
+    " cl_web_http_utility=>escape_url doesn't do dots but escapes slash which we use for namespaces
     " -> we escape just some selected characters
     rv_name = iv_name.
     REPLACE ALL OCCURRENCES OF `#` IN rv_name WITH '%23'.
