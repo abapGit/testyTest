@@ -95,6 +95,7 @@ cp abapGit/src/ui/lib/zif* open
 cp abapGit/src/utils/zcl_abapgit_string_buffer* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addofflin* open
 # cp abapGit/src/ui/pages/zcl_abapgit_gui_page_debuginfo* open
+# cp abapGit/src/ui/pages/zcl_abapgit_gui_page_data* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addonline* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_commit* open
@@ -270,7 +271,6 @@ cp abapGit/src/http/zcl_abapgit_proxy_auth* open
 cp abapGit/src/ui/zcl_abapgit_password_dialog* open
 
 # replace or rewrite most of the code,
-cp replace/zcl_abapgit_xml_pretty* cloud # https://github.com/abapGit/abapGit/pull/6522
 rm cloud/*.w3mi.*
 rm cloud/zcl_abapgit_data_deserializer.clas.testclasses.abap  # uses T100 db table
 rm cloud/zcl_abapgit_data_utils.clas.testclasses.abap  # uses T100 db table
