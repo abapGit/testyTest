@@ -34,9 +34,12 @@ cp abapGit/src/objects/core/zcl_abapgit_folder_logic* open
 cp abapGit/src/utils/zcl_abapgit_item_state* open
 cp abapGit/src/utils/zcl_abapgit_abap_language_vers.* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
+cp abapGit/src/objects/core/zcl_abapgit_objects_files* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
 cp abapGit/src/objects/texts/zif_abapgit_lxe_texts* open
+cp abapGit/src/objects/texts/zif_abapgit_i18n_file* open
+cp abapGit/src/objects/texts/zcl_abapgit_po_file* open
 cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/zif_abapgit_comparator* open
 cp abapGit/src/objects/zif_abapgit_object* open
@@ -176,6 +179,7 @@ sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/*.abap
 sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap         ## if_abap_lock_object=>tv_mode ??
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/*.abap
+sed -i 's/ TYPE LXEOBJNAME/ TYPE char70/ig' ./open/*.abap
 sed -i 's/ OF bdcdata/ OF string/ig' ./open/*.abap
 sed -i "s/zcl_abapgit_objects_super=>c_user_unknown/'UNKNOWN'/ig" ./open/*.abap
 sed -i 's/ TYPE devlayer/ TYPE char4/ig' ./open/*.abap
