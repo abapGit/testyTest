@@ -5,12 +5,13 @@ import fs from "node:fs";
 const dir = "./cloud/";
 
 const replace = [
-  {search: "li_istream->close\\( \\)\\.",              replace: ""},  // https://github.com/abapGit/abapGit/pull/6532
-  {search: " icon_package_standard",              replace: "'@11@'"},
-  {search: " icon_no_status",                     replace: "'@11@'"},
-  {search: " icon_change",                        replace: "'@11@'"},
-  {search: " icon_create",                        replace: "'@11@'"},
-  {search: " icon_delete",                        replace: "'@11@'"},
+  {search: "li_istream->close\\( \\)\\.",         replace: ""},  // https://github.com/abapGit/abapGit/pull/6532
+  {search: " icon_package_standard",              replace: " '@11@'"},
+  {search: " icon_no_status",                     replace: " '@11@'"},
+  {search: " icon_change",                        replace: " '@11@'"},
+  {search: " icon_create",                        replace: " '@11@'"},
+  {search: " icon_delete",                        replace: " '@11@'"},
+  {search: " icon_okay",                          replace: " '@11@'"},
   {search: " icon_adopt",                         replace: "'@11@'"},
   {search: " cl_http_utility=>",                  replace: " cl_web_http_utility=>"},
   {search: " cl_ixml=>",                          replace: " cl_ixml_core=>"},
