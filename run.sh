@@ -25,6 +25,9 @@ cp abapGit/src/http/zif_abapgit_http_agent* open
 cp abapGit/src/http/zif_abapgit_http_response* open
 cp abapGit/src/inspect/zif_abapgit_code_inspector* open
 cp abapGit/src/json/z* open
+cp abapGit/src/objects/core/zcl_abapgit_objects_check* open
+cp abapGit/src/objects/core/zcl_abapgit_file_deserialize* open
+cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif_abapgit_aff_registry* open
 cp abapGit/src/objects/aff_types/zif_abapgit_aff_types_v1.* open
@@ -151,6 +154,7 @@ rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
 rm -f open/zcl_abapgit_injector.clas.testclasses.abap
 rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
+rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
 rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap

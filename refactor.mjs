@@ -5,12 +5,19 @@ import fs from "node:fs";
 const dir = "./cloud/";
 
 const replace = [
+  {search: " icon_package_standard",               replace: "'@11@'"},
+  {search: " icon_no_status",                      replace: "'@11@'"},
+  {search: " icon_change",                         replace: "'@11@'"},
+  {search: " icon_create",                         replace: "'@11@'"},
+  {search: " icon_delete",                         replace: "'@11@'"},
+  {search: " icon_adopt",                          replace: "'@11@'"},
   {search: " cl_http_utility=>",                  replace: " cl_web_http_utility=>"},
   {search: " cl_ixml=>",                          replace: " cl_ixml_core=>"},
   {search: " RANGE OF trkorr",                    replace: " RANGE OF sxco_transport"},
   {search: " TABLE OF devclass",                  replace: " TABLE OF I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE devclass",                      replace: " TYPE I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE funcname",                      replace: " TYPE sxco_fm_name"},
+  {search: " TYPE dirtree-tname",                 replace: " TYPE c LENGTH 45"},
   {search: " TYPE RANGE OF devclass",             replace: " TYPE RANGE OF I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE REF TO if_ixml_istream",        replace: " TYPE REF TO if_ixml_istream_core"},
   {search: " TYPE REF TO if_ixml_ostream",        replace: " TYPE REF TO if_ixml_ostream_core"},
@@ -57,6 +64,8 @@ const removeFunctionModuleCalls = [
   "DOCU_GET",
   "ENQUEUE_EZABAPGIT",
   "FUNCTION_EXISTS",
+  "TR_TADIR_INTERFACE",
+  "WB_TREE_ACTUALIZE",
   "RS_TABLE_LIST_CREATE",
   "SYSTEM_CALLSTACK",
   "TEXT_SPLIT",
