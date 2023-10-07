@@ -63,6 +63,7 @@ cp abapGit/src/progress/z* open
 cp abapGit/src/progress/*clas* open
 cp abapGit/src/progress/*intf* open
 cp abapGit/src/progress/z* open
+# cp abapGit/src/repo/zcl_abapgit_repo_filter* open
 cp abapGit/src/repo/zcl_abapgit_dot_abapgit* open
 cp abapGit/src/repo/zcl_abapgit_repo_content_list* open
 cp abapGit/src/repo/zcl_abapgit_repo_offline* open
