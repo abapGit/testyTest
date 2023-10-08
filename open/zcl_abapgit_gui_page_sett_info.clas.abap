@@ -196,7 +196,7 @@ CLASS zcl_abapgit_gui_page_sett_info IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    IF iv_username <> 'UNKNOWN'.
+    IF iv_username <> zcl_abapgit_objects_super=>c_user_unknown.
       lv_title = zcl_abapgit_user_record=>get_title( iv_username ).
     ENDIF.
 

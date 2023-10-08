@@ -286,7 +286,7 @@ CLASS zcl_abapgit_gui_page_stage IMPLEMENTATION.
         ENDIF.
       ENDIF.
       IF <ls_changed_by>-name IS INITIAL.
-        <ls_changed_by>-name = 'UNKNOWN'.
+        <ls_changed_by>-name = zcl_abapgit_objects_super=>c_user_unknown.
       ENDIF.
     ENDLOOP.
 
