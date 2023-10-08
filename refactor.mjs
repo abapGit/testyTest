@@ -70,6 +70,8 @@ const removeFunctionModuleCalls = [
   "WB_TREE_ACTUALIZE",
   "RS_TABLE_LIST_CREATE",
   "SYSTEM_CALLSTACK",
+  "RS_DD_DELETE_OBJ",
+  "ENQUEUE_READ",
   "TEXT_SPLIT",
   "TR_DISPLAY_REQUEST",
   "CDNAMES_GET",

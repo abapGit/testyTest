@@ -133,6 +133,7 @@ cp abapGit/src/ui/zif_abapgit_popups* open
 cp abapGit/src/objects/sap/zif_abapgit_* open
 cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
+# cp abapGit/src/objects/zcl_abapgit_objects_super* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
 cp abapGit/src/utils/zcl_abapgit_path* open
@@ -246,7 +247,8 @@ cp replace/zcl_abapgit_log_viewer* open
 cp replace/zcl_abapgit_environment* open
 cp replace/zcl_abapgit_objects_activation* open
 cp replace/zcl_abapgit_object_filter_tran* open
-cp replace/zcl_abapgit_objects* open
+cp replace/zcl_abapgit_objects.clas* open
+cp replace/zcl_abapgit_objects_activation* open
 cp replace/zcl_abapgit_repo_filter* open
 cp replace/zcl_abapgit_frontend_services* open
 cp replace/zcl_abapgit_objects_super* open
