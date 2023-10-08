@@ -5,7 +5,6 @@ import fs from "node:fs";
 const dir = "./cloud/";
 
 const replace = [
-  {search: "li_istream->close\\( \\)\\.",         replace: ""},  // https://github.com/abapGit/abapGit/pull/6532
   {search: " icon_package_standard",              replace: " '@11@'"},
   {search: " icon_no_status",                     replace: " '@11@'"},
   {search: " icon_change",                        replace: " '@11@'"},
