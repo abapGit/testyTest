@@ -85,6 +85,7 @@ END OF progdir.
       iv_program_type   TYPE c OPTIONAL
       iv_extension_type TYPE c OPTIONAL
       iv_package        TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
+      iv_version        TYPE char1
       is_item           TYPE zif_abapgit_definitions=>ty_item OPTIONAL
     RAISING
       zcx_abapgit_exception.
@@ -97,6 +98,7 @@ END OF progdir.
       iv_program_type   TYPE c OPTIONAL
       iv_extension_type TYPE c OPTIONAL
       iv_package        TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
+      iv_version        TYPE char1
       is_item           TYPE zif_abapgit_definitions=>ty_item OPTIONAL
     RETURNING
       VALUE(rv_updated) TYPE abap_bool

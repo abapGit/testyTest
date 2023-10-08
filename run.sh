@@ -192,6 +192,7 @@ sed -i 's/ TYPE LXEOBJNAME/ TYPE char70/ig' ./open/*.abap
 sed -i 's/ OF bdcdata/ OF string/ig' ./open/*.abap
 sed -i "s/zcl_abapgit_objects_super=>c_user_unknown/'UNKNOWN'/ig" ./open/*.abap
 sed -i 's/ TYPE devlayer/ TYPE char4/ig' ./open/*.abap
+sed -i 's/ TYPE uccheck/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
 sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/*.abap
 sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/*.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
