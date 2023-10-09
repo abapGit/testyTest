@@ -184,8 +184,8 @@ sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/*.abap
 sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/*.intf.abap
 sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
-sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
-sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/*.abap
+#sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
+sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
 sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap         ## if_abap_lock_object=>tv_mode ??
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_objects_files.clas.testclasses.abap
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_services_repo.clas.abap
