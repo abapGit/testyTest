@@ -186,10 +186,11 @@ sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/zcl_abapgit_zip.clas.a
 sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/zcl_abapgit_gui_page_ex_object.clas.abap
 sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/zif_abapgit_exit.intf.abap
 sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_dot_abapgit.intf.abap
-sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
-#sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
+sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_persist_repo.intf.abap
+sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_dot_abapgit.intf.abap
 sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
-sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap         ## if_abap_lock_object=>tv_mode ??
+sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/zif_abapgit_persist_repo.intf.abap         ## if_abap_lock_object=>tv_mode ??
+sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/zcl_abapgit_persistence_db.clas.abap         ## if_abap_lock_object=>tv_mode ??
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_objects_files.clas.testclasses.abap
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_services_repo.clas.abap
 sed -i 's/ TYPE LXEOBJNAME/ TYPE char70/ig' ./open/zcl_abapgit_po_file.clas.abap
