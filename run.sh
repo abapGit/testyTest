@@ -209,9 +209,9 @@ sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_code_insp.
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_sett_locl.clas.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/zif_abapgit_cts_api.intf.abap
 sed -i 's/ OF namespace/ OF char10/ig' ./open/zcl_abapgit_repo_status.clas.locals_imp.abap
-sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/*.abap
-sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/*.abap
-sed -i 's/ TYPE trnspace/ TYPE char10/ig' ./open/*.abap
+sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/zif_abapgit_definitions.intf.abap
+sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/zif_abapgit_sap_namespace.intf.abap
+sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/zcl_abapgit_sap_namespace.clas.abap
 sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/*.abap
 sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /ig" ./open/zcl_abapgit_gui_chunk_lib.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_main_language./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
