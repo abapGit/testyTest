@@ -207,8 +207,8 @@ sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_persistence.intf.ab
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_code_inspector.intf.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_code_insp.clas.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_sett_locl.clas.abap   # if_satc_api_factory=>ty_check_variant_name
-sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/*.abap
-sed -i 's/ OF namespace/ OF char10/ig' ./open/*.abap
+sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ OF namespace/ OF char10/ig' ./open/zcl_abapgit_repo_status.clas.locals_imp.abap
 sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/*.abap
 sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/*.abap
 sed -i 's/ TYPE trnspace/ TYPE char10/ig' ./open/*.abap
