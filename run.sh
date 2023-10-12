@@ -178,8 +178,11 @@ sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 
-sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/*.abap
-sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/*.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_abap_language_vers.clas.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_gui_page_ex_object.clas.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_po_file.clas.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_zip.clas.abap
+sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/zcl_abapgit_zip.clas.abap
 sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/*.abap
 sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/*.intf.abap
 sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
