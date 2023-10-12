@@ -12,6 +12,11 @@ const replace = [
   {search: " icon_delete",                        replace: " '@11@'"},
   {search: " icon_okay",                          replace: " '@11@'"},
   {search: " icon_adopt",                         replace: "'@11@'"},
+
+  {search: " tadir-object",                       replace: " I_CustABAPObjDirectoryEntry-ABAPObjectType"},
+  {search: " tadir-obj_name",                     replace: " I_CustABAPObjDirectoryEntry-ABAPObject"},
+  {search: " tadir-masterlang",                   replace: " spras"},
+
   {search: " cl_http_utility=>",                  replace: " cl_web_http_utility=>"},
   {search: " cl_ixml=>",                          replace: " cl_ixml_core=>"},
   {search: " RANGE OF trkorr",                    replace: " RANGE OF sxco_transport"},
