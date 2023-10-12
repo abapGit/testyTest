@@ -288,24 +288,6 @@ rm open/zcl_abapgit_abap_language_vers.clas.testclasses.abap
 
 ###########################################################################
 
-sed -i "s/ TYPE REF TO if_http_client/ TYPE REF TO object/ig" ./cloud/*.abap
-sed -i 's/tadir-pgmid/I_CustABAPObjDirectoryEntry-ABAPObjectCategory/ig' ./cloud/*.intf.abap
-sed -i 's/ TYPE tadir-srcsystem/ TYPE c LENGTH 10/ig' ./cloud/*.intf.abap
-sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
-sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap
-sed -i 's/ TYPE scompkdtln-devclass/ TYPE devclass/ig' ./cloud/zcl_abapgit_services_repo.clas.abap
-sed -i 's/ TYPE seoclsname/ TYPE char30/ig' ./cloud/*.abap
-sed -i 's/ TYPE wwwdatatab-objid/ TYPE char40/ig' ./cloud/*.abap
-sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.intf.abap
-sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
-sed -i "s/GET PARAMETER ID 'DBT' FIELD lv_mode.//ig" ./cloud/*.abap
-sed -i "s/ TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0/ TYPE REF TO object OPTIONAL/ig" ./cloud/*.abap
-sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/zcl_abapgit_xml.clas.abap
-sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )./ig" ./cloud/zcl_abapgit_xml.clas.abap
-sed -i "s/ li_istream->close( )./ /ig" ./cloud/zcl_abapgit_xml.clas.abap
-sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_services_repo.clas.abap
-sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
-
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap
 
