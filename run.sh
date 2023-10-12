@@ -183,9 +183,9 @@ sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_gui_page_ex_
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_po_file.clas.abap
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_zip.clas.abap
 sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/zcl_abapgit_zip.clas.abap
-sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/*.abap
-sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/*.intf.abap
-sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
+sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/zcl_abapgit_gui_page_ex_object.clas.abap
+sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/zif_abapgit_exit.intf.abap
+sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_dot_abapgit.intf.abap
 sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 #sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
 sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
