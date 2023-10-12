@@ -212,7 +212,8 @@ sed -i 's/ OF namespace/ OF char10/ig' ./open/zcl_abapgit_repo_status.clas.local
 sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/zif_abapgit_definitions.intf.abap
 sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/zif_abapgit_sap_namespace.intf.abap
 sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/zcl_abapgit_sap_namespace.clas.abap
-sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/*.abap
+sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/zcl_abapgit_objects_files.clas*
+sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/zif_abapgit_sap_report.intf.abap
 sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /ig" ./open/zcl_abapgit_gui_chunk_lib.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_main_language./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_save_sy_langu./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
