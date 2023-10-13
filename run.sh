@@ -11,6 +11,8 @@ cp abapGit/src/apack/zif_abapgit_apack_definitions* open
 cp abapGit/src/background/zif_abapgit_background* open
 cp abapGit/src/cts/zcl_abapgit_default_transport* open
 cp abapGit/src/cts/zif_abapgit_cts_api* open
+cp abapGit/src/cts/zcl_abapgit_transport_2_branch* open
+cp abapGit/src/cts/zcl_abapgit_transport_objects* open
 cp abapGit/src/data/z* open
 cp abapGit/src/utils/zcl_abapgit_timer* open
 cp abapGit/src/exits/z* open
@@ -131,6 +133,7 @@ cp abapGit/src/ui/zif_abapgit_popups* open
 cp abapGit/src/objects/sap/zif_abapgit_* open
 cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
+# cp abapGit/src/objects/zcl_abapgit_objects_super* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
 cp abapGit/src/utils/zcl_abapgit_path* open
@@ -175,31 +178,42 @@ sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 
-sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/*.abap
-sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/*.abap
-sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/*.abap
-sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/*.intf.abap
-sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
-sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
-sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/*.intf.abap
-sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/*.abap
-sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/*.abap         ## if_abap_lock_object=>tv_mode ??
-sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/*.abap
-sed -i 's/ TYPE LXEOBJNAME/ TYPE char70/ig' ./open/*.abap
-sed -i 's/ OF bdcdata/ OF string/ig' ./open/*.abap
-sed -i "s/zcl_abapgit_objects_super=>c_user_unknown/'UNKNOWN'/ig" ./open/*.abap
-sed -i 's/ TYPE devlayer/ TYPE char4/ig' ./open/*.abap
-sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/*.abap
-sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/*.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_abap_language_vers.clas.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_gui_page_ex_object.clas.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_po_file.clas.abap
+sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_zip.clas.abap
+sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/zcl_abapgit_zip.clas.abap
+sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/zcl_abapgit_gui_page_ex_object.clas.abap
+sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/zif_abapgit_exit.intf.abap
+sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_dot_abapgit.intf.abap
+sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_persist_repo.intf.abap
+sed -i 's/ TYPE sappatchlv/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_dot_abapgit.intf.abap
+sed -i 's/ TYPE r3state/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
+sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/zif_abapgit_persist_repo.intf.abap         ## if_abap_lock_object=>tv_mode ??
+sed -i 's/ TYPE enqmode/ TYPE c/ig' ./open/zcl_abapgit_persistence_db.clas.abap         ## if_abap_lock_object=>tv_mode ??
+sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_objects_files.clas.testclasses.abap
+sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_services_repo.clas.abap
+sed -i 's/ TYPE LXEOBJNAME/ TYPE char70/ig' ./open/zcl_abapgit_po_file.clas.abap
+sed -i 's/ OF bdcdata/ OF string/ig' ./open/zif_abapgit_gui_jumper.intf.abap
+#sed -i "s/zcl_abapgit_objects_super=>c_user_unknown/'UNKNOWN'/ig" ./open/*.abap
+sed -i 's/ TYPE devlayer/ TYPE char4/ig' ./open/zif_abapgit_sap_package.intf.abap
+sed -i 's/ TYPE uccheck/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
+sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/zcl_abapgit_folder_logic.clas.abap
+sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/zcl_abapgit_repo_status.clas.locals_imp.abap
+sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/zcl_abapgit_folder_logic.clas.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
-sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
-sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/*.abap   # if_satc_api_factory=>ty_check_variant_name
-sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/*.abap
-sed -i 's/ OF namespace/ OF char10/ig' ./open/*.abap
-sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/*.abap
-sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/*.abap
-sed -i 's/ TYPE trnspace/ TYPE char10/ig' ./open/*.abap
-sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/*.abap
+# sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
+sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_persistence.intf.abap   # if_satc_api_factory=>ty_check_variant_name
+sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_code_inspector.intf.abap   # if_satc_api_factory=>ty_check_variant_name
+sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_code_insp.clas.abap   # if_satc_api_factory=>ty_check_variant_name
+sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_sett_locl.clas.abap   # if_satc_api_factory=>ty_check_variant_name
+sed -i 's/ TYPE trobj_name/ TYPE char120/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ OF namespace/ OF char10/ig' ./open/zcl_abapgit_repo_status.clas.locals_imp.abap
+sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/zif_abapgit_definitions.intf.abap
+sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/zif_abapgit_sap_namespace.intf.abap
+sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/zcl_abapgit_sap_namespace.clas.abap
+sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/zcl_abapgit_objects_files.clas*
+sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/zif_abapgit_sap_report.intf.abap
 sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /ig" ./open/zcl_abapgit_gui_chunk_lib.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_main_language./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_save_sy_langu./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
@@ -244,7 +258,8 @@ cp replace/zcl_abapgit_log_viewer* open
 cp replace/zcl_abapgit_environment* open
 cp replace/zcl_abapgit_objects_activation* open
 cp replace/zcl_abapgit_object_filter_tran* open
-cp replace/zcl_abapgit_objects* open
+cp replace/zcl_abapgit_objects.clas* open
+cp replace/zcl_abapgit_objects_activation* open
 cp replace/zcl_abapgit_repo_filter* open
 cp replace/zcl_abapgit_frontend_services* open
 cp replace/zcl_abapgit_objects_super* open
@@ -281,27 +296,6 @@ rm open/zcl_abapgit_repo_status.clas.testclasses.abap
 rm open/zcl_abapgit_abap_language_vers.clas.testclasses.abap
 
 ###########################################################################
-
-sed -i "s/ TYPE REF TO if_http_client/ TYPE REF TO object/ig" ./cloud/*.abap
-sed -i 's/tadir-pgmid/I_CustABAPObjDirectoryEntry-ABAPObjectCategory/ig' ./cloud/*.intf.abap
-sed -i 's/ tadir-object/ I_CustABAPObjDirectoryEntry-ABAPObjectType/ig' ./cloud/*.abap
-sed -i 's/ tadir-obj_name/ I_CustABAPObjDirectoryEntry-ABAPObject/ig' ./cloud/*.abap
-sed -i 's/ tadir-masterlang/ spras/ig' ./cloud/*.abap
-sed -i 's/ TYPE tadir-srcsystem/ TYPE c LENGTH 10/ig' ./cloud/*.intf.abap
-sed -i 's/ TYPE tadir-delflag/ TYPE abap_bool/ig' ./cloud/*.abap
-sed -i 's/ TYPE tadir-genflag/ TYPE abap_bool/ig' ./cloud/*.abap
-sed -i 's/ TYPE scompkdtln-devclass/ TYPE devclass/ig' ./cloud/zcl_abapgit_services_repo.clas.abap
-sed -i 's/ TYPE seoclsname/ TYPE char30/ig' ./cloud/*.abap
-sed -i 's/ TYPE wwwdatatab-objid/ TYPE char40/ig' ./cloud/*.abap
-sed -i 's/ DEFAULT if_salv_c_selection_mode=>multiple/ OPTIONAL/ig' ./cloud/*.intf.abap
-sed -i 's/ TYPE tdevc-dlvunit/ TYPE c LENGTH 30/ig' ./cloud/*.intf.abap
-sed -i "s/GET PARAMETER ID 'DBT' FIELD lv_mode.//ig" ./cloud/*.abap
-sed -i "s/ TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0/ TYPE REF TO object OPTIONAL/ig" ./cloud/*.abap
-sed -i "s/ li_stream_factory->create_istream_string( iv_xml )/ li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )/ig" ./cloud/zcl_abapgit_xml.clas.abap
-sed -i "s/ li_ostream = li_streamfactory->create_ostream_cstring( rv_xml )./ DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )./ig" ./cloud/zcl_abapgit_xml.clas.abap
-sed -i "s/ li_istream->close( )./ /ig" ./cloud/zcl_abapgit_xml.clas.abap
-sed -i "s/ SUBMIT (sy-cprog)./ ASSERT 1 = 'non_cloud'./ig" ./cloud/zcl_abapgit_services_repo.clas.abap
-sed -i "s/IN UPDATE TASK//ig" ./cloud/zcl_abapgit_persistence_db.clas.abap
 
 sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap

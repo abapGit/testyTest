@@ -494,7 +494,7 @@ CLASS zcl_abapgit_gui_page_diff IMPLEMENTATION.
         iv_filename = is_status-filename ).
     ENDIF.
     IF <ls_diff>-changed_by IS INITIAL.
-      <ls_diff>-changed_by = 'UNKNOWN'.
+      <ls_diff>-changed_by = zcl_abapgit_objects_super=>c_user_unknown.
     ENDIF.
 
     " Extension

@@ -176,7 +176,7 @@ TYPES sci_chkv TYPE c LENGTH 1.
     RETURNING VALUE(rv_labels) TYPE string
     RAISING   zcx_abapgit_exception.
   METHODS choose_code_insp_check_variant
-    RETURNING VALUE(rv_check_variant) TYPE char30
+    RETURNING VALUE(rv_check_variant) TYPE sci_chkv
     RAISING
       zcx_abapgit_exception.
 

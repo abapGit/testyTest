@@ -1353,7 +1353,7 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    IF iv_username <> 'UNKNOWN' AND iv_suppress_title = abap_false.
+    IF iv_username <> zcl_abapgit_objects_super=>c_user_unknown AND iv_suppress_title = abap_false.
       lv_title = zcl_abapgit_user_record=>get_title( iv_username ).
     ENDIF.
 
@@ -1368,7 +1368,7 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
 
       ri_html->add_icon( iv_name = 'user-solid/grey70'
                          iv_hint = 'User name' ).
-      IF iv_interactive = abap_true AND iv_username <> 'UNKNOWN'.
+      IF iv_interactive = abap_true AND iv_username <> zcl_abapgit_objects_super=>c_user_unknown.
         ri_html->add_a( iv_act   = lv_jump
                         iv_title = lv_title
                         iv_txt   = |{ iv_username }| ).

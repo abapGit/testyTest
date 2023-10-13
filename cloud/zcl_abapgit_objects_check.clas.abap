@@ -229,12 +229,12 @@ CLASS zcl_abapgit_objects_check IMPLEMENTATION.
 
       IF <ls_result>-packmove = abap_true.
         <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-packmove.
-        <ls_changes>-icon   ='@11@'.
+        <ls_changes>-icon   = '@11@'.
         <ls_changes>-text   = 'Change package assignment'.
       ELSEIF zcl_abapgit_objects=>is_supported( ls_item ) = abap_false
         AND ls_item-obj_type <> zif_abapgit_data_config=>c_data_type-tabu.
         <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-no_support.
-        <ls_changes>-icon   ='@11@'.
+        <ls_changes>-icon   = '@11@'.
         <ls_changes>-text   = 'Object type not supported'.
       ELSE.
         CONCATENATE <ls_result>-lstate <ls_result>-rstate INTO lv_status RESPECTING BLANKS.
@@ -246,19 +246,19 @@ CLASS zcl_abapgit_objects_check IMPLEMENTATION.
             <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-none.
           WHEN ' A' OR 'D ' OR 'DM'. " added remotely or deleted locally
             <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-add.
-            <ls_changes>-icon   ='@11@'.
+            <ls_changes>-icon   = '@11@'.
             <ls_changes>-text   = 'Add local object'.
           WHEN 'A ' OR ' D' OR 'MD'. " added locally or deleted remotely
             <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-delete.
-            <ls_changes>-icon   ='@11@'.
+            <ls_changes>-icon   = '@11@'.
             <ls_changes>-text   = 'Delete local object'.
           WHEN 'M ' OR 'MM'. " modified locally
             <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-overwrite.
-            <ls_changes>-icon   ='@11@'.
+            <ls_changes>-icon   = '@11@'.
             <ls_changes>-text   = 'Overwrite local object'.
           WHEN ' M'. " modified only remotely
             <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-update.
-            <ls_changes>-icon   ='@11@'.
+            <ls_changes>-icon   = '@11@'.
             <ls_changes>-text   = 'Update local object'.
           WHEN OTHERS.
             ASSERT 0 = 1.
@@ -369,7 +369,7 @@ CLASS zcl_abapgit_objects_check IMPLEMENTATION.
         ls_overwrite-obj_name = <ls_result>-obj_name.
         ls_overwrite-devclass = ls_tadir-devclass.
         ls_overwrite-action   = zif_abapgit_objects=>c_deserialize_action-overwrite.
-        ls_overwrite-icon     ='@11@'.
+        ls_overwrite-icon     = '@11@'.
         ls_overwrite-text     = 'Overwrite local object'.
         INSERT ls_overwrite INTO TABLE lt_overwrite_unique.
       ENDIF.
