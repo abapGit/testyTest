@@ -28,6 +28,7 @@ const replace = [
   {search: " DEFAULT if_salv_c_selection_mode=>multiple", replace: " OPTIONAL"},
   {search: " TYPE tdevc-dlvunit", replace: " TYPE c LENGTH 30"},
   {search: "GET PARAMETER ID 'DBT' FIELD lv_mode.", replace: ""},
+  {search: "GET PARAMETER ID 'TSE' FIELD lv_skip.", replace: ""},
   {search: " TYPE REF TO cl_gui_container DEFAULT cl_gui_container=>screen0", replace: " TYPE REF TO object OPTIONAL"},
   {search: " li_stream_factory->create_istream_string\\( iv_xml \\)", replace: " li_stream_factory->create_istream_xstring( zcl_abapgit_convert=>string_to_xstring_utf8( iv_xml ) )"},
   {search: " li_ostream = li_streamfactory->create_ostream_cstring\\( rv_xml \\).", replace: " DATA foo TYPE xstring. li_ostream = li_streamfactory->create_ostream_xstring( foo ). rv_xml = zcl_abapgit_convert=>xstring_to_string_utf8( foo )."},
