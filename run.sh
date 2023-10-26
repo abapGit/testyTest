@@ -142,8 +142,7 @@ cp abapGit/src/utils/zcl_abapgit_utils* open
 cp abapGit/src/utils/zcl_abapgit_version* open
 cp abapGit/src/utils/zcl_abapgit_zip* open
 cp abapGit/src/utils/zif_abapgit_log* open
-cp abapGit/src/xml/*clas* open
-cp abapGit/src/xml/*intf* open
+cp abapGit/src/xml/z* open
 cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
 cp abapGit/src/zcl_abapgit_settings.clas* open
