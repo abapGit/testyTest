@@ -26,7 +26,7 @@ cp abapGit/src/inspect/zif_abapgit_code_inspector* open
 cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff_types/zif_abapgit_aff_types_v1.* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
-cp abapGit/src/objects/aff/zif_abapgit_aff_registry* open
+cp abapGit/src/objects/aff/zif* open
 cp abapGit/src/objects/core/zcl_abapgit_file_deserialize* open
 cp abapGit/src/objects/core/zcl_abapgit_filename_logic* open
 cp abapGit/src/objects/core/zcl_abapgit_folder_logic* open
@@ -163,6 +163,7 @@ sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_gui_page_ex_
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_po_file.clas.abap
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_zip.clas.abap
 sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/zcl_abapgit_zip.clas.abap
+sed -i 's/ TYPE sobj_name/ TYPE tadir-obj_name/ig' ./open/zif_abapgit_aff_type_mapping.intf.abap
 sed -i 's/ TABLE OF sobj_name/ TABLE OF tadir-obj_name/ig' ./open/zcl_abapgit_gui_page_ex_object.clas.abap
 sed -i 's/ TYPE SSFAPPLSSL/ TYPE char6/ig' ./open/zif_abapgit_exit.intf.abap
 sed -i 's/ TYPE saprelease/ TYPE c LENGTH 10/ig' ./open/zif_abapgit_dot_abapgit.intf.abap
