@@ -144,6 +144,7 @@ CLASS zcl_abapgit_gui_event IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD parse_fields_upper_case_name.
 
     rt_fields = parse_fields(
@@ -165,6 +166,7 @@ CLASS zcl_abapgit_gui_event IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
+
 
   METHOD parse_fields.
 
@@ -231,6 +233,7 @@ CLASS zcl_abapgit_gui_event IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD field_keys_to_upper.
 
     FIELD-SYMBOLS <ls_field> LIKE LINE OF ct_fields.
@@ -240,6 +243,7 @@ CLASS zcl_abapgit_gui_event IMPLEMENTATION.
     ENDLOOP.
 
   ENDMETHOD.
+
 
   METHOD unescape.
 
@@ -257,6 +261,7 @@ CLASS zcl_abapgit_gui_event IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD class_constructor.
 
     CONSTANTS lc_nbsp TYPE xstring VALUE 'C2A0'. " &nbsp;
@@ -268,5 +273,4 @@ CLASS zcl_abapgit_gui_event IMPLEMENTATION.
     ENDTRY.
 
   ENDMETHOD.
-
 ENDCLASS.
