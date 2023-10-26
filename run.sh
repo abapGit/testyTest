@@ -125,8 +125,7 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_syntax* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tags* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tutorial* open
 cp abapGit/src/ui/popups/zcl* open
-cp abapGit/src/ui/routing/zcl* open
-cp abapGit/src/ui/routing/zif* open
+cp abapGit/src/ui/routing/z* open
 cp abapGit/src/ui/zcl_abapgit_ui_factory* open
 cp abapGit/src/ui/zcl_abapgit_ui_injector* open
 cp abapGit/src/ui/zif_abapgit_frontend_services* open
