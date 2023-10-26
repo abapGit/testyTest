@@ -74,7 +74,9 @@ CLASS zcl_abapgit_exit IMPLEMENTATION.
 
     IF gi_exit IS NOT INITIAL.
       TRY.
-          rv_filename = gi_exit->adjust_display_filename( iv_filename ).
+          rv_filename = gi_exit->adjust_display_filename(
+            is_repo_meta = is_repo_meta
+            iv_filename  = iv_filename ).
         CATCH cx_sy_ref_is_initial cx_sy_dyn_call_illegal_method ##NO_HANDLER.
       ENDTRY.
     ENDIF.
@@ -103,6 +105,22 @@ CLASS zcl_abapgit_exit IMPLEMENTATION.
     IF gi_exit IS NOT INITIAL.
       TRY.
           gi_exit->change_local_host( CHANGING ct_hosts = ct_hosts ).
+        CATCH cx_sy_ref_is_initial cx_sy_dyn_call_illegal_method ##NO_HANDLER.
+      ENDTRY.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD zif_abapgit_exit~change_max_parallel_processes.
+
+    IF gi_exit IS NOT INITIAL.
+      TRY.
+          gi_exit->change_max_parallel_processes(
+            EXPORTING
+              iv_package       = iv_package
+            CHANGING
+              cv_max_processes = cv_max_processes ).
         CATCH cx_sy_ref_is_initial cx_sy_dyn_call_illegal_method ##NO_HANDLER.
       ENDTRY.
     ENDIF.
@@ -151,6 +169,18 @@ CLASS zcl_abapgit_exit IMPLEMENTATION.
               iv_repo_url  = iv_repo_url
             CHANGING
               cv_proxy_url = cv_proxy_url ).
+        CATCH cx_sy_ref_is_initial cx_sy_dyn_call_illegal_method ##NO_HANDLER.
+      ENDTRY.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD zif_abapgit_exit~change_rfc_server_group.
+
+    IF gi_exit IS NOT INITIAL.
+      TRY.
+          gi_exit->change_rfc_server_group( CHANGING cv_group = cv_group ).
         CATCH cx_sy_ref_is_initial cx_sy_dyn_call_illegal_method ##NO_HANDLER.
       ENDTRY.
     ENDIF.

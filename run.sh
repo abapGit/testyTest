@@ -178,6 +178,12 @@ sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 
+# types,
+sed -i 's/ TYPE e071k-object/ TYPE char4/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ TYPE e071k-objname/ TYPE char30/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ TYPE e071k-tabkey/ TYPE char120/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ TYPE e070-trstatus/ TYPE char1/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ TYPE RZLLI_APCL/ TYPE char20/ig' ./open/zif_abapgit_exit.intf.abap
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_abap_language_vers.clas.abap
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_gui_page_ex_object.clas.abap
 sed -i 's/ TYPE trobjtype/ TYPE tadir-object/ig' ./open/zcl_abapgit_po_file.clas.abap
