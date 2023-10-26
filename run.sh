@@ -6,10 +6,6 @@ git clone https://github.com/abapGit/abapGit --depth 1
 rm -f open/*
 rm -f cloud/*
 
-# cp abapGit/src/objects/zcl_abapgit_objects_super* open
-# cp abapGit/src/repo/zcl_abapgit_repo_filter* open
-# cp abapGit/src/ui/pages/zcl_abapgit_gui_page_data* open
-# cp abapGit/src/ui/pages/zcl_abapgit_gui_page_debuginfo* open
 cp abapGit/src/apack/zif_abapgit_apack_definitions* open
 cp abapGit/src/background/zif_abapgit_background* open
 cp abapGit/src/cts/zcl_abapgit_default_transport* open
@@ -49,9 +45,7 @@ cp abapGit/src/objects/texts/zif_abapgit_i18n_file* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
 cp abapGit/src/objects/texts/zif_abapgit_lxe_texts* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
-cp abapGit/src/objects/zif_abapgit_comparator* open
-cp abapGit/src/objects/zif_abapgit_object* open
-cp abapGit/src/objects/zif_abapgit_objects* open
+cp abapGit/src/objects/zif* open
 cp abapGit/src/persist/zcl_abapgit_persist_background* open
 cp abapGit/src/persist/zcl_abapgit_persist_factory* open
 cp abapGit/src/persist/zcl_abapgit_persist_injector* open
