@@ -14,7 +14,6 @@ cp abapGit/src/cts/zcl_abapgit_transport_objects* open
 cp abapGit/src/cts/zif_abapgit_cts_api* open
 cp abapGit/src/data/z* open
 cp abapGit/src/exits/z* open
-cp abapGit/src/exits/z* open
 cp abapGit/src/git_platform/z* open
 cp abapGit/src/git/zcl* open
 cp abapGit/src/git/zif* open
