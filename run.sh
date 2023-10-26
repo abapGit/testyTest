@@ -147,9 +147,7 @@ cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
 cp abapGit/src/zcl_abapgit_settings.clas* open
 cp abapGit/src/zcx* open
-cp abapGit/src/zif_abapgit_definitions* open
-cp abapGit/src/zif_abapgit_environment* open
-cp abapGit/src/zif_abapgit_version* open
+cp abapGit/src/zif* open
 
 echo Copying done
 
