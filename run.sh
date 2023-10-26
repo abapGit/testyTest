@@ -128,8 +128,7 @@ cp abapGit/src/ui/popups/zcl* open
 cp abapGit/src/ui/routing/z* open
 cp abapGit/src/ui/zcl_abapgit_ui_factory* open
 cp abapGit/src/ui/zcl_abapgit_ui_injector* open
-cp abapGit/src/ui/zif_abapgit_frontend_services* open
-cp abapGit/src/ui/zif_abapgit_popups* open
+cp abapGit/src/ui/zif* open
 cp abapGit/src/utils/zcl_abapgit_abap_language_vers.* open
 cp abapGit/src/utils/zcl_abapgit_environment.clas.abap open
 cp abapGit/src/utils/zcl_abapgit_item_state* open
