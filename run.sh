@@ -91,15 +91,7 @@ cp abapGit/src/ui/core/zcl_abapgit_html_parts* open
 cp abapGit/src/ui/core/zcl_abapgit_html.clas* open
 cp abapGit/src/ui/core/zcx* open
 cp abapGit/src/ui/core/zif* open
-cp abapGit/src/ui/lib/zcl_abapgit_gui_buttons* open
-cp abapGit/src/ui/lib/zcl_abapgit_gui_chunk_lib* open
-cp abapGit/src/ui/lib/zcl_abapgit_gui_component* open
-cp abapGit/src/ui/lib/zcl_abapgit_gui_in_page_modal* open
-cp abapGit/src/ui/lib/zcl_abapgit_gui_page_hoc* open
-cp abapGit/src/ui/lib/zcl_abapgit_gui_page.clas* open
-cp abapGit/src/ui/lib/zcl_abapgit_gui_picklist* open
-cp abapGit/src/ui/lib/zcl_abapgit_html* open
-cp abapGit/src/ui/lib/zif* open
+cp abapGit/src/ui/lib/z* open
 cp abapGit/src/ui/pages/*w3mi* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addofflin* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addonline* open
