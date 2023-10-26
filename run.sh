@@ -64,9 +64,6 @@ cp abapGit/src/persist/zif_abapgit_persist_repo* open
 cp abapGit/src/persist/zif_abapgit_persist_settings* open
 cp abapGit/src/persist/zif_abapgit_persist_user* open
 cp abapGit/src/persist/zif_abapgit_persistence* open
-cp abapGit/src/progress/*clas* open
-cp abapGit/src/progress/*intf* open
-cp abapGit/src/progress/z* open
 cp abapGit/src/progress/z* open
 cp abapGit/src/repo/zcl_abapgit_dot_abapgit* open
 cp abapGit/src/repo/zcl_abapgit_repo_checksums* open
