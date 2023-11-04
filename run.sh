@@ -17,8 +17,7 @@ cp abapGit/src/exits/z* open
 cp abapGit/src/git_platform/z* open
 cp abapGit/src/git/zcl* open
 cp abapGit/src/git/zif* open
-cp abapGit/src/git/v2/zif* open
-cp abapGit/src/git/v2/zcl* open
+cp abapGit/src/git/v2/z* open
 cp abapGit/src/git/zlib/z* open
 cp abapGit/src/http/zcl_abapgit_http* open
 cp abapGit/src/http/zcl_abapgit_login_manager* open
