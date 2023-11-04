@@ -24,7 +24,7 @@ cp abapGit/src/http/zcl_abapgit_http* open
 cp abapGit/src/http/zcl_abapgit_login_manager* open
 cp abapGit/src/http/zcl_abapgit_url* open
 cp abapGit/src/http/zif* open
-cp abapGit/src/inspect/zif_abapgit_code_inspector* open
+cp abapGit/src/inspect/zif* open
 cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff_types/zif_abapgit_aff_types_v1.* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
