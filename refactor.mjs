@@ -39,6 +39,7 @@ const replace = [
   {search: " cl_http_utility=>",                  replace: " cl_web_http_utility=>"},
   {search: " cl_ixml=>",                          replace: " cl_ixml_core=>"},
   {search: " RANGE OF trkorr",                    replace: " RANGE OF sxco_transport"},
+  {search: " TYPE STANDARD TABLE OF trkorr",      replace: " TYPE STANDARD TABLE OF sxco_transport"},
   {search: " TABLE OF devclass",                  replace: " TABLE OF I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE devclass",                      replace: " TYPE I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE funcname",                      replace: " TYPE sxco_fm_name"},
