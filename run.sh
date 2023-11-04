@@ -7,7 +7,7 @@ rm -f open/*
 rm -f cloud/*
 
 cp abapGit/src/apack/zif_abapgit_apack_definitions* open
-cp abapGit/src/background/zif_abapgit_background* open
+cp abapGit/src/background/zif* open
 cp abapGit/src/cts/zcl_abapgit_default_transport* open
 cp abapGit/src/cts/zcl_abapgit_transport_2_branch* open
 cp abapGit/src/cts/zcl_abapgit_transport_objects* open
