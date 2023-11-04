@@ -38,7 +38,7 @@ cp abapGit/src/objects/core/zcl_abapgit_objects_files* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
-cp abapGit/src/objects/sap/zif_abapgit_* open
+cp abapGit/src/objects/sap/zif* open
 cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/texts/zcl_abapgit_po_file* open
 cp abapGit/src/objects/texts/zif_abapgit_i18n_file* open
