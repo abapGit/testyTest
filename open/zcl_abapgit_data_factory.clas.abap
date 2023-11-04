@@ -60,7 +60,7 @@ CLASS zcl_abapgit_data_factory IMPLEMENTATION.
   METHOD get_supporter.
 
     IF gi_supporter IS INITIAL.
-      CREATE OBJECT gi_supporter TYPE zcl_abapgit_data_supporter.
+      ASSERT 1 = 'decoupled'.
     ENDIF.
 
     ri_supporter = gi_supporter.
