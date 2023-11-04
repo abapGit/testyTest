@@ -12,10 +12,18 @@ CLASS zcl_abapgit_http DEFINITION
     CLASS-METHODS get_agent
       RETURNING
         VALUE(rv_agent) TYPE string .
+
+    TYPES: BEGIN OF ty_key_value,
+             key   TYPE string,
+             value TYPE string,
+           END OF ty_key_value.
+    TYPES ty_headers TYPE STANDARD TABLE OF ty_key_value WITH DEFAULT KEY.
+
     CLASS-METHODS create_by_url
       IMPORTING
         !iv_url          TYPE string
         !iv_service      TYPE string
+        it_headers       TYPE ty_headers OPTIONAL
       RETURNING
         VALUE(ro_client) TYPE REF TO zcl_abapgit_http_client
       RAISING

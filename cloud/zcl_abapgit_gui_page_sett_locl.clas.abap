@@ -41,6 +41,7 @@ CLASS zcl_abapgit_gui_page_sett_locl DEFINITION
         checks                       TYPE string VALUE 'checks',
         code_inspector_check_variant TYPE string VALUE 'code_inspector_check_variant',
         block_commit                 TYPE string VALUE 'block_commit',
+        flow                         TYPE string VALUE 'flow',
       END OF c_id .
     CONSTANTS:
       BEGIN OF c_event,
@@ -208,7 +209,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
 
     ri_page = zcl_abapgit_gui_page_hoc=>create(
       iv_page_title      = 'Local Settings & Checks'
-      io_page_menu       = zcl_abapgit_gui_chunk_lib=>settings_repo_toolbar(
+      io_page_menu       = zcl_abapgit_gui_menus=>repo_settings(
                              iv_key = io_repo->get_key( )
                              iv_act = zif_abapgit_definitions=>c_action-repo_local_settings )
       ii_child_component = lo_component ).
@@ -271,8 +272,15 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
     )->checkbox(
       iv_name        = c_id-main_language_only
       iv_label       = 'Only Serialize Main Language'
-      iv_hint        = 'Ignore translations; serialize only main language of repository'
-    )->start_group(
+      iv_hint        = 'Ignore translations; serialize only main language of repository' ).
+
+    IF zcl_abapgit_feature=>is_enabled( 'FLOW' ) = abap_true.
+      ro_form->checkbox(
+        iv_name  = c_id-flow
+        iv_label = 'Enable Flow Page' ).
+    ENDIF.
+
+    ro_form->start_group(
       iv_name        = c_id-checks
       iv_label       = 'Local Checks'
       iv_hint        = 'Code Inspector check performed to run from menu and before commit'
@@ -367,6 +375,9 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
       iv_key = c_id-main_language_only
       iv_val = boolc( ms_settings-main_language_only = abap_true ) ) ##TYPE.
     ro_form_data->set(
+      iv_key = c_id-flow
+      iv_val = boolc( ms_settings-flow = abap_true ) ) ##TYPE.
+    ro_form_data->set(
       iv_key = c_id-write_protected
       iv_val = boolc( ms_settings-write_protected = abap_true ) ) ##TYPE.
     ro_form_data->set(
@@ -390,6 +401,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
     ms_settings-labels                       = zcl_abapgit_repo_labels=>normalize( mo_form_data->get( c_id-labels ) ).
     ms_settings-ignore_subpackages           = mo_form_data->get( c_id-ignore_subpackages ).
     ms_settings-main_language_only           = mo_form_data->get( c_id-main_language_only ).
+    ms_settings-flow                         = mo_form_data->get( c_id-flow ).
     ms_settings-write_protected              = mo_form_data->get( c_id-write_protected ).
     ms_settings-only_local_objects           = mo_form_data->get( c_id-only_local_objects ).
     ms_settings-code_inspector_check_variant = mo_form_data->get( c_id-code_inspector_check_variant ).

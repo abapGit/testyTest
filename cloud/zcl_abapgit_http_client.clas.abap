@@ -27,11 +27,21 @@ CLASS zcl_abapgit_http_client DEFINITION PUBLIC CREATE PUBLIC.
                   iv_service TYPE string
         RAISING   zcx_abapgit_exception.
 
+    METHODS set_header
+      IMPORTING
+        iv_key   TYPE string
+        iv_value TYPE string
+      RAISING
+        zcx_abapgit_exception.
+
 ENDCLASS.
 
 
 
 CLASS zcl_abapgit_http_client IMPLEMENTATION.
+  METHOD set_header.
+    RETURN. " todo, implement method
+  ENDMETHOD.
 
 
   METHOD check_http_200.

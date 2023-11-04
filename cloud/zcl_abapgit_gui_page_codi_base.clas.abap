@@ -18,6 +18,14 @@ CLASS zcl_abapgit_gui_page_codi_base DEFINITION PUBLIC ABSTRACT INHERITING FROM 
     DATA mo_repo TYPE REF TO zcl_abapgit_repo .
     DATA mt_result TYPE zif_abapgit_code_inspector=>ty_results .
 
+    METHODS on_event
+      IMPORTING
+        ii_event          TYPE REF TO zif_abapgit_gui_event
+      RETURNING
+        VALUE(rs_handled) TYPE zif_abapgit_gui_event_handler=>ty_handling_result
+      RAISING
+        zcx_abapgit_exception.
+
     METHODS render_variant
       IMPORTING
         !iv_variant    TYPE any
@@ -57,52 +65,36 @@ ENDCLASS.
 
 CLASS zcl_abapgit_gui_page_codi_base IMPLEMENTATION.
 
-
   METHOD build_base_menu.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
-
 
   METHOD build_nav_link.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
 
+  METHOD on_event.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
 
   METHOD jump.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
-
 
   METHOD render_result.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
-
 
   METHOD render_result_line.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
-
 
   METHOD render_variant.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
-
 
   METHOD zif_abapgit_gui_event_handler~on_event.
-
     ASSERT 1 = 'decoupled'.
-
   ENDMETHOD.
+
 ENDCLASS.
