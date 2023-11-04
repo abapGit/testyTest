@@ -55,14 +55,7 @@ cp abapGit/src/persist/zcl_abapgit_persistence_repo* open
 cp abapGit/src/persist/zcl_abapgit_persistence_user* open
 cp abapGit/src/persist/zif* open
 cp abapGit/src/progress/z* open
-cp abapGit/src/repo/zcl_abapgit_dot_abapgit* open
-cp abapGit/src/repo/zcl_abapgit_repo_checksums* open
-cp abapGit/src/repo/zcl_abapgit_repo_content_list* open
-cp abapGit/src/repo/zcl_abapgit_repo_offline* open
-cp abapGit/src/repo/zcl_abapgit_repo_online* open
-cp abapGit/src/repo/zcl_abapgit_repo_srv* open
-cp abapGit/src/repo/zcl_abapgit_repo_status* open
-cp abapGit/src/repo/zcl_abapgit_repo.clas* open
+cp abapGit/src/repo/zcl* open
 cp abapGit/src/repo/zif* open
 cp abapGit/src/stage/z* open
 cp abapGit/src/syntax/z* open
@@ -141,6 +134,7 @@ rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
 rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
+rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
 
 echo RM done
 
