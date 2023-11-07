@@ -16,7 +16,7 @@ CLASS zcl_abapgit_transport DEFINITION
 
     CLASS-METHODS to_tadir
       IMPORTING
-        it_transport_headers TYPE any
+        iv_trkorr            TYPE any
         iv_deleted_objects   TYPE abap_bool DEFAULT abap_false
       RETURNING
         VALUE(rt_tadir)      TYPE zif_abapgit_definitions=>ty_tadir_tt
