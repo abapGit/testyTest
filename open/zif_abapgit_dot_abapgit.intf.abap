@@ -3,8 +3,8 @@ INTERFACE zif_abapgit_dot_abapgit PUBLIC.
   TYPES:
     BEGIN OF ty_requirement,
       component   TYPE tdevc-dlvunit,
-      min_release TYPE saprelease,
-      min_patch   TYPE sappatchlv,
+      min_release TYPE c LENGTH 10,
+      min_patch   TYPE c LENGTH 10,
     END OF ty_requirement .
   TYPES:
     ty_requirement_tt TYPE STANDARD TABLE OF ty_requirement WITH DEFAULT KEY .

@@ -24,8 +24,8 @@ CLASS zcl_abapgit_zip DEFINITION
         zcx_abapgit_exception .
     CLASS-METHODS export_object
       IMPORTING
-        !iv_object_type        TYPE trobjtype
-        !iv_object_name        TYPE sobj_name
+        !iv_object_type        TYPE tadir-object
+        !iv_object_name        TYPE tadir-obj_name
         !iv_main_language_only TYPE abap_bool DEFAULT abap_false
       RAISING
         zcx_abapgit_exception .

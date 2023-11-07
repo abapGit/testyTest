@@ -1,6 +1,17 @@
 INTERFACE zif_abapgit_definitions
   PUBLIC .
+types icon_d type c length 4.
+types trfunction type c length 1.
 
+types: begin of textpool,
+         foo type c length 1,
+       end of textpool.
+
+types seocmpname type c length 1.
+types seokeyfld type c length 1.
+types seobusobj type c length 1.
+types seoexpose type c length 1.
+types dokil type c length 1.
   TYPES:
     ty_string_tt TYPE STANDARD TABLE OF string WITH DEFAULT KEY .
   TYPES:
@@ -11,7 +22,7 @@ INTERFACE zif_abapgit_definitions
     END OF ty_item_signature .
   TYPES:
     BEGIN OF ty_obj_namespace,
-      namespace             TYPE trnspace-namespace,
+      namespace             TYPE char10,
       obj_without_namespace TYPE tadir-obj_name,
     END OF ty_obj_namespace.
   TYPES:

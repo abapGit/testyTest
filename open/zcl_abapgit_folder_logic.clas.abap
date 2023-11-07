@@ -3,7 +3,11 @@ CLASS zcl_abapgit_folder_logic DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-
+TYPES: BEGIN OF scompkdtln,
+         devclass TYPE c LENGTH 30,
+         ctext    TYPE c LENGTH 60,
+         as4user  TYPE c LENGTH 8,
+       END OF scompkdtln.
     METHODS package_to_path
       IMPORTING
         !iv_top        TYPE devclass
@@ -40,8 +44,8 @@ CLASS zcl_abapgit_folder_logic DEFINITION
     TYPES:
       BEGIN OF ty_devclass_info,
         devclass  TYPE devclass,
-        namespace TYPE namespace,
-        parentcl  TYPE parentcl,
+        namespace TYPE char10,
+        parentcl  TYPE devclass,
       END OF ty_devclass_info .
     TYPES:
       ty_devclass_info_tt TYPE SORTED TABLE OF ty_devclass_info

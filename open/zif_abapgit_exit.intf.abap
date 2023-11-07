@@ -126,7 +126,7 @@ INTERFACE zif_abapgit_exit PUBLIC.
 
   METHODS get_ssl_id
     RETURNING
-      VALUE(rv_ssl_id) TYPE ssfapplssl.
+      VALUE(rv_ssl_id) TYPE char6.
 
   METHODS http_client
     IMPORTING

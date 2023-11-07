@@ -32,8 +32,7 @@ cp abapGit/src/objects/aff/zif* open
 cp abapGit/src/objects/core/zcl_abapgit_f* open
 cp abapGit/src/objects/core/zif_abapgit_f* open
 cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
-cp abapGit/src/objects/core/zcl_abapgit_objects_check* open
-cp abapGit/src/objects/core/zcl_abapgit_objects_files* open
+cp abapGit/src/objects/core/zcl_abapgit_o* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
@@ -132,6 +131,7 @@ rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
 rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
+rm -f open/zcl_abapgit_objects_activation.clas.testclasses.abap
 rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
 rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap

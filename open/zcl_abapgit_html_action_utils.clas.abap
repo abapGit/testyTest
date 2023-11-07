@@ -4,6 +4,13 @@ CLASS zcl_abapgit_html_action_utils DEFINITION
 
   PUBLIC SECTION.
 
+TYPES: BEGIN OF ty,
+         name  TYPE string,
+         value TYPE string,
+       END OF ty.
+* TIHTTPNVP is actually released, but the structure it refers is not
+* this is a problem for the cloud version
+TYPES tihttpnvp TYPE STANDARD TABLE OF ty WITH DEFAULT KEY.
     CLASS-METHODS jump_encode
       IMPORTING
         !iv_obj_type     TYPE tadir-object

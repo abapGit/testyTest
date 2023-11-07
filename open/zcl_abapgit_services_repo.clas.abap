@@ -4,7 +4,13 @@ CLASS zcl_abapgit_services_repo DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+TYPES trwbo_request_headers TYPE c LENGTH 1.
 
+TYPES: BEGIN OF scompkdtln,
+         devclass TYPE c LENGTH 30,
+         ctext    TYPE c LENGTH 60,
+         as4user  TYPE c LENGTH 8,
+       END OF scompkdtln.
     CLASS-METHODS new_online
       IMPORTING
         !is_repo_params TYPE zif_abapgit_services_repo=>ty_repo_params
@@ -201,7 +207,7 @@ CLASS ZCL_ABAPGIT_SERVICES_REPO IMPLEMENTATION.
   METHOD check_for_restart.
 
     CONSTANTS:
-      lc_abapgit_prog TYPE progname VALUE `ZABAPGIT`.
+      lc_abapgit_prog TYPE char30 VALUE `ZABAPGIT`.
 
     DATA lo_repo_online TYPE REF TO zcl_abapgit_repo_online.
 

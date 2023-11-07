@@ -172,8 +172,8 @@ CLASS lcl_status_consistency_checks IMPLEMENTATION.
 
     DATA:
       li_namespace TYPE REF TO zif_abapgit_sap_namespace,
-      lv_namespace TYPE namespace,
-      lt_namespace TYPE TABLE OF namespace.
+      lv_namespace TYPE char10,
+      lt_namespace TYPE TABLE OF char10.
 
     FIELD-SYMBOLS <ls_result> LIKE LINE OF it_results.
 

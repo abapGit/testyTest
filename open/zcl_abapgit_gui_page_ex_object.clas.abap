@@ -78,7 +78,7 @@ CLASS zcl_abapgit_gui_page_ex_object IMPLEMENTATION.
 
   METHOD export_object.
     DATA lv_object_type TYPE tadir-object.
-    DATA lt_names TYPE STANDARD TABLE OF sobj_name WITH DEFAULT KEY.
+    DATA lt_names TYPE STANDARD TABLE OF tadir-obj_name WITH DEFAULT KEY.
     DATA lv_name LIKE LINE OF lt_names.
     DATA lv_list TYPE string.
     DATA lv_only_main TYPE abap_bool.

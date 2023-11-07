@@ -1,6 +1,38 @@
 INTERFACE zif_abapgit_sap_report
   PUBLIC.
 
+TYPES: BEGIN OF progdir,
+ name    TYPE c LENGTH 1,
+ state   TYPE c LENGTH 1,
+ sqlx    TYPE c LENGTH 1,
+ edtx    TYPE c LENGTH 1,
+ varcl   TYPE c LENGTH 1,
+ dbapl   TYPE c LENGTH 1,
+ dbna    TYPE c LENGTH 1,
+ clas    TYPE c LENGTH 1,
+ type    TYPE c LENGTH 1,
+ occurs  TYPE c LENGTH 1,
+ subc    TYPE c LENGTH 1,
+ appl    TYPE c LENGTH 1,
+ secu    TYPE c LENGTH 1,
+ cnam    TYPE c LENGTH 1,
+ cdat    TYPE c LENGTH 1,
+ unam    TYPE c LENGTH 1,
+ udat    TYPE c LENGTH 1,
+ vern    TYPE c LENGTH 1,
+ levl    TYPE c LENGTH 1,
+ rstat   TYPE c LENGTH 1,
+ rmand   TYPE c LENGTH 1,
+ rload   TYPE c LENGTH 1,
+ fixpt   TYPE c LENGTH 1,
+ sset    TYPE c LENGTH 1,
+ sdate   TYPE c LENGTH 1,
+ stime   TYPE c LENGTH 1,
+ idate   TYPE c LENGTH 1,
+ itime   TYPE c LENGTH 1,
+ ldbname TYPE c LENGTH 1,
+ uccheck TYPE c LENGTH 1,
+END OF progdir.
   TYPES:
     BEGIN OF ty_progdir,
       name    TYPE progdir-name,
@@ -38,10 +70,10 @@ INTERFACE zif_abapgit_sap_report
   METHODS read_report
     IMPORTING
       iv_name          TYPE syrepid
-      iv_state         TYPE r3state OPTIONAL
+      iv_state         TYPE char1 OPTIONAL
       is_item          TYPE zif_abapgit_definitions=>ty_item OPTIONAL
     RETURNING
-      VALUE(rt_source) TYPE abaptxt255_tab
+      VALUE(rt_source) TYPE string_table
     RAISING
       zcx_abapgit_exception.
 
@@ -49,11 +81,11 @@ INTERFACE zif_abapgit_sap_report
     IMPORTING
       iv_name           TYPE syrepid
       it_source         TYPE STANDARD TABLE
-      iv_state          TYPE r3state OPTIONAL
+      iv_state          TYPE char1 OPTIONAL
       iv_program_type   TYPE c OPTIONAL
       iv_extension_type TYPE c OPTIONAL
       iv_package        TYPE devclass
-      iv_version        TYPE uccheck
+      iv_version        TYPE char1
       is_item           TYPE zif_abapgit_definitions=>ty_item OPTIONAL
     RAISING
       zcx_abapgit_exception.
@@ -62,11 +94,11 @@ INTERFACE zif_abapgit_sap_report
     IMPORTING
       iv_name           TYPE syrepid
       it_source         TYPE STANDARD TABLE
-      iv_state          TYPE r3state OPTIONAL
+      iv_state          TYPE char1 OPTIONAL
       iv_program_type   TYPE c OPTIONAL
       iv_extension_type TYPE c OPTIONAL
       iv_package        TYPE devclass
-      iv_version        TYPE uccheck
+      iv_version        TYPE char1
       is_item           TYPE zif_abapgit_definitions=>ty_item OPTIONAL
     RETURNING
       VALUE(rv_updated) TYPE abap_bool
@@ -84,7 +116,7 @@ INTERFACE zif_abapgit_sap_report
   METHODS read_progdir
     IMPORTING
       iv_name           TYPE syrepid
-      iv_state          TYPE r3state DEFAULT 'A'
+      iv_state          TYPE char1 DEFAULT 'A'
     RETURNING
       VALUE(rs_progdir) TYPE ty_progdir
     RAISING
@@ -94,7 +126,7 @@ INTERFACE zif_abapgit_sap_report
     IMPORTING
       is_progdir TYPE ty_progdir
       iv_package TYPE devclass
-      iv_state   TYPE r3state DEFAULT 'I'
+      iv_state   TYPE char1 DEFAULT 'I'
     RAISING
       zcx_abapgit_exception.
 
