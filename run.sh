@@ -6,6 +6,8 @@ git clone https://github.com/abapGit/abapGit --depth 1
 rm -f open/*
 rm -f cloud/*
 
+SECONDS=0
+
 cp abapGit/src/apack/zif_abapgit_apack_definitions* open
 cp abapGit/src/background/zif* open
 cp abapGit/src/cts/zcl_abapgit_default_transport* open
@@ -123,7 +125,8 @@ cp abapGit/src/zcl_abapgit_settings.clas* open
 cp abapGit/src/zcx* open
 cp abapGit/src/zif* open
 
-echo Copying done
+echo "Copying done, $SECONDS seconds"
+SECONDS=0
 
 rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
 rm -f open/zcl_abapgit_injector.clas.testclasses.abap
@@ -136,7 +139,8 @@ rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
 rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
 
-echo RM done
+echo "RM done, $SECONDS seconds"
+SECONDS=0
 
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
@@ -229,7 +233,8 @@ sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_package.prog.abap' ./open/zif_abapg
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_lxe_texts.prog.abap' ./open/zif_abapgit_lxe_texts.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_report.prog.abap' ./open/zif_abapgit_sap_report.intf.abap
 
-echo sed done
+echo "sed done, $SECONDS seconds"
+SECONDS=0
 
 ###########################################################################
 
@@ -282,7 +287,8 @@ rm cloud/zcl_abapgit_repo_status.clas.testclasses.abap
 rm open/zcl_abapgit_repo_status.clas.testclasses.abap
 rm open/zcl_abapgit_abap_language_vers.clas.testclasses.abap
 
-echo replace done
+echo "replace done, $SECONDS seconds"
+SECONDS=0
 
 ###########################################################################
 
@@ -290,3 +296,4 @@ sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_a
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap
 
 node refactor.mjs
+echo "refactor done, $SECONDS seconds"
