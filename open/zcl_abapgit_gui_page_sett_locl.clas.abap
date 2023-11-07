@@ -424,7 +424,7 @@ CLASS zcl_abapgit_gui_page_sett_locl IMPLEMENTATION.
       lx_error               TYPE REF TO zcx_abapgit_exception,
       lv_transport_request   TYPE trkorr,
       lv_customizing_request TYPE trkorr,
-      lv_check_variant       TYPE char30.
+      lv_check_variant       TYPE sci_chkv.
 
     ro_validation_log = zcl_abapgit_html_form_utils=>create( mo_form )->validate( io_form_data ).
 

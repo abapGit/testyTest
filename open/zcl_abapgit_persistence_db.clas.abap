@@ -44,7 +44,7 @@ CLASS zcl_abapgit_persistence_db DEFINITION
       RETURNING VALUE(rt_contents) TYPE zif_abapgit_persistence=>ty_contents.
     METHODS lock
       IMPORTING
-        !iv_mode  TYPE c DEFAULT 'E'
+        !iv_mode  TYPE enqmode DEFAULT 'E'
         !iv_type  TYPE zif_abapgit_persistence=>ty_type
         !iv_value TYPE zif_abapgit_persistence=>ty_content-value
       RAISING

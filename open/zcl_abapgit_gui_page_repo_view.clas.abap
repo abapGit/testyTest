@@ -679,7 +679,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
     DATA:
       lv_main_language TYPE spras,
       ls_item          TYPE zif_abapgit_definitions=>ty_item,
-      lv_tcode         TYPE string.
+      lv_tcode         TYPE tcode.
 
     lv_main_language = mo_repo->get_dot_abapgit( )->get_main_language( ).
     lv_tcode = zcl_abapgit_services_abapgit=>get_abapgit_tcode( ).
@@ -1069,7 +1069,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
 
       WHEN c_actions-go_unit.
-         ASSERT 1 = 'decoupled'.
+        rs_handled-page  = zcl_abapgit_gui_page_runit=>create( mo_repo ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
 
       WHEN c_actions-toggle_hide_files. " Toggle file diplay

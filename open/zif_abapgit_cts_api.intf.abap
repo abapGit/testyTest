@@ -69,10 +69,10 @@ INTERFACE zif_abapgit_cts_api
   METHODS get_r3tr_obj_for_limu_obj
     IMPORTING
       !iv_object   TYPE tadir-object
-      !iv_obj_name TYPE char120
+      !iv_obj_name TYPE trobj_name
     EXPORTING
       !ev_object   TYPE tadir-object
-      !ev_obj_name TYPE char120
+      !ev_obj_name TYPE trobj_name
     RAISING
       zcx_abapgit_exception .
   METHODS get_transports_for_list
@@ -103,7 +103,7 @@ INTERFACE zif_abapgit_cts_api
       !iv_mode     TYPE c DEFAULT 'I'
     EXPORTING
       !ev_object   TYPE tadir-object
-      !ev_obj_name TYPE char120
+      !ev_obj_name TYPE trobj_name
     RAISING
       zcx_abapgit_exception .
   "! Check if change recording is possible for the given package

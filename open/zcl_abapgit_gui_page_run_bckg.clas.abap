@@ -61,7 +61,7 @@ CLASS zcl_abapgit_gui_page_run_bckg IMPLEMENTATION.
         zcl_abapgit_background=>run( ).
 
         DO.
-          ASSERT 1 = 'decoupled'.
+          READ LINE lv_line LINE VALUE INTO lv_text.
           IF sy-subrc <> 0.
             EXIT.
           ENDIF.

@@ -232,7 +232,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
         rs_handled-page  = zcl_abapgit_gui_page_db=>create( ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
       WHEN zif_abapgit_definitions=>c_action-go_debuginfo.                   " Go debug info
-        ASSERT 1 = 'decoupled'.
+        rs_handled-page  = zcl_abapgit_gui_page_debuginfo=>create( ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
       WHEN zif_abapgit_definitions=>c_action-go_settings.                    " Go global settings
         rs_handled-page  = zcl_abapgit_gui_page_sett_glob=>create( ).
@@ -461,7 +461,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
     lv_adt_jump_enabled = zcl_abapgit_persist_factory=>get_settings( )->read( )->get_adt_jump_enabled( ).
     IF lv_adt_jump_enabled = abap_true.
       TRY.
-           ASSERT 1 = 'decoupled'.
+          lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport ).
           zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
         CATCH zcx_abapgit_exception.
           " Fallback if ADT link execution failed or was cancelled
@@ -642,7 +642,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
         zcl_abapgit_services_repo=>transport_to_branch( lv_key ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-re_render.
       WHEN zif_abapgit_definitions=>c_action-repo_settings.                   " Repo settings
-        ASSERT 1 = 'decoupled'.
+        rs_handled-page  = zcl_abapgit_gui_page_sett_repo=>create( lo_repo ).
         rs_handled-state = get_state_settings( ii_event ).
       WHEN zif_abapgit_definitions=>c_action-repo_local_settings.             " Local repo settings
         rs_handled-page  = zcl_abapgit_gui_page_sett_locl=>create( lo_repo ).
@@ -830,7 +830,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
         rs_handled-page  = zcl_abapgit_gui_page_ex_pckage=>create( ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
       WHEN zif_abapgit_definitions=>c_action-zip_transport.                   " Export transports as ZIP
-        ASSERT 1 = 'decoupled'.
+        zcl_abapgit_transport_mass=>run( ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
       WHEN zif_abapgit_definitions=>c_action-zip_object.                      " Export object as ZIP
         rs_handled-page  = zcl_abapgit_gui_page_ex_object=>create( ).

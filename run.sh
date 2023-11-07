@@ -29,11 +29,8 @@ cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff_types/zif* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif* open
-cp abapGit/src/objects/core/zcl_abapgit_file_deserialize* open
-cp abapGit/src/objects/core/zif_abapgit_function_module* open
-cp abapGit/src/objects/core/zcl_abapgit_function_module* open
-cp abapGit/src/objects/core/zcl_abapgit_filename_logic* open
-cp abapGit/src/objects/core/zcl_abapgit_folder_logic* open
+cp abapGit/src/objects/core/zcl_abapgit_f* open
+cp abapGit/src/objects/core/zif_abapgit_f* open
 cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
 cp abapGit/src/objects/core/zcl_abapgit_objects_check* open
 cp abapGit/src/objects/core/zcl_abapgit_objects_files* open

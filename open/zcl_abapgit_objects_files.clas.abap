@@ -43,7 +43,7 @@ CLASS zcl_abapgit_objects_files DEFINITION
         !iv_extra      TYPE clike OPTIONAL
         !iv_error      TYPE abap_bool DEFAULT abap_true
       RETURNING
-        VALUE(rt_abap) TYPE string_table
+        VALUE(rt_abap) TYPE abaptxt255_tab
       RAISING
         zcx_abapgit_exception .
     METHODS add_abap

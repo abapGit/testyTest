@@ -39,7 +39,7 @@ INTERFACE zif_abapgit_persist_repo
       zcx_abapgit_exception .
   METHODS lock
     IMPORTING
-      !iv_mode TYPE c
+      !iv_mode TYPE enqmode
       !iv_key  TYPE zif_abapgit_persistence=>ty_repo-key
     RAISING
       zcx_abapgit_exception .

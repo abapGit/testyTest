@@ -16,7 +16,7 @@ CLASS zcl_abapgit_gui_page_code_insp DEFINITION
       IMPORTING
         io_repo                  TYPE REF TO zcl_abapgit_repo
         io_stage                 TYPE REF TO zcl_abapgit_stage OPTIONAL
-        iv_check_variant         TYPE char30 OPTIONAL
+        iv_check_variant         TYPE sci_chkv OPTIONAL
         iv_raise_when_no_results TYPE abap_bool DEFAULT abap_false
       RETURNING
         VALUE(ri_page)           TYPE REF TO zif_abapgit_gui_renderable
@@ -28,7 +28,7 @@ CLASS zcl_abapgit_gui_page_code_insp DEFINITION
         IMPORTING
           io_repo                  TYPE REF TO zcl_abapgit_repo
           io_stage                 TYPE REF TO zcl_abapgit_stage OPTIONAL
-          iv_check_variant         TYPE char30 OPTIONAL
+          iv_check_variant         TYPE sci_chkv OPTIONAL
           iv_raise_when_no_results TYPE abap_bool DEFAULT abap_false
         RAISING
           zcx_abapgit_exception.
@@ -38,7 +38,7 @@ CLASS zcl_abapgit_gui_page_code_insp DEFINITION
 
     DATA:
       mo_stage         TYPE REF TO zcl_abapgit_stage,
-      mv_check_variant TYPE char30.
+      mv_check_variant TYPE sci_chkv.
 
     METHODS:
       run_code_inspector
@@ -55,7 +55,7 @@ CLASS zcl_abapgit_gui_page_code_insp DEFINITION
 
       ask_user_for_check_variant
         RETURNING
-          VALUE(rv_check_variant) TYPE char30
+          VALUE(rv_check_variant) TYPE sci_chkv
         RAISING
           zcx_abapgit_exception,
 

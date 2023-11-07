@@ -24,7 +24,7 @@ CLASS ltcl_objects_files DEFINITION FOR TESTING
 
     METHODS get_expected_abap_source
       RETURNING
-        VALUE(rt_result) TYPE string_table.
+        VALUE(rt_result) TYPE abaptxt255_tab.
 
     METHODS read_abap FOR TESTING RAISING cx_static_check.
     METHODS read_xml FOR TESTING RAISING cx_static_check.
@@ -112,7 +112,7 @@ CLASS ltcl_objects_files IMPLEMENTATION.
 
   METHOD read_xml.
     DATA: BEGIN OF ls_exp_prog_metadata,
-            name       TYPE char30 VALUE 'ZLF',
+            name       TYPE progname VALUE 'ZLF',
             subc(1)    TYPE c VALUE '1',
             rload(1)   TYPE c VALUE 'E',
             fixpt(1)   TYPE c VALUE 'X',
