@@ -22,8 +22,8 @@ types dokil type c length 1.
     END OF ty_item_signature .
   TYPES:
     BEGIN OF ty_obj_namespace,
-      namespace TYPE char10,
-      obj_without_namespace  TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
+      namespace             TYPE char10,
+      obj_without_namespace TYPE I_CustABAPObjDirectoryEntry-ABAPObject,
     END OF ty_obj_namespace.
   TYPES:
     BEGIN OF ty_item.
@@ -71,7 +71,8 @@ types dokil type c length 1.
     END OF ty_requirements .
   TYPES:
     BEGIN OF ty_dependencies,
-      met TYPE ty_yes_no,
+      met      TYPE ty_yes_no,
+      decision TYPE ty_yes_no,
     END OF ty_dependencies .
   TYPES:
     BEGIN OF ty_transport_type,

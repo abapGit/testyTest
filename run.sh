@@ -7,26 +7,24 @@ rm -f open/*
 rm -f cloud/*
 
 cp abapGit/src/apack/zif_abapgit_apack_definitions* open
-cp abapGit/src/background/zif_abapgit_background* open
+cp abapGit/src/background/zif* open
 cp abapGit/src/cts/zcl_abapgit_default_transport* open
 cp abapGit/src/cts/zcl_abapgit_transport_2_branch* open
 cp abapGit/src/cts/zcl_abapgit_transport_objects* open
-cp abapGit/src/cts/zif_abapgit_cts_api* open
+cp abapGit/src/cts/zif* open
 cp abapGit/src/data/z* open
 cp abapGit/src/exits/z* open
 cp abapGit/src/git_platform/z* open
-cp abapGit/src/git/zcl* open
-cp abapGit/src/git/zif* open
-cp abapGit/src/git/v2/zif* open
-cp abapGit/src/git/v2/zcl* open
+cp abapGit/src/git/z*.* open
+cp abapGit/src/git/v2/z* open
 cp abapGit/src/git/zlib/z* open
 cp abapGit/src/http/zcl_abapgit_http* open
 cp abapGit/src/http/zcl_abapgit_login_manager* open
 cp abapGit/src/http/zcl_abapgit_url* open
 cp abapGit/src/http/zif* open
-cp abapGit/src/inspect/zif_abapgit_code_inspector* open
+cp abapGit/src/inspect/zif* open
 cp abapGit/src/json/z* open
-cp abapGit/src/objects/aff_types/zif_abapgit_aff_types_v1.* open
+cp abapGit/src/objects/aff_types/zif* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif* open
 cp abapGit/src/objects/core/zcl_abapgit_file_deserialize* open
@@ -40,7 +38,7 @@ cp abapGit/src/objects/core/zcl_abapgit_objects_files* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
-cp abapGit/src/objects/sap/zif_abapgit_* open
+cp abapGit/src/objects/sap/zif* open
 cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/texts/zcl_abapgit_po_file* open
 cp abapGit/src/objects/texts/zif_abapgit_i18n_file* open
@@ -57,14 +55,7 @@ cp abapGit/src/persist/zcl_abapgit_persistence_repo* open
 cp abapGit/src/persist/zcl_abapgit_persistence_user* open
 cp abapGit/src/persist/zif* open
 cp abapGit/src/progress/z* open
-cp abapGit/src/repo/zcl_abapgit_dot_abapgit* open
-cp abapGit/src/repo/zcl_abapgit_repo_checksums* open
-cp abapGit/src/repo/zcl_abapgit_repo_content_list* open
-cp abapGit/src/repo/zcl_abapgit_repo_offline* open
-cp abapGit/src/repo/zcl_abapgit_repo_online* open
-cp abapGit/src/repo/zcl_abapgit_repo_srv* open
-cp abapGit/src/repo/zcl_abapgit_repo_status* open
-cp abapGit/src/repo/zcl_abapgit_repo.clas* open
+cp abapGit/src/repo/zcl* open
 cp abapGit/src/repo/zif* open
 cp abapGit/src/stage/z* open
 cp abapGit/src/syntax/z* open
@@ -136,12 +127,14 @@ echo Copying done
 
 rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
 rm -f open/zcl_abapgit_injector.clas.testclasses.abap
+rm -f open/zcl_abapgit_data_supporter.clas.*
 rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
 rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
 rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
+rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
 
 echo RM done
 
@@ -153,6 +146,7 @@ sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decou
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_sap_report TYPE zcl_abapgit_sap_report./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_longtext TYPE zcl_abapgit_longtexts./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
+sed -i "s/ CREATE OBJECT gi_supporter TYPE zcl_abapgit_data_supporter./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_data_factory.clas.abap
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
@@ -240,7 +234,6 @@ echo sed done
 ###########################################################################
 
 cp replace/zcl_abapgit_apack* open
-cp replace/zcl_abapgit_data_supporter* open
 cp replace/zcl_abapgit_background* open
 cp replace/zcl_abapgit_diff* open
 cp replace/zcl_abapgit_exception_viewer* open

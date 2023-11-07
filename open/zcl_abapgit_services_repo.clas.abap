@@ -77,14 +77,14 @@ TYPES: BEGIN OF scompkdtln,
         VALUE(rv_package)   TYPE devclass
       RAISING
         zcx_abapgit_exception.
-    CLASS-METHODS check_and_create_package
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+    CLASS-METHODS check_package_exists
       IMPORTING
         !iv_package TYPE devclass
         !it_remote  TYPE zif_abapgit_git_definitions=>ty_files_tt
       RAISING
         zcx_abapgit_exception.
-  PROTECTED SECTION.
-  PRIVATE SECTION.
 
     CLASS-METHODS delete_unnecessary_objects
       IMPORTING
@@ -101,7 +101,7 @@ TYPES: BEGIN OF scompkdtln,
       RAISING
         zcx_abapgit_cancel
         zcx_abapgit_exception .
-    CLASS-METHODS popup_overwrite
+    CLASS-METHODS popup_objects_overwrite
       CHANGING
         !ct_overwrite TYPE zif_abapgit_definitions=>ty_overwrite_tt
       RAISING
@@ -128,7 +128,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_abapgit_services_repo IMPLEMENTATION.
+CLASS ZCL_ABAPGIT_SERVICES_REPO IMPLEMENTATION.
 
 
   METHOD activate_objects.
@@ -186,7 +186,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD check_and_create_package.
+  METHOD check_package_exists.
 
     IF zcl_abapgit_factory=>get_sap_package( iv_package )->exists( ) = abap_false.
       " Check if any package is included in remote
@@ -194,8 +194,10 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
         WITH KEY file
         COMPONENTS filename = zcl_abapgit_filename_logic=>c_package_file.
       IF sy-subrc <> 0.
-        " If not, prompt to create it
-        create_package( iv_package ).
+        " If not, give error
+        zcx_abapgit_exception=>raise(
+          iv_text     = |Package { iv_package } does not exist and there's no package included in the repository|
+          iv_longtext = 'Either select an existing package, create a new one, or add a package to the repository' ).
       ENDIF.
     ENDIF.
 
@@ -375,6 +377,8 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
   METHOD new_offline.
 
+    DATA lx_error TYPE REF TO zcx_abapgit_exception.
+
     check_package( is_repo_params ).
 
     " create new repo and add to favorites
@@ -387,9 +391,15 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       iv_main_lang_only = is_repo_params-main_lang_only
       iv_abap_lang_vers = is_repo_params-abap_lang_vers ).
 
-    check_and_create_package(
-      iv_package = is_repo_params-package
-      it_remote  = ro_repo->get_files_remote( ) ).
+    TRY.
+        check_package_exists(
+          iv_package = is_repo_params-package
+          it_remote  = ro_repo->get_files_remote( ) ).
+      CATCH zcx_abapgit_exception INTO lx_error.
+        zcl_abapgit_repo_srv=>get_instance( )->delete( ro_repo ).
+        COMMIT WORK.
+        RAISE EXCEPTION lx_error.
+    ENDTRY.
 
     " Make sure there're no leftovers from previous repos
     ro_repo->zif_abapgit_repo~checksums( )->rebuild( ).
@@ -407,6 +417,8 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
   METHOD new_online.
 
+    DATA lx_error TYPE REF TO zcx_abapgit_exception.
+
     check_package( is_repo_params ).
 
     ro_repo ?= zcl_abapgit_repo_srv=>get_instance( )->new_online(
@@ -420,9 +432,15 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       iv_main_lang_only = is_repo_params-main_lang_only
       iv_abap_lang_vers = is_repo_params-abap_lang_vers ).
 
-    check_and_create_package(
-      iv_package = is_repo_params-package
-      it_remote  = ro_repo->get_files_remote( ) ).
+    TRY.
+        check_package_exists(
+          iv_package = is_repo_params-package
+          it_remote  = ro_repo->get_files_remote( ) ).
+      CATCH zcx_abapgit_exception INTO lx_error.
+        zcl_abapgit_repo_srv=>get_instance( )->delete( ro_repo ).
+        COMMIT WORK.
+        RAISE EXCEPTION lx_error.
+    ENDTRY.
 
     " Make sure there're no leftovers from previous repos
     ro_repo->zif_abapgit_repo~checksums( )->rebuild( ).
@@ -462,9 +480,6 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
     ENDIF.
 
     " Ask user what to do
-    popup_overwrite( CHANGING ct_overwrite = lt_decision ).
-    popup_package_overwrite( CHANGING ct_overwrite = cs_checks-warning_package ).
-
     IF cs_checks-requirements-met = zif_abapgit_definitions=>c_no.
       lt_requirements = io_repo->get_dot_abapgit( )->get_data( )-requirements.
       zcl_abapgit_requirement_helper=>requirements_popup( lt_requirements ).
@@ -474,7 +489,11 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
     IF cs_checks-dependencies-met = zif_abapgit_definitions=>c_no.
       lt_dependencies = io_repo->get_dot_apack( )->get_manifest_descriptor( )-dependencies.
       zcl_abapgit_apack_helper=>dependencies_popup( lt_dependencies ).
+      cs_checks-dependencies-decision = zif_abapgit_definitions=>c_yes.
     ENDIF.
+
+    popup_objects_overwrite( CHANGING ct_overwrite = lt_decision ).
+    popup_package_overwrite( CHANGING ct_overwrite = cs_checks-warning_package ).
 
     IF cs_checks-transport-required = abap_true AND cs_checks-transport-transport IS INITIAL.
       cs_checks-transport-transport =
@@ -493,7 +512,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD popup_overwrite.
+  METHOD popup_objects_overwrite.
 
     DATA: lt_columns  TYPE zif_abapgit_popups=>ty_alv_column_tt,
           lt_selected LIKE ct_overwrite,
@@ -810,6 +829,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
       lo_transport_to_branch TYPE REF TO zcl_abapgit_transport_2_branch,
       lt_transport_headers   TYPE trwbo_request_headers,
       lt_transport_objects   TYPE zif_abapgit_definitions=>ty_tadir_tt,
+      lv_trkorr              TYPE trkorr,
       ls_transport_to_branch TYPE zif_abapgit_definitions=>ty_transport_to_branch.
 
 
@@ -819,11 +839,11 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
     lo_repository ?= zcl_abapgit_repo_srv=>get_instance( )->get( iv_repository_key ).
 
-    lt_transport_headers = zcl_abapgit_ui_factory=>get_popups( )->popup_to_select_transports( ).
+    lv_trkorr = zcl_abapgit_ui_factory=>get_popups( )->popup_to_select_transport( ).
     " Also include deleted objects that are included in transport
     lt_transport_objects = zcl_abapgit_transport=>to_tadir(
-      it_transport_headers = lt_transport_headers
-      iv_deleted_objects   = abap_true ).
+      iv_trkorr          = lv_trkorr
+      iv_deleted_objects = abap_true ).
     IF lt_transport_objects IS INITIAL.
       zcx_abapgit_exception=>raise( 'Canceled or List of objects is empty ' ).
     ENDIF.
