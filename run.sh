@@ -118,17 +118,20 @@ cp abapGit/src/zif* open
 echo "Copying done, $SECONDS seconds"
 SECONDS=0
 
-rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
-rm -f open/zcl_abapgit_injector.clas.testclasses.abap
+rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_data_supporter.clas.*
+rm -f open/zcl_abapgit_diff.clas.testclasses.abap
 rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
-rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
-rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
-rm -f open/zcl_abapgit_objects_activation.clas.testclasses.abap
-rm -f open/*xml*.clas.testclasses.abap
-rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
+rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
+rm -f open/zcl_abapgit_injector.clas.testclasses.abap
 rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
+rm -f open/zcl_abapgit_objects_activation.clas.testclasses.abap
+rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
+rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
+rm -f open/zcl_abapgit_requirement_helper.clas.testclasses.abap
+rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
+rm -f open/zcl_abapgit_user_record.clas.testclasses.abap
 
 echo "RM done, $SECONDS seconds"
 SECONDS=0
