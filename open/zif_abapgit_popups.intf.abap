@@ -1,18 +1,5 @@
 INTERFACE zif_abapgit_popups
   PUBLIC .
-TYPES: BEGIN OF sval,
-         tabname TYPE c LENGTH 30,
-         fieldname TYPE c LENGTH 30,
-         value TYPE c LENGTH 132,
-         field_attr TYPE c LENGTH 2,
-         field_obl TYPE c LENGTH 1,
-         comp_code TYPE c LENGTH 2,
-         fieldtext TYPE c LENGTH 20,
-         comp_tab TYPE c LENGTH 30,
-         comp_field TYPE c LENGTH 30,
-         novaluehlp TYPE c LENGTH 1,
-       END OF sval.
-
 TYPES lvc_outlen TYPE n LENGTH 6.
 
 TYPES: BEGIN OF ddshretval,
@@ -31,9 +18,7 @@ TYPES trwbo_selection TYPE c LENGTH 1.
 TYPES trwbo_title TYPE c LENGTH 1.
 TYPES sci_chkv TYPE c LENGTH 1.
 
-  TYPES:
-    ty_sval_tt TYPE STANDARD TABLE OF sval WITH DEFAULT KEY,
-    ty_rows    TYPE SORTED TABLE OF i WITH UNIQUE KEY table_line.
+  TYPES ty_rows TYPE SORTED TABLE OF i WITH UNIQUE KEY table_line.
 
   TYPES:
     BEGIN OF ty_alv_column,
@@ -126,7 +111,7 @@ TYPES sci_chkv TYPE c LENGTH 1.
       zcx_abapgit_exception .
   METHODS popup_to_create_transp_branch
     IMPORTING
-      !it_transport_headers      TYPE trwbo_request_headers
+      !iv_trkorr                 TYPE trkorr
     RETURNING
       VALUE(rs_transport_branch) TYPE zif_abapgit_definitions=>ty_transport_to_branch
     RAISING

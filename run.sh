@@ -6,6 +6,8 @@ git clone https://github.com/abapGit/abapGit --depth 1
 rm -f open/*
 rm -f cloud/*
 
+SECONDS=0
+
 cp abapGit/src/apack/zif_abapgit_apack_definitions* open
 cp abapGit/src/background/zif* open
 cp abapGit/src/cts/zcl_abapgit_default_transport* open
@@ -27,14 +29,10 @@ cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff_types/zif* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif* open
-cp abapGit/src/objects/core/zcl_abapgit_file_deserialize* open
-cp abapGit/src/objects/core/zif_abapgit_function_module* open
-cp abapGit/src/objects/core/zcl_abapgit_function_module* open
-cp abapGit/src/objects/core/zcl_abapgit_filename_logic* open
-cp abapGit/src/objects/core/zcl_abapgit_folder_logic* open
+cp abapGit/src/objects/core/zcl_abapgit_f* open
+cp abapGit/src/objects/core/zif_abapgit_f* open
 cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
-cp abapGit/src/objects/core/zcl_abapgit_objects_check* open
-cp abapGit/src/objects/core/zcl_abapgit_objects_files* open
+cp abapGit/src/objects/core/zcl_abapgit_o* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
@@ -60,13 +58,7 @@ cp abapGit/src/repo/zif* open
 cp abapGit/src/stage/z* open
 cp abapGit/src/syntax/z* open
 cp abapGit/src/ui/*w3mi* open
-cp abapGit/src/ui/core/zcl_abapgit_gui_asset_manager* open
-cp abapGit/src/ui/core/zcl_abapgit_gui_css_processor* open
-cp abapGit/src/ui/core/zcl_abapgit_gui_event* open
-cp abapGit/src/ui/core/zcl_abapgit_gui_hotkey_ctl* open
-cp abapGit/src/ui/core/zcl_abapgit_gui_html_processor* open
-cp abapGit/src/ui/core/zcl_abapgit_gui_utils.clas* open
-cp abapGit/src/ui/core/zcl_abapgit_gui.clas* open
+cp abapGit/src/ui/core/zcl_abapgit_gui* open
 cp abapGit/src/ui/core/zcl_abapgit_html_parts* open
 cp abapGit/src/ui/core/zcl_abapgit_html.clas* open
 cp abapGit/src/ui/core/zcx* open
@@ -97,7 +89,7 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_stage* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_syntax* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tags* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tutorial* open
-cp abapGit/src/ui/popups/zcl* open
+cp abapGit/src/ui/popups/z* open
 cp abapGit/src/ui/routing/z* open
 cp abapGit/src/ui/zcl_abapgit_ui* open
 cp abapGit/src/ui/zif* open
@@ -123,20 +115,26 @@ cp abapGit/src/zcl_abapgit_settings.clas* open
 cp abapGit/src/zcx* open
 cp abapGit/src/zif* open
 
-echo Copying done
+echo "Copying done, $SECONDS seconds"
+SECONDS=0
 
-rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
-rm -f open/zcl_abapgit_injector.clas.testclasses.abap
+rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_data_supporter.clas.*
+rm -f open/zcl_abapgit_diff.clas.testclasses.abap
 rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
-rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
-rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
-rm -f open/*xml*.clas.testclasses.abap
-rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
+rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
+rm -f open/zcl_abapgit_injector.clas.testclasses.abap
 rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
+rm -f open/zcl_abapgit_objects_activation.clas.testclasses.abap
+rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
+rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
+rm -f open/zcl_abapgit_requirement_helper.clas.testclasses.abap
+rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
+rm -f open/zcl_abapgit_user_record.clas.testclasses.abap
 
-echo RM done
+echo "RM done, $SECONDS seconds"
+SECONDS=0
 
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
@@ -229,7 +227,8 @@ sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_package.prog.abap' ./open/zif_abapg
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_lxe_texts.prog.abap' ./open/zif_abapgit_lxe_texts.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_report.prog.abap' ./open/zif_abapgit_sap_report.intf.abap
 
-echo sed done
+echo "sed done, $SECONDS seconds"
+SECONDS=0
 
 ###########################################################################
 
@@ -282,7 +281,8 @@ rm cloud/zcl_abapgit_repo_status.clas.testclasses.abap
 rm open/zcl_abapgit_repo_status.clas.testclasses.abap
 rm open/zcl_abapgit_abap_language_vers.clas.testclasses.abap
 
-echo replace done
+echo "replace done, $SECONDS seconds"
+SECONDS=0
 
 ###########################################################################
 
@@ -290,3 +290,4 @@ sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_a
 sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap
 
 node refactor.mjs
+echo "refactor done, $SECONDS seconds"
