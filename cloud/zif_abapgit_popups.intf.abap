@@ -31,9 +31,7 @@ TYPES trwbo_selection TYPE c LENGTH 1.
 TYPES trwbo_title TYPE c LENGTH 1.
 TYPES sci_chkv TYPE c LENGTH 1.
 
-  TYPES:
-    ty_sval_tt TYPE STANDARD TABLE OF sval WITH DEFAULT KEY,
-    ty_rows    TYPE SORTED TABLE OF i WITH UNIQUE KEY table_line.
+  TYPES ty_rows TYPE SORTED TABLE OF i WITH UNIQUE KEY table_line.
 
   TYPES:
     BEGIN OF ty_alv_column,
@@ -126,7 +124,7 @@ TYPES sci_chkv TYPE c LENGTH 1.
       zcx_abapgit_exception .
   METHODS popup_to_create_transp_branch
     IMPORTING
-      !it_transport_headers      TYPE trwbo_request_headers
+      !iv_trkorr                 TYPE sxco_transport
     RETURNING
       VALUE(rs_transport_branch) TYPE zif_abapgit_definitions=>ty_transport_to_branch
     RAISING
