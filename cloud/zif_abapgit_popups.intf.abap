@@ -1,18 +1,5 @@
 INTERFACE zif_abapgit_popups
   PUBLIC .
-TYPES: BEGIN OF sval,
-         tabname TYPE c LENGTH 30,
-         fieldname TYPE c LENGTH 30,
-         value TYPE c LENGTH 132,
-         field_attr TYPE c LENGTH 2,
-         field_obl TYPE c LENGTH 1,
-         comp_code TYPE c LENGTH 2,
-         fieldtext TYPE c LENGTH 20,
-         comp_tab TYPE c LENGTH 30,
-         comp_field TYPE c LENGTH 30,
-         novaluehlp TYPE c LENGTH 1,
-       END OF sval.
-
 TYPES lvc_outlen TYPE n LENGTH 6.
 
 TYPES: BEGIN OF ddshretval,
