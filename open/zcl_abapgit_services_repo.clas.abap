@@ -383,7 +383,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
     " create new repo and add to favorites
     ro_repo ?= zcl_abapgit_repo_srv=>get_instance( )->new_offline(
-      iv_url            = is_repo_params-url
+      iv_name           = is_repo_params-name
       iv_package        = is_repo_params-package
       iv_folder_logic   = is_repo_params-folder_logic
       iv_labels         = is_repo_params-labels
@@ -424,6 +424,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
     ro_repo ?= zcl_abapgit_repo_srv=>get_instance( )->new_online(
       iv_url            = is_repo_params-url
       iv_branch_name    = is_repo_params-branch_name
+      iv_name           = is_repo_params-name
       iv_package        = is_repo_params-package
       iv_display_name   = is_repo_params-display_name
       iv_folder_logic   = is_repo_params-folder_logic
@@ -654,7 +655,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
     lv_repo_name = lo_repo->get_name( ).
 
     lv_package = lo_repo->get_package( ).
-    lt_tadir   = zcl_abapgit_factory=>get_tadir( )->read( lv_package ).
+    lt_tadir   = lo_repo->get_tadir_objects( ).
 
     IF lines( lt_tadir ) > 0.
 
