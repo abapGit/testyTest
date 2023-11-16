@@ -71,6 +71,7 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_commit* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_flow* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_db* open
+cp abapGit/src/ui/pages/zcl_abapgit_gui_page_pull* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_diff* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_object* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_pckage* open
