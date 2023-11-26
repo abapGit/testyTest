@@ -262,7 +262,7 @@ CLASS zcl_abapgit_services_repo IMPLEMENTATION.
 
   METHOD create_package.
 
-    DATA ls_package_data TYPE scompkdtln.
+    DATA ls_package_data TYPE zif_abapgit_sap_package=>ty_create.
     DATA lv_create       TYPE abap_bool.
     DATA li_popup        TYPE REF TO zif_abapgit_popups.
 
