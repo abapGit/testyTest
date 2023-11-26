@@ -11,6 +11,10 @@ CLASS zcl_abapgit_environment IMPLEMENTATION.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.
 
+  METHOD zif_abapgit_environment~init_parallel_processing.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
+
   METHOD zif_abapgit_environment~get_basis_release.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.

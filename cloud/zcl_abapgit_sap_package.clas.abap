@@ -44,10 +44,6 @@ CLASS zcl_abapgit_sap_package IMPLEMENTATION.
     rv_bool = abap_false.
   ENDMETHOD.
 
-  METHOD zif_abapgit_sap_package~get_transport_layer.
-    ASSERT 1 = 'decoupled'.
-  ENDMETHOD.
-
   METHOD zif_abapgit_sap_package~get_transport_type.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.
