@@ -214,7 +214,7 @@ sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_html_action_utils.prog.abap' ./open/zcl_abapgit_html_action_utils.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui_event.prog.abap' ./open/zcl_abapgit_gui_event.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui.prog.abap' ./open/zcl_abapgit_gui.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_default_transport.prog.abap' ./open/zcl_abapgit_default_transport.clas.abap
+sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_default_transport.prog.abap' ./open/zcl_abapgit_default_transport.clas.abap # https://github.com/abapGit/abapGit/pull/6673
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_repo.prog.abap' ./open/zcl_abapgit_services_repo.clas.abap
 
 # INTF shims,
