@@ -6,3 +6,5 @@ TYPES: BEGIN OF ty,
 * TIHTTPNVP is actually released, but the structure it refers is not
 * this is a problem for the cloud version
 TYPES tihttpnvp TYPE STANDARD TABLE OF ty WITH DEFAULT KEY.
+
+* https://github.com/abapGit/abapGit/pull/6676
