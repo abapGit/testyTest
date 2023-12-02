@@ -1,10 +1,6 @@
 INTERFACE zif_abapgit_sap_package
   PUBLIC .
-TYPES: BEGIN OF scompkdtln,
-         devclass TYPE c LENGTH 30,
-         ctext    TYPE c LENGTH 60,
-         as4user  TYPE c LENGTH 8,
-       END OF scompkdtln.
+
 
   TYPES:
     ty_devclass_tt TYPE STANDARD TABLE OF devclass WITH DEFAULT KEY .

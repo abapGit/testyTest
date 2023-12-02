@@ -5,8 +5,10 @@ CLASS zcl_abapgit_abap_language_vers DEFINITION
 
   PUBLIC SECTION.
 
-    CONSTANTS c_any_abap_language_version TYPE zif_abapgit_aff_types_v1=>ty_abap_language_version VALUE '*'.
-    CONSTANTS c_feature_flag TYPE string VALUE 'ALAV'.
+    CONSTANTS:
+      c_any_abap_language_version TYPE zif_abapgit_aff_types_v1=>ty_abap_language_version VALUE '*',
+      c_no_abap_language_version  TYPE zif_abapgit_aff_types_v1=>ty_abap_language_version VALUE '-',
+      c_feature_flag              TYPE string VALUE 'ALAV'.
 
     METHODS constructor
       IMPORTING
@@ -66,7 +68,8 @@ CLASS zcl_abapgit_abap_language_vers IMPLEMENTATION.
 
     IF zcl_abapgit_feature=>is_enabled( c_feature_flag ) = abap_false.
       mv_has_abap_language_vers = abap_false.
-    ELSEIF get_abap_language_vers_by_repo( ) = zif_abapgit_dot_abapgit=>c_abap_language_version-undefined.
+    ELSEIF get_abap_language_vers_by_repo( ) = zif_abapgit_dot_abapgit=>c_abap_language_version-undefined
+        OR get_abap_language_vers_by_repo( ) = zif_abapgit_dot_abapgit=>c_abap_language_version-ignore.
       mv_has_abap_language_vers = abap_false.
     ELSE.
       mv_has_abap_language_vers = abap_true.
@@ -191,6 +194,8 @@ CLASS zcl_abapgit_abap_language_vers IMPLEMENTATION.
         rv_abap_language_version = zif_abapgit_aff_types_v1=>co_abap_language_version_src-key_user.
       WHEN zif_abapgit_dot_abapgit=>c_abap_language_version-cloud_development.
         rv_abap_language_version = zif_abapgit_aff_types_v1=>co_abap_language_version_src-cloud_development.
+      WHEN zif_abapgit_dot_abapgit=>c_abap_language_version-ignore.
+        rv_abap_language_version = c_no_abap_language_version.
       WHEN OTHERS. " undefined or feature off
         rv_abap_language_version = c_any_abap_language_version.
     ENDCASE.
@@ -205,7 +210,8 @@ CLASS zcl_abapgit_abap_language_vers IMPLEMENTATION.
     lv_package_version = get_abap_language_vers_by_devc( iv_package ).
 
     CASE get_abap_language_vers_by_repo( ).
-      WHEN zif_abapgit_dot_abapgit=>c_abap_language_version-undefined.
+      WHEN zif_abapgit_dot_abapgit=>c_abap_language_version-undefined
+        OR zif_abapgit_dot_abapgit=>c_abap_language_version-ignore.
         rv_allowed = abap_true.
       WHEN OTHERS.
         IF get_abap_language_vers_by_repo( ) = lv_package_version.
