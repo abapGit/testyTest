@@ -140,7 +140,6 @@ SECONDS=0
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_objects_factory.clas.abap
-sed -i "s/ CREATE OBJECT gi_cts_api TYPE zcl_abapgit_cts_api./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_sap_report TYPE zcl_abapgit_sap_report./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
@@ -228,6 +227,7 @@ SECONDS=0
 ###########################################################################
 
 cp replace/zcl_abapgit_apack* open
+cp replace/zcl_abapgit_cts_api* open
 cp replace/zcl_abapgit_default_transport* open
 cp replace/zcl_abapgit_background* open
 cp replace/zcl_abapgit_diff* open
