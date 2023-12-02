@@ -212,7 +212,6 @@ sed -i "s/lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport )./ A
 # CLAS shims,
 sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx_abapgit_exception.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui.prog.abap' ./open/zcl_abapgit_gui.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_default_transport.prog.abap' ./open/zcl_abapgit_default_transport.clas.abap # https://github.com/abapGit/abapGit/pull/6673
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_repo.prog.abap' ./open/zcl_abapgit_services_repo.clas.abap
 
 # INTF shims,
@@ -229,6 +228,7 @@ SECONDS=0
 ###########################################################################
 
 cp replace/zcl_abapgit_apack* open
+cp replace/zcl_abapgit_default_transport* open
 cp replace/zcl_abapgit_background* open
 cp replace/zcl_abapgit_diff* open
 cp replace/zcl_abapgit_exception_viewer* open
