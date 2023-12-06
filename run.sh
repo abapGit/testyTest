@@ -77,6 +77,7 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_object* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_pckage* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_merge* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_patch* open
+cp abapGit/src/ui/pages/zcl_abapgit_gui_page_data* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_over* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_view* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_run_bckg* open
@@ -245,7 +246,6 @@ cp replace/zcl_abapgit_repo_filter* open
 cp replace/zcl_abapgit_frontend_services* open
 cp replace/zcl_abapgit_objects_super* open
 cp replace/zcl_abapgit_gui_page_codi_base* open
-cp replace/zcl_abapgit_gui_page_data* open
 cp replace/zcl_abapgit_requirement_helper* open
 cp replace/zcl_abapgit_serialize* open
 cp replace/zcl_abapgit_services_abapgit* open
