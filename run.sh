@@ -211,14 +211,13 @@ sed -i "s/lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport )./ A
 # CLAS shims,
 sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx_abapgit_exception.clas.abap
 sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_gui.prog.abap' ./open/zcl_abapgit_gui.clas.abap
-sed -i -e '/PUBLIC SECTION/r ./shims/zcl_abapgit_services_repo.prog.abap' ./open/zcl_abapgit_services_repo.clas.abap
 
 # INTF shims,
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_definitions.prog.abap' ./open/zif_abapgit_definitions.intf.abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_html_viewer.prog.abap' ./open/zif_abapgit_html_viewer.intf.abap
 sed -i -e '/PUBLIC /r ./shims/zif_abapgit_popups.prog.abap' ./open/zif_abapgit_popups.intf.abap
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_longtexts.prog.abap' ./open/zif_abapgit_longtexts.intf.abap
-sed -i -e '/PUBLIC/r ./shims/zif_abapgit_lxe_texts.prog.abap' ./open/zif_abapgit_lxe_texts.intf.abap
+sed -i -e '/PUBLIC/r ./shims/zif_abapgit_lxe_texts.prog.abap' ./open/zif_abapgit_lxe_texts.intf.abap # https://github.com/abapGit/abapGit/pull/6687
 sed -i -e '/PUBLIC/r ./shims/zif_abapgit_sap_report.prog.abap' ./open/zif_abapgit_sap_report.intf.abap
 
 echo "sed done, $SECONDS seconds"
