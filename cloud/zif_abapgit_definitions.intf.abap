@@ -1,17 +1,17 @@
 INTERFACE zif_abapgit_definitions
   PUBLIC .
-types icon_d type c length 4.
-types trfunction type c length 1.
+TYPES icon_d TYPE c LENGTH 4.
+TYPES trfunction TYPE c LENGTH 1.
 
-types: begin of textpool,
-         foo type c length 1,
-       end of textpool.
+TYPES: BEGIN OF textpool,
+         foo TYPE c LENGTH 1,
+       END OF textpool.
 
-types seocmpname type c length 1.
-types seokeyfld type c length 1.
-types seobusobj type c length 1.
-types seoexpose type c length 1.
-types dokil type c length 1.
+TYPES seocmpname TYPE c LENGTH 1.
+TYPES seokeyfld TYPE c LENGTH 1.
+TYPES seobusobj TYPE c LENGTH 1.
+TYPES seoexpose TYPE c LENGTH 1.
+TYPES dokil TYPE c LENGTH 1.
   TYPES:
     ty_string_tt TYPE STANDARD TABLE OF string WITH DEFAULT KEY .
   TYPES:

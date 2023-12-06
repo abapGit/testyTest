@@ -119,7 +119,7 @@ CLASS ZCL_ABAPGIT_FACTORY IMPLEMENTATION.
 
   METHOD get_cts_api.
     IF gi_cts_api IS NOT BOUND.
-      ASSERT 1 = 'decoupled'.
+      CREATE OBJECT gi_cts_api TYPE zcl_abapgit_cts_api.
     ENDIF.
 
     ri_cts_api = gi_cts_api.

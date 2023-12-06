@@ -16,10 +16,12 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_log_viewer IMPLEMENTATION.
-  method show_log.
-  endmethod.
-  method to_html.
-  endmethod.
-  method write_log.
+  METHOD show_log.
+  ENDMETHOD.
+
+  METHOD to_html.
+  ENDMETHOD.
+
+  METHOD write_log.
   ENDMETHOD.
 ENDCLASS.
