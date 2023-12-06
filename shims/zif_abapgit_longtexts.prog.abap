@@ -6,12 +6,12 @@ TYPES tline_tab TYPE STANDARD TABLE OF ty_aline WITH DEFAULT KEY.
 TYPES tline TYPE LINE OF tline_tab.
 
 TYPES: BEGIN OF thead,
-tdobject TYPE c LENGTH 10,
-tdname TYPE c LENGTH 70,
-tdid TYPE c LENGTH 4,
-tdspras TYPE c LENGTH 1,
+         tdobject TYPE c LENGTH 10,
+         tdname   TYPE c LENGTH 70,
+         tdid     TYPE c LENGTH 4,
+         tdspras  TYPE c LENGTH 1,
 * more here
-END OF thead.
+       END OF thead.
 
 TYPES: BEGIN OF dokil,
          id     TYPE c LENGTH 2,
