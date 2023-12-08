@@ -7,10 +7,6 @@ TYPES: BEGIN OF textpool,
          foo TYPE c LENGTH 1,
        END OF textpool.
 
-TYPES seocmpname TYPE c LENGTH 1.
-TYPES seokeyfld TYPE c LENGTH 1.
-TYPES seobusobj TYPE c LENGTH 1.
-TYPES seoexpose TYPE c LENGTH 1.
 TYPES dokil TYPE c LENGTH 1.
   TYPES:
     ty_string_tt TYPE STANDARD TABLE OF string WITH DEFAULT KEY .
