@@ -282,7 +282,7 @@ CLASS zcl_abapgit_objects_check IMPLEMENTATION.
       IF sy-subrc = 0.
         " There's some other action, so object will be recreated after deletion
         <ls_changes>-action = zif_abapgit_objects=>c_deserialize_action-delete_add.
-        <ls_changes>-icon   ='@11@'.
+        <ls_changes>-icon   = '@11@'.
         <ls_changes>-text   = 'Delete and recreate local object'.
       ENDIF.
 
