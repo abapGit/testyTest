@@ -7,10 +7,6 @@ TYPES: BEGIN OF textpool,
          foo TYPE c LENGTH 1,
        END OF textpool.
 
-TYPES seocmpname TYPE c LENGTH 1.
-TYPES seokeyfld TYPE c LENGTH 1.
-TYPES seobusobj TYPE c LENGTH 1.
-TYPES seoexpose TYPE c LENGTH 1.
 TYPES dokil TYPE c LENGTH 1.
   TYPES:
     ty_string_tt TYPE STANDARD TABLE OF string WITH DEFAULT KEY .
@@ -174,16 +170,7 @@ TYPES dokil TYPE c LENGTH 1.
   TYPES: END OF ty_tpool .
   TYPES:
     ty_tpool_tt TYPE STANDARD TABLE OF ty_tpool WITH DEFAULT KEY .
-  TYPES:
-    BEGIN OF ty_obj_attribute,
-      cmpname   TYPE seocmpname,
-      attkeyfld TYPE seokeyfld,
-      attbusobj TYPE seobusobj,
-      exposure  TYPE seoexpose,
-    END OF ty_obj_attribute .
-  TYPES:
-    ty_obj_attribute_tt TYPE STANDARD TABLE OF ty_obj_attribute WITH DEFAULT KEY
-                             WITH NON-UNIQUE SORTED KEY cmpname COMPONENTS cmpname .
+
   TYPES:
     BEGIN OF ty_transport_to_branch,
       branch_name TYPE string,
