@@ -247,7 +247,7 @@ cp replace/zcl_abapgit_objects_super* open
 cp replace/zcl_abapgit_gui_page_codi_base* open
 cp replace/zcl_abapgit_requirement_helper* open
 cp replace/zcl_abapgit_serialize* open
-cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6690
+cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 cp replace/zcl_abapgit_user_record* open
 cp replace/zcl_abapgit_sap_package* open
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
