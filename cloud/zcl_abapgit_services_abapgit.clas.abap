@@ -9,7 +9,6 @@ CLASS zcl_abapgit_services_abapgit DEFINITION
     CONSTANTS c_abapgit_homepage TYPE string VALUE 'https://www.abapgit.org' ##NO_TEXT.
     CONSTANTS c_abapgit_wikipage TYPE string VALUE 'https://docs.abapgit.org' ##NO_TEXT.
     CONSTANTS c_dotabap_homepage TYPE string VALUE 'https://dotabap.org' ##NO_TEXT.
-    CONSTANTS c_abapgit_class TYPE char30 VALUE `ZCX_ABAPGIT_EXCEPTION` ##NO_TEXT.
     CONSTANTS c_changelog_path TYPE string VALUE '/blob/main/changelog.txt' ##NO_TEXT.
 
     CLASS-METHODS open_abapgit_homepage
@@ -28,29 +27,11 @@ CLASS zcl_abapgit_services_abapgit DEFINITION
     CLASS-METHODS open_abapgit_changelog
       RAISING
         zcx_abapgit_exception .
-    CLASS-METHODS is_installed
-      RETURNING
-        VALUE(rv_devclass) TYPE I_CustABAPObjDirectoryEntry-ABAPPackage .
-    CLASS-METHODS prepare_gui_startup
-      RAISING
-        zcx_abapgit_exception .
     CLASS-METHODS get_abapgit_tcode
       RETURNING
         VALUE(rv_tcode) TYPE string .
   PROTECTED SECTION.
   PRIVATE SECTION.
-
-    CLASS-METHODS set_start_repo_from_package
-      IMPORTING
-        !iv_package TYPE I_CustABAPObjDirectoryEntry-ABAPPackage
-      RAISING
-        zcx_abapgit_exception .
-    CLASS-METHODS get_package_from_adt
-      RETURNING
-        VALUE(rv_package) TYPE I_CustABAPObjDirectoryEntry-ABAPPackage .
-    CLASS-METHODS check_sapgui
-      RAISING
-        zcx_abapgit_exception .
     CLASS-METHODS open_url_in_browser
       IMPORTING
         !iv_url TYPE string
@@ -63,66 +44,57 @@ ENDCLASS.
 CLASS zcl_abapgit_services_abapgit IMPLEMENTATION.
 
 
-  METHOD check_sapgui.
-
-    ASSERT 1 = 'decoupled'.
-
-  ENDMETHOD.
-
-
   METHOD get_abapgit_tcode.
-    ASSERT 1 = 'decoupled'.
-  ENDMETHOD.
+    CONSTANTS lc_report_tcode_hex TYPE x VALUE '80'.
+    DATA lt_tcodes TYPE STANDARD TABLE OF string.
 
+    TRY.
+        SELECT tcode
+          FROM ('TSTC')
+          
+          WHERE pgmna = @sy-cprog
+          AND cinfo = @lc_report_tcode_hex
+          ORDER BY tcode INTO TABLE @lt_tcodes.
+      CATCH cx_sy_dynamic_osql_error.
+* ABAP Cloud/Steampunk compatibility
+        RETURN.
+    ENDTRY.
 
-  METHOD get_package_from_adt.
-
-    ASSERT 1 = 'decoupled'.
-  ENDMETHOD.
-
-
-  METHOD is_installed.
-
-    ASSERT 1 = 'decoupled'.
-
+    IF lines( lt_tcodes ) > 0.
+      READ TABLE lt_tcodes INDEX 1 INTO rv_tcode.
+    ENDIF.
   ENDMETHOD.
 
 
   METHOD open_abapgit_changelog.
-    ASSERT 1 = 'decoupled'.
+    open_url_in_browser( |{ c_abapgit_repo }{ c_changelog_path }| ).
   ENDMETHOD.
 
 
   METHOD open_abapgit_homepage.
-    ASSERT 1 = 'decoupled'.
+    open_url_in_browser( |{ c_abapgit_homepage }/{ iv_page }| ).
   ENDMETHOD.
 
 
   METHOD open_abapgit_wikipage.
-    ASSERT 1 = 'decoupled'.
+    open_url_in_browser( |{ c_abapgit_wikipage }/{ iv_page }| ).
   ENDMETHOD.
 
 
   METHOD open_dotabap_homepage.
-    ASSERT 1 = 'decoupled'.
+    open_url_in_browser( c_dotabap_homepage ).
   ENDMETHOD.
 
 
   METHOD open_url_in_browser.
-    ASSERT 1 = 'decoupled'.
+    DATA lx_error TYPE REF TO zcx_abapgit_exception.
+
+    TRY.
+        zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = iv_url ).
+      CATCH zcx_abapgit_exception INTO lx_error.
+        zcx_abapgit_exception=>raise( iv_text     = 'Opening page in external browser failed.'
+                                      ix_previous = lx_error ).
+    ENDTRY.
   ENDMETHOD.
 
-
-  METHOD prepare_gui_startup.
-
-    ASSERT 1 = 'decoupled'.
-
-  ENDMETHOD.
-
-
-  METHOD set_start_repo_from_package.
-
-    ASSERT 1 = 'decoupled'.
-
-  ENDMETHOD.
 ENDCLASS.

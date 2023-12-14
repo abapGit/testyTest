@@ -30,7 +30,7 @@ cp abapGit/src/objects/aff_types/zif* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif* open
 cp abapGit/src/objects/core/zcl_abapgit_f* open
-cp abapGit/src/objects/core/zif_abapgit_f* open
+#sdf cp abapGit/src/objects/core/zif_abapgit_f* open
 cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
 cp abapGit/src/objects/core/zcl_abapgit_o* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
@@ -52,7 +52,7 @@ cp abapGit/src/persist/zcl_abapgit_persistence_db* open
 cp abapGit/src/persist/zcl_abapgit_persistence_repo* open
 cp abapGit/src/persist/zcl_abapgit_persistence_user* open
 cp abapGit/src/persist/zif* open
-cp abapGit/src/progress/z* open
+cp abapGit/src/ui/progress/z* open
 cp abapGit/src/repo/zcl* open
 cp abapGit/src/repo/zif* open
 cp abapGit/src/stage/z* open
@@ -95,8 +95,8 @@ cp abapGit/src/ui/popups/z* open
 cp abapGit/src/ui/routing/z* open
 cp abapGit/src/ui/zcl_abapgit_ui* open
 cp abapGit/src/ui/zif* open
-cp abapGit/src/utils/zcl_abapgit_abap_language_vers.* open
-cp abapGit/src/utils/zcl_abapgit_environment.clas.abap open
+#sdf cp abapGit/src/utils/zcl_abapgit_abap_language_vers.* open
+#sdf cp abapGit/src/utils/zcl_abapgit_environment.clas.abap open
 cp abapGit/src/utils/zcl_abapgit_item_state* open
 cp abapGit/src/utils/zcl_abapgit_log* open
 cp abapGit/src/utils/zcl_abapgit_news* open
@@ -112,8 +112,9 @@ cp abapGit/src/utils/zif* open
 cp abapGit/src/xml/z* open
 cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
-cp abapGit/src/zcl_abapgit_feature* open
-cp abapGit/src/zcl_abapgit_settings.clas* open
+cp abapGit/src/env/z* open
+#sdf cp abapGit/src/zcl_abapgit_feature* open
+#sdf cp abapGit/src/zcl_abapgit_settings.clas* open
 cp abapGit/src/zcx* open
 cp abapGit/src/zif* open
 
@@ -122,8 +123,11 @@ SECONDS=0
 
 rm -f open/*xml*.clas.testclasses.abap
 rm -f open/zcl_abapgit_data_supporter.clas.*
+rm -f open/zcl_abapgit_language.*
+rm -f open/zif_abapgit_object_tabl.*
 rm -f open/zcl_abapgit_diff.clas.testclasses.abap
 rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
+rm -f open/zcl_abapgit_environment.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
 rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
 rm -f open/zcl_abapgit_injector.clas.testclasses.abap
@@ -141,6 +145,7 @@ SECONDS=0
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_objects_factory.clas.abap
+sed -i "s/ CREATE OBJECT gi_function_module TYPE zcl_abapgit_function_module./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_sap_report TYPE zcl_abapgit_sap_report./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
@@ -157,6 +162,8 @@ sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zcl_abapgit_gui_page_flow.cla
 sed -i 's/ TYPE e071-obj_name/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
 sed -i 's/ TYPE e071k-object/ TYPE char4/ig' ./open/zif_abapgit_cts_api.intf.abap
 sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_services_abapgit.clas.abap
+sed -i 's/ OF tcode/ OF string/ig' ./open/zcl_abapgit_services_abapgit.clas.abap
 sed -i 's/ TYPE e071k-objname/ TYPE char30/ig' ./open/zif_abapgit_cts_api.intf.abap
 sed -i 's/ TYPE e071-obj_name/ TYPE char30/ig' ./open/zif_abapgit_cts_api.intf.abap
 sed -i 's/ TYPE e071k-tabkey/ TYPE char120/ig' ./open/zif_abapgit_cts_api.intf.abap
@@ -247,7 +254,7 @@ cp replace/zcl_abapgit_objects_super* open
 cp replace/zcl_abapgit_gui_page_codi_base* open
 cp replace/zcl_abapgit_requirement_helper* open
 cp replace/zcl_abapgit_serialize* open
-cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
+# cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 cp replace/zcl_abapgit_user_record* open
 cp replace/zcl_abapgit_sap_package* open
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
