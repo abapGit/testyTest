@@ -162,6 +162,8 @@ sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zcl_abapgit_gui_page_flow.cla
 sed -i 's/ TYPE e071-obj_name/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
 sed -i 's/ TYPE e071k-object/ TYPE char4/ig' ./open/zif_abapgit_cts_api.intf.abap
 sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zif_abapgit_cts_api.intf.abap
+sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_services_abapgit.clas.abap
+sed -i 's/ OF tcode/ OF string/ig' ./open/zcl_abapgit_services_abapgit.clas.abap
 sed -i 's/ TYPE e071k-objname/ TYPE char30/ig' ./open/zif_abapgit_cts_api.intf.abap
 sed -i 's/ TYPE e071-obj_name/ TYPE char30/ig' ./open/zif_abapgit_cts_api.intf.abap
 sed -i 's/ TYPE e071k-tabkey/ TYPE char120/ig' ./open/zif_abapgit_cts_api.intf.abap
@@ -252,7 +254,7 @@ cp replace/zcl_abapgit_objects_super* open
 cp replace/zcl_abapgit_gui_page_codi_base* open
 cp replace/zcl_abapgit_requirement_helper* open
 cp replace/zcl_abapgit_serialize* open
-cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
+# cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 cp replace/zcl_abapgit_user_record* open
 cp replace/zcl_abapgit_sap_package* open
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
