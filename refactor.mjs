@@ -11,7 +11,8 @@ const replace = [
   {search: " icon_create",                        replace: " '@11@'"},
   {search: " icon_delete",                        replace: " '@11@'"},
   {search: " icon_okay",                          replace: " '@11@'"},
-  {search: " icon_adopt",                         replace: "'@11@'"},
+  {search: " icon_set_state",                     replace: " '@11@'"},
+  {search: " icon_adopt",                         replace: " '@11@'"},
 
   {search: " tadir-object",                       replace: " I_CustABAPObjDirectoryEntry-ABAPObjectType"},
   {search: " tadir-obj_name",                     replace: " I_CustABAPObjDirectoryEntry-ABAPObject"},
