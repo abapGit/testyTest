@@ -52,6 +52,7 @@ cp abapGit/src/persist/zcl_abapgit_persistence_repo* open
 cp abapGit/src/persist/zcl_abapgit_persistence_user* open
 cp abapGit/src/persist/zif* open
 cp abapGit/src/ui/progress/z* open
+cp abapGit/src/repo/filter/z* open
 cp abapGit/src/repo/zcl* open
 cp abapGit/src/repo/zif* open
 cp abapGit/src/syntax/z* open
