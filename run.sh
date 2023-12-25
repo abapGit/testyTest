@@ -30,7 +30,6 @@ cp abapGit/src/objects/aff_types/zif* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
 cp abapGit/src/objects/aff/zif* open
 cp abapGit/src/objects/core/zcl_abapgit_f* open
-#sdf cp abapGit/src/objects/core/zif_abapgit_f* open
 cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
 cp abapGit/src/objects/core/zcl_abapgit_o* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
@@ -94,27 +93,19 @@ cp abapGit/src/ui/popups/z* open
 cp abapGit/src/ui/routing/z* open
 cp abapGit/src/ui/zcl_abapgit_ui* open
 cp abapGit/src/ui/zif* open
-#sdf cp abapGit/src/utils/zcl_abapgit_abap_language_vers.* open
-#sdf cp abapGit/src/utils/zcl_abapgit_environment.clas.abap open
 cp abapGit/src/repo/utils/z* open
 cp abapGit/src/repo/stage/z* open
 cp abapGit/src/utils/zcl_abapgit_log* open
-#cp abapGit/src/utils/zcl_abapgit_news* open
 cp abapGit/src/utils/zcl_abapgit_path* open
-#cp abapGit/src/utils/zcl_abapgit_repo_labels* open
 cp abapGit/src/utils/zcl_abapgit_string_buffer* open
 cp abapGit/src/utils/zcl_abapgit_string_map* open
 cp abapGit/src/utils/zcl_abapgit_timer* open
 cp abapGit/src/utils/zcl_abapgit_utils* open
-#cp abapGit/src/utils/zcl_abapgit_version* open
-#cp abapGit/src/utils/zcl_abapgit_zip* open
 cp abapGit/src/utils/zif* open
 cp abapGit/src/xml/z* open
 cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
 cp abapGit/src/env/z* open
-#sdf cp abapGit/src/zcl_abapgit_feature* open
-#sdf cp abapGit/src/zcl_abapgit_settings.clas* open
 cp abapGit/src/zcx* open
 cp abapGit/src/zif* open
 
