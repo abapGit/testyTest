@@ -5,7 +5,12 @@
   "dependencies": [
     {
       "url": "https://github.com/open-abap/open-abap-core",
-      "folder": "/deps",
+      "folder": "/deps1",
+      "files": "/src/**/*.*"
+    },
+    {
+      "url": "https://github.com/open-abap/open-abap-gui",
+      "folder": "/deps2",
       "files": "/src/**/*.*"
     }
   ],

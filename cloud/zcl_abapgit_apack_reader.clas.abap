@@ -72,10 +72,9 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_apack_reader IMPLEMENTATION.
-  METHOD refresh.
-    RETURN. " todo, implement method
-  ENDMETHOD.
 
+  METHOD refresh.
+  ENDMETHOD.
 
   METHOD constructor.
     mv_package_name = iv_package_name.

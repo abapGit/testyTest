@@ -73,6 +73,10 @@ ENDCLASS.
 
 CLASS zcl_abapgit_gui_page_codi_base IMPLEMENTATION.
 
+  METHOD render_ci_report.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
+
   METHOD build_base_menu.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.

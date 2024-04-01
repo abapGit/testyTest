@@ -244,6 +244,7 @@ cp replace/zcl_abapgit_objects_activation* open
 cp replace/zcl_abapgit_repo_filter* open
 cp replace/zcl_abapgit_frontend_services* open
 cp replace/zcl_abapgit_oo_factory* open
+cp replace/zcl_abapgit_lxe_texts* open
 cp replace/zif_abapgit_oo_object_fnc* open
 cp replace/zcl_abapgit_objects_super* open
 cp replace/zcl_abapgit_gui_page_codi_base* open
