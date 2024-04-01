@@ -23,6 +23,7 @@ const replace = [
   {search: " TYPE tadir-srcsystem", replace: " TYPE c LENGTH 10"},
   {search: " TYPE tadir-delflag", replace: " TYPE abap_bool"},
   {search: " TYPE tadir-genflag", replace: " TYPE abap_bool"},
+  {search: " TYPE trfunction", replace: " TYPE char1"},
   {search: " TYPE scompkdtln-devclass", replace: " TYPE devclass"},
   {search: " TYPE seoclsname", replace: " TYPE char30"},
   {search: " TYPE wwwdatatab-objid", replace: " TYPE char40"},

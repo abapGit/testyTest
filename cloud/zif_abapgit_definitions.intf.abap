@@ -72,8 +72,8 @@ TYPES dokil TYPE c LENGTH 1.
     END OF ty_dependencies .
   TYPES:
     BEGIN OF ty_transport_type,
-      request TYPE trfunction,
-      task    TYPE trfunction,
+      request TYPE char1,
+      task    TYPE char1,
     END OF ty_transport_type .
   TYPES:
     BEGIN OF ty_transport,

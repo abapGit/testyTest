@@ -157,8 +157,8 @@ INTERFACE zif_abapgit_cts_api
   METHODS change_transport_type
     IMPORTING
       !iv_transport_request   TYPE sxco_transport
-      !iv_transport_type_from TYPE trfunction
-      !iv_transport_type_to   TYPE trfunction
+      !iv_transport_type_from TYPE char1
+      !iv_transport_type_to   TYPE char1
     RAISING
       zcx_abapgit_exception.
 ENDINTERFACE.
