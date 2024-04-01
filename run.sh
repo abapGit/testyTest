@@ -128,7 +128,7 @@ rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
 rm -f open/zcl_abapgit_objects_activation.clas.testclasses.abap
 rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
 rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
-rm -f open/zcl_abapgit_requirement_helper.clas.testclasses.abap
+rm -f open/zcl_abapgit_repo_requirements.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
 rm -f open/zcl_abapgit_user_record.clas.testclasses.abap
 
@@ -245,7 +245,7 @@ cp replace/zcl_abapgit_repo_filter* open
 cp replace/zcl_abapgit_frontend_services* open
 cp replace/zcl_abapgit_objects_super* open
 cp replace/zcl_abapgit_gui_page_codi_base* open
-cp replace/zcl_abapgit_requirement_helper* open
+cp replace/zcl_abapgit_repo_requirements* open
 cp replace/zcl_abapgit_serialize* open
 # cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 cp replace/zcl_abapgit_user_record* open
