@@ -96,12 +96,7 @@ cp abapGit/src/ui/zcl_abapgit_ui* open
 cp abapGit/src/ui/zif* open
 cp abapGit/src/repo/utils/z* open
 cp abapGit/src/repo/stage/z* open
-cp abapGit/src/utils/zcl_abapgit_log* open
-cp abapGit/src/utils/zcl_abapgit_path* open
-cp abapGit/src/utils/zcl_abapgit_string_buffer* open
-cp abapGit/src/utils/zcl_abapgit_string_map* open
-cp abapGit/src/utils/zcl_abapgit_timer* open
-cp abapGit/src/utils/zcl_abapgit_utils* open
+cp abapGit/src/utils/zcl* open
 cp abapGit/src/utils/zif* open
 cp abapGit/src/xml/z* open
 cp abapGit/src/zcl_abapgit_factory* open
