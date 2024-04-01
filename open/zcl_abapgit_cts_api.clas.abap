@@ -16,6 +16,10 @@ ENDCLASS.
 
 CLASS zcl_abapgit_cts_api IMPLEMENTATION.
 
+  METHOD zif_abapgit_cts_api~change_transport_type.
+    RETURN.
+  ENDMETHOD.
+
   METHOD zif_abapgit_cts_api~confirm_transport_messages.
     RETURN.
   ENDMETHOD.

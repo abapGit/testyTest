@@ -120,6 +120,11 @@ CLASS zcl_abapgit_gui_router DEFINITION
         !iv_url TYPE csequence
       RAISING
         zcx_abapgit_exception .
+    METHODS call_transaction
+      IMPORTING
+        !iv_tcode TYPE csequence
+      RAISING
+        zcx_abapgit_exception .
     METHODS get_state_settings
       IMPORTING
         !ii_event       TYPE REF TO zif_abapgit_gui_event
@@ -137,7 +142,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_abapgit_gui_router IMPLEMENTATION.
+CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
 
 
   METHOD abapgit_services_actions.
@@ -153,6 +158,22 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
   METHOD call_browser.
 
     zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = |{ iv_url }| ).
+
+  ENDMETHOD.
+
+
+  METHOD call_transaction.
+
+    DATA lv_msg TYPE c LENGTH 200.
+
+    ASSERT 1 = 'replacedByRefactorMJS'.
+    IF sy-subrc <> 0.
+      lv_msg = |Error starting transaction { iv_tcode }: { lv_msg }|.
+      ASSERT 1 = 'messageStatementRemoved'.
+    ELSE.
+      lv_msg = |Transaction { iv_tcode } opened in a new window|.
+      ASSERT 1 = 'messageStatementRemoved'.
+    ENDIF.
 
   ENDMETHOD.
 
@@ -373,9 +394,6 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
     ENDIF.
 
     IF ri_page IS INITIAL.
-      " force refresh on stage, to make sure the latest local and remote files are used
-      lo_repo->refresh( ).
-
       ri_page = zcl_abapgit_gui_page_stage=>create(
         io_repo       = lo_repo
         iv_seed       = lv_seed
@@ -672,6 +690,10 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
           iv_line       = ii_event->query( )->get( 'LINE' )
           iv_new_window = ii_event->query( )->get( 'NEW_WINDOW' ) ).
 
+        rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
+
+      WHEN zif_abapgit_definitions=>c_action-jump_transaction.
+        call_transaction( |{ ii_event->query( )->get( 'TRANSACTION' ) }| ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
 
       WHEN zif_abapgit_definitions=>c_action-jump_transport.

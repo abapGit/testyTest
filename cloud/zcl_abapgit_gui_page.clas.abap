@@ -258,9 +258,9 @@ CLASS zcl_abapgit_gui_page IMPLEMENTATION.
       lv_gui_patch         TYPE zif_abapgit_frontend_services=>ty_gui_patch,
       li_frontend_services TYPE REF TO zif_abapgit_frontend_services.
 
-    " With SAGUI 8.00 PL3 and 7.70 PL13 edge browser control is basically working.
+    " With SAP GUI 8.00 PL3 and 7.70 PL13 Edge browser control is basically working.
     " For lower releases we render the browser control warning
-    " an toggle it via JS function toggleBrowserControlWarning.
+    " and toggle it via JS function toggleBrowserControlWarning.
 
     rv_result = abap_true.
 
@@ -309,7 +309,7 @@ CLASS zcl_abapgit_gui_page IMPLEMENTATION.
 
     ii_html->add( 'var gCommandPalette = new CommandPalette(enumerateUiActions, {' ).
     ii_html->add( '  toggleKey: "F1",' ).
-    ii_html->add( '  hotkeyDescription: "Command ..."' ).
+    ii_html->add( '  hotkeyDescription: "Command Palette"' ).
     ii_html->add( '});' ).
 
   ENDMETHOD.

@@ -226,6 +226,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_FLOW IMPLEMENTATION.
           iv_key    = lv_key ).
 
         rs_handled-page = zcl_abapgit_gui_page_stage=>create(
+          ii_force_refresh = abap_false
           io_repo       = lo_online
           ii_obj_filter = lo_filter ).
 
@@ -350,7 +351,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_FLOW IMPLEMENTATION.
       ENDIF.
 
       IF ls_feature-branch IS NOT INITIAL AND ls_feature-branch-up_to_date = abap_false.
-        ri_html->add( 'Branch not up to date<br><br>' ).
+        ri_html->add( '<b>Branch not up to date</b><br><br>' ).
         CONTINUE.
       ENDIF.
 

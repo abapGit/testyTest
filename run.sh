@@ -52,6 +52,7 @@ cp abapGit/src/persist/zcl_abapgit_persistence_repo* open
 cp abapGit/src/persist/zcl_abapgit_persistence_user* open
 cp abapGit/src/persist/zif* open
 cp abapGit/src/ui/progress/z* open
+cp abapGit/src/ui/zcl_abapgit_frontend_no_gui* open
 cp abapGit/src/repo/filter/z* open
 cp abapGit/src/repo/zcl* open
 cp abapGit/src/repo/zif* open
@@ -64,12 +65,12 @@ cp abapGit/src/ui/core/zcx* open
 cp abapGit/src/ui/core/zif* open
 cp abapGit/src/ui/lib/z* open
 cp abapGit/src/ui/pages/*w3mi* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addofflin* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_addonline* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_code_insp* open
+cp abapGit/src/ui/pages/dlg/zcl_abapgit_gui_page_addofflin* open
+cp abapGit/src/ui/pages/dlg/zcl_abapgit_gui_page_addonline* open
+cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_commit* open
 cp abapGit/src/ui/flow/z* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_db* open
+cp abapGit/src/ui/pages/db/zcl_abapgit_gui_page_db* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_pull* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_diff* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_ex_object* open
@@ -80,14 +81,14 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_data* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_over* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_repo_view* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_run_bckg* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_bckg* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_glob* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_info* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_locl* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_pers* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_sett_remo* open
+cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_bckg* open
+cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_glob* open
+cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_info* open
+cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_locl* open
+cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_pers* open
+cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_remo* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_stage* open
-cp abapGit/src/ui/pages/zcl_abapgit_gui_page_syntax* open
+cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_syntax* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tags* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tutorial* open
 cp abapGit/src/ui/popups/z* open
@@ -127,7 +128,7 @@ rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
 rm -f open/zcl_abapgit_objects_activation.clas.testclasses.abap
 rm -f open/zcl_abapgit_objects_check.clas.testclasses.abap
 rm -f open/zcl_abapgit_persistence_user.clas.testclasses.abap
-rm -f open/zcl_abapgit_requirement_helper.clas.testclasses.abap
+rm -f open/zcl_abapgit_repo_requirements.clas.testclasses.abap
 rm -f open/zcl_abapgit_ui_injector.clas.testclasses.abap
 rm -f open/zcl_abapgit_user_record.clas.testclasses.abap
 
@@ -242,9 +243,12 @@ cp replace/zcl_abapgit_objects.clas* open
 cp replace/zcl_abapgit_objects_activation* open
 cp replace/zcl_abapgit_repo_filter* open
 cp replace/zcl_abapgit_frontend_services* open
+cp replace/zcl_abapgit_oo_factory* open
+cp replace/zcl_abapgit_lxe_texts* open
+cp replace/zif_abapgit_oo_object_fnc* open
 cp replace/zcl_abapgit_objects_super* open
 cp replace/zcl_abapgit_gui_page_codi_base* open
-cp replace/zcl_abapgit_requirement_helper* open
+cp replace/zcl_abapgit_repo_requirements* open
 cp replace/zcl_abapgit_serialize* open
 # cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 cp replace/zcl_abapgit_user_record* open

@@ -121,7 +121,7 @@ TYPES tdline TYPE c LENGTH 1.
   PROTECTED SECTION.
   PRIVATE SECTION.
 
-    CONSTANTS c_generic_error_msg TYPE string VALUE `An error occured (ZCX_ABAPGIT_EXCEPTION)`.
+    CONSTANTS c_generic_error_msg TYPE string VALUE `An error occurred (ZCX_ABAPGIT_EXCEPTION)`.
 
     CLASS-METHODS split_text_to_symsg
       IMPORTING

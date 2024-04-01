@@ -247,7 +247,7 @@ CLASS zcl_abapgit_html_form_utils IMPLEMENTATION.
     DATA:
       lt_fields TYPE zif_abapgit_html_form=>ty_fields,
       lv_value  TYPE string,
-      lv_number TYPE i.
+      lv_number TYPE p LENGTH 16 DECIMALS 0.
 
     FIELD-SYMBOLS <ls_field> LIKE LINE OF lt_fields.
 
@@ -267,15 +267,21 @@ CLASS zcl_abapgit_html_form_utils IMPLEMENTATION.
       ENDIF.
       CASE <ls_field>-type.
         WHEN zif_abapgit_html_form=>c_field_type-text.
-          IF <ls_field>-min <> cl_abap_math=>min_int4 AND strlen( lv_value ) < <ls_field>-min.
+          IF <ls_field>-min = <ls_field>-max AND strlen( lv_value ) <> <ls_field>-min.
             ro_validation_log->set(
               iv_key = <ls_field>-name
-              iv_val = |{ <ls_field>-label } must not be shorter than { <ls_field>-min } characters| ).
-          ENDIF.
-          IF <ls_field>-max <> cl_abap_math=>max_int4 AND strlen( lv_value ) > <ls_field>-max.
-            ro_validation_log->set(
-              iv_key = <ls_field>-name
-              iv_val = |{ <ls_field>-label } must not be longer than { <ls_field>-max } characters| ).
+              iv_val = |{ <ls_field>-label } must be exactly { <ls_field>-min } characters long| ).
+          ELSE.
+            IF <ls_field>-min <> cl_abap_math=>min_int4 AND strlen( lv_value ) < <ls_field>-min.
+              ro_validation_log->set(
+                iv_key = <ls_field>-name
+                iv_val = |{ <ls_field>-label } must not be shorter than { <ls_field>-min } characters| ).
+            ENDIF.
+            IF <ls_field>-max <> cl_abap_math=>max_int4 AND strlen( lv_value ) > <ls_field>-max.
+              ro_validation_log->set(
+                iv_key = <ls_field>-name
+                iv_val = |{ <ls_field>-label } must not be longer than { <ls_field>-max } characters| ).
+            ENDIF.
           ENDIF.
         WHEN zif_abapgit_html_form=>c_field_type-number.
           TRY.

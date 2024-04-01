@@ -114,6 +114,14 @@ CLASS zcl_abapgit_gui_page_sett_remo DEFINITION
       RAISING
         zcx_abapgit_exception.
 
+    METHODS prepare_for_compare
+      IMPORTING
+        io_form_data        TYPE REF TO zcl_abapgit_string_map
+      RETURNING
+        VALUE(ro_form_data) TYPE REF TO zcl_abapgit_string_map
+      RAISING
+        zcx_abapgit_exception.
+
     METHODS check_protection
       RAISING
         zcx_abapgit_exception.
@@ -121,6 +129,7 @@ CLASS zcl_abapgit_gui_page_sett_remo DEFINITION
     METHODS validate_form
       IMPORTING
         io_form_data             TYPE REF TO zcl_abapgit_string_map
+        iv_connection_check      TYPE abap_bool DEFAULT abap_true
       RETURNING
         VALUE(ro_validation_log) TYPE REF TO zcl_abapgit_string_map
       RAISING
@@ -583,7 +592,7 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
 
     IF mo_popup_picklist IS BOUND AND
       ( mo_popup_picklist->is_fulfilled( ) = abap_true OR mo_popup_picklist->is_in_page( ) = abap_false ).
-      " Picklist is either fullfilled OR
+      " Picklist is either fulfilled OR
       " it was on its own page and user went back from it via F3/ESC and the picklist had no "graceful back" handler
       CASE mo_popup_picklist->id( ).
         WHEN c_event-choose_pull_request.
@@ -655,6 +664,44 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD prepare_for_compare.
+
+    ro_form_data = zcl_abapgit_string_map=>create( )->merge( io_form_data ).
+
+    CASE ro_form_data->get( c_id-head_type ).
+      WHEN c_head_types-branch.
+        ro_form_data->set(
+          iv_key = c_id-pull_request
+          iv_val = '' ).
+        ro_form_data->set(
+          iv_key = c_id-commit
+          iv_val = '' ).
+        ro_form_data->set(
+          iv_key = c_id-tag
+          iv_val = '' ).
+      WHEN c_head_types-tag.
+        ro_form_data->set(
+          iv_key = c_id-pull_request
+          iv_val = '' ).
+        ro_form_data->set(
+          iv_key = c_id-commit
+          iv_val = '' ).
+        ro_form_data->set(
+          iv_key = c_id-branch
+          iv_val = '' ).
+      WHEN c_head_types-commit.
+        ro_form_data->set(
+          iv_key = c_id-pull_request
+          iv_val = '' ).
+      WHEN c_head_types-pull_request.
+        ro_form_data->set(
+          iv_key = c_id-commit
+          iv_val = '' ).
+    ENDCASE.
+
+  ENDMETHOD.
+
+
   METHOD render_content.
 
     CREATE OBJECT ri_html TYPE zcl_abapgit_html.
@@ -717,7 +764,7 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
 
     COMMIT WORK AND WAIT.
 
-    MESSAGE 'Settings succesfully saved' TYPE 'S'.
+    MESSAGE 'Settings successfully saved' TYPE 'S'.
 
     mv_refresh_on_back = abap_true.
     ms_settings_snapshot = get_remote_settings_from_repo( mo_repo ).
@@ -864,6 +911,10 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
             iv_key = c_id-url
             iv_val = lx_error->get_text( ) ).
       ENDTRY.
+
+      IF iv_connection_check = abap_true.
+        zcl_abapgit_http=>check_connection( lv_url ).
+      ENDIF.
     ENDIF.
 
     IF lv_offline = abap_false.
@@ -890,7 +941,7 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
 
           " Cannot check for commit existence currently (needs API that doesn't rely on finding the first commit
           " in the branch), check format instead
-          IF lv_commit CN '0123456789abcdef'.
+          IF lv_commit CN '0123456789abcdef' AND ro_validation_log->get( c_id-commit ) IS INITIAL.
             ro_validation_log->set(
               iv_key = c_id-commit
               iv_val = 'Commit needs to be hexadecimal and in lowercase' ).
@@ -901,16 +952,19 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
             iv_val = 'Unknown head type' ).
       ENDCASE.
 
-      TRY.
-          IF lv_branch IS NOT INITIAL.
-            lo_branch_list = zcl_abapgit_git_factory=>get_git_transport( )->branches( lv_url ).
+      IF lv_branch IS NOT INITIAL.
+        " Problems with getting branches in general are raised to the page
+        lo_branch_list = zcl_abapgit_git_factory=>get_git_transport( )->branches( lv_url ).
+
+        TRY.
+            " Issues with finding a particular branch are shown next to corresponding field
             lo_branch_list->find_by_name( lv_branch ).
-          ENDIF.
-        CATCH zcx_abapgit_exception INTO lx_error.
-          ro_validation_log->set(
-            iv_key = lv_branch_check_error_id
-            iv_val = lx_error->get_text( ) ).
-      ENDTRY.
+          CATCH zcx_abapgit_exception INTO lx_error.
+            ro_validation_log->set(
+              iv_key = lv_branch_check_error_id
+              iv_val = lx_error->get_text( ) ).
+        ENDTRY.
+      ENDIF.
     ENDIF.
   ENDMETHOD.
 
@@ -931,7 +985,7 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
         ENDIF.
 
         rs_handled-state = zcl_abapgit_html_form_utils=>create( mo_form )->exit(
-          io_form_data    = mo_form_data
+          io_form_data    = prepare_for_compare( mo_form_data )
           io_compare_with = initialize_form_data( ) ).
 
       WHEN c_event-choose_url.
@@ -951,13 +1005,13 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
         mo_validation_log->clear( ).
 
       WHEN c_event-choose_branch.
-        choose_branch( ). " Unformly handle state below
+        choose_branch( ). " Uniformly handle state below
 
       WHEN c_event-choose_tag.
-        choose_tag( ). " Unformly handle state below
+        choose_tag( ). " Uniformly handle state below
 
       WHEN c_event-choose_pull_request.
-        choose_pr( ). " Unformly handle state below
+        choose_pr( ). " Uniformly handle state below
 
       WHEN c_event-choose_commit.
         lv_commit = choose_commit( ).
@@ -989,7 +1043,7 @@ CLASS zcl_abapgit_gui_page_sett_remo IMPLEMENTATION.
     IF mo_popup_picklist IS BOUND. " Uniform popup state handling
       " This should happen only for a new popup because
       " on the first re-render main component event handling is blocked
-      " and not called again until the popup distruction
+      " and not called again until the popup destruction
       IF mo_popup_picklist->is_in_page( ) = abap_true.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-re_render.
       ELSE.

@@ -56,6 +56,14 @@ CLASS zcl_abapgit_gui_page_codi_base DEFINITION PUBLIC ABSTRACT INHERITING FROM 
       RETURNING
         VALUE(ro_menu) TYPE REF TO zcl_abapgit_html_toolbar .
     DATA mv_summary TYPE string.
+
+    METHODS render_ci_report
+      IMPORTING
+        !ii_html        TYPE REF TO zif_abapgit_html
+        !iv_variant     TYPE any
+        !iv_success_msg TYPE string
+      RAISING
+        zcx_abapgit_exception.
   PRIVATE SECTION.
     CONSTANTS c_object_separator TYPE c LENGTH 1 VALUE '|'.
     CONSTANTS c_ci_sig TYPE string VALUE 'cinav:'.
@@ -64,6 +72,10 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_gui_page_codi_base IMPLEMENTATION.
+
+  METHOD render_ci_report.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
 
   METHOD build_base_menu.
     ASSERT 1 = 'decoupled'.

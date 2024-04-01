@@ -81,10 +81,10 @@ CLASS ZCL_ABAPGIT_REPO_CHECKSUMS IMPLEMENTATION.
       <ls_local>       LIKE LINE OF it_local,
       <ls_cs_file_sig> LIKE LINE OF <ls_checksum>-files.
 
-    " This methods is run at repo creation moment or manually by user
+    " This method is run at repo creation moment or manually by user
     " In the first case it assumes that the local state is the CURRENT state
     " Thus the idea is to copy local state to checksums
-    " The second case is an exception, when we acknoledge that the state is unknown
+    " The second case is an exception, when we acknowledge that the state is unknown
     " Thus copying the local to checksums is the "best guess"
 
     LOOP AT it_local ASSIGNING <ls_local>.

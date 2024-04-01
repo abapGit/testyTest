@@ -49,6 +49,8 @@ CLASS zcl_abapgit_aff_registry IMPLEMENTATION.
     register( 'CHKC' ).
     register( 'CHKO' ).
     register( 'CHKV' ).
+    register( 'DRTY' ).
+    register( 'DTEB' ).
     register( 'EVTB' ).
     register( 'EEEC' ).
     register( 'GSMP' ).
@@ -57,6 +59,8 @@ CLASS zcl_abapgit_aff_registry IMPLEMENTATION.
     register( 'SMBC' ).
     register( 'NONT' ).
     register( 'RONT' ).
+    register( 'UIPG' ).
+    register( 'UIST' ).
   ENDMETHOD.
 
 

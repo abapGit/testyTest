@@ -228,7 +228,7 @@ CLASS zcl_abapgit_git_pack IMPLEMENTATION.
             raw_out_len = lv_decompress_len ).
 
         IF lv_expected <> lv_decompress_len.
-          zcx_abapgit_exception=>raise( |Decompression falied| ).
+          zcx_abapgit_exception=>raise( |Decompression failed| ).
         ENDIF.
 
         cl_abap_gzip=>compress_binary(
@@ -280,7 +280,7 @@ CLASS zcl_abapgit_git_pack IMPLEMENTATION.
     lv_xstring = iv_data(lv_len).
     lv_sha1 = zcl_abapgit_hash=>sha1_raw( lv_xstring ).
     IF to_upper( lv_sha1 ) <> lv_data.
-      zcx_abapgit_exception=>raise( |SHA1 at end of pack doesnt match| ).
+      zcx_abapgit_exception=>raise( |SHA1 at end of pack doesn't match| ).
     ENDIF.
 
     decode_deltas( CHANGING ct_objects = rt_objects ).
@@ -934,7 +934,7 @@ CLASS zcl_abapgit_git_pack IMPLEMENTATION.
     cv_decompressed = ls_data-raw.
 
     IF lv_compressed_len IS INITIAL.
-      zcx_abapgit_exception=>raise( |Decompression falied :o/| ).
+      zcx_abapgit_exception=>raise( |Decompression failed :o/| ).
     ENDIF.
 
     cv_data = cv_data+lv_compressed_len.

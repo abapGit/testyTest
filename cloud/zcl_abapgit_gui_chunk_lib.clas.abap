@@ -27,7 +27,7 @@ CLASS zcl_abapgit_gui_chunk_lib DEFINITION
         !iv_show_commit        TYPE abap_bool DEFAULT abap_true
         !iv_show_edit          TYPE abap_bool DEFAULT abap_false
         !iv_interactive_branch TYPE abap_bool DEFAULT abap_false
-        !io_news               TYPE REF TO zcl_abapgit_news OPTIONAL
+        !io_news               TYPE REF TO zcl_abapgit_repo_news OPTIONAL
       RETURNING
         VALUE(ri_html)         TYPE REF TO zif_abapgit_html
       RAISING
@@ -45,7 +45,7 @@ CLASS zcl_abapgit_gui_chunk_lib DEFINITION
         zcx_abapgit_exception .
     CLASS-METHODS render_news
       IMPORTING
-        !io_news       TYPE REF TO zcl_abapgit_news
+        !io_news       TYPE REF TO zcl_abapgit_repo_news
       RETURNING
         VALUE(ri_html) TYPE REF TO zif_abapgit_html
       RAISING
@@ -177,6 +177,7 @@ CLASS zcl_abapgit_gui_chunk_lib DEFINITION
         it_labels           TYPE string_table
         io_label_colors     TYPE REF TO zcl_abapgit_string_map
         iv_clickable_action TYPE string OPTIONAL
+        iv_unlisted         TYPE abap_bool DEFAULT abap_false
       RETURNING
         VALUE(rv_html)      TYPE string.
 
@@ -467,6 +468,8 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
 
         lv_longtext = |{ lv_longtext }<p>{ <lv_longtext_paragraph> }</p>{ cl_abap_char_utilities=>newline }|.
       ENDLOOP.
+
+      lv_longtext = |{ lv_longtext }<br>|.
     ENDIF.
 
     ri_html->add( |<div id="message" class="message-panel">| ).
@@ -490,7 +493,7 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
         iv_msgno = ix_error->if_t100_message~t100key-msgno ).
 
       IF lv_title IS NOT INITIAL.
-        lv_text = |Message ({ ix_error->if_t100_message~t100key-msgid }/{ ix_error->if_t100_message~t100key-msgno })|.
+        lv_text = |Message E{ ix_error->if_t100_message~t100key-msgno }({ ix_error->if_t100_message~t100key-msgid })|.
 
         ri_html->add_a(
           iv_txt   = lv_text
@@ -659,12 +662,18 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
     DATA lt_fragments TYPE string_table.
     DATA lv_l TYPE string.
     DATA lv_class TYPE string.
+    DATA lv_class_cmd TYPE string.
     DATA lv_style TYPE string.
     DATA ls_parsed_color TYPE zcl_abapgit_repo_labels=>ty_color.
     DATA li_html TYPE REF TO zif_abapgit_html.
 
     IF it_labels IS INITIAL.
       RETURN.
+    ENDIF.
+
+    lv_class_cmd = 'command'.
+    IF iv_unlisted = abap_true.
+      lv_class_cmd = lv_class_cmd && ' unlisted'.
     ENDIF.
 
     li_html = zcl_abapgit_html=>create( ).
@@ -695,9 +704,9 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
 
       IF iv_clickable_action IS NOT INITIAL.
         lv_l = li_html->a(
-          iv_txt = lv_l
-          iv_act = |{ iv_clickable_action }|
-          iv_class = 'command'
+          iv_txt   = lv_l
+          iv_act   = |{ iv_clickable_action }|
+          iv_class = lv_class_cmd
           iv_query = lv_l ).
       ENDIF.
       lv_l = |<li{ lv_class }{ lv_style }>{ lv_l }</li>|.
@@ -716,7 +725,7 @@ CLASS zcl_abapgit_gui_chunk_lib IMPLEMENTATION.
     DATA: lv_text TYPE string,
           lv_hint TYPE string,
           lv_ul   TYPE abap_bool,
-          lt_log  TYPE zcl_abapgit_news=>ty_logs.
+          lt_log  TYPE zcl_abapgit_repo_news=>ty_logs.
 
     FIELD-SYMBOLS: <ls_line> LIKE LINE OF lt_log.
 

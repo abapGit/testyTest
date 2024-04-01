@@ -28,6 +28,12 @@ CLASS zcl_abapgit_http DEFINITION
         VALUE(ro_client) TYPE REF TO zcl_abapgit_http_client
       RAISING
         zcx_abapgit_exception .
+
+    CLASS-METHODS check_connection
+      IMPORTING
+        !iv_url TYPE string
+      RAISING
+        zcx_abapgit_exception.
   PROTECTED SECTION.
 
   PRIVATE SECTION.

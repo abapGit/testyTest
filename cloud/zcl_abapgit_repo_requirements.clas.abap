@@ -1,4 +1,4 @@
-CLASS zcl_abapgit_requirement_helper DEFINITION
+CLASS zcl_abapgit_repo_requirements DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -24,7 +24,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_abapgit_requirement_helper IMPLEMENTATION.
+CLASS zcl_abapgit_repo_requirements IMPLEMENTATION.
 
   METHOD requirements_popup.
     ASSERT 1 = 'todo'.

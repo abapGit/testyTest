@@ -42,7 +42,8 @@ CLASS zcl_abapgit_gui_page_repo_view DEFINITION
   PRIVATE SECTION.
 
     DATA mo_repo TYPE REF TO zcl_abapgit_repo .
-    DATA mo_repo_aggregated_state TYPE REF TO zcl_abapgit_item_state.
+    DATA mo_repo_aggregated_state TYPE REF TO zcl_abapgit_repo_item_state.
+    DATA mv_connection_error TYPE abap_bool.
     DATA mv_cur_dir TYPE string .
     DATA mv_hide_files TYPE abap_bool .
     DATA mv_max_lines TYPE i .
@@ -192,6 +193,10 @@ CLASS zcl_abapgit_gui_page_repo_view DEFINITION
       RAISING
         zcx_abapgit_exception.
 
+    METHODS check_connection
+      RAISING
+        zcx_abapgit_exception.
+
 ENDCLASS.
 
 
@@ -216,7 +221,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
     ENDIF.
 
     " we want to preserve non-code and metadata files at the top,
-    " so we isolate them and and sort only the code artifacts
+    " so we isolate them and sort only the code artifacts
     LOOP AT ct_repo_items ASSIGNING <ls_repo_item>.
 
       IF <ls_repo_item>-obj_type IS INITIAL AND <ls_repo_item>-is_dir = abap_false.
@@ -486,7 +491,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
                      iv_act = |{ zif_abapgit_definitions=>c_action-repo_refresh }?key={ mv_key }|
                      iv_opt = zif_abapgit_html=>c_html_opt-strong ).
 
-    ro_toolbar->add( iv_txt   = 'Settings'
+    ro_toolbar->add( iv_txt   = 'Repo Settings'
                      iv_act   = |{ zif_abapgit_definitions=>c_action-repo_settings }?key={ mv_key }|
                      iv_opt   = zif_abapgit_html=>c_html_opt-strong
                      iv_title = `Repository Settings` ).
@@ -572,6 +577,22 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
       lo_repo ?= mo_repo.
       lo_repo->check_for_valid_branch( ).
     ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD check_connection.
+
+    DATA lo_repo TYPE REF TO zif_abapgit_repo_online.
+
+    mv_connection_error = abap_true.
+
+    IF mo_repo->is_offline( ) = abap_false.
+      lo_repo ?= mo_repo.
+      zcl_abapgit_http=>check_connection( lo_repo->get_url( ) ).
+    ENDIF.
+
+    mv_connection_error = abap_false.
 
   ENDMETHOD.
 
@@ -1072,7 +1093,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
          ASSERT 1 = 'decoupled'.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-new_page.
 
-      WHEN c_actions-toggle_hide_files. " Toggle file diplay
+      WHEN c_actions-toggle_hide_files. " Toggle file display
         mv_hide_files    = zcl_abapgit_persistence_user=>get_instance( )->toggle_hide_files( ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-re_render.
 
@@ -1215,7 +1236,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
           lv_add_str    TYPE string,
           li_log        TYPE REF TO zif_abapgit_log,
           lv_msg        TYPE string,
-          lo_news       TYPE REF TO zcl_abapgit_news.
+          lo_news       TYPE REF TO zcl_abapgit_repo_news.
 
     FIELD-SYMBOLS <ls_item> LIKE LINE OF lt_repo_items.
 
@@ -1229,12 +1250,32 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
         " Reinit, for the case of type change
         mo_repo ?= zcl_abapgit_repo_srv=>get_instance( )->get( mo_repo->get_key( ) ).
 
+        IF mv_connection_error = abap_true.
+          " If connection doesn't work, render a minimal header
+          ri_html->add( |<div class="repo" id="repo{ mv_key }">| ).
+          ri_html->add( zcl_abapgit_gui_chunk_lib=>render_repo_top(
+            io_repo               = mo_repo
+            iv_show_edit          = abap_true
+            iv_show_branch        = abap_false
+            iv_show_commit        = abap_false
+            iv_interactive_branch = abap_false ) ).
+          ri_html->add( '</div>' ).
+
+          ri_html->add( render_head_line( ) ).
+
+          " Reset error flag to try connecting again next time
+          CLEAR mv_connection_error.
+          RETURN.
+        ENDIF.
+
+        check_connection( ).
+
         check_branch( ).
 
         mv_are_changes_recorded_in_tr = zcl_abapgit_factory=>get_sap_package( mo_repo->get_package( )
           )->are_changes_recorded_in_tr_req( ).
 
-        lo_news = zcl_abapgit_news=>create( mo_repo ).
+        lo_news = zcl_abapgit_repo_news=>create( mo_repo ).
 
         ri_html->add( |<div class="repo" id="repo{ mv_key }">| ).
         ri_html->add( zcl_abapgit_gui_chunk_lib=>render_repo_top(
@@ -1346,11 +1387,7 @@ CLASS zcl_abapgit_gui_page_repo_view IMPLEMENTATION.
         " and allow troubleshooting of issue
         zcl_abapgit_persistence_user=>get_instance( )->set_repo_show( || ).
 
-        ri_html->add( render_head_line( ) ).
-
-        ri_html->add( zcl_abapgit_gui_chunk_lib=>render_error(
-          iv_extra_style = 'repo_banner'
-          ix_error = lx_error ) ).
+        RAISE EXCEPTION lx_error.
     ENDTRY.
 
     register_deferred_script( render_scripts( ) ).

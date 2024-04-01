@@ -72,8 +72,8 @@ TYPES dokil TYPE c LENGTH 1.
     END OF ty_dependencies .
   TYPES:
     BEGIN OF ty_transport_type,
-      request TYPE trfunction,
-      task    TYPE trfunction,
+      request TYPE char1,
+      task    TYPE char1,
     END OF ty_transport_type .
   TYPES:
     BEGIN OF ty_transport,
@@ -348,6 +348,7 @@ TYPES dokil TYPE c LENGTH 1.
       homepage                      TYPE string VALUE 'homepage',
       ie_devtools                   TYPE string VALUE 'ie_devtools',
       jump                          TYPE string VALUE 'jump',
+      jump_transaction              TYPE string VALUE 'jump_transaction',
       jump_transport                TYPE string VALUE 'jump_transport',
       jump_user                     TYPE string VALUE 'jump_user',
       performance_test              TYPE string VALUE 'performance_test',

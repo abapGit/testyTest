@@ -99,6 +99,8 @@ TYPES sci_chkv TYPE c LENGTH 1.
     RAISING
       zcx_abapgit_exception .
   METHODS popup_to_create_package
+    IMPORTING
+      is_package_data  TYPE zif_abapgit_sap_package=>ty_create OPTIONAL
     EXPORTING
       !es_package_data TYPE zif_abapgit_sap_package=>ty_create
       !ev_create       TYPE abap_bool
