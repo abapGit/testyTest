@@ -14,19 +14,19 @@ INTERFACE zif_abapgit_cts_api
     ty_trkorr_tt TYPE STANDARD TABLE OF trkorr WITH DEFAULT KEY .
   TYPES:
     BEGIN OF ty_transport_key,
-      object  TYPE e071k-object,
-      objname TYPE e071k-objname,
-      tabkey  TYPE e071k-tabkey,
+      object  TYPE char4,
+      objname TYPE char30,
+      tabkey  TYPE char120,
     END OF ty_transport_key .
   TYPES:
     BEGIN OF ty_transport_data,
-      trstatus TYPE e070-trstatus,
+      trstatus TYPE char1,
       keys     TYPE STANDARD TABLE OF ty_transport_key WITH DEFAULT KEY,
     END OF ty_transport_data .
   TYPES:
     BEGIN OF ty_transport_obj,
-      object   TYPE e071-object,
-      obj_name TYPE e071-obj_name,
+      object   TYPE char4,
+      obj_name TYPE char30,
     END OF ty_transport_obj .
   TYPES:
     ty_transport_obj_tt TYPE STANDARD TABLE OF ty_transport_obj WITH DEFAULT KEY .
@@ -69,10 +69,10 @@ INTERFACE zif_abapgit_cts_api
   METHODS get_r3tr_obj_for_limu_obj
     IMPORTING
       !iv_object   TYPE tadir-object
-      !iv_obj_name TYPE trobj_name
+      !iv_obj_name TYPE char120
     EXPORTING
       !ev_object   TYPE tadir-object
-      !ev_obj_name TYPE trobj_name
+      !ev_obj_name TYPE char120
     RAISING
       zcx_abapgit_exception .
   METHODS get_transports_for_list
@@ -103,7 +103,7 @@ INTERFACE zif_abapgit_cts_api
       !iv_mode     TYPE c DEFAULT 'I'
     EXPORTING
       !ev_object   TYPE tadir-object
-      !ev_obj_name TYPE trobj_name
+      !ev_obj_name TYPE char120
     RAISING
       zcx_abapgit_exception .
   "! Check if change recording is possible for the given package

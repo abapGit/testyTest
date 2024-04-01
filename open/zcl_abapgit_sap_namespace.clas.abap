@@ -15,7 +15,7 @@ CLASS ZCL_ABAPGIT_SAP_NAMESPACE IMPLEMENTATION.
 
 
   METHOD zif_abapgit_sap_namespace~exists.
-    DATA lv_editflag TYPE trnspace-editflag.
+    DATA lv_editflag TYPE abap_bool.
     DATA lo_obj TYPE REF TO object.
     DATA lo_nsp TYPE REF TO object.
     FIELD-SYMBOLS <lg_obj> TYPE any.
@@ -38,7 +38,7 @@ CLASS ZCL_ABAPGIT_SAP_NAMESPACE IMPLEMENTATION.
 
 
   METHOD zif_abapgit_sap_namespace~is_editable.
-    DATA lv_editflag TYPE trnspace-editflag.
+    DATA lv_editflag TYPE abap_bool.
     DATA lo_obj TYPE REF TO object.
     DATA lo_nsp TYPE REF TO object.
     FIELD-SYMBOLS <lg_obj> TYPE any.

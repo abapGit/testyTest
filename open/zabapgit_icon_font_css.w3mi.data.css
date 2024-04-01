@@ -1,0 +1,90 @@
+@font-face {
+    font-family: "ag-icons";
+    font-weight: normal;
+    font-style: normal;
+    src: url("../font/ag-icons.woff") format("woff");
+}
+
+.icon {
+    line-height: 1;
+}
+
+.icon:before {
+    font-family: ag-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: text-top;
+    /* width: 1.1em; */
+    /* padding-right: 0.2em */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+}
+
+.icon.large { font-size: 200%; }
+
+.icon-abapgit:before { content: "\f101"; }
+.icon-abaplint:before { content: "\f102"; }
+.icon-arrow-circle-up:before { content: "\f103"; }
+.icon-bars:before { content: "\f104"; }
+.icon-bolt:before { content: "\f105"; }
+.icon-box:before { content: "\f106"; }
+.icon-briefcase:before { content: "\f107"; }
+.icon-bug-solid:before { content: "\f108"; }
+.icon-check:before { content: "\f109"; }
+.icon-chevron-down:before { content: "\f10a"; }
+.icon-chevron-left:before { content: "\f10b"; }
+.icon-chevron-right:before { content: "\f10c"; }
+.icon-chevron-up:before { content: "\f10d"; }
+.icon-circle-dot-regular:before { content: "\f10e"; }
+.icon-circle-play-regular:before { content: "\f10f"; }
+.icon-circle-solid:before { content: "\f110"; }
+.icon-cloud-commit:before { content: "\f111"; }
+.icon-cloud-solid:before { content: "\f112"; }
+.icon-cloud-upload-alt:before { content: "\f113"; }
+.icon-code-branch:before { content: "\f114"; }
+.icon-code-commit:before { content: "\f115"; }
+.icon-code-pull-request-solid:before { content: "\f116"; }
+.icon-code-solid:before { content: "\f117"; }
+.icon-cog:before { content: "\f118"; }
+.icon-copy-solid:before { content: "\f119"; }
+.icon-download-solid:before { content: "\f11a"; }
+.icon-edit-solid:before { content: "\f11b"; }
+.icon-exclamation-circle:before { content: "\f11c"; }
+.icon-exclamation-triangle:before { content: "\f11d"; }
+.icon-file-alt:before { content: "\f11e"; }
+.icon-file-code:before { content: "\f11f"; }
+.icon-file-image:before { content: "\f120"; }
+.icon-file:before { content: "\f121"; }
+.icon-fire-alt:before { content: "\f122"; }
+.icon-flow:before { content: "\f123"; }
+.icon-folder:before { content: "\f124"; }
+.icon-git-alt:before { content: "\f125"; }
+.icon-github:before { content: "\f126"; }
+.icon-heart-regular:before { content: "\f127"; }
+.icon-info-circle-solid:before { content: "\f128"; }
+.icon-language-solid:before { content: "\f129"; }
+.icon-lock:before { content: "\f12a"; }
+.icon-magnifying-glass-solid:before { content: "\f12b"; }
+.icon-markdown:before { content: "\f12c"; }
+.icon-paste-solid:before { content: "\f12d"; }
+.icon-plug:before { content: "\f12e"; }
+.icon-question-circle-solid:before { content: "\f12f"; }
+.icon-redo-alt-solid:before { content: "\f130"; }
+.icon-server-solid:before { content: "\f131"; }
+.icon-sliders-h:before { content: "\f132"; }
+.icon-snowflake:before { content: "\f133"; }
+.icon-star:before { content: "\f134"; }
+.icon-tag-solid:before { content: "\f135"; }
+.icon-times-solid:before { content: "\f136"; }
+.icon-tools-solid:before { content: "\f137"; }
+.icon-truck-solid:before { content: "\f138"; }
+.icon-upload-solid:before { content: "\f139"; }
+.icon-user-cog-solid:before { content: "\f13a"; }
+.icon-user-solid:before { content: "\f13b"; }
+.icon-vial-solid:before { content: "\f13c"; }

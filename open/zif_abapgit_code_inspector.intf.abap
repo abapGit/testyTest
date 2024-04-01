@@ -18,7 +18,7 @@ INTERFACE zif_abapgit_code_inspector
   TYPES ty_results TYPE STANDARD TABLE OF ty_result WITH DEFAULT KEY.
 
   TYPES: BEGIN OF ty_variant,
-           name        TYPE sci_chkv,
+           name        TYPE char30,
            description TYPE string,
          END OF ty_variant.
 
@@ -26,7 +26,7 @@ INTERFACE zif_abapgit_code_inspector
 
   METHODS run
     IMPORTING
-      !iv_variant    TYPE sci_chkv
+      !iv_variant    TYPE char30
       !iv_save       TYPE abap_bool DEFAULT abap_false
     RETURNING
       VALUE(rt_list) TYPE ty_results
@@ -43,7 +43,7 @@ INTERFACE zif_abapgit_code_inspector
 
   METHODS validate_check_variant
     IMPORTING
-      !iv_check_variant_name TYPE sci_chkv
+      !iv_check_variant_name TYPE char30
     RAISING
       zcx_abapgit_exception.
 

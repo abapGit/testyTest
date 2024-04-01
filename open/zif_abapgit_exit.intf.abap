@@ -59,7 +59,7 @@ INTERFACE zif_abapgit_exit PUBLIC.
       !cv_proxy_url TYPE string.
   METHODS change_rfc_server_group
     CHANGING
-      !cv_group TYPE rzlli_apcl.
+      !cv_group TYPE char20.
   METHODS change_supported_data_objects
     CHANGING
       !ct_objects TYPE zif_abapgit_data_supporter=>ty_objects.
@@ -112,7 +112,7 @@ INTERFACE zif_abapgit_exit PUBLIC.
       !ct_ci_repos TYPE ty_ci_repos.
   METHODS get_ssl_id
     RETURNING
-      VALUE(rv_ssl_id) TYPE ssfapplssl.
+      VALUE(rv_ssl_id) TYPE char6.
   METHODS http_client
     IMPORTING
       !iv_url    TYPE string
