@@ -65,8 +65,7 @@ cp abapGit/src/ui/core/zcx* open
 cp abapGit/src/ui/core/zif* open
 cp abapGit/src/ui/lib/z* open
 cp abapGit/src/ui/pages/*w3mi* open
-cp abapGit/src/ui/pages/dlg/zcl_abapgit_gui_page_addofflin* open
-cp abapGit/src/ui/pages/dlg/zcl_abapgit_gui_page_addonline* open
+cp abapGit/src/ui/pages/dlg/zcl* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_commit* open
 cp abapGit/src/ui/flow/z* open
