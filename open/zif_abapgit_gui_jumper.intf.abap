@@ -2,7 +2,7 @@ INTERFACE zif_abapgit_gui_jumper
   PUBLIC.
 
   TYPES:
-    ty_bdcdata_tt TYPE STANDARD TABLE OF string WITH DEFAULT KEY.
+    ty_bdcdata_tt TYPE STANDARD TABLE OF bdcdata WITH DEFAULT KEY.
 
   METHODS jump
     IMPORTING

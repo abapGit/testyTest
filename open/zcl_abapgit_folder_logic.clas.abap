@@ -40,8 +40,8 @@ CLASS zcl_abapgit_folder_logic DEFINITION
     TYPES:
       BEGIN OF ty_devclass_info,
         devclass  TYPE devclass,
-        namespace TYPE char10,
-        parentcl  TYPE devclass,
+        namespace TYPE namespace,
+        parentcl  TYPE parentcl,
       END OF ty_devclass_info .
     TYPES:
       ty_devclass_info_tt TYPE SORTED TABLE OF ty_devclass_info
@@ -118,7 +118,7 @@ CLASS zcl_abapgit_folder_logic IMPLEMENTATION.
             IF iv_package(lv_len) <> lv_parentcl.
               " If abapGit project is installed in package ZZZ, all subpackages should be named
               " ZZZ_something. This will define the folder name in the zip file to be "something",
-              " similarily with online projects. Alternatively change to FULL folder logic
+              " similarly with online projects. Alternatively change to FULL folder logic
               lv_message = |PREFIX: Unexpected package naming |
                         && |(top: { iv_top }, parent: { lv_parentcl }, child: { iv_package }). |
                         && |Try using the folder logic FULL|.

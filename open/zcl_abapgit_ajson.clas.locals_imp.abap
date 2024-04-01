@@ -672,6 +672,14 @@ CLASS lcl_json_to_abap DEFINITION FINAL.
       RAISING
         zcx_abapgit_ajson_error.
 
+    METHODS to_time
+      IMPORTING
+        iv_value         TYPE zif_abapgit_ajson_types=>ty_node-value
+      RETURNING
+        VALUE(rv_result) TYPE t
+      RAISING
+        zcx_abapgit_ajson_error.
+
   PRIVATE SECTION.
 
     TYPES:
@@ -803,7 +811,7 @@ CLASS lcl_json_to_abap IMPLEMENTATION.
           zcx_abapgit_ajson_error=>raise( |Unexpected parent type| ).
       ENDCASE.
 
-      rs_node_type-type_kind         = rs_node_type-dd->type_kind. " for caching and cleaner unintialized access
+      rs_node_type-type_kind         = rs_node_type-dd->type_kind. " for caching and cleaner uninitialized access
       IF rs_node_type-type_kind = lif_kind=>table.
         lo_tdescr ?= rs_node_type-dd.
         IF lo_tdescr->table_kind <> cl_abap_tabledescr=>tablekind_std.
@@ -984,10 +992,19 @@ CLASS lcl_json_to_abap IMPLEMENTATION.
 
       WHEN zif_abapgit_ajson_types=>node_type-string.
         " TODO: check type ?
-        IF is_node_type-type_kind = lif_kind=>date AND is_node-value IS NOT INITIAL.
-          <container> = to_date( is_node-value ).
-        ELSEIF is_node_type-type_kind = lif_kind=>packed AND is_node-value IS NOT INITIAL.
-          <container> = to_timestamp( is_node-value ).
+        IF is_node-value IS NOT INITIAL.
+          IF is_node_type-type_kind = lif_kind=>date.
+            <container> = to_date( is_node-value ).
+          ELSEIF is_node_type-type_kind = lif_kind=>time.
+            <container> = to_time( is_node-value ).
+          ELSEIF is_node_type-dd->absolute_name = '\TYPE=TIMESTAMP'
+            OR is_node_type-dd->absolute_name = '\TYPE=TIMESTAMPL'.
+            <container> = to_timestamp( is_node-value ).
+          ELSEIF is_node_type-type_kind = lif_kind=>packed. " Number as a string, but not a timestamp
+            <container> = is_node-value.
+          ELSE.
+            <container> = is_node-value.
+          ENDIF.
         ELSE.
           <container> = is_node-value.
         ENDIF.
@@ -1092,6 +1109,22 @@ CLASS lcl_json_to_abap IMPLEMENTATION.
         IMPORTING
           tstmp_tgt = rv_result ).
     ENDIF.
+
+  ENDMETHOD.
+
+  METHOD to_time.
+
+    DATA lv_h TYPE c LENGTH 2.
+    DATA lv_m TYPE c LENGTH 2.
+    DATA lv_s TYPE c LENGTH 2.
+
+    FIND FIRST OCCURRENCE OF REGEX '^(\d{2}):(\d{2}):(\d{2})(T|$)'
+      IN iv_value
+      SUBMATCHES lv_h lv_m lv_s.
+    IF sy-subrc <> 0.
+      zcx_abapgit_ajson_error=>raise( 'Unexpected time format' ).
+    ENDIF.
+    CONCATENATE lv_h lv_m lv_s INTO rv_result.
 
   ENDMETHOD.
 
