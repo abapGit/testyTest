@@ -225,35 +225,10 @@ SECONDS=0
 
 ###########################################################################
 
-cp replace/zcl_abapgit_apack* open
-cp replace/zcl_abapgit_cts_api* open
-cp replace/zcl_abapgit_default_transport* open
-cp replace/zcl_abapgit_background* open
-cp replace/zcl_abapgit_diff* open
-cp replace/zcl_abapgit_exception_viewer* open
-cp replace/zcl_abapgit_http* open
-cp replace/zcl_abapgit_tadir.clas* open
-cp replace/zcl_abapgit_transport* open
-cp replace/zcl_abapgit_progress* open
-cp replace/zcl_abapgit_log_viewer* open
-cp replace/zcl_abapgit_environment* open
-cp replace/zcl_abapgit_objects_activation* open
-cp replace/zcl_abapgit_object_filter_tran* open
-cp replace/zcl_abapgit_objects.clas* open
-cp replace/zcl_abapgit_objects_activation* open
-cp replace/zcl_abapgit_repo_filter* open
-cp replace/zcl_abapgit_frontend_services* open
-cp replace/zcl_abapgit_oo_factory* open
-cp replace/zcl_abapgit_lxe_texts* open
-cp replace/zif_abapgit_oo_object_fnc* open
-cp replace/zcl_abapgit_objects_super* open
-cp replace/zcl_abapgit_gui_page_codi_base* open
-cp replace/zcl_abapgit_repo_requirements* open
-cp replace/zcl_abapgit_serialize* open
-# cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
-cp replace/zcl_abapgit_user_record* open
-cp replace/zcl_abapgit_sap_package* open
+cp replace/* open
+
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
+# cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 
 cp additional/*.* open
 cp open/* cloud
