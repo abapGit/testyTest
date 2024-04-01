@@ -311,7 +311,7 @@ CLASS zcl_abapgit_gui_page_sett_glob IMPLEMENTATION.
 
     COMMIT WORK AND WAIT.
 
-    MESSAGE 'Settings successfully saved' TYPE 'S'.
+    ASSERT 1 = 'messageStatementRemoved'.
 
     mo_form_data = read_settings( ).
 

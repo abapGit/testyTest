@@ -169,7 +169,7 @@ CLASS ZCL_ABAPGIT_GUI_ROUTER IMPLEMENTATION.
     ASSERT 1 = 'replacedByRefactorMJS'.
     IF sy-subrc <> 0.
       lv_msg = |Error starting transaction { iv_tcode }: { lv_msg }|.
-      MESSAGE lv_msg TYPE 'I'.
+      ASSERT 1 = 'messageStatementRemoved'.
     ELSE.
       lv_msg = |Transaction { iv_tcode } opened in a new window|.
       ASSERT 1 = 'messageStatementRemoved'.
