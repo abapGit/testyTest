@@ -239,6 +239,8 @@ TYPES dokil TYPE c LENGTH 1.
       hide_sapgui_hint       TYPE abap_bool,
       activate_wo_popup      TYPE abap_bool,
       label_colors           TYPE string,
+      default_git_uname      TYPE string,
+      default_git_email      TYPE string,
     END OF ty_s_user_settings .
   TYPES:
     BEGIN OF ty_list_settings,
@@ -378,7 +380,7 @@ TYPES dokil TYPE c LENGTH 1.
       sponsor                       TYPE string VALUE 'sponsor',
       toggle_favorites              TYPE string VALUE 'toggle_favorites',
       url                           TYPE string VALUE 'url',
-      yank_to_clipboard             TYPE string VALUE 'yank_to_clipboard',
+      where_used                    TYPE string VALUE 'where_used',
       zip_export                    TYPE string VALUE 'zip_export',
       zip_export_transport          TYPE string VALUE 'zip_export_transport',
       zip_import                    TYPE string VALUE 'zip_import',
