@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/larshp/testyTest#readme",
   "dependencies": {
-    "@abaplint/cli": "^2.106.5",
-    "@abaplint/database-sqlite": "^2.8.0",
-    "@abaplint/runtime": "^2.8.22",
-    "@abaplint/transpiler-cli": "^2.8.22",
-    "electron": "^29.1.6",
+    "@abaplint/cli": "^2.112.6",
+    "@abaplint/database-sqlite": "^2.8.25",
+    "@abaplint/runtime": "^2.10.5",
+    "@abaplint/transpiler-cli": "^2.10.5",
+    "electron": "^31.2.1",
     "express": "^4.19.2"
   }
 }
