@@ -2,7 +2,7 @@
   "name": "testy-test",
   "version": "1.0.0",
   "private": true,
-  "description": "notes",
+  "description": "test",
   "scripts": {
     "build": "rm -rf output && abap_transpile abap_transpile.json && echo RUNNING && cp -f abapGit/src/ui/zabapgit_icon_font.w3mi.data.woff output/ && node output/index.mjs",
     "express": "node express.mjs",
