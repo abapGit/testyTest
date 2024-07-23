@@ -5,7 +5,7 @@ CLASS zcl_abapgit_where_used_tools DEFINITION PUBLIC.
       BEGIN OF ty_dependency,
         package       TYPE devclass,
         obj_type      TYPE tadir-object,
-        obj_prog_type TYPE trdir-subc,
+        obj_prog_type TYPE c LENGTH 1,
         obj_name      TYPE tadir-obj_name,
         obj_cls       TYPE string,
         dep_package   TYPE devclass,

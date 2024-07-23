@@ -57,7 +57,6 @@ const replace = [
   {search: " TYPE tadir-devclass",                replace: " TYPE I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE RANGE OF tadir-devclass",       replace: " TYPE RANGE OF I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE tadir-korrnum",                 replace: " TYPE sxco_transport"},
-  {search: " TYPE trdir-subc",                    replace: " TYPE c LENGTH 1"},
   {search: " TYPE tdevc-parentcl",                replace: " TYPE I_CustABAPObjDirectoryEntry-ABAPPackage"},
   {search: " TYPE trkorr",                        replace: " TYPE sxco_transport"},
   {search: " msgid type symsgid value '00',",     replace: " msgid type symsgid value 'ZABAPGIT',"},
