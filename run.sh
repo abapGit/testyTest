@@ -28,6 +28,7 @@ cp abapGit/src/inspect/zif* open
 cp abapGit/src/json/z* open
 cp abapGit/src/objects/aff_types/zif* open
 cp abapGit/src/objects/aff/zcl_abapgit_aff_registry* open
+cp abapGit/src/objects/aff/zcl_abapgit_json_path* open
 cp abapGit/src/objects/aff/zif* open
 cp abapGit/src/objects/core/zcl_abapgit_f* open
 cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
@@ -41,6 +42,7 @@ cp abapGit/src/objects/texts/zcl_abapgit_po_file* open
 cp abapGit/src/objects/texts/zif_abapgit_i18n_file* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
 cp abapGit/src/objects/texts/zif_abapgit_lxe_texts* open
+cp abapGit/src/objects/texts/zcl_abapgit_properties_file* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
 cp abapGit/src/objects/zif* open
 cp abapGit/src/persist/zcl_abapgit_persist_background* open
@@ -68,6 +70,7 @@ cp abapGit/src/ui/pages/*w3mi* open
 cp abapGit/src/ui/flow/z* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_syntax* open
+cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_whereused* open
 cp abapGit/src/ui/pages/db/zcl_abapgit_gui_page_db* open
 cp abapGit/src/ui/pages/dlg/zcl* open
 cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_bckg* open

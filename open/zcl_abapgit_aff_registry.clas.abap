@@ -37,7 +37,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_abapgit_aff_registry IMPLEMENTATION.
+CLASS ZCL_ABAPGIT_AFF_REGISTRY IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -46,11 +46,15 @@ CLASS zcl_abapgit_aff_registry IMPLEMENTATION.
 
 
   METHOD initialize_registry_table.
+    register( 'BGQC' ).
+    register( 'CDBO' ).
     register( 'CHKC' ).
     register( 'CHKO' ).
     register( 'CHKV' ).
     register( 'DRTY' ).
     register( 'DTEB' ).
+    register( 'DRAS' ).
+    register( 'DSFD' ).
     register( 'EVTB' ).
     register( 'EEEC' ).
     register( 'GSMP' ).
@@ -59,6 +63,7 @@ CLASS zcl_abapgit_aff_registry IMPLEMENTATION.
     register( 'SMBC' ).
     register( 'NONT' ).
     register( 'RONT' ).
+    register( 'UIAD' ).
     register( 'UIPG' ).
     register( 'UIST' ).
   ENDMETHOD.
