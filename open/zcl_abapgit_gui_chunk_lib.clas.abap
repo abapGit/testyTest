@@ -849,7 +849,7 @@ CLASS ZCL_ABAPGIT_GUI_CHUNK_LIB IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    lv_jump = |{ 'decoupled' }?PATH=|.
+    lv_jump = |{ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir }?PATH=|.
 
     ri_html->add( |<span class="path-box">| ).
 
