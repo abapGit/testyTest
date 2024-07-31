@@ -133,7 +133,7 @@ SECONDS=0
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_objects_factory.clas.abap
-sed -i "s/ CREATE OBJECT gi_function_module TYPE zcl_abapgit_function_module./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
+sed -i "s/ CREATE OBJECT gi_function_module TYPE zcl_abapgit_function_module./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap # https://github.com/abapGit/abapGit/pull/7002
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_sap_report TYPE zcl_abapgit_sap_report./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
@@ -142,10 +142,8 @@ sed -i "s/ CREATE OBJECT gi_supporter TYPE zcl_abapgit_data_supporter./ ASSERT 1
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
-sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 
 # types,
-
 sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
 sed -i 's/ TYPE e071-obj_name/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
 sed -i 's/ TYPE e071k-object/ TYPE char4/ig' ./open/zif_abapgit_cts_api.intf.abap
