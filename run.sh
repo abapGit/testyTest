@@ -249,8 +249,8 @@ SECONDS=0
 
 ###########################################################################
 
-sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
-sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap
+sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap # https://github.com/abapGit/abapGit/pull/7003
+sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap                                           # https://github.com/abapGit/abapGit/pull/7003
 
 node refactor.mjs
 echo "refactor done, $SECONDS seconds"
