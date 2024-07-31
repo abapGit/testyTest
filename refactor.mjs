@@ -34,7 +34,7 @@ const replace = [
   {search: " TYPE tdevc-dlvunit", replace: " TYPE c LENGTH 30"},
   {search: " TYPE trfunction", replace: " TYPE char1"},
   {search: " TYPE wwwdatatab-objid", replace: " TYPE char40"},
-  {search: "GET PARAMETER ID 'DBT' FIELD lv_mode.", replace: ""},
+  {search: "GET PARAMETER ID 'DBT' FIELD lv_mode.", replace: ""}, // https://github.com/abapGit/abapGit/pull/7005
   {search: "GET PARAMETER ID 'TSE' FIELD lv_skip.", replace: ""}, // https://github.com/abapGit/abapGit/pull/7004
   {search: "IN UPDATE TASK", replace: ""},
 
