@@ -35,7 +35,7 @@ const replace = [
   {search: " TYPE trfunction", replace: " TYPE char1"},
   {search: " TYPE wwwdatatab-objid", replace: " TYPE char40"},
   {search: "GET PARAMETER ID 'DBT' FIELD lv_mode.", replace: ""},
-  {search: "GET PARAMETER ID 'TSE' FIELD lv_skip.", replace: ""},
+  {search: "GET PARAMETER ID 'TSE' FIELD lv_skip.", replace: ""}, // https://github.com/abapGit/abapGit/pull/7004
   {search: "IN UPDATE TASK", replace: ""},
 
   {search: " cl_http_utility=>",                  replace: " cl_web_http_utility=>"},
