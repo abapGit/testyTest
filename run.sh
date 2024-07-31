@@ -220,7 +220,6 @@ SECONDS=0
 cp replace/* open
 
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
-# cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 
 cp additional/*.* open
 cp open/* cloud
