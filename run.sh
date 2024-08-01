@@ -15,10 +15,11 @@ cp abapGit/src/cts/zcl_abapgit_transport_2_branch* open
 cp abapGit/src/cts/zcl_abapgit_transport_objects* open
 cp abapGit/src/cts/zif* open
 cp abapGit/src/data/z* open
+cp abapGit/src/env/z* open
 cp abapGit/src/exits/z* open
 cp abapGit/src/git_platform/z* open
-cp abapGit/src/git/z*.* open
 cp abapGit/src/git/v2/z* open
+cp abapGit/src/git/z*.* open
 cp abapGit/src/git/zlib/z* open
 cp abapGit/src/http/zcl_abapgit_http* open
 cp abapGit/src/http/zcl_abapgit_login_manager* open
@@ -35,15 +36,15 @@ cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
 cp abapGit/src/objects/core/zcl_abapgit_o* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
-cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/sap/zcl_abapgit_function_module* open
+cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/sap/zif* open
 cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/texts/zcl_abapgit_po_file* open
+cp abapGit/src/objects/texts/zcl_abapgit_properties_file* open
 cp abapGit/src/objects/texts/zif_abapgit_i18n_file* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
 cp abapGit/src/objects/texts/zif_abapgit_lxe_texts* open
-cp abapGit/src/objects/texts/zcl_abapgit_properties_file* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
 cp abapGit/src/objects/zif* open
 cp abapGit/src/persist/zcl_abapgit_persist_background* open
@@ -54,9 +55,9 @@ cp abapGit/src/persist/zcl_abapgit_persistence_db* open
 cp abapGit/src/persist/zcl_abapgit_persistence_repo* open
 cp abapGit/src/persist/zcl_abapgit_persistence_user* open
 cp abapGit/src/persist/zif* open
-cp abapGit/src/ui/progress/z* open
-cp abapGit/src/ui/zcl_abapgit_frontend_no_gui* open
 cp abapGit/src/repo/filter/z* open
+cp abapGit/src/repo/stage/z* open
+cp abapGit/src/repo/utils/z* open
 cp abapGit/src/repo/zcl* open
 cp abapGit/src/repo/zif* open
 cp abapGit/src/syntax/z* open
@@ -66,9 +67,9 @@ cp abapGit/src/ui/core/zcl_abapgit_html_parts* open
 cp abapGit/src/ui/core/zcl_abapgit_html.clas* open
 cp abapGit/src/ui/core/zcx* open
 cp abapGit/src/ui/core/zif* open
+cp abapGit/src/ui/flow/z* open
 cp abapGit/src/ui/lib/z* open
 cp abapGit/src/ui/pages/*w3mi* open
-cp abapGit/src/ui/flow/z* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_syntax* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_whereused* open
@@ -95,16 +96,15 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_stage* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tags* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tutorial* open
 cp abapGit/src/ui/popups/z* open
+cp abapGit/src/ui/progress/z* open
 cp abapGit/src/ui/routing/z* open
+cp abapGit/src/ui/zcl_abapgit_frontend_no_gui* open
 cp abapGit/src/ui/zcl_abapgit_ui* open
 cp abapGit/src/ui/zif* open
-cp abapGit/src/repo/utils/z* open
-cp abapGit/src/repo/stage/z* open
 cp abapGit/src/utils/z* open
 cp abapGit/src/xml/z* open
 cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
-cp abapGit/src/env/z* open
 cp abapGit/src/zcx* open
 cp abapGit/src/zif* open
 
@@ -223,8 +223,6 @@ cp open/* cloud
 cp additional/open/*.* open
 cp additional/cloud/*.* cloud
 
-cp abapGit/src/utils/zcl_abapgit_convert* open
-cp abapGit/src/utils/zcl_abapgit_convert* cloud
 cp abapGit/src/http/zcl_abapgit_http.clas* open
 cp abapGit/src/http/zcl_abapgit_http_client.clas* open
 cp abapGit/src/http/zcl_abapgit_proxy_config* open
