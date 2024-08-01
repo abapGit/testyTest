@@ -141,7 +141,6 @@ sed -i "s/ CREATE OBJECT gi_longtext TYPE zcl_abapgit_longtexts./ ASSERT 1 = 'de
 sed -i "s/ CREATE OBJECT gi_supporter TYPE zcl_abapgit_data_supporter./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_data_factory.clas.abap
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
-sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 
 # types,
 sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
@@ -173,14 +172,12 @@ sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_objects_files.clas.
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_services_repo.clas.abap
 sed -i 's/ TYPE LXEOBJNAME/ TYPE char70/ig' ./open/zcl_abapgit_po_file.clas.abap
 sed -i 's/ OF bdcdata/ OF string/ig' ./open/zif_abapgit_gui_jumper.intf.abap
-#sed -i "s/zcl_abapgit_objects_super=>c_user_unknown/'UNKNOWN'/ig" ./open/*.abap
 sed -i 's/ TYPE devlayer/ TYPE char4/ig' ./open/zif_abapgit_sap_package.intf.abap
 sed -i 's/ TYPE uccheck/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
 sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/zcl_abapgit_folder_logic.clas.abap
 sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/zcl_abapgit_repo_status.clas.locals_imp.abap
 sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/zcl_abapgit_folder_logic.clas.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
-# sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_persistence.intf.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_code_inspector.intf.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_code_insp.clas.abap   # if_satc_api_factory=>ty_check_variant_name
