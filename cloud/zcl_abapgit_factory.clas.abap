@@ -148,7 +148,7 @@ CLASS ZCL_ABAPGIT_FACTORY IMPLEMENTATION.
   METHOD get_function_module.
 
     IF gi_function_module IS INITIAL.
-      ASSERT 1 = 'decoupled'.
+      CREATE OBJECT gi_function_module TYPE zcl_abapgit_function_module.
     ENDIF.
 
     ri_function_module = gi_function_module.

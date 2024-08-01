@@ -36,6 +36,7 @@ cp abapGit/src/objects/core/zcl_abapgit_o* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
 cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
+cp abapGit/src/objects/sap/zcl_abapgit_function_module* open
 cp abapGit/src/objects/sap/zif* open
 cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/texts/zcl_abapgit_po_file* open
@@ -118,7 +119,6 @@ rm -f open/zcl_abapgit_diff.clas.testclasses.abap
 rm -f open/zcl_abapgit_file_status.clas.testclasses.abap
 rm -f open/zcl_abapgit_environment.clas.testclasses.abap
 rm -f open/zcl_abapgit_filename_logic.clas.testclasses.abap
-rm -f open/zcl_abapgit_html_action_utils.clas.testclasses.abap
 rm -f open/zcl_abapgit_injector.clas.testclasses.abap
 rm -f open/zcl_abapgit_object_filter_tran.clas.testclasses.abap
 rm -f open/zcl_abapgit_objects_activation.clas.testclasses.abap
@@ -134,7 +134,6 @@ SECONDS=0
 # decoupling classes
 sed -i "s/ CREATE OBJECT gi_popups TYPE zcl_abapgit_popups./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_gui_jumper TYPE zcl_abapgit_gui_jumper./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_objects_factory.clas.abap
-sed -i "s/ CREATE OBJECT gi_function_module TYPE zcl_abapgit_function_module./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ ri_http_agent = zcl_abapgit_http_agent=>create( )./ ASSERT 1 = 'decoupled'./ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_lxe_texts TYPE zcl_abapgit_lxe_texts./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
 sed -i "s/ CREATE OBJECT gi_sap_report TYPE zcl_abapgit_sap_report./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_factory.clas.abap
@@ -143,10 +142,8 @@ sed -i "s/ CREATE OBJECT gi_supporter TYPE zcl_abapgit_data_supporter./ ASSERT 1
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
 sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
-sed -i "s/ zcl_abapgit_transport=>validate_transport_request( lv_transport_request )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 
 # types,
-
 sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
 sed -i 's/ TYPE e071-obj_name/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
 sed -i 's/ TYPE e071k-object/ TYPE char4/ig' ./open/zif_abapgit_cts_api.intf.abap
@@ -195,7 +192,6 @@ sed -i 's/ TYPE trnspace-namespace/ TYPE char10/ig' ./open/zif_abapgit_sap_names
 sed -i 's/ TYPE trnspace-editflag/ TYPE abap_bool/ig' ./open/zcl_abapgit_sap_namespace.clas.abap
 sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/zcl_abapgit_objects_files.clas*
 sed -i 's/ TYPE ABAPTXT255_TAB/ TYPE string_table/ig' ./open/zif_abapgit_sap_report.intf.abap
-sed -i "s/ zcl_abapgit_gui_page_repo_view=>c_actions-change_dir / 'decoupled' /ig" ./open/zcl_abapgit_gui_chunk_lib.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_main_language./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ SET LOCALE LANGUAGE lv_save_sy_langu./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/ READ LINE lv_line LINE VALUE INTO lv_text./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_run_bckg.clas.abap
@@ -224,7 +220,6 @@ SECONDS=0
 cp replace/* open
 
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
-# cp replace/zcl_abapgit_services_abapgit* open  # https://github.com/abapGit/abapGit/pull/6695
 
 cp additional/*.* open
 cp open/* cloud
@@ -254,8 +249,8 @@ SECONDS=0
 
 ###########################################################################
 
-sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap
-sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap
+sed -i "s/cl_gui_cfw=>compute_pixel_from_metric( x_or_y = 'X'//ig" ./cloud/zcl_abapgit_html.clas.abap # https://github.com/abapGit/abapGit/pull/7003
+sed -i "s/in = 1 )/1/ig" ./cloud/zcl_abapgit_html.clas.abap                                           # https://github.com/abapGit/abapGit/pull/7003
 
 node refactor.mjs
 echo "refactor done, $SECONDS seconds"
