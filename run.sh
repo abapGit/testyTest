@@ -15,10 +15,11 @@ cp abapGit/src/cts/zcl_abapgit_transport_2_branch* open
 cp abapGit/src/cts/zcl_abapgit_transport_objects* open
 cp abapGit/src/cts/zif* open
 cp abapGit/src/data/z* open
+cp abapGit/src/env/z* open
 cp abapGit/src/exits/z* open
 cp abapGit/src/git_platform/z* open
-cp abapGit/src/git/z*.* open
 cp abapGit/src/git/v2/z* open
+cp abapGit/src/git/z*.* open
 cp abapGit/src/git/zlib/z* open
 cp abapGit/src/http/zcl_abapgit_http* open
 cp abapGit/src/http/zcl_abapgit_login_manager* open
@@ -35,15 +36,15 @@ cp abapGit/src/objects/core/zcl_abapgit_item_graph* open
 cp abapGit/src/objects/core/zcl_abapgit_o* open
 cp abapGit/src/objects/core/zif_abapgit_tadir* open
 cp abapGit/src/objects/jump/zif_abapgit_gui_jumper* open
-cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/sap/zcl_abapgit_function_module* open
+cp abapGit/src/objects/sap/zcl_abapgit_sap_namespace* open
 cp abapGit/src/objects/sap/zif* open
 cp abapGit/src/objects/texts/zcl_abapgit_i18n_params* open
 cp abapGit/src/objects/texts/zcl_abapgit_po_file* open
+cp abapGit/src/objects/texts/zcl_abapgit_properties_file* open
 cp abapGit/src/objects/texts/zif_abapgit_i18n_file* open
 cp abapGit/src/objects/texts/zif_abapgit_longtexts* open
 cp abapGit/src/objects/texts/zif_abapgit_lxe_texts* open
-cp abapGit/src/objects/texts/zcl_abapgit_properties_file* open
 cp abapGit/src/objects/zcl_abapgit_objects_factory* open
 cp abapGit/src/objects/zif* open
 cp abapGit/src/persist/zcl_abapgit_persist_background* open
@@ -54,9 +55,9 @@ cp abapGit/src/persist/zcl_abapgit_persistence_db* open
 cp abapGit/src/persist/zcl_abapgit_persistence_repo* open
 cp abapGit/src/persist/zcl_abapgit_persistence_user* open
 cp abapGit/src/persist/zif* open
-cp abapGit/src/ui/progress/z* open
-cp abapGit/src/ui/zcl_abapgit_frontend_no_gui* open
 cp abapGit/src/repo/filter/z* open
+cp abapGit/src/repo/stage/z* open
+cp abapGit/src/repo/utils/z* open
 cp abapGit/src/repo/zcl* open
 cp abapGit/src/repo/zif* open
 cp abapGit/src/syntax/z* open
@@ -66,9 +67,9 @@ cp abapGit/src/ui/core/zcl_abapgit_html_parts* open
 cp abapGit/src/ui/core/zcl_abapgit_html.clas* open
 cp abapGit/src/ui/core/zcx* open
 cp abapGit/src/ui/core/zif* open
+cp abapGit/src/ui/flow/z* open
 cp abapGit/src/ui/lib/z* open
 cp abapGit/src/ui/pages/*w3mi* open
-cp abapGit/src/ui/flow/z* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_code_insp* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_syntax* open
 cp abapGit/src/ui/pages/codi/zcl_abapgit_gui_page_whereused* open
@@ -95,16 +96,15 @@ cp abapGit/src/ui/pages/zcl_abapgit_gui_page_stage* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tags* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_tutorial* open
 cp abapGit/src/ui/popups/z* open
+cp abapGit/src/ui/progress/z* open
 cp abapGit/src/ui/routing/z* open
+cp abapGit/src/ui/zcl_abapgit_frontend_no_gui* open
 cp abapGit/src/ui/zcl_abapgit_ui* open
 cp abapGit/src/ui/zif* open
-cp abapGit/src/repo/utils/z* open
-cp abapGit/src/repo/stage/z* open
 cp abapGit/src/utils/z* open
 cp abapGit/src/xml/z* open
 cp abapGit/src/zcl_abapgit_factory* open
 cp abapGit/src/zcl_abapgit_injector* open
-cp abapGit/src/env/z* open
 cp abapGit/src/zcx* open
 cp abapGit/src/zif* open
 
@@ -141,7 +141,6 @@ sed -i "s/ CREATE OBJECT gi_longtext TYPE zcl_abapgit_longtexts./ ASSERT 1 = 'de
 sed -i "s/ CREATE OBJECT gi_supporter TYPE zcl_abapgit_data_supporter./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_data_factory.clas.abap
 sed -i "s/ CREATE OBJECT ls_code_inspector-instance TYPE zcl_abapgit_code_inspector/ CREATE OBJECT ls_code_inspector-instance TYPE ('DECOUPLED')/ig" ./open/*.abap
 sed -i "s/ CREATE OBJECT gi_html_viewer TYPE zcl_abapgit_html_viewer_gui/ CREATE OBJECT gi_html_viewer TYPE ('DECOUPLED')/ig" ./open/zcl_abapgit_ui_factory.clas.abap
-sed -i "s/ zcl_abapgit_code_inspector=>validate_check_variant( lv_check_variant )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_sett_locl.clas.abap
 
 # types,
 sed -i 's/ TYPE e071-object/ TYPE char4/ig' ./open/zcl_abapgit_gui_page_flow.clas.locals_imp.abap
@@ -173,14 +172,12 @@ sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_objects_files.clas.
 sed -i 's/ TYPE progname/ TYPE char30/ig' ./open/zcl_abapgit_services_repo.clas.abap
 sed -i 's/ TYPE LXEOBJNAME/ TYPE char70/ig' ./open/zcl_abapgit_po_file.clas.abap
 sed -i 's/ OF bdcdata/ OF string/ig' ./open/zif_abapgit_gui_jumper.intf.abap
-#sed -i "s/zcl_abapgit_objects_super=>c_user_unknown/'UNKNOWN'/ig" ./open/*.abap
 sed -i 's/ TYPE devlayer/ TYPE char4/ig' ./open/zif_abapgit_sap_package.intf.abap
 sed -i 's/ TYPE uccheck/ TYPE char1/ig' ./open/zif_abapgit_sap_report.intf.abap
 sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/zcl_abapgit_folder_logic.clas.abap
 sed -i 's/ TYPE namespace/ TYPE char10/ig' ./open/zcl_abapgit_repo_status.clas.locals_imp.abap
 sed -i 's/ TYPE parentcl/ TYPE devclass/ig' ./open/zcl_abapgit_folder_logic.clas.abap
 sed -i 's/ TYPE tcode/ TYPE string/ig' ./open/zcl_abapgit_gui_page_repo_view.clas.abap
-# sed -i 's/ TYPE scit_alvlist/ TYPE string_table/ig' ./open/*.abap
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_persistence.intf.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zif_abapgit_code_inspector.intf.abap   # if_satc_api_factory=>ty_check_variant_name
 sed -i 's/ TYPE sci_chkv/ TYPE char30/ig' ./open/zcl_abapgit_gui_page_code_insp.clas.abap   # if_satc_api_factory=>ty_check_variant_name
@@ -226,8 +223,6 @@ cp open/* cloud
 cp additional/open/*.* open
 cp additional/cloud/*.* cloud
 
-cp abapGit/src/utils/zcl_abapgit_convert* open
-cp abapGit/src/utils/zcl_abapgit_convert* cloud
 cp abapGit/src/http/zcl_abapgit_http.clas* open
 cp abapGit/src/http/zcl_abapgit_http_client.clas* open
 cp abapGit/src/http/zcl_abapgit_proxy_config* open
