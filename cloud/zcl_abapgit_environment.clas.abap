@@ -6,6 +6,12 @@ CLASS zcl_abapgit_environment DEFINITION PUBLIC FINAL CREATE PRIVATE GLOBAL FRIE
 ENDCLASS.
 
 CLASS zcl_abapgit_environment IMPLEMENTATION.
+  METHOD zif_abapgit_environment~get_available_user_sessions.
+    RETURN. " todo, implement method
+  ENDMETHOD.
+  METHOD zif_abapgit_environment~check_parallel_processing.
+    RETURN. " todo, implement method
+  ENDMETHOD.
 
   METHOD zif_abapgit_environment~compare_with_inactive.
     ASSERT 1 = 'decoupled'.

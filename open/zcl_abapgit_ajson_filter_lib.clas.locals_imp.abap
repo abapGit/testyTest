@@ -27,8 +27,8 @@ CLASS lcl_paths_filter DEFINITION FINAL.
     INTERFACES zif_abapgit_ajson_filter.
     METHODS constructor
       IMPORTING
-        it_skip_paths TYPE string_table OPTIONAL
-        iv_skip_paths TYPE string OPTIONAL
+        it_skip_paths     TYPE string_table OPTIONAL
+        iv_skip_paths     TYPE string OPTIONAL
         iv_pattern_search TYPE abap_bool
       RAISING
         zcx_abapgit_ajson_error.
@@ -72,7 +72,7 @@ CLASS lcl_paths_filter IMPLEMENTATION.
     ENDIF.
 
     LOOP AT it_skip_paths INTO lv_s.
-      lv_s = to_lower( lv_s ).
+      lv_s = condense( lv_s ).
       APPEND lv_s TO lt_tab.
     ENDLOOP.
 
@@ -83,7 +83,7 @@ CLASS lcl_paths_filter IMPLEMENTATION.
           DELETE lt_tab INDEX sy-tabix.
           CONTINUE.
         ENDIF.
-        <s> = condense( to_lower( <s> ) ).
+        <s> = condense( <s> ).
       ENDLOOP.
     ENDIF.
 

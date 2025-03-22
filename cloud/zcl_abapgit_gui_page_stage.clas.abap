@@ -21,22 +21,22 @@ CLASS zcl_abapgit_gui_page_stage DEFINITION
 
     CLASS-METHODS create
       IMPORTING
-        io_repo        TYPE REF TO zcl_abapgit_repo_online
-        iv_seed        TYPE string OPTIONAL
-        iv_sci_result  TYPE zif_abapgit_definitions=>ty_sci_result DEFAULT zif_abapgit_definitions=>c_sci_result-no_run
-        ii_obj_filter  TYPE REF TO zif_abapgit_object_filter OPTIONAL
+        io_repo          TYPE REF TO zcl_abapgit_repo_online
+        iv_seed          TYPE string OPTIONAL
+        iv_sci_result    TYPE zif_abapgit_definitions=>ty_sci_result DEFAULT zif_abapgit_definitions=>c_sci_result-no_run
+        ii_obj_filter    TYPE REF TO zif_abapgit_object_filter OPTIONAL
         ii_force_refresh TYPE abap_bool DEFAULT abap_true
       RETURNING
-        VALUE(ri_page) TYPE REF TO zif_abapgit_gui_renderable
+        VALUE(ri_page)   TYPE REF TO zif_abapgit_gui_renderable
       RAISING
         zcx_abapgit_exception.
 
     METHODS constructor
       IMPORTING
-        io_repo       TYPE REF TO zcl_abapgit_repo_online
-        iv_seed       TYPE string OPTIONAL
-        iv_sci_result TYPE zif_abapgit_definitions=>ty_sci_result DEFAULT zif_abapgit_definitions=>c_sci_result-no_run
-        ii_obj_filter TYPE REF TO zif_abapgit_object_filter OPTIONAL
+        io_repo          TYPE REF TO zcl_abapgit_repo_online
+        iv_seed          TYPE string OPTIONAL
+        iv_sci_result    TYPE zif_abapgit_definitions=>ty_sci_result DEFAULT zif_abapgit_definitions=>c_sci_result-no_run
+        ii_obj_filter    TYPE REF TO zif_abapgit_object_filter OPTIONAL
         ii_force_refresh TYPE abap_bool DEFAULT abap_true
       RAISING
         zcx_abapgit_exception.
@@ -154,12 +154,15 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_STAGE IMPLEMENTATION.
     " Check all added files if the exist in different paths (packages) without being removed
     LOOP AT io_files->mt_entries ASSIGNING <ls_item> WHERE v = zif_abapgit_definitions=>c_method-add.
 
+      " Allow mixed case path, but check filename to lower case
       zcl_abapgit_path=>split_file_location(
         EXPORTING
-          iv_fullpath = to_lower( <ls_item>-k )
+          iv_fullpath = <ls_item>-k
         IMPORTING
           ev_path     = ls_file-path
           ev_filename = ls_file-filename ).
+
+      ls_file-filename = to_lower( ls_file-filename ).
 
       " Skip packages since they all have identical filenames
       IF ls_file-filename <> 'package.devc.xml'.
@@ -235,11 +238,11 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_STAGE IMPLEMENTATION.
 
     CREATE OBJECT lo_component
       EXPORTING
-        io_repo       = io_repo
-        iv_seed       = iv_seed
-        iv_sci_result = iv_sci_result
+        io_repo          = io_repo
+        iv_seed          = iv_seed
+        iv_sci_result    = iv_sci_result
         ii_force_refresh = ii_force_refresh
-        ii_obj_filter = ii_obj_filter.
+        ii_obj_filter    = ii_obj_filter.
 
     ri_page = zcl_abapgit_gui_page_hoc=>create(
       iv_page_title         = 'Stage'
@@ -281,7 +284,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_STAGE IMPLEMENTATION.
               es_item     = ls_item ).
           ls_changed_by-item = ls_item.
           INSERT ls_changed_by INTO TABLE lt_changed_by_remote.
-        CATCH zcx_abapgit_exception.
+        CATCH zcx_abapgit_exception ##NO_HANDLER.
       ENDTRY.
     ENDLOOP.
 
@@ -348,7 +351,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_STAGE IMPLEMENTATION.
 
         rt_transports = li_cts_api->get_transports_for_list( lt_items ).
 
-      CATCH zcx_abapgit_exception.
+      CATCH zcx_abapgit_exception ##NO_HANDLER.
     ENDTRY.
 
   ENDMETHOD.
@@ -373,8 +376,8 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_STAGE IMPLEMENTATION.
 
 
   METHOD init_files.
-    ms_files = zcl_abapgit_factory=>get_stage_logic( )->get( io_repo       = mo_repo
-                                                             ii_obj_filter = mi_obj_filter ).
+    ms_files = zcl_abapgit_stage_logic=>get_stage_logic( )->get( io_repo       = mo_repo
+                                                                 ii_obj_filter = mi_obj_filter ).
 
     IF lines( ms_files-local ) = 0 AND lines( ms_files-remote ) = 0.
       mo_repo->refresh( ).
@@ -738,12 +741,15 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_STAGE IMPLEMENTATION.
       "Ignore Files that we don't want to stage, so any errors don't stop the staging process
       WHERE v <> zif_abapgit_definitions=>c_method-skip.
 
+      " Allow mixed case path, but check filename to lower case
       zcl_abapgit_path=>split_file_location(
         EXPORTING
-          iv_fullpath = to_lower( <ls_item>-k ) " filename is lower cased
+          iv_fullpath = <ls_item>-k
         IMPORTING
           ev_path     = ls_file-path
           ev_filename = ls_file-filename ).
+
+      ls_file-filename = to_lower( ls_file-filename ).
 
       READ TABLE ms_files-status ASSIGNING <ls_status>
         WITH TABLE KEY
@@ -870,7 +876,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_STAGE IMPLEMENTATION.
 
   METHOD zif_abapgit_gui_menu_provider~get_menu.
 
-    CREATE OBJECT ro_toolbar EXPORTING iv_id = 'toolbar-main'.
+    ro_toolbar = zcl_abapgit_html_toolbar=>create( 'toolbar-staging' ).
 
     IF lines( ms_files-local ) > 0
     OR lines( ms_files-remote ) > 0.

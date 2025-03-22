@@ -275,11 +275,6 @@ TYPES dokil TYPE c LENGTH 1.
       prerelase       TYPE string,
       prerelase_patch TYPE i,
     END OF ty_version.
-  TYPES:
-    ty_deserialization_step TYPE string.
-  TYPES:
-    ty_deserialization_step_tt TYPE STANDARD TABLE OF ty_deserialization_step
-                                          WITH DEFAULT KEY .
   TYPES ty_sci_result TYPE c LENGTH 1.
   CONSTANTS:
     BEGIN OF c_sci_result,
