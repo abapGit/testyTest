@@ -28,6 +28,10 @@ CLASS zcl_abapgit_sap_package IMPLEMENTATION.
     rv_are_changes_rec_in_tr_req = abap_false.
   ENDMETHOD.
 
+  METHOD zif_abapgit_sap_package~get.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
+
   METHOD zif_abapgit_sap_package~create.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.

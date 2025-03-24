@@ -19,9 +19,6 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_sap_package IMPLEMENTATION.
-  METHOD zif_abapgit_sap_package~get.
-    RETURN. " todo, implement method
-  ENDMETHOD.
 
   METHOD constructor.
     mv_package = iv_package.
@@ -29,6 +26,10 @@ CLASS zcl_abapgit_sap_package IMPLEMENTATION.
 
   METHOD zif_abapgit_sap_package~are_changes_recorded_in_tr_req.
     rv_are_changes_rec_in_tr_req = abap_false.
+  ENDMETHOD.
+
+  METHOD zif_abapgit_sap_package~get.
+    ASSERT 1 = 'decoupled'.
   ENDMETHOD.
 
   METHOD zif_abapgit_sap_package~create.
