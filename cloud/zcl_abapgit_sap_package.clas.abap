@@ -19,6 +19,9 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_sap_package IMPLEMENTATION.
+  METHOD zif_abapgit_sap_package~get.
+    RETURN. " todo, implement method
+  ENDMETHOD.
 
   METHOD constructor.
     mv_package = iv_package.

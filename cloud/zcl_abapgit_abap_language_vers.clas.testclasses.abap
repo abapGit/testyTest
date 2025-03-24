@@ -81,7 +81,7 @@ CLASS ltcl_abap_language_version DEFINITION FOR TESTING RISK LEVEL HARMLESS
   PRIVATE SECTION.
     " Cloud package hardcoded in cl_abap_language_version
     CONSTANTS c_cloud_package TYPE I_CustABAPObjDirectoryEntry-ABAPPackage VALUE 'TEST_LANGUAGE_VERSION_SCP'.
-    CONSTANTS c_language_cfg TYPE char30 VALUE 'CL_ABAP_LANGUAGE_VERSION_CFG'.
+    CONSTANTS c_language_cfg TYPE seoclskey VALUE 'CL_ABAP_LANGUAGE_VERSION_CFG'.
 
     DATA:
       mt_versions          TYPE string_table,
@@ -411,19 +411,11 @@ CLASS ltcl_abap_language_version IMPLEMENTATION.
   METHOD is_import_allowed.
 
     DATA lv_version TYPE string.
-    DATA ls_clskey TYPE seoclskey.
-
-    ls_clskey-clsname = c_language_cfg.
 
     " Tests using ABAP language version "standard" only work if the required
     " SAP class is available. In older releases, all packages will have
     " ABAP language version "undefined" and are handled like a new package
-    CALL FUNCTION 'SEO_CLASS_EXISTENCE_CHECK'
-      EXPORTING
-        clskey = ls_clskey
-      EXCEPTIONS
-        OTHERS = 1.
-    mv_has_language_cfg = boolc( sy-subrc = 0 ).
+    mv_has_language_cfg = zcl_abapgit_oo_factory=>get_by_type( 'CLAS' )->exists( c_language_cfg ).
 
     LOOP AT mt_versions INTO lv_version.
 
