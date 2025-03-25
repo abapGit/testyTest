@@ -15,6 +15,14 @@ CLASS zcl_abapgit_environment IMPLEMENTATION.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.
 
+  METHOD zif_abapgit_environment~check_parallel_processing.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
+
+  METHOD zif_abapgit_environment~get_available_user_sessions.
+    ASSERT 1 = 'decoupled'.
+  ENDMETHOD.
+
   METHOD zif_abapgit_environment~get_basis_release.
     ASSERT 1 = 'decoupled'.
   ENDMETHOD.

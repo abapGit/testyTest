@@ -178,14 +178,18 @@ CLASS zcl_abapgit_git_pack IMPLEMENTATION.
     lv_data = iv_data.
 
 * header
-    IF NOT xstrlen( lv_data ) > 4 OR lv_data(4) <> c_pack_start.
-      zcx_abapgit_exception=>raise( |Unexpected pack header| ).
+    IF xstrlen( lv_data ) < 4.
+      zcx_abapgit_exception=>raise( |Unexpected pack header, short reply| ).
+    ENDIF.
+
+    IF lv_data(4) <> c_pack_start.
+      zcx_abapgit_exception=>raise( |Unexpected pack header, { lv_data(4) }| ).
     ENDIF.
     lv_data = lv_data+4.
 
 * version
     IF lv_data(4) <> c_version.
-      zcx_abapgit_exception=>raise( |Version not supported| ).
+      zcx_abapgit_exception=>raise( |Version not supported, { lv_data(4) }| ).
     ENDIF.
     lv_data = lv_data+4.
 
@@ -481,9 +485,10 @@ CLASS zcl_abapgit_git_pack IMPLEMENTATION.
       ls_node-chmod = lv_chmod.
       IF ls_node-chmod <> zif_abapgit_git_definitions=>c_chmod-dir
           AND ls_node-chmod <> zif_abapgit_git_definitions=>c_chmod-file
+          AND ls_node-chmod <> zif_abapgit_git_definitions=>c_chmod-symbolic_link
           AND ls_node-chmod <> zif_abapgit_git_definitions=>c_chmod-executable
           AND ls_node-chmod <> zif_abapgit_git_definitions=>c_chmod-submodule.
-        zcx_abapgit_exception=>raise( |Unknown chmod| ).
+        zcx_abapgit_exception=>raise( |Unknown chmod { ls_node-chmod }| ).
       ENDIF.
 
       lv_offset = lv_match + 1.

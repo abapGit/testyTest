@@ -81,6 +81,7 @@ cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_info* open
 cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_locl* open
 cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_pers* open
 cp abapGit/src/ui/pages/sett/zcl_abapgit_gui_page_sett_remo* open
+cp abapGit/src/ui/pages/zcl_abapgit_gui_page_chg_pckg* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_commit* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_data* open
 cp abapGit/src/ui/pages/zcl_abapgit_gui_page_diff* open
@@ -197,6 +198,8 @@ sed -i "s/ rs_handled-page  = zcl_abapgit_gui_page_sett_repo=>create( lo_repo ).
 sed -i "s/ zcl_abapgit_transport_mass=>run( )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
 sed -i "s/rs_handled-page  = zcl_abapgit_gui_page_runit=>create( mo_repo )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_repo_view.clas.abap
 sed -i "s/lv_adt_link = zcl_abapgit_adt_link=>link_transport( iv_transport )./ ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_router.clas.abap
+sed -i "s/UPDATE sotr_head SET paket = <ls_map>-new_package WHERE paket = <ls_map>-old_package ##SUBRC_OK./ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_chg_pckg.clas.abap
+sed -i "s/UPDATE sotr_headu SET paket = <ls_map>-new_package WHERE paket = <ls_map>-old_package ##SUBRC_OK./ASSERT 1 = 'decoupled'./ig" ./open/zcl_abapgit_gui_page_chg_pckg.clas.abap
 
 # CLAS shims,
 sed -i -e '/PUBLIC SECTION/r ./shims/zcx_abapgit_exception.prog.abap' ./open/zcx_abapgit_exception.clas.abap

@@ -15,8 +15,8 @@ CLASS zcl_abapgit_gui_page_whereused DEFINITION
 
     CLASS-METHODS create
       IMPORTING
-        iv_package TYPE I_CustABAPObjDirectoryEntry-ABAPPackage OPTIONAL
-        ii_repo    TYPE REF TO zif_abapgit_repo OPTIONAL
+        iv_package     TYPE I_CustABAPObjDirectoryEntry-ABAPPackage OPTIONAL
+        ii_repo        TYPE REF TO zif_abapgit_repo OPTIONAL
         PREFERRED PARAMETER iv_package
       RETURNING
         VALUE(ri_page) TYPE REF TO zif_abapgit_gui_renderable
@@ -65,7 +65,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_ABAPGIT_GUI_PAGE_WHEREUSED IMPLEMENTATION.
+CLASS zcl_abapgit_gui_page_whereused IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -220,7 +220,7 @@ CLASS ZCL_ABAPGIT_GUI_PAGE_WHEREUSED IMPLEMENTATION.
       lv_show_used_txt = 'Show Used Type'.
     ENDIF.
 
-    ro_toolbar = zcl_abapgit_html_toolbar=>create(
+    ro_toolbar = zcl_abapgit_html_toolbar=>create( 'toolbar-where-used'
       )->add(
         iv_txt    = lv_show_used_txt
         iv_title  = 'Show/Hide used type or object (when available)'

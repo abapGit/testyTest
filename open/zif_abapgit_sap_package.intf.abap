@@ -15,6 +15,11 @@ INTERFACE zif_abapgit_sap_package
            as4user   TYPE usnam,
          END OF ty_create.
 
+  METHODS get
+    RETURNING
+      VALUE(rs_package) TYPE ty_create
+    RAISING
+      zcx_abapgit_exception .
   METHODS validate_name
     RAISING
       zcx_abapgit_exception .
@@ -41,14 +46,10 @@ INTERFACE zif_abapgit_sap_package
       zcx_abapgit_exception .
   METHODS read_description
     RETURNING
-      VALUE(rv_description) TYPE string
-    RAISING
-      zcx_abapgit_exception .
+      VALUE(rv_description) TYPE string.
   METHODS read_responsible
     RETURNING
-      VALUE(rv_responsible) TYPE usnam
-    RAISING
-      zcx_abapgit_exception .
+      VALUE(rv_responsible) TYPE usnam.
   METHODS create_child
     IMPORTING
       !iv_child TYPE devclass

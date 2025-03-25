@@ -275,11 +275,6 @@ TYPES dokil TYPE c LENGTH 1.
       prerelase       TYPE string,
       prerelase_patch TYPE i,
     END OF ty_version.
-  TYPES:
-    ty_deserialization_step TYPE string.
-  TYPES:
-    ty_deserialization_step_tt TYPE STANDARD TABLE OF ty_deserialization_step
-                                          WITH DEFAULT KEY .
   TYPES ty_sci_result TYPE c LENGTH 1.
   CONSTANTS:
     BEGIN OF c_sci_result,
@@ -357,6 +352,7 @@ TYPES dokil TYPE c LENGTH 1.
       repo_activate_objects         TYPE string VALUE 'repo_activate_objects',
       repo_add_all_obj_to_trans_req TYPE string VALUE 'repo_add_all_obj_to_trans_req',
       repo_background               TYPE string VALUE 'repo_background',
+      repo_change_package           TYPE string VALUE 'repo_change_package',
       repo_code_inspector           TYPE string VALUE 'repo_code_inspector',
       repo_delete_objects           TYPE string VALUE 'repo_delete_objects',
       repo_infos                    TYPE string VALUE 'repo_infos',
