@@ -93,6 +93,7 @@ const removeFunctionModuleCalls = [
 
 const removeMethodImplementations = [
   {"filename": "zcl_abapgit_gui_router.clas.abap", "method": "jump_display_transport"},
+  {"filename": "zcl_abapgit_gui_page_chg_pckg.clas.abap", "method": "update_sotr_package_assignment"},
 ];
 
 for (const filename of fs.readdirSync(dir)) {

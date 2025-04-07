@@ -498,46 +498,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
 
   METHOD jump_display_transport.
-
-    DATA:
-      ls_e071 TYPE e071,
-      lv_adt_link         TYPE string,
-      lv_adt_jump_enabled TYPE abap_bool.
-
-    lv_adt_jump_enabled = zcl_abapgit_persist_factory=>get_settings( )->read( )->get_adt_jump_enabled( ).
-    IF lv_adt_jump_enabled = abap_true AND iv_transport <> zif_abapgit_definitions=>c_multiple_transports.
-      TRY.
-           ASSERT 1 = 'decoupled'.
-          zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
-          RETURN.
-        CATCH zcx_abapgit_exception.
-          " Fallback if ADT link execution failed or was cancelled
-      ENDTRY.
-    ENDIF.
-
-    IF iv_transport = zif_abapgit_definitions=>c_multiple_transports.
-      ls_e071-pgmid    = 'R3TR'.
-      ls_e071-object   = iv_obj_type.
-      ls_e071-obj_name = iv_obj_name.
-
-      CALL FUNCTION 'TR_SHOW_OBJECT_LOCKS'
-        EXPORTING
-          iv_e071             = ls_e071
-        EXCEPTIONS
-          object_not_lockable = 1
-          empty_key           = 2
-          unknown_object      = 3
-          unallowed_locks     = 4
-          OTHERS              = 5.
-      IF sy-subrc <> 0.
-        zcx_abapgit_exception=>raise_t100( ).
-      ENDIF.
-    ELSE.
-      CALL FUNCTION 'TR_DISPLAY_REQUEST'
-        EXPORTING
-          i_trkorr = iv_transport.
-    ENDIF.
-
+    ASSERT 1 = 'replacedByRefactorMJS'.
   ENDMETHOD.
 
 

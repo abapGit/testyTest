@@ -221,6 +221,9 @@ cp replace/* open
 
 rm ./open/zcl_abapgit_http_agent.clas.locals_imp.abap
 
+node remove_methods.mjs
+echo "remove_methods done"
+
 cp additional/*.* open
 cp open/* cloud
 cp additional/open/*.* open

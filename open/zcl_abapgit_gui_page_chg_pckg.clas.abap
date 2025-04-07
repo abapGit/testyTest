@@ -417,15 +417,7 @@ CLASS zcl_abapgit_gui_page_chg_pckg IMPLEMENTATION.
 
 
   METHOD update_sotr_package_assignment.
-
-    FIELD-SYMBOLS <ls_map> LIKE LINE OF it_mapping.
-
-    LOOP AT it_mapping ASSIGNING <ls_map>.
-      zcl_abapgit_sotr_handler=>change_sotr_package(
-        iv_old_package = <ls_map>-old_package
-        iv_new_package = <ls_map>-new_package ).
-    ENDLOOP.
-
+    ASSERT 1 = 'replacedByRefactorMJS'.
   ENDMETHOD.
 
 
