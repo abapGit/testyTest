@@ -91,6 +91,10 @@ const removeFunctionModuleCalls = [
   "WWWPARAMS_READ",
 ];
 
+const removeMethodImplementations = [
+  {"filename": "zcl_abapgit_gui_router.clas.abap", "method": "jump_display_transport"},
+];
+
 for (const filename of fs.readdirSync(dir)) {
   if (filename.endsWith(".xml") === true) {
     continue;
@@ -110,6 +114,19 @@ for (const filename of fs.readdirSync(dir)) {
     const regex = new RegExp(`CALL FUNCTION '${fm}'[\\s\\S]+?\\.`, "ig");
     if (abap.match(regex)) {
       abap = abap.replace(regex, "ASSERT 1 = 'replacedByRefactorMJS'.");
+      changed = true;
+    }
+  }
+
+  for (const method of removeMethodImplementations) {
+    if (filename !== method.filename) {
+      continue;
+    }
+    const regex = new RegExp(`METHOD ${method.method}\\.[\\s\\S]*ENDMETHOD`, "ig");
+    if (abap.match(regex)) {
+      abap = abap.replace(regex, `METHOD ${method.method}.
+    ASSERT 1 = 'replacedByRefactorMJS'.
+  ENDMETHOD`);
       changed = true;
     }
   }
