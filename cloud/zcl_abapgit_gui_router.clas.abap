@@ -511,15 +511,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
       ls_e071-object   = iv_obj_type.
       ls_e071-obj_name = iv_obj_name.
 
-      CALL FUNCTION 'TR_SHOW_OBJECT_LOCKS'
-        EXPORTING
-          iv_e071             = ls_e071
-        EXCEPTIONS
-          object_not_lockable = 1
-          empty_key           = 2
-          unknown_object      = 3
-          unallowed_locks     = 4
-          OTHERS              = 5.
+      ASSERT 1 = 'replacedByRefactorMJS'.
       IF sy-subrc <> 0.
         zcx_abapgit_exception=>raise_t100( ).
       ENDIF.
