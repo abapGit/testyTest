@@ -422,4 +422,7 @@ TYPES dokil TYPE c LENGTH 1.
       use_lxe               TYPE abap_bool,
     END OF ty_i18n_params .
   TYPES ty_trrngtrkor_tt TYPE RANGE OF sxco_transport.
+
+  CONSTANTS c_multiple_transports TYPE sxco_transport VALUE 'MULTIPLE'.
+
 ENDINTERFACE.
