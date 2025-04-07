@@ -71,23 +71,29 @@ const replace = [
 const removeFunctionModuleCalls = [
   "ABAP4_CALL_TRANSACTION",
   "BAPI_USER_DISPLAY",
+  "CDNAMES_GET",
   "CONVERT_ITF_TO_STREAM_TEXT",
   "DOCU_GET",
   "ENQUEUE_EZABAPGIT",
-  "TR_TADIR_INTERFACE",
-  "WB_TREE_ACTUALIZE",
+  "ENQUEUE_READ",
+  "RS_DD_DELETE_OBJ",
   "RS_TABLE_LIST_CREATE",
   "SYSTEM_CALLSTACK",
-  "RS_DD_DELETE_OBJ",
-  "ENQUEUE_READ",
   "TEXT_SPLIT",
   "TR_DISPLAY_REQUEST",
-  "CDNAMES_GET",
+  "TR_SHOW_OBJECT_LOCKS",
+  "TR_TADIR_INTERFACE",
   "TR_TASK_GET",
   "TR_TASK_RESET",
   "TR_TASK_SET",
+  "WB_TREE_ACTUALIZE",
   "WWWDATA_IMPORT",
   "WWWPARAMS_READ",
+];
+
+const removeMethodImplementations = [
+  {"filename": "zcl_abapgit_gui_router.clas.abap", "method": "jump_display_transport"},
+  {"filename": "zcl_abapgit_gui_page_chg_pckg.clas.abap", "method": "update_sotr_package_assignment"},
 ];
 
 for (const filename of fs.readdirSync(dir)) {
@@ -109,6 +115,19 @@ for (const filename of fs.readdirSync(dir)) {
     const regex = new RegExp(`CALL FUNCTION '${fm}'[\\s\\S]+?\\.`, "ig");
     if (abap.match(regex)) {
       abap = abap.replace(regex, "ASSERT 1 = 'replacedByRefactorMJS'.");
+      changed = true;
+    }
+  }
+
+  for (const method of removeMethodImplementations) {
+    if (filename !== method.filename) {
+      continue;
+    }
+    const regex = new RegExp(`METHOD ${method.method}\\.[\\s\\S]*ENDMETHOD`, "ig");
+    if (abap.match(regex)) {
+      abap = abap.replace(regex, `METHOD ${method.method}.
+    ASSERT 1 = 'replacedByRefactorMJS'.
+  ENDMETHOD`);
       changed = true;
     }
   }

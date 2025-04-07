@@ -417,14 +417,7 @@ CLASS zcl_abapgit_gui_page_chg_pckg IMPLEMENTATION.
 
 
   METHOD update_sotr_package_assignment.
-
-    FIELD-SYMBOLS <ls_map> LIKE LINE OF it_mapping.
-
-    LOOP AT it_mapping ASSIGNING <ls_map>.
-      ASSERT 1 = 'decoupled'.
-      ASSERT 1 = 'decoupled'.
-    ENDLOOP.
-
+    ASSERT 1 = 'replacedByRefactorMJS'.
   ENDMETHOD.
 
 

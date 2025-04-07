@@ -120,6 +120,8 @@ CLASS zcl_abapgit_gui_router DEFINITION
     CLASS-METHODS jump_display_transport
       IMPORTING
         !iv_transport TYPE trkorr
+        iv_obj_type   TYPE tadir-object OPTIONAL
+        iv_obj_name   TYPE tadir-obj_name OPTIONAL
       RAISING
         zcx_abapgit_exception .
     CLASS-METHODS jump_display_user
@@ -496,28 +498,7 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
 
 
   METHOD jump_display_transport.
-
-    DATA:
-      lv_adt_link         TYPE string,
-      lv_adt_jump_enabled TYPE abap_bool.
-
-    lv_adt_jump_enabled = zcl_abapgit_persist_factory=>get_settings( )->read( )->get_adt_jump_enabled( ).
-    IF lv_adt_jump_enabled = abap_true.
-      TRY.
-           ASSERT 1 = 'decoupled'.
-          zcl_abapgit_ui_factory=>get_frontend_services( )->execute( iv_document = lv_adt_link ).
-        CATCH zcx_abapgit_exception.
-          " Fallback if ADT link execution failed or was cancelled
-          CALL FUNCTION 'TR_DISPLAY_REQUEST'
-            EXPORTING
-              i_trkorr = iv_transport.
-      ENDTRY.
-    ELSE.
-      CALL FUNCTION 'TR_DISPLAY_REQUEST'
-        EXPORTING
-          i_trkorr = iv_transport.
-    ENDIF.
-
+    ASSERT 1 = 'replacedByRefactorMJS'.
   ENDMETHOD.
 
 
@@ -732,7 +713,10 @@ CLASS zcl_abapgit_gui_router IMPLEMENTATION.
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
 
       WHEN zif_abapgit_definitions=>c_action-jump_transport.
-        jump_display_transport( |{ ii_event->query( )->get( 'TRANSPORT' ) }| ).
+        jump_display_transport(
+          iv_transport = |{ ii_event->query( )->get( 'TRANSPORT' ) }|
+          iv_obj_type  = |{ ii_event->query( )->get( 'TYPE' ) }|
+          iv_obj_name  = |{ ii_event->query( )->get( 'NAME' ) }| ).
         rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
 
       WHEN zif_abapgit_definitions=>c_action-jump_user.

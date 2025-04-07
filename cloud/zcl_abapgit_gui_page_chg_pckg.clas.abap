@@ -128,6 +128,15 @@ ENDCLASS.
 
 
 CLASS zcl_abapgit_gui_page_chg_pckg IMPLEMENTATION.
+  METHOD zif_abapgit_gui_renderable~render.
+    RETURN. " todo, implement method
+  ENDMETHOD.
+  METHOD zif_abapgit_gui_event_handler~on_event.
+    RETURN. " todo, implement method
+  ENDMETHOD.
+  METHOD validate_form.
+    RETURN. " todo, implement method
+  ENDMETHOD.
 
 
   METHOD change_package.
@@ -409,100 +418,6 @@ CLASS zcl_abapgit_gui_page_chg_pckg IMPLEMENTATION.
 
 
   METHOD update_sotr_package_assignment.
-
-    FIELD-SYMBOLS <ls_map> LIKE LINE OF it_mapping.
-
-    LOOP AT it_mapping ASSIGNING <ls_map>.
-      ASSERT 1 = 'decoupled'.
-      ASSERT 1 = 'decoupled'.
-    ENDLOOP.
-
-  ENDMETHOD.
-
-
-  METHOD validate_form.
-
-    DATA lv_new_package TYPE I_CustABAPObjDirectoryEntry-ABAPPackage.
-
-    ro_validation_log = mo_form_util->validate( io_form_data ).
-
-    lv_new_package = io_form_data->get( c_id-new_package ).
-
-    IF lv_new_package IS NOT INITIAL AND lv_new_package = io_form_data->get( c_id-old_package ).
-      ro_validation_log->set(
-        iv_key = c_id-new_package
-        iv_val = 'New package must be different from old package' ).
-    ENDIF.
-
-    IF zcl_abapgit_factory=>get_cts_api( )->is_chrec_possible_for_package( lv_new_package ) = abap_true.
-      ro_validation_log->set(
-        iv_key = c_id-new_package
-        iv_val = 'Feature is only supported local packages (no transport)' ).
-    ENDIF.
-
-  ENDMETHOD.
-
-
-  METHOD zif_abapgit_gui_event_handler~on_event.
-
-    mo_form_data = mo_form_util->normalize( ii_event->form_data( ) ).
-
-    CASE ii_event->mv_action.
-      WHEN c_event-change_package.
-
-        mo_validation_log = validate_form( mo_form_data ).
-
-        IF mo_validation_log->is_empty( ) = abap_false.
-          rs_handled-state = zcl_abapgit_gui=>c_event_state-re_render.
-        ELSE.
-          change_package(
-            iv_old_package = |{ mo_form_data->get( c_id-old_package ) }|
-            iv_new_package = |{ mo_form_data->get( c_id-new_package ) }|
-            iv_remove_old  = |{ mo_form_data->get( c_id-remove_old ) }| ).
-
-          ASSERT 1 = 'messageStatementRemoved'.
-          rs_handled-state = zcl_abapgit_gui=>c_event_state-go_back.
-        ENDIF.
-
-      WHEN c_event-choose_package_old.
-
-        mo_form_data->set(
-          iv_key = c_id-old_package
-          iv_val = zcl_abapgit_ui_factory=>get_popups( )->popup_search_help( 'TDEVC-DEVCLASS' ) ).
-
-        IF mo_form_data->get( c_id-old_package ) IS NOT INITIAL.
-          rs_handled-state = zcl_abapgit_gui=>c_event_state-re_render.
-        ELSE.
-          rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
-        ENDIF.
-
-      WHEN c_event-choose_package_new.
-
-        mo_form_data->set(
-          iv_key = c_id-new_package
-          iv_val = zcl_abapgit_ui_factory=>get_popups( )->popup_search_help( 'TDEVC-DEVCLASS' ) ).
-
-        IF mo_form_data->get( c_id-new_package ) IS NOT INITIAL.
-          rs_handled-state = zcl_abapgit_gui=>c_event_state-re_render.
-        ELSE.
-          rs_handled-state = zcl_abapgit_gui=>c_event_state-no_more_act.
-        ENDIF.
-    ENDCASE.
-
-  ENDMETHOD.
-
-
-  METHOD zif_abapgit_gui_renderable~render.
-
-    init_form( ).
-
-    register_handlers( ).
-
-    ri_html = zcl_abapgit_html=>create( ).
-
-    ri_html->add( mo_form->render(
-      io_values         = mo_form_data
-      io_validation_log = mo_validation_log ) ).
-
+    ASSERT 1 = 'replacedByRefactorMJS'.
   ENDMETHOD.
 ENDCLASS.
